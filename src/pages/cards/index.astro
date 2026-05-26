@@ -1,5 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 ---
 <Base title="Cards" description="Short, specific cards for the moment you're in. When ADHD and parenting collide." current="cards">
 
@@ -16,7 +16,7 @@ import Base from '../layouts/Base.astro';
   <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
-    import CardBrowser from '../components/CardBrowser.jsx';
+    import CardBrowser from '../../components/CardBrowser.jsx';
 
     const root = createRoot(document.getElementById('card-browser-root'));
     root.render(createElement(CardBrowser));
