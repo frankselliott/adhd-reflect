@@ -1,0 +1,17 @@
+{
+  "name": "adhd-reflect",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.8.0",
+    "@astrojs/react": "^4.2.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
