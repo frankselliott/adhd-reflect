@@ -1,7 +1,2 @@
-cat > .replit << 'EOF'
-run = "npx astro dev --host 0.0.0.0 --port 3000"
-
-[[ports]]
-localPort = 3000
-externalPort = 80
-EOF
+[agent]
+expertMode = true
