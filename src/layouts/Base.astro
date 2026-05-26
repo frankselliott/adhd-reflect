@@ -28,6 +28,14 @@ const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#4A6FA5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="ADHD Reflect" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
@@ -43,5 +51,11 @@ const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`
     <slot />
   </main>
   <Footer />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
 </body>
 </html>
+
