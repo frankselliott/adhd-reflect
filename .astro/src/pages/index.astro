@@ -1,0 +1,272 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Find out how your ADHD shows up when parenting gets hard.">
+
+  <!-- ─── Hero ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">For ADHD parents raising ADHD kids</p>
+      <h1 class="hero-title">How does your ADHD show up<br/> when parenting gets <em>hard?</em></h1>
+      <p class="hero-body">
+        ADHD Reflect helps you notice the patterns that show up when ADHD, stress and parenting collide. Not therapy. Not advice. Just what actually helps on the hard days.
+      </p>
+      <div class="hero-actions">
+        <a href="/quiz" class="btn btn-primary">Take the quiz</a>
+        <a href="/cards" class="btn btn-secondary">Browse the cards</a>
+      </div>
+      <p class="hero-note">Three minutes. Twelve questions. No diagnosis, no data stored.</p>
+    </div>
+  </section>
+
+  <!-- ─── What this is ─── -->
+  <section class="what">
+    <div class="what-inner">
+      <div class="what-block">
+        <span class="what-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="var(--blue)" stroke-width="1.5" fill="none"/><path d="M10 6v4l2.5 2.5" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Right now cards</h3>
+        <p>Short, specific cards for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+      </div>
+      <div class="what-block">
+        <span class="what-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z" stroke="var(--sage-dark)" stroke-width="1.5" fill="none"/><path d="M7 10l2 2 4-4" stroke="var(--sage-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>Your pattern</h3>
+        <p>Take the quiz to find out which ADHD parenting pattern fits you. Not a diagnosis. A way to understand what keeps happening and why.</p>
+      </div>
+      <div class="what-block">
+        <span class="what-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 15V5a2 2 0 012-2h8a2 2 0 012 2v10" stroke="var(--lavender)" stroke-width="1.5" fill="none"/><path d="M2 15h16" stroke="var(--lavender)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Built by someone in it</h3>
+        <p>Made by an ADHD parent raising an ADHD-influenced kid. Not a clinic, not a course, not a brand that discovered ADHD last quarter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Who this is for ─── -->
+  <section class="who">
+    <div class="who-inner">
+      <h2>This is for you if</h2>
+      <div class="who-list">
+        <p>You have ADHD (diagnosed or strongly suspect it) and you're raising a child whose brain works like yours.</p>
+        <p>You've read the parenting books but they assume a level of consistency your brain doesn't offer.</p>
+        <p>You want something that helps on the bad Tuesday afternoon, not just the calm Sunday morning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Newsletter ─── -->
+  <section class="newsletter">
+    <div class="newsletter-inner">
+      <h2>One email a week</h2>
+      <p>Short, honest dispatches about ADHD parenting. Not tips lists. Not hustle. Just what's actually happening, written by someone living it.</p>
+      <div class="newsletter-form-placeholder">
+        <!-- Replace with ConvertKit/email provider embed -->
+        <div class="newsletter-mock">
+          <input type="email" placeholder="your@email.com" class="newsletter-input" disabled />
+          <button class="btn btn-primary newsletter-btn" disabled>Subscribe</button>
+        </div>
+        <p class="newsletter-note">Free. Unsubscribe any time. No spam, obviously.</p>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* ─── Hero ─── */
+  .hero {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+  }
+  .hero-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space-md);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--slate);
+    margin-bottom: var(--space-lg);
+    font-variation-settings: 'opsz' 48;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .hero-body {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--pewter);
+    max-width: 520px;
+    margin-bottom: var(--space-xl);
+  }
+  .hero-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+  }
+  .hero-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--pewter);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--space-2xl) 0 var(--space-xl);
+    }
+    .hero-title br { display: none; }
+    .hero-actions {
+      flex-direction: column;
+    }
+    .hero-actions .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* ─── What this is ─── */
+  .what {
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--mist-border);
+  }
+  .what-inner {
+    max-width: var(--container-wide);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+  .what-block h3 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: var(--space-sm);
+    font-variation-settings: 'opsz' 24;
+  }
+  .what-block p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--pewter);
+  }
+  .what-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--mist);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .what-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  /* ─── Who this is for ─── */
+  .who {
+    padding: var(--space-3xl) 0;
+    background: white;
+    border-top: 1px solid var(--mist-border);
+    border-bottom: 1px solid var(--mist-border);
+  }
+  .who-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+  }
+  .who-inner h2 {
+    margin-bottom: var(--space-lg);
+  }
+  .who-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .who-list p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--pewter);
+    padding-left: var(--space-lg);
+    border-left: 2px solid var(--sage);
+  }
+
+  /* ─── Newsletter ─── */
+  .newsletter {
+    padding: var(--space-3xl) 0;
+  }
+  .newsletter-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+  }
+  .newsletter-inner h2 {
+    margin-bottom: var(--space-sm);
+  }
+  .newsletter-inner > p {
+    color: var(--pewter);
+    margin-bottom: var(--space-lg);
+    max-width: 480px;
+  }
+  .newsletter-mock {
+    display: flex;
+    gap: var(--space-sm);
+    max-width: 420px;
+  }
+  .newsletter-input {
+    flex: 1;
+    font-family: var(--sans);
+    font-size: 15px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--mist-border);
+    border-radius: var(--radius-pill);
+    background: white;
+    color: var(--slate);
+    min-height: 48px;
+    outline: none;
+  }
+  .newsletter-input:focus {
+    border-color: var(--blue);
+  }
+  .newsletter-btn {
+    padding: 12px 24px;
+    white-space: nowrap;
+  }
+  .newsletter-note {
+    font-size: 13px;
+    color: var(--pewter);
+    opacity: 0.6;
+    margin-top: var(--space-sm);
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-mock {
+      flex-direction: column;
+    }
+    .newsletter-btn {
+      width: 100%;
+    }
+  }
+</style>

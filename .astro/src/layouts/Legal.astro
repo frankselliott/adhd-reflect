@@ -1,0 +1,51 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || 'ADHD Reflect';
+const description = frontmatter?.description || '';
+const fullTitle = `${title} — ADHD Reflect`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{fullTitle}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+<body>
+  <Nav />
+  <main class="prose">
+    <p class="prose-label">{frontmatter?.label || ''}</p>
+    <h1>{title}</h1>
+    {frontmatter?.updated && (
+      <p class="prose-updated">Last updated: {frontmatter.updated}</p>
+    )}
+    <hr />
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
+
+<style>
+  .prose-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space-sm);
+  }
+  .prose-updated {
+    font-size: 13px;
+    color: var(--pewter);
+    opacity: 0.6;
+    margin-top: calc(-1 * var(--space-md));
+  }
+</style>

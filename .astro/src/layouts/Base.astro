@@ -1,0 +1,47 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+
+const {
+  title = 'ADHD Reflect',
+  description = 'For ADHD parents raising ADHD kids. Not therapy. Not advice. Just what helps.',
+  current = '',
+} = Astro.props;
+
+const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{fullTitle}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ADHD Reflect" />
+
+  <!-- Prevent indexing until ready to launch -->
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+<body>
+  <Nav current={current} />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
