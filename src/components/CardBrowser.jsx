@@ -55,14 +55,15 @@ export default function CardBrowser() {
         gap: 16, paddingBottom: 80,
       }}>
         {filtered.map(card => (
-          <div
+          <a
             key={card.id}
+            href={`/cards/${card.id}`}
             style={{
               background: 'white', borderRadius: 16,
               border: '1px solid rgba(31,42,55,0.08)',
               padding: 24, display: 'flex', flexDirection: 'column', gap: 10,
               transition: 'box-shadow 0.2s, transform 0.2s',
-              cursor: 'pointer',
+              cursor: 'pointer', textDecoration: 'none', color: 'inherit',
             }}
             onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 24px rgba(31,42,55,0.09)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
             onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none'; }}
@@ -94,18 +95,10 @@ export default function CardBrowser() {
             }}>
               {card.category.replace(/-/g, ' ')}
             </span>
-
-            {/* Coming soon indicator */}
-            <span style={{
-              fontSize: 12, color: 'var(--pewter)', opacity: 0.4,
-              fontFamily: 'var(--mono)', letterSpacing: '0.08em',
-              marginTop: 'auto', paddingTop: 4,
-            }}>
-              Coming soon
-            </span>
-          </div>
+          </a>
         ))}
       </div>
     </div>
   );
 }
+
