@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Cards" description="Short, specific cards for the moment you're in. When ADHD and parenting collide." current="cards">
+
+  <section class="cards-hero">
+    <div class="cards-hero-inner">
+      <p class="cards-label">Card library</p>
+      <h1 class="cards-title">Right now <em>cards</em></h1>
+      <p class="cards-body">Short, specific cards for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+    </div>
+  </section>
+
+  <div id="card-browser-root"></div>
+
+  <script>
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import CardBrowser from '../components/CardBrowser.jsx';
+
+    const root = createRoot(document.getElementById('card-browser-root'));
+    root.render(createElement(CardBrowser));
+  </script>
+
+</Base>
+
+<style>
+  .cards-hero {
+    padding: 64px 0 32px;
+  }
+  .cards-hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .cards-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .cards-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--slate);
+    margin-bottom: 16px;
+    font-variation-settings: 'opsz' 48;
+  }
+  .cards-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .cards-body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--pewter);
+    max-width: 520px;
+  }
+
+  @media (min-width: 768px) {
+    .cards-hero-inner {
+      padding: 0 40px;
+    }
+  }
+</style>

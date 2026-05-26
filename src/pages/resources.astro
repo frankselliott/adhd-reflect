@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Resources" description="Find support options in your country. Crisis support, ADHD education, professional directories and more." current="resources">
+
+  <section class="resources">
+    <div class="resources-inner">
+      <p class="resources-label">Support</p>
+      <h1 class="resources-title">Need more than a <em>card?</em></h1>
+      <p class="resources-body">ADHD Reflect can help you understand hard parenting moments, repair after conflict and practise small changes. But sometimes a card or guide is not enough.</p>
+      <p class="resources-body">If the same pattern keeps happening, if you feel overwhelmed, or if you are worried about safety, these resources may help you find the next right step.</p>
+
+      <!-- Safety block - always first -->
+      <div class="safety-block">
+        <h2>If someone may be unsafe</h2>
+        <p>If you are worried you may hurt yourself, your child or someone else, step away if safe and contact emergency services or a crisis support service in your country.</p>
+        <p>ADHD Reflect does not provide crisis care.</p>
+        <div class="crisis-numbers">
+          <div class="crisis-country">
+            <h3>Australia</h3>
+            <p>Emergency: <strong>000</strong></p>
+            <p>Lifeline: <strong>13 11 14</strong> (24/7)</p>
+            <p>Parentline: <strong>1300 301 300</strong></p>
+            <p>Kids Helpline: <strong>1800 551 800</strong></p>
+          </div>
+          <div class="crisis-country">
+            <h3>United States</h3>
+            <p>Emergency: <strong>911</strong></p>
+            <p>988 Suicide & Crisis Lifeline: <strong>988</strong></p>
+            <p>Crisis Text Line: text <strong>HOME</strong> to <strong>741741</strong></p>
+          </div>
+          <div class="crisis-country">
+            <h3>United Kingdom</h3>
+            <p>Emergency: <strong>999</strong></p>
+            <p>Samaritans: <strong>116 123</strong> (24/7)</p>
+            <p>NSPCC: <strong>0808 800 5000</strong></p>
+          </div>
+          <div class="crisis-country">
+            <h3>New Zealand</h3>
+            <p>Emergency: <strong>111</strong></p>
+            <p>Need to Talk: <strong>1737</strong> (24/7)</p>
+            <p>Parentline: <strong>0800 568 856</strong></p>
+          </div>
+          <div class="crisis-country">
+            <h3>Canada</h3>
+            <p>Emergency: <strong>911</strong></p>
+            <p>Talk Suicide Canada: <strong>988</strong></p>
+            <p>Crisis Text Line: text <strong>HOME</strong> to <strong>686868</strong></p>
+          </div>
+          <div class="crisis-country">
+            <h3>Ireland</h3>
+            <p>Emergency: <strong>112</strong> or <strong>999</strong></p>
+            <p>Samaritans: <strong>116 123</strong> (24/7)</p>
+            <p>Parentline: <strong>1890 927 277</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coming soon sections -->
+      <div class="coming-soon-block">
+        <h2>More support options coming soon</h2>
+        <p>We're building a country-specific support directory covering ADHD education, professional directories, coaching options and practical parenting support. The goal is to help you find the next right step, not sell you something.</p>
+        <p>For now, if you need support beyond what a card or guide can offer, your GP or family doctor is usually the safest first step.</p>
+        <p>Questions or suggestions: <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .resources {
+    padding: 64px 0 96px;
+  }
+  .resources-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .resources-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .resources-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--slate);
+    margin-bottom: 16px;
+    font-variation-settings: 'opsz' 48;
+  }
+  .resources-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .resources-body {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--pewter);
+    max-width: 560px;
+    margin-bottom: 12px;
+  }
+
+  .safety-block {
+    margin-top: 40px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(201,123,106,0.2);
+  }
+  .safety-block h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--slate);
+    margin-bottom: 12px;
+  }
+  .safety-block > p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--pewter);
+    margin-bottom: 12px;
+  }
+  .crisis-numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .crisis-country {
+    padding: 16px;
+    background: var(--cloud);
+    border-radius: 12px;
+  }
+  .crisis-country h3 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 8px;
+  }
+  .crisis-country p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--pewter);
+    margin-bottom: 4px;
+  }
+  .crisis-country strong {
+    color: var(--slate);
+  }
+
+  .coming-soon-block {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--mist);
+    border-radius: 16px;
+  }
+  .coming-soon-block h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--slate);
+    margin-bottom: 12px;
+  }
+  .coming-soon-block p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--pewter);
+    margin-bottom: 12px;
+  }
+  .coming-soon-block a {
+    color: var(--blue);
+  }
+</style>

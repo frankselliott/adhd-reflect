@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="What's Your ADHD Parenting Pattern?" description="Find out how your ADHD shows up when parenting gets hard. Twelve questions, three minutes, no diagnosis.">
+
+  <div id="quiz-root">
+    <!-- React island loads here -->
+  </div>
+
+  <script>
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import Quiz from '../components/Quiz.jsx';
+
+    const root = createRoot(document.getElementById('quiz-root'));
+    root.render(createElement(Quiz));
+  </script>
+
+</Base>
+
+<style>
+  #quiz-root {
+    min-height: 80dvh;
+  }
+</style>
