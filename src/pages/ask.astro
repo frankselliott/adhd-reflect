@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="What just happened?" description="Describe the moment and we'll find the right card for you.">
+
+  <section class="ask-hero">
+    <div class="ask-inner">
+      <p class="ask-label">In the moment</p>
+      <h1 class="ask-title">What just <em>happened?</em></h1>
+      <p class="ask-body">Describe what happened at home. In your own words, however messy. We'll match you to a card that fits.</p>
+    </div>
+  </section>
+
+  <section class="ask-router">
+    <div class="ask-router-inner" id="ai-router-root"></div>
+  </section>
+
+  <script>
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import AIRouter from '../components/AIRouter.jsx';
+
+    const root = createRoot(document.getElementById('ai-router-root'));
+    root.render(createElement(AIRouter));
+  </script>
+
+</Base>
+
+<style>
+  .ask-hero {
+    padding: 64px 0 24px;
+  }
+  .ask-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ask-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .ask-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--slate);
+    margin-bottom: 16px;
+    font-variation-settings: 'opsz' 48;
+  }
+  .ask-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .ask-body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--pewter);
+    max-width: 480px;
+  }
+  .ask-router {
+    padding: 24px 0 96px;
+  }
+  .ask-router-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+</style>
+
