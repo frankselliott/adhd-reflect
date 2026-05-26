@@ -1,13 +1,13 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Base from '../layouts/Base.astro';
 ---
-<Base title="Cards" description="Short, specific cards for the moment you're in. When ADHD and parenting collide." current="cards">
+<Base title="Cards" description="Short, specific guides for the moment you're in. When ADHD and parenting collide." current="cards">
 
   <section class="cards-hero">
     <div class="cards-hero-inner">
-      <p class="cards-label">Card library</p>
-      <h1 class="cards-title">Right now <em>cards</em></h1>
-      <p class="cards-body">Short, specific cards for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+      <p class="cards-label">Guide library</p>
+      <h1 class="cards-title">Guides for the <em>moment</em></h1>
+      <p class="cards-body">Short, specific guides for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
     </div>
   </section>
 
@@ -16,7 +16,7 @@ import Base from '../../layouts/Base.astro';
   <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
-    import CardBrowser from '../../components/CardBrowser.jsx';
+    import CardBrowser from '../components/CardBrowser.jsx';
 
     const root = createRoot(document.getElementById('card-browser-root'));
     root.render(createElement(CardBrowser));

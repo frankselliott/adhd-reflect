@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CARDS, CARD_TYPES } from '../data/cards.js';
 
 const typeFilters = [
-  { key: 'all', label: 'All cards' },
+  { key: 'all', label: 'All guides' },
   { key: 'moment', label: 'Moment', color: '#4A6FA5' },
   { key: 'parent', label: 'Parent', color: '#9B8BB4' },
   { key: 'kid', label: 'Kid', color: '#A8C3A0' },
@@ -45,7 +45,7 @@ export default function CardBrowser() {
         fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.12em',
         color: 'var(--pewter)', opacity: 0.7, marginBottom: 20,
       }}>
-        {filtered.length} card{filtered.length !== 1 ? 's' : ''}
+        {filtered.length} guide{filtered.length !== 1 ? 's' : ''}
       </p>
 
       {/* Card grid */}

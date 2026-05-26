@@ -358,8 +358,8 @@ function ResultScreen({ results }) {
         <p style={styles.prose}>{r.practice}</p>
         <div style={styles.scriptBox}>{r.script}</div>
 
-        {/* Three cards to start with */}
-        <h2 style={styles.sectionTitle}>Three cards to start with</h2>
+        {/* Start with these */}
+        <h2 style={styles.sectionTitle}>Start with these</h2>
         <ul style={styles.cardList}>
           {r.cards.map((card, i) => (
             <li key={i} style={styles.cardItem}>{card}</li>
@@ -438,3 +438,4 @@ export default function Quiz() {
     />
   );
 }
+

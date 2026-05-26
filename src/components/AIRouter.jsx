@@ -148,7 +148,7 @@ export default function AIRouter() {
                   opacity: input.trim().length >= 3 ? 1 : 0.5,
                 }}
               >
-                Find a card
+                Go
               </button>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function AIRouter() {
             fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.08em',
             color: 'var(--pewter)', opacity: 0.5, marginTop: 12,
           }}>
-            Your words are sent to match a card. They are not stored or logged.
+            Your words are sent to find the right guide. Not stored. Not logged.
           </p>
         </div>
       )}
@@ -175,7 +175,7 @@ export default function AIRouter() {
             animation: 'spin 0.8s linear infinite',
             margin: '0 auto 16px',
           }} />
-          <p style={{ fontSize: 15, color: 'var(--pewter)' }}>Finding the right card...</p>
+          <p style={{ fontSize: 15, color: 'var(--pewter)' }}>Matching......</p>
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
@@ -191,7 +191,7 @@ export default function AIRouter() {
             fontFamily: 'var(--serif)', fontSize: 20, fontWeight: 400,
             color: 'var(--slate)', marginBottom: 12,
           }}>
-            This sounds like it needs more than a card right now.
+            This sounds like it needs more than a guide right now.
           </h3>
           <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--pewter)', marginBottom: 16 }}>
             If you or your child are unsafe, please reach out to crisis support.
@@ -223,7 +223,7 @@ export default function AIRouter() {
             textTransform: 'uppercase', color: 'var(--sage-dark)',
             marginBottom: 16,
           }}>
-            {matches.length === 1 ? 'Matched card' : `${matches.length} cards matched`}
+            {matches.length === 1 ? 'Here's what fits' : `${matches.length} guides matched`}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -284,10 +284,10 @@ export default function AIRouter() {
             fontFamily: 'var(--serif)', fontSize: 20, fontWeight: 400,
             color: 'var(--slate)', marginBottom: 12,
           }}>
-            No card for this one yet
+            Nothing for this one yet
           </h3>
           <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--pewter)', marginBottom: 8 }}>
-            We don't have a card that matches what you described. We're still building the library.
+            We don't have a guide that matches what you described. We're still building.
           </p>
           {unmatchedNote && (
             <p style={{ fontSize: 14, lineHeight: 1.5, color: 'var(--pewter)', opacity: 0.7 }}>
@@ -302,7 +302,7 @@ export default function AIRouter() {
               fontSize: 14, fontWeight: 600, minHeight: 44,
               display: 'inline-flex', alignItems: 'center',
             }}>
-              Browse all cards
+              Browse guides
             </a>
             <button onClick={handleReset} style={{
               padding: '10px 20px', borderRadius: 100,

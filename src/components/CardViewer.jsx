@@ -110,7 +110,7 @@ export default function CardViewer({ cardId, cardType, title, category, parentTa
   const [activeTab, setActiveTab] = useState(tabs[0]?.key || 'now');
   const currentTab = tabs.find(t => t.key === activeTab) || tabs[0];
   
-  const typeLabel = { moment: 'Moment card', parent: 'Parent card', kid: 'Kid card' }[cardType];
+  const typeLabel = { moment: 'Moment guide', parent: 'Parent guide', kid: 'Kid guide' }[cardType];
   const typeColor = { moment: '#4A6FA5', parent: '#9B8BB4', kid: '#A8C3A0' }[cardType];
   
   return (
@@ -122,7 +122,7 @@ export default function CardViewer({ cardId, cardType, title, category, parentTa
           fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--pewter)',
           textDecoration: 'none', marginBottom: 16,
         }}>
-          ← All cards
+          ← All guides
         </a>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: 6,

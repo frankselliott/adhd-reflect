@@ -1,21 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Find out how your ADHD shows up when parenting gets hard.">
+<Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Describe what just happened and find what helps.">
 
-  <!-- ─── Hero ─── -->
+  <!-- ─── Hero: AI Router ─── -->
   <section class="hero">
     <div class="hero-inner">
       <p class="hero-label">For ADHD parents raising ADHD kids</p>
-      <h1 class="hero-title">How does your ADHD show up<br/> when parenting gets <em>hard?</em></h1>
+      <h1 class="hero-title">What just <em>happened?</em></h1>
       <p class="hero-body">
-        ADHD Reflect helps you notice the patterns that show up when ADHD, stress and parenting collide. Not therapy. Not advice. Just what actually helps on the hard days.
+        Describe the moment. In your own words, however messy. We'll find the guide that fits.
       </p>
-      <div class="hero-actions">
-        <a href="/quiz" class="btn btn-primary">Take the quiz</a>
-        <a href="/cards" class="btn btn-secondary">Browse the cards</a>
+      <div id="ai-router-root"></div>
+    </div>
+  </section>
+
+  <!-- ─── Quiz CTA ─── -->
+  <section class="quiz-cta">
+    <div class="quiz-cta-inner">
+      <div class="quiz-cta-content">
+        <h2>Not sure where to start?</h2>
+        <p>Take a three-minute quiz to find out how your ADHD shows up when parenting gets hard. Twelve questions, no diagnosis, no data stored.</p>
+        <a href="/quiz" class="btn btn-primary">What's my pattern?</a>
       </div>
-      <p class="hero-note">Three minutes. Twelve questions. No diagnosis, no data stored.</p>
     </div>
   </section>
 
@@ -26,8 +33,8 @@ import Base from '../layouts/Base.astro';
         <span class="what-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="var(--blue)" stroke-width="1.5" fill="none"/><path d="M10 6v4l2.5 2.5" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/></svg>
         </span>
-        <h3>Right now cards</h3>
-        <p>Short, specific cards for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+        <h3>For the moment you're in</h3>
+        <p>Short, specific guides for when you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
       </div>
       <div class="what-block">
         <span class="what-icon">
@@ -64,7 +71,6 @@ import Base from '../layouts/Base.astro';
       <h2>One email a week</h2>
       <p>Short, honest dispatches about ADHD parenting. Not tips lists. Not hustle. Just what's actually happening, written by someone living it.</p>
       <div class="newsletter-form-placeholder">
-        <!-- Replace with ConvertKit/email provider embed -->
         <div class="newsletter-mock">
           <input type="email" placeholder="your@email.com" class="newsletter-input" disabled />
           <button class="btn btn-primary newsletter-btn" disabled>Subscribe</button>
@@ -74,15 +80,24 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
+  <script>
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import AIRouter from '../components/AIRouter.jsx';
+
+    const root = createRoot(document.getElementById('ai-router-root'));
+    root.render(createElement(AIRouter));
+  </script>
+
 </Base>
 
 <style>
   /* ─── Hero ─── */
   .hero {
-    padding: var(--space-4xl) 0 var(--space-3xl);
+    padding: var(--space-3xl) 0 var(--space-2xl);
   }
   .hero-inner {
-    max-width: var(--container-max);
+    max-width: 640px;
     margin: 0 auto;
     padding: 0 var(--page-pad);
   }
@@ -100,7 +115,7 @@ import Base from '../layouts/Base.astro';
     font-weight: 300;
     line-height: 1.15;
     color: var(--slate);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     font-variation-settings: 'opsz' 48;
   }
   .hero-title em {
@@ -111,35 +126,42 @@ import Base from '../layouts/Base.astro';
     font-size: 18px;
     line-height: 1.6;
     color: var(--pewter);
-    max-width: 520px;
+    max-width: 480px;
     margin-bottom: var(--space-xl);
-  }
-  .hero-actions {
-    display: flex;
-    gap: var(--space-md);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-md);
-  }
-  .hero-note {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--pewter);
-    opacity: 0.6;
   }
 
   @media (max-width: 480px) {
     .hero {
       padding: var(--space-2xl) 0 var(--space-xl);
     }
-    .hero-title br { display: none; }
-    .hero-actions {
-      flex-direction: column;
-    }
-    .hero-actions .btn {
-      width: 100%;
-      text-align: center;
-    }
+  }
+
+  /* ─── Quiz CTA ─── */
+  .quiz-cta {
+    padding: var(--space-2xl) 0;
+    border-top: 1px solid var(--mist-border);
+  }
+  .quiz-cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+  }
+  .quiz-cta-content {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--mist-border);
+    padding: var(--space-lg);
+  }
+  .quiz-cta-content h2 {
+    font-size: 22px;
+    margin-bottom: var(--space-sm);
+  }
+  .quiz-cta-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--pewter);
+    margin-bottom: var(--space-md);
+    max-width: 480px;
   }
 
   /* ─── What this is ─── */
@@ -270,3 +292,4 @@ import Base from '../layouts/Base.astro';
     }
   }
 </style>
+
