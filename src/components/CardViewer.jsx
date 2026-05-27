@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 function renderMarkdown(md) {
   if (!md) return '';
-  let html = md
+  return md
     .replace(/^---$/gm, '<hr/>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
@@ -11,13 +11,12 @@ function renderMarkdown(md) {
       block = block.trim();
       if (!block) return '';
       if (block.startsWith('<hr')) return block;
-      return `<p>${block.replace(/\n/g, '<br/>')}</p>`;
+      return '<p>' + block.replace(/\n/g, '<br/>') + '</p>';
     })
     .join('');
-  return html;
 }
 
-export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content }) {
+export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides }) {
   const isMoment = cardType === 'moment';
   
   const tabs = [];
@@ -25,9 +24,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
   
   if (isMoment && parentNow) {
     tabs.push({ key: 'you', label: 'Right now', accent: '#4A6FA5' });
-    if (kidNow) {
-      tabs.push({ key: 'kid', label: 'Your kid', accent: '#9B8BB4' });
-    }
+    if (kidNow) tabs.push({ key: 'kid', label: 'Your kid', accent: '#9B8BB4' });
     tabContent.you = parentNow;
     tabContent.kid = kidNow || '';
   } else if (content) {
@@ -39,28 +36,32 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
   const typeColor = { moment: '#4A6FA5', parent: '#9B8BB4', kid: '#A8C3A0' }[cardType];
   const typeLabel = { moment: 'Moment', parent: 'Parent', kid: 'Kid' }[cardType];
 
+  // Split guides: primary (first) and related (rest)
+  const primaryGuide = relatedGuides?.[0] || null;
+  const otherGuides = relatedGuides?.slice(1) || [];
+
   return (
     <div style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px 64px' }}>
+      {/* Header */}
       <div style={{ paddingTop: 40, marginBottom: 24 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
-            textTransform: 'uppercase', color: typeColor,
-          }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: typeColor }} />
-            {typeLabel}
-          </span>
-        </div>
+        <span style={{
+          display: 'inline-flex', alignItems: 'center', gap: 5,
+          fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
+          textTransform: 'uppercase', color: typeColor, marginBottom: 16,
+        }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: typeColor }} />
+          {typeLabel}
+        </span>
         <h1 style={{
           fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 4vw, 32px)',
           fontWeight: 300, lineHeight: 1.2, color: 'var(--slate)',
-          fontVariationSettings: '"opsz" 36', marginBottom: 0,
+          fontVariationSettings: '"opsz" 36',
         }}>
           {title}
         </h1>
       </div>
 
+      {/* Tabs */}
       {tabs.length > 1 && (
         <div style={{
           display: 'flex', gap: 4, marginBottom: 20,
@@ -81,6 +82,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         </div>
       )}
 
+      {/* Content */}
       <div className="card-content"
         style={{
           background: 'rgba(74,111,165,0.03)', borderRadius: 14,
@@ -89,20 +91,38 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         dangerouslySetInnerHTML={{ __html: renderMarkdown(tabContent[activeTab] || '') }}
       />
 
-      <a href={`/guides/${cardId}`}
-        style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          marginTop: 16, padding: '14px 18px', background: 'white', borderRadius: 12,
-          border: '1px solid rgba(31,42,55,0.06)', textDecoration: 'none', color: 'var(--slate)',
-          fontFamily: 'var(--sans)', fontSize: 15, transition: 'border-color 0.2s',
-        }}
-      >
-        <span>
-          <span style={{ fontWeight: 500 }}>Understand why this happens</span><br/>
-          <span style={{ fontSize: 13, color: 'var(--pewter)' }}>Read the full guide</span>
-        </span>
-        <span style={{ color: 'var(--pewter)', fontSize: 18 }}>→</span>
-      </a>
+      {/* Related guides */}
+      {relatedGuides && relatedGuides.length > 0 && (
+        <div style={{ marginTop: 24 }}>
+          <p style={{
+            fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: '#7FA88E', marginBottom: 12,
+          }}>
+            Guides to read when you're ready
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {relatedGuides.map((guide, i) => (
+              <a key={guide.id} href={'/guides/' + guide.id}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '12px 16px', background: i === 0 ? 'white' : 'transparent',
+                  borderRadius: 10,
+                  border: i === 0 ? '1px solid rgba(127,168,142,0.15)' : '1px solid rgba(31,42,55,0.04)',
+                  textDecoration: 'none', color: 'var(--slate)',
+                  fontFamily: 'var(--sans)', fontSize: 14, lineHeight: 1.4,
+                  transition: 'background 0.15s',
+                }}
+              >
+                <span style={{ fontWeight: i === 0 ? 500 : 400, color: i === 0 ? 'var(--slate)' : 'var(--pewter)' }}>
+                  {guide.title}
+                </span>
+                <span style={{ color: 'var(--pewter)', fontSize: 14, flexShrink: 0, marginLeft: 8 }}>→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       <p style={{ fontSize: 12, lineHeight: 1.5, color: 'var(--pewter)', opacity: 0.4, marginTop: 24 }}>
         Not medical advice. <a href="/legal/safety" style={{ color: 'var(--pewter)' }}>Crisis support</a>

@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
+import { CARDS } from '../data/cards.js';
+import { TYPE_TO_GUIDES } from '../data/mappings.js';
+
 /* ═══════════════════════════════════════════
    ADHD Reflect — Parenting Pattern Quiz
    Source: Quiz Production Design doc

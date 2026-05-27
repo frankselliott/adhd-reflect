@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { CARDS } from '../../data/cards.js';
 import { CARD_RIGHT_NOW } from '../../data/cardRightNow.js';
+import { CARD_TO_GUIDES } from '../../data/mappings.js';
 
 export function getStaticPaths() {
   return CARDS.map(card => ({
@@ -12,6 +13,13 @@ export function getStaticPaths() {
 
 const { card } = Astro.props;
 const content = CARD_RIGHT_NOW[card.id] || {};
+
+// Build related guides list with titles
+const guideIds = CARD_TO_GUIDES[card.id] || [card.id];
+const cardsMap = Object.fromEntries(CARDS.map(c => [c.id, c]));
+const relatedGuides = guideIds
+  .filter(id => cardsMap[id])
+  .map(id => ({ id, title: cardsMap[id].title }));
 ---
 <Base title={card.title} description={`ADHD Reflect: ${card.title}`}>
 
@@ -20,6 +28,7 @@ const content = CARD_RIGHT_NOW[card.id] || {};
   <script id="parent-now-data" type="application/json" set:html={JSON.stringify(content.parentNow || '')} />
   <script id="kid-now-data" type="application/json" set:html={JSON.stringify(content.kidNow || '')} />
   <script id="content-now-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+  <script id="related-guides-data" type="application/json" set:html={JSON.stringify(relatedGuides)} />
 
   <script define:vars={{ cardId: card.id, cardType: card.type, title: card.title }}>
     import { createElement } from 'react';
@@ -29,10 +38,11 @@ const content = CARD_RIGHT_NOW[card.id] || {};
     const parentNow = JSON.parse(document.getElementById('parent-now-data').textContent);
     const kidNow = JSON.parse(document.getElementById('kid-now-data').textContent);
     const content = JSON.parse(document.getElementById('content-now-data').textContent);
+    const relatedGuides = JSON.parse(document.getElementById('related-guides-data').textContent);
 
     const root = createRoot(document.getElementById('card-viewer-root'));
     root.render(createElement(CardViewer, {
-      cardId, cardType, title, parentNow, kidNow, content,
+      cardId, cardType, title, parentNow, kidNow, content, relatedGuides,
     }));
   </script>
 
