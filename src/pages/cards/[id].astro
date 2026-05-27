@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { CARDS } from '../../data/cards.js';
-import { CARD_CONTENT } from '../../data/cardContent.js';
+import { CARD_RIGHT_NOW } from '../../data/cardRightNow.js';
 
 export function getStaticPaths() {
   return CARDS.map(card => ({
@@ -11,84 +11,47 @@ export function getStaticPaths() {
 }
 
 const { card } = Astro.props;
-const content = CARD_CONTENT[card.id] || {};
+const content = CARD_RIGHT_NOW[card.id] || {};
 ---
-<Base title={card.title} description={`ADHD Reflect card: ${card.title}`}>
-  
-  <div id="card-viewer-root"
-    data-card-id={card.id}
-    data-card-type={card.type}
-    data-card-title={card.title}
-    data-card-category={card.category}
-    data-has-parent-tab={content.parentTab ? 'true' : 'false'}
-    data-has-kid-tab={content.kidTab ? 'true' : 'false'}
-    data-has-content={content.content ? 'true' : 'false'}
-  >
-  </div>
+<Base title={card.title} description={`ADHD Reflect: ${card.title}`}>
 
-  <!-- Hidden content containers for React to read -->
-  <script id="parent-tab-data" type="application/json" set:html={JSON.stringify(content.parentTab || '')} />
-  <script id="kid-tab-data" type="application/json" set:html={JSON.stringify(content.kidTab || '')} />
-  <script id="content-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+  <div id="card-viewer-root"></div>
 
-  <script>
+  <script id="parent-now-data" type="application/json" set:html={JSON.stringify(content.parentNow || '')} />
+  <script id="kid-now-data" type="application/json" set:html={JSON.stringify(content.kidNow || '')} />
+  <script id="content-now-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+
+  <script define:vars={{ cardId: card.id, cardType: card.type, title: card.title }}>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import CardViewer from '../../components/CardViewer.jsx';
 
-    const el = document.getElementById('card-viewer-root');
-    const parentTab = JSON.parse(document.getElementById('parent-tab-data').textContent);
-    const kidTab = JSON.parse(document.getElementById('kid-tab-data').textContent);
-    const content = JSON.parse(document.getElementById('content-data').textContent);
-    
-    const root = createRoot(el);
+    const parentNow = JSON.parse(document.getElementById('parent-now-data').textContent);
+    const kidNow = JSON.parse(document.getElementById('kid-now-data').textContent);
+    const content = JSON.parse(document.getElementById('content-now-data').textContent);
+
+    const root = createRoot(document.getElementById('card-viewer-root'));
     root.render(createElement(CardViewer, {
-      cardId: el.dataset.cardId,
-      cardType: el.dataset.cardType,
-      title: el.dataset.cardTitle,
-      category: el.dataset.cardCategory,
-      parentTab: parentTab,
-      kidTab: kidTab,
-      content: content,
+      cardId, cardType, title, parentNow, kidNow, content,
     }));
   </script>
 
 </Base>
 
 <style is:global>
-  .cv-content p {
+  .card-content p {
     font-size: 17px;
     line-height: 1.65;
     color: var(--pewter);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-  .cv-content p:last-child {
-    margin-bottom: 0;
-  }
-  .cv-content strong {
-    color: var(--slate);
-    font-weight: 600;
-  }
-  .cv-content em {
-    font-style: italic;
-    color: var(--slate);
-  }
-  .cv-content hr {
+  .card-content p:last-child { margin-bottom: 0; }
+  .card-content strong { color: var(--slate); font-weight: 600; }
+  .card-content em { font-style: italic; }
+  .card-content hr {
     border: none;
-    border-top: 1px solid rgba(31,42,55,0.08);
-    margin: 24px 0;
-  }
-  .cv-content h4 {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--slate);
-    margin-top: 24px;
-    margin-bottom: 12px;
-    font-variation-settings: 'opsz' 22;
-  }
-  .cv-content .cv-subhead {
-    margin-top: 24px;
+    border-top: 1px solid rgba(74,111,165,0.08);
+    margin: 20px 0;
   }
 </style>
 

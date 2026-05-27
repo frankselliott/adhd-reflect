@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CARDS } from '../../data/cards.js';
+import { GUIDE_CONTENT } from '../../data/guideContent.js';
+
+export function getStaticPaths() {
+  return CARDS.map(card => ({
+    params: { id: card.id },
+    props: { card },
+  }));
+}
+
+const { card } = Astro.props;
+const content = GUIDE_CONTENT[card.id] || {};
+---
+<Base title={`${card.title} — Guide`} description={`Understand why this happens: ${card.title}`}>
+
+  <div id="guide-viewer-root"></div>
+
+  <script id="parent-guide-data" type="application/json" set:html={JSON.stringify(content.parentGuide || '')} />
+  <script id="kid-guide-data" type="application/json" set:html={JSON.stringify(content.kidGuide || '')} />
+  <script id="guide-content-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+
+  <script define:vars={{ cardId: card.id, cardType: card.type, title: card.title }}>
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import GuideViewer from '../../components/GuideViewer.jsx';
+
+    const parentGuide = JSON.parse(document.getElementById('parent-guide-data').textContent);
+    const kidGuide = JSON.parse(document.getElementById('kid-guide-data').textContent);
+    const guideContent = JSON.parse(document.getElementById('guide-content-data').textContent);
+
+    const root = createRoot(document.getElementById('guide-viewer-root'));
+    root.render(createElement(GuideViewer, {
+      cardId, cardType, title, parentGuide, kidGuide, content: guideContent,
+    }));
+  </script>
+
+</Base>
+
+<style is:global>
+  .guide-content p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--pewter);
+    margin-bottom: 18px;
+    max-width: 60ch;
+  }
+  .guide-content p:last-child { margin-bottom: 0; }
+  .guide-content strong { color: var(--slate); font-weight: 600; }
+  .guide-content em { font-style: italic; color: var(--slate); }
+  .guide-content hr {
+    border: none;
+    border-top: 1px solid rgba(31,42,55,0.08);
+    margin: 28px 0;
+  }
+</style>
+
