@@ -1,9 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-
-/* ═══════════════════════════════════════════
-   ADHD Reflect — Calming Card Viewer
-   Design: adhd-parent-design.html prototype
-   ═══════════════════════════════════════════ */
+import BreathingExercise from './BreathingExercise.jsx';
 
 function renderMarkdown(md) {
   if (!md) return '';
@@ -27,45 +23,12 @@ const TABS = {
   kid:  { label: 'your kid',     bg: '#E2E8EF', accent: '#3F6178', iconBg: 'rgba(63,97,120,0.1)' },
 };
 
-function TimerButton() {
-  const [seconds, setSeconds] = useState(30);
-  const [running, setRunning] = useState(false);
-  const intervalRef = useRef(null);
+const ink = '#191714';
+const ink2 = '#6B6358';
+const ink3 = '#A09589';
 
-  useEffect(() => {
-    if (running && seconds > 0) {
-      intervalRef.current = setInterval(() => setSeconds(s => s - 1), 1000);
-    }
-    if (seconds === 0) { setRunning(false); setSeconds(30); }
-    return () => clearInterval(intervalRef.current);
-  }, [running, seconds]);
-
-  const toggle = () => {
-    if (running) { setRunning(false); setSeconds(30); }
-    else setRunning(true);
-  };
-
-  const display = running
-    ? `${String(Math.floor(seconds/60)).padStart(1,'0')}:${String(seconds%60).padStart(2,'0')}`
-    : 'pause 0:30';
-
-  return (
-    <button onClick={toggle} style={{
-      appearance: 'none', border: 0, cursor: 'pointer', flexShrink: 0,
-      background: running ? '#B85038' : '#191714', color: '#F5EFE0',
-      fontFamily: 'var(--mono)', fontSize: 15, letterSpacing: '0.04em',
-      padding: '16px 26px', borderRadius: 999,
-      animation: running ? 'timer-pulse 1.4s ease-in-out infinite' : 'none',
-      transition: 'background 220ms ease',
-    }}>
-      {display}
-    </button>
-  );
-}
-
-function ExpandSection({ label, children, accentColor }) {
+function ExpandSection({ label, children }) {
   const [open, setOpen] = useState(false);
-
   return (
     <div>
       <button onClick={() => setOpen(!open)} style={{
@@ -73,7 +36,7 @@ function ExpandSection({ label, children, accentColor }) {
         background: 'transparent', width: '100%', padding: '17px 0',
         display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', textAlign: 'left',
         fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.09em',
-        textTransform: 'lowercase', color: open ? '#6B6358' : '#A09589',
+        textTransform: 'lowercase', color: open ? ink2 : ink3,
         transition: 'color 180ms ease',
       }}>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
@@ -83,18 +46,37 @@ function ExpandSection({ label, children, accentColor }) {
         {label}
       </button>
       <div style={{
-        overflow: 'hidden', maxHeight: open ? 900 : 0, opacity: open ? 1 : 0,
+        overflow: 'hidden', maxHeight: open ? 1200 : 0, opacity: open ? 1 : 0,
         transition: 'max-height 420ms cubic-bezier(.4,0,.2,1), opacity 280ms ease',
       }}>
-        <div style={{ paddingBottom: 36 }}>
-          {children}
-        </div>
+        <div style={{ paddingBottom: 24 }}>{children}</div>
       </div>
     </div>
   );
 }
 
-export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides }) {
+function DeepBlock({ label, text, accentColor }) {
+  return (
+    <div style={{
+      background: 'rgba(25,23,20,0.04)', borderRadius: 12, padding: '16px 18px', marginBottom: 10,
+    }}>
+      <div style={{
+        fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.16em',
+        textTransform: 'lowercase', color: accentColor || ink3, marginBottom: 8,
+      }}>
+        {label}
+      </div>
+      <p style={{
+        fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 380',
+        fontSize: 15, lineHeight: 1.6, color: ink2, margin: 0,
+      }}
+        dangerouslySetInnerHTML={{ __html: text.replace(/\*\*(.+?)\*\*/g, '<strong style="color:#191714;font-variation-settings:\'opsz\' 16, \'wght\' 580">$1</strong>') }}
+      />
+    </div>
+  );
+}
+
+export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess }) {
   const isMoment = cardType === 'moment';
   const hasKid = isMoment && kidNow;
 
@@ -106,11 +88,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
   const tabsRef = useRef(null);
   const [barStyle, setBarStyle] = useState({});
   const currentTab = TABS[activeTab];
-  const ink = '#191714';
-  const ink2 = '#6B6358';
-  const ink3 = '#A09589';
 
-  // Animated tab bar
   useEffect(() => {
     if (!tabsRef.current) return;
     const btns = tabsRef.current.querySelectorAll('[data-tab]');
@@ -119,28 +97,23 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
       const btn = btns[idx];
       const container = tabsRef.current;
       setBarStyle({
-        transform: `translateX(${btn.offsetLeft - container.offsetLeft}px)`,
-        width: `${btn.offsetWidth}px`,
+        transform: 'translateX(' + (btn.offsetLeft - container.offsetLeft) + 'px)',
+        width: btn.offsetWidth + 'px',
         background: currentTab.accent,
       });
     }
   }, [activeTab]);
 
   const mainContent = activeTab === 'now' ? (parentNow || content || '') :
-                       activeTab === 'kid' ? (kidNow || '') :
-                       ''; // why tab gets the guide link
+                       activeTab === 'kid' ? (kidNow || '') : '';
 
   const typeLabel = { moment: 'moment', parent: 'parent', kid: 'kid' }[cardType];
+  const brain = brainProcess || null;
 
   return (
     <>
       <style>{`
-        @keyframes timer-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.78; } }
-        @keyframes pulse-live {
-          0%  { box-shadow: 0 0 0 0 rgba(75,107,78,0.6); }
-          60% { box-shadow: 0 0 0 7px rgba(75,107,78,0); }
-          100%{ box-shadow: 0 0 0 0 rgba(75,107,78,0); }
-        }
+        @keyframes pulse-live { 0% { box-shadow: 0 0 0 0 rgba(75,107,78,0.6); } 60% { box-shadow: 0 0 0 7px rgba(75,107,78,0); } 100% { box-shadow: 0 0 0 0 rgba(75,107,78,0); } }
         @keyframes panel-in { from { opacity: 0; } to { opacity: 1; } }
         .calming-shell { transition: background 360ms ease; }
         .calming-panel { animation: panel-in 260ms ease both; }
@@ -153,14 +126,11 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
       <div className="calming-shell" style={{
         width: '100%', maxWidth: 430, margin: '0 auto',
         minHeight: '80dvh', display: 'flex', flexDirection: 'column',
-        background: currentTab.bg, borderRadius: window.innerWidth >= 700 ? 32 : 0,
+        background: currentTab.bg, borderRadius: typeof window !== 'undefined' && window.innerWidth >= 700 ? 32 : 0,
         overflow: 'hidden',
       }}>
-
-        {/* Chrome bar */}
-        <div style={{
-          padding: '22px 26px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0,
-        }}>
+        {/* Chrome */}
+        <div style={{ padding: '22px 26px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
           <a href="/" style={{
             fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.07em',
             color: ink2, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 5,
@@ -173,10 +143,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
             fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.05em', color: ink3,
           }}>
             matched
-            <span style={{
-              width: 7, height: 7, borderRadius: '50%', background: '#4B6B4E',
-              animation: 'pulse-live 2.8s ease-out infinite',
-            }}/>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4B6B4E', animation: 'pulse-live 2.8s ease-out infinite' }}/>
           </div>
         </div>
 
@@ -185,22 +152,18 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
           <div style={{
             fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 18, "wght" 440',
             fontSize: 18, letterSpacing: '-0.01em', color: ink, lineHeight: 1.2,
-          }}>
-            {title}
-          </div>
+          }}>{title}</div>
           <div style={{
             fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.12em',
             color: ink3, textTransform: 'lowercase', marginTop: 3,
-          }}>
-            {typeLabel} · {cardId}
-          </div>
+          }}>{typeLabel}</div>
         </div>
 
         {/* Tabs */}
         {availableTabs.length > 1 && (
           <div ref={tabsRef} style={{
             padding: '16px 26px 0', display: 'grid',
-            gridTemplateColumns: `repeat(${availableTabs.length}, 1fr)`,
+            gridTemplateColumns: 'repeat(' + availableTabs.length + ', 1fr)',
             borderBottom: '1px solid rgba(25,23,20,0.12)', position: 'relative', flexShrink: 0,
           }}>
             {availableTabs.map(key => (
@@ -212,10 +175,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   color: activeTab === key ? ink : ink3,
                   padding: '0 0 13px', cursor: 'pointer', textAlign: 'left',
                   transition: 'color 200ms ease',
-                }}
-              >
-                {TABS[key].label}
-              </button>
+                }}>{TABS[key].label}</button>
             ))}
             <span style={{
               position: 'absolute', bottom: -1, height: 2.5, borderRadius: 2,
@@ -225,38 +185,35 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
           </div>
         )}
 
-        {/* Panel content */}
+        {/* Panel */}
         <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <div key={activeTab} className="calming-panel" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
 
-            {/* RIGHT NOW panel */}
             {activeTab === 'now' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
                   fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.24em',
                   textTransform: 'uppercase', color: currentTab.accent, marginBottom: 14,
-                }}>
-                  what to do right now
-                </div>
-                <div className="calming-content" style={{ flex: 1 }}
+                }}>what to do right now</div>
+
+                <div className="calming-content" style={{ flex: 0 }}
                   dangerouslySetInnerHTML={{ __html: renderMarkdown(mainContent) }}
                 />
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  gap: 16, marginTop: 24,
-                }}>
-                  <div style={{
-                    fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 14, "wght" 360',
-                    fontSize: 13, lineHeight: 1.45, color: ink3, maxWidth: '50%',
-                  }}>
-                    Take thirty seconds before you do anything else.
-                  </div>
-                  <TimerButton />
-                </div>
+
+                {/* Breathing exercise */}
+                <BreathingExercise accentColor={currentTab.accent} />
+
+                {/* What your brain just did */}
+                {brain && (
+                  <ExpandSection label="what your brain just did">
+                    <DeepBlock label="your body" text={brain.body} accentColor={currentTab.accent} />
+                    <DeepBlock label="your brain" text={brain.brain} accentColor={currentTab.accent} />
+                    <DeepBlock label="what this did" text={brain.effect} accentColor={currentTab.accent} />
+                  </ExpandSection>
+                )}
               </div>
             )}
 
-            {/* WHY / UNDERSTAND panel */}
             {activeTab === 'why' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
@@ -272,7 +229,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 28, "wght" 460',
                   fontSize: 22, lineHeight: 1.34, letterSpacing: '-0.015em', color: ink, marginBottom: 16,
                 }}>
-                  Understanding what's happening when <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>this moment</strong> shows up.
+                  Understanding what happens when <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>this moment</strong> shows up.
                 </div>
                 <div style={{
                   fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 360',
@@ -289,14 +246,11 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   <span style={{
                     fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 450',
                     fontSize: 16, lineHeight: 1.45, letterSpacing: '-0.01em',
-                  }}>
-                    Read the full guide →
-                  </span>
+                  }}>Read the full guide &#8594;</span>
                 </a>
 
-                {/* Related guides */}
                 {relatedGuides && relatedGuides.length > 1 && (
-                  <ExpandSection label="related guides" accentColor={currentTab.accent}>
+                  <ExpandSection label="related guides">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                       {relatedGuides.slice(1).map(g => (
                         <a key={g.id} href={'/guides/' + g.id} style={{
@@ -304,9 +258,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                           textDecoration: 'none', display: 'block',
                           fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 380',
                           fontSize: 15, lineHeight: 1.45, color: ink2,
-                        }}>
-                          {g.title}
-                        </a>
+                        }}>{g.title}</a>
                       ))}
                     </div>
                   </ExpandSection>
@@ -314,7 +266,6 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
               </div>
             )}
 
-            {/* YOUR KID panel */}
             {activeTab === 'kid' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
@@ -323,12 +274,12 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   background: currentTab.iconBg, marginBottom: 26, flexShrink: 0,
                 }}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={currentTab.accent} strokeWidth="1.5" strokeLinecap="round">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
                   </svg>
                 </div>
                 <div style={{
                   fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 28, "wght" 460',
-                  fontSize: 22, lineHeight: 1.34, letterSpacing: '-0.015em', color: ink, marginBottom: 16,
+                  fontSize: 22, lineHeight: 1.34, letterSpacing: '-0.015em', color: ink, marginBottom: 20,
                 }}>
                   What your <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>kid</strong> is experiencing right now.
                 </div>
@@ -340,12 +291,12 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
           </div>
         </div>
 
-        {/* Footer safety */}
+        {/* Footer */}
         <div style={{
           padding: '12px 26px 20px', flexShrink: 0, textAlign: 'center',
           fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.08em', color: ink3,
         }}>
-          not medical advice · <a href="/legal/safety" style={{ color: ink3 }}>crisis support</a>
+          not medical advice &middot; <a href="/legal/safety" style={{ color: ink3 }}>crisis support</a>
         </div>
       </div>
     </>
