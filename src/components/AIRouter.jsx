@@ -223,7 +223,7 @@ export default function AIRouter() {
             textTransform: 'uppercase', color: 'var(--sage-dark)',
             marginBottom: 16,
           }}>
-            {matches.length === 1 ? 'Here's what fits' : `${matches.length} guides matched`}
+            {matches.length === 1 ? 'What fits' : `${matches.length} guides matched`}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
