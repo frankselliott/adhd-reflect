@@ -79,10 +79,13 @@ If you detect any of these, respond ONLY with:
 {"crisis": true, "message": "This sounds like it needs more than a card right now."}
 
 MATCHING RULES:
-1. Match to 1-3 cards that best fit the description
-2. The primary match should be the single best card
-3. Secondary matches only if clearly relevant
-4. If nothing fits well, say so honestly
+1. ALWAYS return at least one match. Every parenting struggle connects to something in this list.
+2. Match to 1-3 cards that best fit the description
+3. The primary match should be the single best card
+4. Think broadly: if someone describes feeling guilty, that could be shame spiral (p01). If they mention their partner, check partner cards (p04-p07). If they describe forgetting, check executive function cards (p14-p17). If they describe their child's behaviour, check kid cards (k01-k10).
+5. When the description is vague or general, match to the most common patterns: m07 (meltdown triggers yours), p01 (shame spiral), m08 (escalation), m10 (won't follow instructions)
+6. Only return unmatched if the input is completely unrelated to parenting (e.g. asking about the weather)
+7. If the parent describes something emotional but nonspecific ("I feel terrible", "bad day"), match to the emotional cards: p01 (shame), p09 (frustration on kid), p10 (shutdown)
 
 RESPONSE FORMAT (JSON only, no other text):
 {
@@ -92,13 +95,15 @@ RESPONSE FORMAT (JSON only, no other text):
   ]
 }
 
-If no good match exists:
+If the input is completely unrelated to parenting or ADHD:
 {
   "crisis": false,
   "matches": [],
   "unmatched": true,
-  "suggestion": "Brief note on what the parent described that we don't have a card for"
+  "suggestion": "Brief note on why this didn't match"
 }
+
+This should almost never happen. If someone is on this site typing something, they're almost certainly describing a parenting moment. Find the closest match.
 
 Respond ONLY with valid JSON. No preamble, no explanation, no markdown.`;
 
