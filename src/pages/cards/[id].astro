@@ -14,7 +14,6 @@ export function getStaticPaths() {
 const { card } = Astro.props;
 const content = CARD_RIGHT_NOW[card.id] || {};
 
-// Build related guides list with titles
 const guideIds = CARD_TO_GUIDES[card.id] || [card.id];
 const cardsMap = Object.fromEntries(CARDS.map(c => [c.id, c]));
 const relatedGuides = guideIds
@@ -23,45 +22,48 @@ const relatedGuides = guideIds
 ---
 <Base title={card.title} description={`ADHD Reflect: ${card.title}`}>
 
-  <div id="card-viewer-root"></div>
+  <div id="card-viewer-root"
+    data-card-id={card.id}
+    data-card-type={card.type}
+    data-card-title={card.title}
+  ></div>
 
-  <script id="parent-now-data" type="application/json" set:html={JSON.stringify(content.parentNow || '')} />
-  <script id="kid-now-data" type="application/json" set:html={JSON.stringify(content.kidNow || '')} />
-  <script id="content-now-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
-  <script id="related-guides-data" type="application/json" set:html={JSON.stringify(relatedGuides)} />
+  <script id="pn-data" type="application/json" set:html={JSON.stringify(content.parentNow || '')} />
+  <script id="kn-data" type="application/json" set:html={JSON.stringify(content.kidNow || '')} />
+  <script id="cn-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+  <script id="rg-data" type="application/json" set:html={JSON.stringify(relatedGuides)} />
 
-  <script define:vars={{ cardId: card.id, cardType: card.type, title: card.title }}>
+  <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import CardViewer from '../../components/CardViewer.jsx';
 
-    const parentNow = JSON.parse(document.getElementById('parent-now-data').textContent);
-    const kidNow = JSON.parse(document.getElementById('kid-now-data').textContent);
-    const content = JSON.parse(document.getElementById('content-now-data').textContent);
-    const relatedGuides = JSON.parse(document.getElementById('related-guides-data').textContent);
+    const el = document.getElementById('card-viewer-root');
+    const parentNow = JSON.parse(document.getElementById('pn-data').textContent);
+    const kidNow = JSON.parse(document.getElementById('kn-data').textContent);
+    const content = JSON.parse(document.getElementById('cn-data').textContent);
+    const relatedGuides = JSON.parse(document.getElementById('rg-data').textContent);
 
-    const root = createRoot(document.getElementById('card-viewer-root'));
+    const root = createRoot(el);
     root.render(createElement(CardViewer, {
-      cardId, cardType, title, parentNow, kidNow, content, relatedGuides,
+      cardId: el.dataset.cardId,
+      cardType: el.dataset.cardType,
+      title: el.dataset.cardTitle,
+      parentNow, kidNow, content, relatedGuides,
     }));
   </script>
 
 </Base>
 
 <style is:global>
-  .card-content p {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--pewter);
-    margin-bottom: 14px;
-  }
+  .card-content p { font-size: 17px; line-height: 1.65; color: #6B6358; margin-bottom: 14px; }
   .card-content p:last-child { margin-bottom: 0; }
-  .card-content strong { color: var(--slate); font-weight: 600; }
+  .card-content strong { color: #191714; font-weight: 600; }
   .card-content em { font-style: italic; }
-  .card-content hr {
-    border: none;
-    border-top: 1px solid rgba(74,111,165,0.08);
-    margin: 20px 0;
-  }
+  .card-content hr { border: none; border-top: 1px solid rgba(74,111,165,0.08); margin: 20px 0; }
+  .calming-content p { font-variation-settings: "opsz" 16, "wght" 380; font-size: 16px; line-height: 1.68; color: #6B6358; margin-bottom: 14px; }
+  .calming-content p:last-child { margin-bottom: 0; }
+  .calming-content strong { font-variation-settings: "opsz" 16, "wght" 580; color: #191714; }
+  .calming-content hr { border: none; border-top: 1px solid rgba(25,23,20,0.07); margin: 20px 0; }
 </style>
 

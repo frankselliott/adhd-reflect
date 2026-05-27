@@ -15,24 +15,34 @@ const content = GUIDE_CONTENT[card.id] || {};
 ---
 <Base title={`${card.title} — Guide`} description={`Understand why this happens: ${card.title}`}>
 
-  <div id="guide-viewer-root"></div>
+  <div id="guide-viewer-root"
+    data-card-id={card.id}
+    data-card-type={card.type}
+    data-card-title={card.title}
+  ></div>
 
-  <script id="parent-guide-data" type="application/json" set:html={JSON.stringify(content.parentGuide || '')} />
-  <script id="kid-guide-data" type="application/json" set:html={JSON.stringify(content.kidGuide || '')} />
-  <script id="guide-content-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+  <script id="pg-data" type="application/json" set:html={JSON.stringify(content.parentGuide || '')} />
+  <script id="kg-data" type="application/json" set:html={JSON.stringify(content.kidGuide || '')} />
+  <script id="gc-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
 
-  <script define:vars={{ cardId: card.id, cardType: card.type, title: card.title }}>
+  <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import GuideViewer from '../../components/GuideViewer.jsx';
 
-    const parentGuide = JSON.parse(document.getElementById('parent-guide-data').textContent);
-    const kidGuide = JSON.parse(document.getElementById('kid-guide-data').textContent);
-    const guideContent = JSON.parse(document.getElementById('guide-content-data').textContent);
+    const el = document.getElementById('guide-viewer-root');
+    const parentGuide = JSON.parse(document.getElementById('pg-data').textContent);
+    const kidGuide = JSON.parse(document.getElementById('kg-data').textContent);
+    const guideContent = JSON.parse(document.getElementById('gc-data').textContent);
 
-    const root = createRoot(document.getElementById('guide-viewer-root'));
+    const root = createRoot(el);
     root.render(createElement(GuideViewer, {
-      cardId, cardType, title, parentGuide, kidGuide, content: guideContent,
+      cardId: el.dataset.cardId,
+      cardType: el.dataset.cardType,
+      title: el.dataset.cardTitle,
+      parentGuide,
+      kidGuide,
+      content: guideContent,
     }));
   </script>
 
@@ -40,19 +50,11 @@ const content = GUIDE_CONTENT[card.id] || {};
 
 <style is:global>
   .guide-content p {
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--pewter);
-    margin-bottom: 18px;
-    max-width: 60ch;
+    font-size: 17px; line-height: 1.7; color: #6B6358; margin-bottom: 18px; max-width: 60ch;
   }
   .guide-content p:last-child { margin-bottom: 0; }
-  .guide-content strong { color: var(--slate); font-weight: 600; }
-  .guide-content em { font-style: italic; color: var(--slate); }
-  .guide-content hr {
-    border: none;
-    border-top: 1px solid rgba(31,42,55,0.08);
-    margin: 28px 0;
-  }
+  .guide-content strong { color: #191714; font-weight: 600; }
+  .guide-content em { font-style: italic; color: #191714; }
+  .guide-content hr { border: none; border-top: 1px solid rgba(25,23,20,0.08); margin: 28px 0; }
 </style>
 

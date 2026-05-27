@@ -10,7 +10,7 @@ const { current = '' } = Astro.props;
   <div class="nav-inner">
     <Logo />
     <ul class="nav-links" role="list">
-      <li><a href="/cards" class:list={[{ active: current === 'cards' }]}>Guides</a></li>
+      <li><a href="/guides" class:list={[{ active: current === 'guides' }]}>Guides</a></li>
       <li><a href="/resources" class:list={[{ active: current === 'resources' }]}>Resources</a></li>
       <li><a href="/about" class:list={[{ active: current === 'about' }]}>About</a></li>
     </ul>
@@ -26,7 +26,7 @@ const { current = '' } = Astro.props;
 <!-- Mobile menu overlay -->
 <div class="nav-mobile-menu" aria-hidden="true">
   <div class="nav-mobile-menu-inner">
-    <a href="/cards">Guides</a>
+    <a href="/guides">Guides</a>
     <a href="/resources">Resources</a>
     <a href="/about">About</a>
   </div>

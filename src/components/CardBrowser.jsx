@@ -8,7 +8,7 @@ const typeFilters = [
   { key: 'kid', label: 'Kid', color: '#A8C3A0' },
 ];
 
-export default function CardBrowser() {
+export default function CardBrowser({ linkPrefix = '/guides/' }) {
   const [filter, setFilter] = useState('all');
 
   const filtered = filter === 'all' ? CARDS : CARDS.filter(c => c.type === filter);
@@ -57,7 +57,7 @@ export default function CardBrowser() {
         {filtered.map(card => (
           <a
             key={card.id}
-            href={`/cards/${card.id}`}
+            href={`${linkPrefix}${card.id}`}
             style={{
               background: 'white', borderRadius: 16,
               border: '1px solid rgba(31,42,55,0.08)',
