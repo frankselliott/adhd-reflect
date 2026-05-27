@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import AIRouter from '../components/AIRouter.jsx';
 ---
 <Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Describe what just happened and find what helps.">
 
@@ -11,7 +12,7 @@ import Base from '../layouts/Base.astro';
       <p class="hero-body">
         Describe the moment. In your own words, however messy. We'll find the guide that fits.
       </p>
-      <div id="ai-router-root"></div>
+      <AIRouter client:load />
     </div>
   </section>
 
@@ -80,19 +81,9 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
-  <script>
-    import { createElement } from 'react';
-    import { createRoot } from 'react-dom/client';
-    import AIRouter from '../components/AIRouter.jsx';
-
-    const root = createRoot(document.getElementById('ai-router-root'));
-    root.render(createElement(AIRouter));
-  </script>
-
 </Base>
 
 <style>
-  /* ─── Hero ─── */
   .hero {
     padding: var(--space-3xl) 0 var(--space-2xl);
   }
@@ -131,12 +122,9 @@ import Base from '../layouts/Base.astro';
   }
 
   @media (max-width: 480px) {
-    .hero {
-      padding: var(--space-2xl) 0 var(--space-xl);
-    }
+    .hero { padding: var(--space-2xl) 0 var(--space-xl); }
   }
 
-  /* ─── Quiz CTA ─── */
   .quiz-cta {
     padding: var(--space-2xl) 0;
     border-top: 1px solid var(--mist-border);
@@ -152,19 +140,12 @@ import Base from '../layouts/Base.astro';
     border: 1px solid var(--mist-border);
     padding: var(--space-lg);
   }
-  .quiz-cta-content h2 {
-    font-size: 22px;
-    margin-bottom: var(--space-sm);
-  }
+  .quiz-cta-content h2 { font-size: 22px; margin-bottom: var(--space-sm); }
   .quiz-cta-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--pewter);
-    margin-bottom: var(--space-md);
-    max-width: 480px;
+    font-size: 16px; line-height: 1.6; color: var(--pewter);
+    margin-bottom: var(--space-md); max-width: 480px;
   }
 
-  /* ─── What this is ─── */
   .what {
     padding: var(--space-3xl) 0;
     border-top: 1px solid var(--mist-border);
@@ -178,36 +159,20 @@ import Base from '../layouts/Base.astro';
     gap: var(--space-xl);
   }
   .what-block h3 {
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 400;
-    margin-bottom: var(--space-sm);
-    font-variation-settings: 'opsz' 24;
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    margin-bottom: var(--space-sm); font-variation-settings: 'opsz' 24;
   }
-  .what-block p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--pewter);
-  }
+  .what-block p { font-size: 15px; line-height: 1.6; color: var(--pewter); }
   .what-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    background: var(--mist);
-    margin-bottom: var(--space-md);
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: var(--radius-md);
+    background: var(--mist); margin-bottom: var(--space-md);
   }
 
   @media (max-width: 640px) {
-    .what-inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
-    }
+    .what-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
   }
 
-  /* ─── Who this is for ─── */
   .who {
     padding: var(--space-3xl) 0;
     background: white;
@@ -219,77 +184,35 @@ import Base from '../layouts/Base.astro';
     margin: 0 auto;
     padding: 0 var(--page-pad);
   }
-  .who-inner h2 {
-    margin-bottom: var(--space-lg);
-  }
-  .who-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
+  .who-inner h2 { margin-bottom: var(--space-lg); }
+  .who-list { display: flex; flex-direction: column; gap: var(--space-md); }
   .who-list p {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--pewter);
-    padding-left: var(--space-lg);
-    border-left: 2px solid var(--sage);
+    font-size: 17px; line-height: 1.6; color: var(--pewter);
+    padding-left: var(--space-lg); border-left: 2px solid var(--sage);
   }
 
-  /* ─── Newsletter ─── */
-  .newsletter {
-    padding: var(--space-3xl) 0;
-  }
+  .newsletter { padding: var(--space-3xl) 0; }
   .newsletter-inner {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--page-pad);
   }
-  .newsletter-inner h2 {
-    margin-bottom: var(--space-sm);
-  }
-  .newsletter-inner > p {
-    color: var(--pewter);
-    margin-bottom: var(--space-lg);
-    max-width: 480px;
-  }
-  .newsletter-mock {
-    display: flex;
-    gap: var(--space-sm);
-    max-width: 420px;
-  }
+  .newsletter-inner h2 { margin-bottom: var(--space-sm); }
+  .newsletter-inner > p { color: var(--pewter); margin-bottom: var(--space-lg); max-width: 480px; }
+  .newsletter-mock { display: flex; gap: var(--space-sm); max-width: 420px; }
   .newsletter-input {
-    flex: 1;
-    font-family: var(--sans);
-    font-size: 15px;
-    padding: 12px 16px;
-    border: 1.5px solid var(--mist-border);
-    border-radius: var(--radius-pill);
-    background: white;
-    color: var(--slate);
-    min-height: 48px;
-    outline: none;
+    flex: 1; font-family: var(--sans); font-size: 15px;
+    padding: 12px 16px; border: 1.5px solid var(--mist-border);
+    border-radius: var(--radius-pill); background: white;
+    color: var(--slate); min-height: 48px; outline: none;
   }
-  .newsletter-input:focus {
-    border-color: var(--blue);
-  }
-  .newsletter-btn {
-    padding: 12px 24px;
-    white-space: nowrap;
-  }
-  .newsletter-note {
-    font-size: 13px;
-    color: var(--pewter);
-    opacity: 0.6;
-    margin-top: var(--space-sm);
-  }
+  .newsletter-input:focus { border-color: var(--blue); }
+  .newsletter-btn { padding: 12px 24px; white-space: nowrap; }
+  .newsletter-note { font-size: 13px; color: var(--pewter); opacity: 0.6; margin-top: var(--space-sm); }
 
   @media (max-width: 480px) {
-    .newsletter-mock {
-      flex-direction: column;
-    }
-    .newsletter-btn {
-      width: 100%;
-    }
+    .newsletter-mock { flex-direction: column; }
+    .newsletter-btn { width: 100%; }
   }
 </style>
 
