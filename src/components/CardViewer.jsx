@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import BreathingExercise from './BreathingExercise.jsx';
+import { GroundingExercise, ScaleExercise, PerspectiveShift, RepairScript, RoomReset, NameThePattern } from './Activities.jsx';
 
 function renderMarkdown(md) {
   if (!md) return '';
@@ -18,14 +19,96 @@ function renderMarkdown(md) {
 }
 
 const TABS = {
-  now:  { label: 'right now',    bg: '#EEE8D8', accent: '#B85038', iconBg: 'rgba(184,80,56,0.08)' },
-  why:  { label: 'understand it', bg: '#E4EBE3', accent: '#4B6B4E', iconBg: 'rgba(75,107,78,0.1)' },
-  kid:  { label: 'your kid',     bg: '#E2E8EF', accent: '#3F6178', iconBg: 'rgba(63,97,120,0.1)' },
+  now:  { label: 'right now',     bg: '#EEE8D8', accent: '#B85038' },
+  why:  { label: 'understand it', bg: '#E4EBE3', accent: '#4B6B4E' },
+  kid:  { label: 'your kid',      bg: '#E2E8EF', accent: '#3F6178' },
 };
 
-const ink = '#191714';
-const ink2 = '#6B6358';
-const ink3 = '#A09589';
+const ink = '#191714', ink2 = '#6B6358', ink3 = '#A09589';
+
+// Card imagery - abstract SVG patterns matched to card themes
+function CardImagery({ cardType, accentColor }) {
+  const patterns = {
+    moment: (
+      <svg width="100%" height="80" viewBox="0 0 400 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="grd" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor={accentColor} stopOpacity="0.06"/>
+            <stop offset="0.5" stopColor={accentColor} stopOpacity="0.12"/>
+            <stop offset="1" stopColor={accentColor} stopOpacity="0.03"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,60 Q100,20 200,45 Q300,70 400,30 L400,80 L0,80Z" fill="url(#grd)"/>
+        <circle cx="320" cy="25" r="3" fill={accentColor} opacity="0.15"/>
+        <circle cx="80" cy="35" r="2" fill={accentColor} opacity="0.1"/>
+        <circle cx="200" cy="20" r="4" fill={accentColor} opacity="0.08"/>
+      </svg>
+    ),
+    parent: (
+      <svg width="100%" height="80" viewBox="0 0 400 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="grd2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#9B8BB4" stopOpacity="0.08"/>
+            <stop offset="1" stopColor="#9B8BB4" stopOpacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="80" fill="url(#grd2)"/>
+        <line x1="40" y1="60" x2="360" y2="60" stroke="#9B8BB4" strokeWidth="0.5" opacity="0.15"/>
+        <circle cx="200" cy="35" r="20" fill="none" stroke="#9B8BB4" strokeWidth="0.5" opacity="0.12"/>
+        <circle cx="200" cy="35" r="10" fill="none" stroke="#9B8BB4" strokeWidth="0.5" opacity="0.08"/>
+      </svg>
+    ),
+    kid: (
+      <svg width="100%" height="80" viewBox="0 0 400 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="grd3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#A8C3A0" stopOpacity="0.06"/>
+            <stop offset="1" stopColor="#A8C3A0" stopOpacity="0.12"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="80" fill="url(#grd3)" rx="0"/>
+        <path d="M0,65 Q50,55 100,62 Q150,69 200,60 Q250,51 300,58 Q350,65 400,55" fill="none" stroke="#A8C3A0" strokeWidth="1" opacity="0.15"/>
+      </svg>
+    ),
+  };
+  return <div style={{ marginBottom: -8, opacity: 0.9 }}>{patterns[cardType] || patterns.moment}</div>;
+}
+
+function ActivityRenderer({ type, accentColor, patternData }) {
+  switch (type) {
+    case 'breathing': return <BreathingExercise accentColor={accentColor} />;
+    case 'grounding': return <GroundingExercise accentColor={accentColor} />;
+    case 'scale': return <ScaleExercise accentColor={accentColor} />;
+    case 'perspective': return <PerspectiveShift accentColor={accentColor} />;
+    case 'repair': return <RepairScript accentColor={accentColor} />;
+    case 'room-reset': return <RoomReset accentColor={accentColor} />;
+    case 'name-pattern': return <NameThePattern accentColor={accentColor} patternName={patternData?.name} patternDescription={patternData?.desc} />;
+    default: return null;
+  }
+}
+
+const ACTIVITY_LABELS = {
+  'breathing': 'breathe', 'grounding': 'ground', 'scale': 'scale it',
+  'perspective': 'shift', 'repair': 'repair', 'room-reset': 'reset',
+  'name-pattern': 'name it',
+};
+
+function BrainBlock({ label, text, accentColor }) {
+  return (
+    <div style={{
+      background: 'rgba(25,23,20,0.045)', borderRadius: 14, padding: '18px 20px', marginBottom: 12,
+    }}>
+      <div style={{
+        fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
+        textTransform: 'lowercase', color: accentColor, marginBottom: 10,
+      }}>{label}</div>
+      <p style={{
+        fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 400',
+        fontSize: 16, lineHeight: 1.65, color: ink2, margin: 0,
+      }}>{text}</p>
+    </div>
+  );
+}
 
 function ExpandSection({ label, children }) {
   const [open, setOpen] = useState(false);
@@ -37,7 +120,6 @@ function ExpandSection({ label, children }) {
         display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', textAlign: 'left',
         fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.09em',
         textTransform: 'lowercase', color: open ? ink2 : ink3,
-        transition: 'color 180ms ease',
       }}>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
           style={{ flexShrink: 0, transition: 'transform 300ms ease', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}>
@@ -55,36 +137,17 @@ function ExpandSection({ label, children }) {
   );
 }
 
-function DeepBlock({ label, text, accentColor }) {
-  return (
-    <div style={{
-      background: 'rgba(25,23,20,0.04)', borderRadius: 12, padding: '16px 18px', marginBottom: 10,
-    }}>
-      <div style={{
-        fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.16em',
-        textTransform: 'lowercase', color: accentColor || ink3, marginBottom: 8,
-      }}>
-        {label}
-      </div>
-      <p style={{
-        fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 380',
-        fontSize: 15, lineHeight: 1.6, color: ink2, margin: 0,
-      }}
-        dangerouslySetInnerHTML={{ __html: text.replace(/\*\*(.+?)\*\*/g, '<strong style="color:#191714;font-variation-settings:\'opsz\' 16, \'wght\' 580">$1</strong>') }}
-      />
-    </div>
-  );
-}
-
-export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess }) {
+export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess, activities, patternData }) {
   const isMoment = cardType === 'moment';
   const hasKid = isMoment && kidNow;
+  const brain = brainProcess || null;
+  const cardActivities = activities || ['breathing'];
 
-  const availableTabs = ['now'];
-  if (isMoment) availableTabs.push('why');
+  const availableTabs = ['now', 'why'];
   if (hasKid) availableTabs.push('kid');
 
   const [activeTab, setActiveTab] = useState('now');
+  const [activeActivity, setActiveActivity] = useState(0);
   const tabsRef = useRef(null);
   const [barStyle, setBarStyle] = useState({});
   const currentTab = TABS[activeTab];
@@ -104,11 +167,8 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
     }
   }, [activeTab]);
 
-  const mainContent = activeTab === 'now' ? (parentNow || content || '') :
-                       activeTab === 'kid' ? (kidNow || '') : '';
-
+  const mainContent = parentNow || content || '';
   const typeLabel = { moment: 'moment', parent: 'parent', kid: 'kid' }[cardType];
-  const brain = brainProcess || null;
 
   return (
     <>
@@ -117,7 +177,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         @keyframes panel-in { from { opacity: 0; } to { opacity: 1; } }
         .calming-shell { transition: background 360ms ease; }
         .calming-panel { animation: panel-in 260ms ease both; }
-        .calming-content p { font-variation-settings: "opsz" 16, "wght" 380; font-size: 16px; line-height: 1.68; color: ${ink2}; letter-spacing: -0.005em; margin-bottom: 14px; }
+        .calming-content p { font-variation-settings: "opsz" 16, "wght" 380; font-size: 16px; line-height: 1.68; color: ${ink2}; margin-bottom: 14px; }
         .calming-content p:last-child { margin-bottom: 0; }
         .calming-content strong { font-variation-settings: "opsz" 16, "wght" 580; color: ${ink}; }
         .calming-content hr { border: none; border-top: 1px solid rgba(25,23,20,0.07); margin: 20px 0; }
@@ -126,7 +186,8 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
       <div className="calming-shell" style={{
         width: '100%', maxWidth: 430, margin: '0 auto',
         minHeight: '80dvh', display: 'flex', flexDirection: 'column',
-        background: currentTab.bg, borderRadius: typeof window !== 'undefined' && window.innerWidth >= 700 ? 32 : 0,
+        background: currentTab.bg,
+        borderRadius: typeof window !== 'undefined' && window.innerWidth >= 700 ? 32 : 0,
         overflow: 'hidden',
       }}>
         {/* Chrome */}
@@ -138,17 +199,17 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
             back
           </a>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 8,
-            fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.05em', color: ink3,
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.05em', color: ink3 }}>
             matched
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4B6B4E', animation: 'pulse-live 2.8s ease-out infinite' }}/>
           </div>
         </div>
 
+        {/* Imagery */}
+        <CardImagery cardType={cardType} accentColor={currentTab.accent} />
+
         {/* Title */}
-        <div style={{ padding: '16px 26px 0', flexShrink: 0 }}>
+        <div style={{ padding: '0 26px', flexShrink: 0 }}>
           <div style={{
             fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 18, "wght" 440',
             fontSize: 18, letterSpacing: '-0.01em', color: ink, lineHeight: 1.2,
@@ -160,35 +221,34 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         </div>
 
         {/* Tabs */}
-        {availableTabs.length > 1 && (
-          <div ref={tabsRef} style={{
-            padding: '16px 26px 0', display: 'grid',
-            gridTemplateColumns: 'repeat(' + availableTabs.length + ', 1fr)',
-            borderBottom: '1px solid rgba(25,23,20,0.12)', position: 'relative', flexShrink: 0,
-          }}>
-            {availableTabs.map(key => (
-              <button key={key} data-tab={key} onClick={() => setActiveTab(key)}
-                style={{
-                  appearance: 'none', border: 0, background: 'transparent',
-                  fontFamily: 'var(--serif)', fontSize: 15, letterSpacing: '-0.01em',
-                  fontVariationSettings: activeTab === key ? '"opsz" 14, "wght" 600' : '"opsz" 14, "wght" 360',
-                  color: activeTab === key ? ink : ink3,
-                  padding: '0 0 13px', cursor: 'pointer', textAlign: 'left',
-                  transition: 'color 200ms ease',
-                }}>{TABS[key].label}</button>
-            ))}
-            <span style={{
-              position: 'absolute', bottom: -1, height: 2.5, borderRadius: 2,
-              transition: 'transform 300ms cubic-bezier(.3,.8,.3,1), width 300ms cubic-bezier(.3,.8,.3,1), background 300ms ease',
-              ...barStyle,
-            }}/>
-          </div>
-        )}
+        <div ref={tabsRef} style={{
+          padding: '16px 26px 0', display: 'grid',
+          gridTemplateColumns: 'repeat(' + availableTabs.length + ', 1fr)',
+          borderBottom: '1px solid rgba(25,23,20,0.12)', position: 'relative', flexShrink: 0,
+        }}>
+          {availableTabs.map(key => (
+            <button key={key} data-tab={key} onClick={() => setActiveTab(key)}
+              style={{
+                appearance: 'none', border: 0, background: 'transparent',
+                fontFamily: 'var(--serif)', fontSize: 15, letterSpacing: '-0.01em',
+                fontVariationSettings: activeTab === key ? '"opsz" 14, "wght" 600' : '"opsz" 14, "wght" 360',
+                color: activeTab === key ? ink : ink3,
+                padding: '0 0 13px', cursor: 'pointer', textAlign: 'left',
+                transition: 'color 200ms ease',
+              }}>{TABS[key].label}</button>
+          ))}
+          <span style={{
+            position: 'absolute', bottom: -1, height: 2.5, borderRadius: 2,
+            transition: 'transform 300ms cubic-bezier(.3,.8,.3,1), width 300ms cubic-bezier(.3,.8,.3,1), background 300ms ease',
+            ...barStyle,
+          }}/>
+        </div>
 
         {/* Panel */}
         <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <div key={activeTab} className="calming-panel" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
 
+            {/* RIGHT NOW */}
             {activeTab === 'now' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
@@ -200,63 +260,80 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   dangerouslySetInnerHTML={{ __html: renderMarkdown(mainContent) }}
                 />
 
-                {/* Breathing exercise */}
-                <BreathingExercise accentColor={currentTab.accent} />
+                {/* Activity selector */}
+                <div style={{
+                  borderTop: '1px solid rgba(25,23,20,0.08)',
+                  marginTop: 20, paddingTop: 20,
+                }}>
+                  <div style={{
+                    fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
+                    textTransform: 'lowercase', color: ink3, marginBottom: 12,
+                  }}>try this</div>
 
-                {/* What your brain just did */}
-                {brain && (
-                  <ExpandSection label="what your brain just did">
-                    <DeepBlock label="your body" text={brain.body} accentColor={currentTab.accent} />
-                    <DeepBlock label="your brain" text={brain.brain} accentColor={currentTab.accent} />
-                    <DeepBlock label="what this did" text={brain.effect} accentColor={currentTab.accent} />
-                  </ExpandSection>
-                )}
+                  {/* Activity pills */}
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
+                    {cardActivities.map((act, i) => (
+                      <button key={act} onClick={() => setActiveActivity(i)}
+                        style={{
+                          appearance: 'none', cursor: 'pointer',
+                          padding: '7px 14px', borderRadius: 100,
+                          border: activeActivity === i ? '1.5px solid ' + currentTab.accent : '1.5px solid rgba(25,23,20,0.08)',
+                          background: activeActivity === i ? currentTab.accent + '12' : 'transparent',
+                          color: activeActivity === i ? currentTab.accent : ink3,
+                          fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.06em',
+                          transition: 'all 0.15s ease',
+                        }}>{ACTIVITY_LABELS[act] || act}</button>
+                    ))}
+                  </div>
+
+                  {/* Active activity */}
+                  <div key={cardActivities[activeActivity]}>
+                    <ActivityRenderer
+                      type={cardActivities[activeActivity]}
+                      accentColor={currentTab.accent}
+                      patternData={patternData}
+                    />
+                  </div>
+                </div>
               </div>
             )}
 
+            {/* UNDERSTAND IT */}
             {activeTab === 'why' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
-                  width: 58, height: 58, borderRadius: 17,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: currentTab.iconBg, marginBottom: 26, flexShrink: 0,
-                }}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={currentTab.accent} strokeWidth="1.5" strokeLinecap="round">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
-                  </svg>
-                </div>
-                <div style={{
-                  fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 28, "wght" 460',
-                  fontSize: 22, lineHeight: 1.34, letterSpacing: '-0.015em', color: ink, marginBottom: 16,
-                }}>
-                  Understanding what happens when <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>this moment</strong> shows up.
-                </div>
-                <div style={{
-                  fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 360',
-                  fontSize: 16, lineHeight: 1.65, color: ink2,
-                }}>
-                  This moment has a guide with the neuroscience behind it and practical strategies for next time.
-                </div>
+                  fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.24em',
+                  textTransform: 'uppercase', color: currentTab.accent, marginBottom: 20,
+                }}>what your brain just did</div>
+
+                {brain && (
+                  <>
+                    <BrainBlock label="your body" text={brain.body} accentColor={currentTab.accent} />
+                    <BrainBlock label="your brain" text={brain.brain} accentColor={currentTab.accent} />
+                    <BrainBlock label="what this did" text={brain.effect} accentColor={currentTab.accent} />
+                  </>
+                )}
+
                 <a href={'/guides/' + cardId} style={{
                   display: 'flex', alignItems: 'flex-start', gap: 13,
-                  background: currentTab.iconBg, borderRadius: 14, padding: '17px 18px', marginTop: 26,
-                  textDecoration: 'none', color: ink,
+                  background: 'rgba(75,107,78,0.08)', borderRadius: 14, padding: '17px 18px',
+                  marginTop: 20, textDecoration: 'none', color: ink,
                 }}>
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: currentTab.accent, flexShrink: 0, marginTop: 7 }}/>
-                  <span style={{
-                    fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 450',
-                    fontSize: 16, lineHeight: 1.45, letterSpacing: '-0.01em',
-                  }}>Read the full guide &#8594;</span>
+                  <span>
+                    <span style={{ fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 480', fontSize: 15, display: 'block', color: ink }}>Go deeper</span>
+                    <span style={{ fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 14, "wght" 360', fontSize: 13, color: ink3 }}>Full guide with strategies for next time</span>
+                  </span>
                 </a>
 
                 {relatedGuides && relatedGuides.length > 1 && (
                   <ExpandSection label="related guides">
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                       {relatedGuides.slice(1).map(g => (
                         <a key={g.id} href={'/guides/' + g.id} style={{
                           padding: '14px 0', borderBottom: '1px solid rgba(25,23,20,0.07)',
-                          textDecoration: 'none', display: 'block',
-                          fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 380',
+                          textDecoration: 'none', fontFamily: 'var(--serif)',
+                          fontVariationSettings: '"opsz" 16, "wght" 380',
                           fontSize: 15, lineHeight: 1.45, color: ink2,
                         }}>{g.title}</a>
                       ))}
@@ -266,12 +343,13 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
               </div>
             )}
 
+            {/* YOUR KID */}
             {activeTab === 'kid' && (
               <div style={{ padding: '28px 26px 30px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{
                   width: 58, height: 58, borderRadius: 17,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: currentTab.iconBg, marginBottom: 26, flexShrink: 0,
+                  background: 'rgba(63,97,120,0.1)', marginBottom: 26,
                 }}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={currentTab.accent} strokeWidth="1.5" strokeLinecap="round">
                     <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
@@ -279,19 +357,16 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                 </div>
                 <div style={{
                   fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 28, "wght" 460',
-                  fontSize: 22, lineHeight: 1.34, letterSpacing: '-0.015em', color: ink, marginBottom: 20,
+                  fontSize: 22, lineHeight: 1.34, color: ink, marginBottom: 20,
                 }}>
                   What your <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>kid</strong> is experiencing right now.
                 </div>
-                <div className="calming-content" style={{ flex: 1 }}
-                  dangerouslySetInnerHTML={{ __html: renderMarkdown(kidNow || '') }}
-                />
+                <div className="calming-content" dangerouslySetInnerHTML={{ __html: renderMarkdown(kidNow || '') }} />
               </div>
             )}
           </div>
         </div>
 
-        {/* Footer */}
         <div style={{
           padding: '12px 26px 20px', flexShrink: 0, textAlign: 'center',
           fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.08em', color: ink3,

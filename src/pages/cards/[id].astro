@@ -4,6 +4,7 @@ import { CARDS } from '../../data/cards.js';
 import { CARD_RIGHT_NOW } from '../../data/cardRightNow.js';
 import { CARD_TO_GUIDES } from '../../data/mappings.js';
 import { BRAIN_PROCESS, DEFAULT_BRAIN } from '../../data/brainProcess.js';
+import { CARD_ACTIVITIES, PATTERN_NAMES } from '../../data/activities.js';
 
 export function getStaticPaths() {
   return CARDS.map(card => ({
@@ -15,12 +16,12 @@ export function getStaticPaths() {
 const { card } = Astro.props;
 const content = CARD_RIGHT_NOW[card.id] || {};
 const brain = BRAIN_PROCESS[card.id] || DEFAULT_BRAIN;
+const activities = CARD_ACTIVITIES[card.id] || ['breathing'];
+const patternData = PATTERN_NAMES[card.id] || null;
 
 const guideIds = CARD_TO_GUIDES[card.id] || [card.id];
 const cardsMap = Object.fromEntries(CARDS.map(c => [c.id, c]));
-const relatedGuides = guideIds
-  .filter(id => cardsMap[id])
-  .map(id => ({ id, title: cardsMap[id].title }));
+const relatedGuides = guideIds.filter(id => cardsMap[id]).map(id => ({ id, title: cardsMap[id].title }));
 ---
 <Base title={card.title} description={`ADHD Reflect: ${card.title}`}>
 
@@ -35,6 +36,8 @@ const relatedGuides = guideIds
   <script id="cn-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
   <script id="rg-data" type="application/json" set:html={JSON.stringify(relatedGuides)} />
   <script id="bp-data" type="application/json" set:html={JSON.stringify(brain)} />
+  <script id="ac-data" type="application/json" set:html={JSON.stringify(activities)} />
+  <script id="pd-data" type="application/json" set:html={JSON.stringify(patternData)} />
 
   <script>
     import { createElement } from 'react';
@@ -47,13 +50,15 @@ const relatedGuides = guideIds
     const content = JSON.parse(document.getElementById('cn-data').textContent);
     const relatedGuides = JSON.parse(document.getElementById('rg-data').textContent);
     const brainProcess = JSON.parse(document.getElementById('bp-data').textContent);
+    const activities = JSON.parse(document.getElementById('ac-data').textContent);
+    const patternData = JSON.parse(document.getElementById('pd-data').textContent);
 
     const root = createRoot(el);
     root.render(createElement(CardViewer, {
       cardId: el.dataset.cardId,
       cardType: el.dataset.cardType,
       title: el.dataset.cardTitle,
-      parentNow, kidNow, content, relatedGuides, brainProcess,
+      parentNow, kidNow, content, relatedGuides, brainProcess, activities, patternData,
     }));
   </script>
 
