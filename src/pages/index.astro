@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AIRouter from '../components/AIRouter.jsx';
 ---
-<Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Describe what just happened and find what helps.">
+<Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Work out what's happening before everyone escalates.">
 
   <!-- ─── Hero: AI Router ─── -->
   <section class="hero">
@@ -10,7 +10,7 @@ import AIRouter from '../components/AIRouter.jsx';
       <p class="hero-label">For ADHD parents raising ADHD kids</p>
       <h1 class="hero-title">What just <em>happened?</em></h1>
       <p class="hero-body">
-        Describe the moment. In your own words, however messy. We'll find the guide that fits.
+        Describe the moment, however messy. We'll help you work out what's happening and what to do next.
       </p>
       <AIRouter client:load />
     </div>
@@ -20,9 +20,9 @@ import AIRouter from '../components/AIRouter.jsx';
   <section class="quiz-cta">
     <div class="quiz-cta-inner">
       <div class="quiz-cta-content">
-        <h2>Not sure where to start?</h2>
-        <p>Take a three-minute quiz to find out how your ADHD shows up when parenting gets hard. Twelve questions, no diagnosis, no data stored.</p>
-        <a href="/quiz" class="btn btn-primary">What's my pattern?</a>
+        <h2>Keep seeing the same pattern?</h2>
+        <p>Take a three-minute quiz to see how your ADHD tends to show up when parenting gets hard. Not a diagnosis. A way to notice what keeps happening.</p>
+        <a href="/quiz" class="btn btn-primary">Find my pattern</a>
       </div>
     </div>
   </section>
@@ -35,21 +35,21 @@ import AIRouter from '../components/AIRouter.jsx';
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="var(--blue)" stroke-width="1.5" fill="none"/><path d="M10 6v4l2.5 2.5" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/></svg>
         </span>
         <h3>For the moment you're in</h3>
-        <p>Short, specific guides for when you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+        <p>Short, specific help for the hard bit. After you yell, when homework collapses, when bedtime turns feral, or when you check out and feel guilty.</p>
       </div>
       <div class="what-block">
         <span class="what-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z" stroke="var(--sage-dark)" stroke-width="1.5" fill="none"/><path d="M7 10l2 2 4-4" stroke="var(--sage-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
         <h3>Your pattern</h3>
-        <p>Take the quiz to find out which ADHD parenting pattern fits you. Not a diagnosis. A way to understand what keeps happening and why.</p>
+        <p>Take the quiz to see which ADHD parenting loop keeps catching you. Not a diagnosis. A way to notice what keeps happening.</p>
       </div>
       <div class="what-block">
         <span class="what-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 15V5a2 2 0 012-2h8a2 2 0 012 2v10" stroke="var(--lavender)" stroke-width="1.5" fill="none"/><path d="M2 15h16" stroke="var(--lavender)" stroke-width="1.5" stroke-linecap="round"/></svg>
         </span>
         <h3>Built by someone in it</h3>
-        <p>Made by an ADHD parent raising an ADHD-influenced kid. Not a clinic, not a course, not a brand that discovered ADHD last quarter.</p>
+        <p>Made by an ADHD parent raising an ADHD-influenced kid. Not a clinic. Not a course. Not another pastel brand pretending chaos is a morning routine problem.</p>
       </div>
     </div>
   </section>
@@ -61,7 +61,7 @@ import AIRouter from '../components/AIRouter.jsx';
       <div class="who-list">
         <p>You have ADHD (diagnosed or strongly suspect it) and you're raising a child whose brain works like yours.</p>
         <p>You've read the parenting books but they assume a level of consistency your brain doesn't offer.</p>
-        <p>You want something that helps on the bad Tuesday afternoon, not just the calm Sunday morning.</p>
+        <p>You need something for the bad Tuesday afternoon, not the calm Sunday morning when every parenting strategy looks achievable.</p>
       </div>
     </div>
   </section>
@@ -84,61 +84,29 @@ import AIRouter from '../components/AIRouter.jsx';
 </Base>
 
 <style>
-  .hero {
-    padding: var(--space-3xl) 0 var(--space-2xl);
-  }
-  .hero-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 var(--page-pad);
-  }
+  .hero { padding: var(--space-3xl) 0 var(--space-2xl); }
+  .hero-inner { max-width: 640px; margin: 0 auto; padding: 0 var(--page-pad); }
   .hero-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: var(--space-md);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: var(--space-md);
   }
   .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(30px, 5vw, 44px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--slate);
-    margin-bottom: var(--space-md);
+    font-family: var(--serif); font-size: clamp(30px, 5vw, 44px); font-weight: 300;
+    line-height: 1.15; color: var(--slate); margin-bottom: var(--space-md);
     font-variation-settings: 'opsz' 48;
   }
-  .hero-title em {
-    font-style: italic;
-    color: var(--blue);
-  }
+  .hero-title em { font-style: italic; color: var(--blue); }
   .hero-body {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--pewter);
-    max-width: 480px;
-    margin-bottom: var(--space-xl);
+    font-size: 18px; line-height: 1.6; color: var(--pewter);
+    max-width: 480px; margin-bottom: var(--space-xl);
   }
+  @media (max-width: 480px) { .hero { padding: var(--space-2xl) 0 var(--space-xl); } }
 
-  @media (max-width: 480px) {
-    .hero { padding: var(--space-2xl) 0 var(--space-xl); }
-  }
-
-  .quiz-cta {
-    padding: var(--space-2xl) 0;
-    border-top: 1px solid var(--mist-border);
-  }
-  .quiz-cta-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 var(--page-pad);
-  }
+  .quiz-cta { padding: var(--space-2xl) 0; border-top: 1px solid var(--mist-border); }
+  .quiz-cta-inner { max-width: 640px; margin: 0 auto; padding: 0 var(--page-pad); }
   .quiz-cta-content {
-    background: white;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--mist-border);
-    padding: var(--space-lg);
+    background: white; border-radius: var(--radius-lg);
+    border: 1px solid var(--mist-border); padding: var(--space-lg);
   }
   .quiz-cta-content h2 { font-size: 22px; margin-bottom: var(--space-sm); }
   .quiz-cta-content p {
@@ -146,17 +114,10 @@ import AIRouter from '../components/AIRouter.jsx';
     margin-bottom: var(--space-md); max-width: 480px;
   }
 
-  .what {
-    padding: var(--space-3xl) 0;
-    border-top: 1px solid var(--mist-border);
-  }
+  .what { padding: var(--space-3xl) 0; border-top: 1px solid var(--mist-border); }
   .what-inner {
-    max-width: var(--container-wide);
-    margin: 0 auto;
-    padding: 0 var(--page-pad);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
+    max-width: var(--container-wide); margin: 0 auto; padding: 0 var(--page-pad);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl);
   }
   .what-block h3 {
     font-family: var(--serif); font-size: 19px; font-weight: 400;
@@ -168,22 +129,13 @@ import AIRouter from '../components/AIRouter.jsx';
     width: 40px; height: 40px; border-radius: var(--radius-md);
     background: var(--mist); margin-bottom: var(--space-md);
   }
-
-  @media (max-width: 640px) {
-    .what-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
-  }
+  @media (max-width: 640px) { .what-inner { grid-template-columns: 1fr; } }
 
   .who {
-    padding: var(--space-3xl) 0;
-    background: white;
-    border-top: 1px solid var(--mist-border);
-    border-bottom: 1px solid var(--mist-border);
+    padding: var(--space-3xl) 0; background: white;
+    border-top: 1px solid var(--mist-border); border-bottom: 1px solid var(--mist-border);
   }
-  .who-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--page-pad);
-  }
+  .who-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--page-pad); }
   .who-inner h2 { margin-bottom: var(--space-lg); }
   .who-list { display: flex; flex-direction: column; gap: var(--space-md); }
   .who-list p {
@@ -192,24 +144,18 @@ import AIRouter from '../components/AIRouter.jsx';
   }
 
   .newsletter { padding: var(--space-3xl) 0; }
-  .newsletter-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--page-pad);
-  }
+  .newsletter-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--page-pad); }
   .newsletter-inner h2 { margin-bottom: var(--space-sm); }
   .newsletter-inner > p { color: var(--pewter); margin-bottom: var(--space-lg); max-width: 480px; }
   .newsletter-mock { display: flex; gap: var(--space-sm); max-width: 420px; }
   .newsletter-input {
-    flex: 1; font-family: var(--sans); font-size: 15px;
-    padding: 12px 16px; border: 1.5px solid var(--mist-border);
-    border-radius: var(--radius-pill); background: white;
-    color: var(--slate); min-height: 48px; outline: none;
+    flex: 1; font-family: var(--sans); font-size: 15px; padding: 12px 16px;
+    border: 1.5px solid var(--mist-border); border-radius: var(--radius-pill);
+    background: white; color: var(--slate); min-height: 48px; outline: none;
   }
   .newsletter-input:focus { border-color: var(--blue); }
   .newsletter-btn { padding: 12px 24px; white-space: nowrap; }
   .newsletter-note { font-size: 13px; color: var(--pewter); opacity: 0.6; margin-top: var(--space-sm); }
-
   @media (max-width: 480px) {
     .newsletter-mock { flex-direction: column; }
     .newsletter-btn { width: 100%; }
