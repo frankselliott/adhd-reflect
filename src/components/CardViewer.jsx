@@ -137,7 +137,7 @@ function ExpandSection({ label, children }) {
   );
 }
 
-export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess, activities, patternData }) {
+export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess, activities, patternData, kidBrain }) {
   const isMoment = cardType === 'moment';
   const hasKid = isMoment && kidNow;
   const brain = brainProcess || null;
@@ -362,6 +362,19 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   What your <strong style={{ color: currentTab.accent, fontVariationSettings: '"opsz" 28, "wght" 700' }}>kid</strong> is experiencing right now.
                 </div>
                 <div className="calming-content" dangerouslySetInnerHTML={{ __html: renderMarkdown(kidNow || '') }} />
+
+                {/* Kid brain process */}
+                {kidBrain && (
+                  <div style={{ marginTop: 24 }}>
+                    <div style={{
+                      fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.24em',
+                      textTransform: 'uppercase', color: currentTab.accent, marginBottom: 16,
+                    }}>their adhd brain right now</div>
+                    <BrainBlock label="their body" text={kidBrain.body} accentColor={currentTab.accent} />
+                    <BrainBlock label="their brain" text={kidBrain.brain} accentColor={currentTab.accent} />
+                    <BrainBlock label="what they need" text={kidBrain.need} accentColor={currentTab.accent} />
+                  </div>
+                )}
               </div>
             )}
           </div>
