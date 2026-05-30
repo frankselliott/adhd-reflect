@@ -258,6 +258,257 @@ export const BRAIN_PROCESS = {
     brain: "ADHD executive function is especially impaired under divided-attention conditions. Task-switching between two urgent demands exceeds the available cognitive bandwidth. The freeze is a processing bottleneck, not indifference.",
     effect: "One or both children experienced you as unavailable during a moment of need. The triage: address physical safety first, emotional needs second. You cannot split. Pick one, address it, then move to the other. Name the constraint out loud: 'I can only help one person at a time. I'm coming to you next.'",
   },
+  // ─── 50 NEW CARDS ───
+  m22: {
+    body: "Their mood, behaviour, and regulation just shifted noticeably within 30 to 60 minutes. The medication that was providing dopamine and norepinephrine support all day has left their system. The crash is pharmacological withdrawal, not a mood swing.",
+    brain: "Stimulant medication increases dopamine availability in the prefrontal cortex. When it wears off, dopamine drops below the pre-medication baseline temporarily. This rebound dip means the child is briefly less regulated than they would be completely unmedicated.",
+    effect: "The worst hour of the day is predictable. Knowing it is coming allows you to plan around it rather than react to it. Lower demands, higher snacks, minimal transitions during the rebound window.",
+  },
+  m23: {
+    body: "The appetite has been suppressed all day by the stimulant. Now the suppression is gone and the body is catching up. The hunger is genuine, intense, and landing on a system that is already in medication rebound.",
+    brain: "Stimulants suppress appetite by increasing dopamine and norepinephrine, which reduce the hunger signal. When the medication wears off, the hunger signal returns at full intensity, often stronger than normal because the body has been under-fuelled all day.",
+    effect: "The combination of intense hunger and medication rebound makes this window uniquely dysregulating. Protein-heavy food stabilises blood sugar faster. The dinner battle is not about manners tonight. It is about refuelling.",
+  },
+  m24: {
+    body: "Your cortisol is rising with each passing minute. The clock is a threat. Their slowness feels deliberate because you can see the time and they genuinely cannot.",
+    brain: "Time blindness in ADHD means the passage of time is not felt. \'Five minutes until we leave\' is an abstract concept, not an experienced reality. They are not defying the clock. They do not feel it. This is one of the most consistent ADHD impairments and one of the least understood by people around them.",
+    effect: "Verbal time warnings without visual support do not work. A visual timer, a countdown, a physical cue at the door. The lateness is structural, not attitudinal. External time tools reduce conflict without requiring the child to develop a sense they neurologically lack.",
+  },
+  m25: {
+    body: "The screen was providing a high-dopamine input that their brain was locked onto. Removing it created an instant dopamine deficit. The rage or tears are withdrawal, not entitlement.",
+    brain: "The ADHD dopamine system is driven by interest and stimulation. Games provide predictable, rapid reward cycles that match what the ADHD brain craves. Stopping is not a preference decision. It is a neurological transition that requires executive function the child may not have available.",
+    effect: "Abrupt shutoffs produce the biggest reactions. Layered transitions reduce them. A timer on the screen itself, a verbal warning, a next-activity to transition to. Give them something to move toward, not just a loss.",
+  },
+  m26: {
+    body: "Your heart rate spiked. Adrenaline flooded your system. The fear response is real and proportionate. Your child was in danger. Your body responded correctly.",
+    brain: "The child\'s impulse fired before the safety assessment could intervene. The ADHD prefrontal cortex is the last brain region to mature and the first to go offline under excitement. The bolt was not a decision. It was an unfiltered impulse.",
+    effect: "Safety conversations after dangerous impulsivity are important but they only land when both nervous systems are calm. The parking lot is not the classroom. Hold their hand. Name the danger later. Tonight, not now.",
+  },
+  m27: {
+    body: "Fear and anger arrived simultaneously. The fear is for their safety. The anger is at the risk. Both are valid. Both are loud.",
+    brain: "Impulse-driven risk-taking in ADHD children skips the risk-assessment step. The thrill or curiosity signal reached the motor system before the \'is this safe\' evaluation could fire. They did not choose to ignore danger. The danger assessment arrived after the action.",
+    effect: "Physical safety first, emotional processing second. Secure the situation, check for injury, regulate yourself. The safety teaching happens later with specific, concrete language about what the danger was. Not \'be more careful.\' That is too abstract.",
+  },
+  m28: {
+    body: "The structure that held the day together is gone and the cognitive demand of every decision and transition has multiplied. Your stress is climbing because you can see the day unravelling and have no scaffolding to prevent it.",
+    brain: "ADHD brains rely heavily on external structure to compensate for internal executive function deficits. When the routine breaks, every transition, every decision, every impulse that the routine was quietly managing becomes a conscious demand.",
+    effect: "Build a temporary micro-routine immediately. Three things that will happen, in order. Write them down. Post them on the wall. The routine does not need to be good. It needs to exist.",
+  },
+  m29: {
+    body: "The meltdown is disproportionate to the food error. But the sensory violation was experienced as a genuine assault on their nervous system. The \'wrong\' food triggered alarm, not preference.",
+    brain: "ADHD sensory processing treats unexpected sensory input as threat. The foods touching, the texture changing, the presentation being different from expected. Rigidity around food is the nervous system\'s attempt to control an unpredictable sensory environment.",
+    effect: "Accommodation reduces meltdowns. Separate plates, consistent presentation, warning before new foods. These are not giving in to fussiness. They are respecting a nervous system that processes food input differently.",
+  },
+  m30: {
+    body: "The sock seam is producing a pain-level signal in their nervous system. Your frustration is a time-pressure response. Both are real. Neither is wrong.",
+    brain: "Tactile sensitivity in ADHD means fabric textures, seams, tags, and pressure points register at higher intensity than for neurotypical children. The seam that you cannot feel is the loudest signal in their body right now.",
+    effect: "Buy the seamless socks. Cut every tag. Turn clothes inside out if needed. Every sensory accommodation you make is one fewer daily conflict. The goal is getting dressed, not teaching them to tolerate discomfort.",
+  },
+  m31: {
+    body: "The nightly hygiene fight drains the last energy you had. Water, toothpaste texture, standing still, sequencing steps. Every ADHD difficulty converges in the bathroom at the worst possible time.",
+    brain: "Hygiene tasks require executive function sequencing, sensory tolerance, and transition management simultaneously. By evening, all three are at minimum capacity for an ADHD child. The refusal is depletion, not defiance.",
+    effect: "Simplify. Reduce steps. Give choices over sensory details. Let them brush in the shower. Let them use the flavour toothpaste that works. The teeth get brushed. The method is negotiable.",
+  },
+  m32: {
+    body: "Fifteen repetitions of the same question overloaded your auditory processing. The snap was your sensory system reaching threshold. You did not fail. You filled up.",
+    brain: "Perseverative questioning in ADHD children often signals anxiety or a working memory loop where the answer did not stick. They are not testing you. The question keeps arising because the answer did not reach the part of the brain that resolves it.",
+    effect: "Address the feeling underneath the question, not the question itself. \'You keep asking about tomorrow. Are you worried about it?\' Often resolves the loop faster than answering the question a sixteenth time.",
+  },
+  m33: {
+    body: "Your auditory system is saturated. The constant narration, the sound effects, the volume. Your ADHD sensory processing cannot filter it and your regulatory capacity is spent.",
+    brain: "ADHD parents with sensory sensitivities are especially vulnerable to auditory overload from their children. The child\'s noise output is their nervous system\'s baseline stimulation need. Your silence need and their noise need are in direct conflict.",
+    effect: "Name the conflict without blame. Noise-reducing earplugs that allow conversation but lower volume. Designated loud and quiet spaces. The goal is coexistence of two different sensory needs, not suppression of one.",
+  },
+  m34: {
+    body: "You sat down to help and your own focus drifted. The frustration of not being able to scaffold your child when you cannot scaffold yourself is specific and painful.",
+    brain: "Helping with homework requires sustained attention, patience, explanation skills, and emotional regulation. Every one of these is a prefrontal cortex function. Your ADHD prefrontal cortex is operating at the same reduced capacity as your child\'s. Two depleted systems trying to support each other.",
+    effect: "Body-doubling works better than active teaching when both brains are struggling. Sit side by side, each doing your own task. Your physical presence provides regulation without requiring your executive function to carry their work.",
+  },
+  m35: {
+    body: "Their distress is enormous and your instinct is to fix it by explaining why the comment was not that bad. That explanation will make it worse.",
+    brain: "Rejection sensitive dysphoria activates the same neural circuits as physical pain. The comment was small. The pain is real. Their brain processed a neutral social signal as evidence of fundamental unworthiness. This is not drama. It is neurology.",
+    effect: "Sit with them. Do not minimise. Do not explain. \'That sounds like it really hurt\' is more regulating than \'They probably didn\'t mean it.\' The cognitive reframe works later, after the nervous system has calmed.",
+  },
+  m36: {
+    body: "You were gentle. They collapsed. The disconnect between the size of your correction and the size of their response is bewildering and guilt-inducing.",
+    brain: "Correction, however gentle, activates the ADHD rejection sensitivity circuit. The content of what you said is less important than the fact that you said something corrective. Their brain heard \'you are wrong\' and interpreted it as \'you are fundamentally flawed.\'",
+    effect: "The shutdown is self-protection. They are not punishing you. They are protecting themselves from more perceived rejection. Space now, warmth later. The correction can land tomorrow when the rejection sensitivity has subsided.",
+  },
+  m37: {
+    body: "The fun is ending and their nervous system is resisting the transition with everything it has. Your patience is being tested by what feels like ingratitude for the fun you just provided.",
+    brain: "Leaving a preferred activity requires disengaging from a dopamine source and moving toward a less rewarding state. For an ADHD brain, this transition involves a genuine neurological loss. The meltdown is withdrawal, not entitlement.",
+    effect: "Transition objects and transition activities bridge the gap. \'You can choose the music in the car\' or \'We are going to stop for a snack on the way.\' Give something to move toward. The loss of the fun thing is easier when there is something next.",
+  },
+  m38: {
+    body: "It is 10pm and they are wired. You are exhausted and resentful. The gap between what you need and what they need right now is as wide as it gets.",
+    brain: "ADHD delayed sleep phase means melatonin releases later. The default mode network activates in low-stimulation environments and generates racing thoughts. They are not choosing to stay awake. Their brain will not switch off. Lying in the dark with a mind running at full speed is genuinely distressing for them.",
+    effect: "Consistent wake time matters more than bedtime. An audiobook gives the brain something to track without activating it. Talk to the prescriber if stimulants are contributing to the sleep difficulty. This is one of the most modifiable ADHD symptoms with the right support.",
+  },
+  m39: {
+    body: "The lie was faster than the truth. Your hurt is real. The betrayal of trust feels personal even though you know the mechanism.",
+    brain: "Impulsive lying in ADHD children fires before the honesty-assessment system can intervene. The truth had a consequence that felt overwhelming. The lie was the path of least immediate emotional resistance. The prefrontal cortex could not weigh trust against relief in the time available.",
+    effect: "Make truth safe. Your calm response to honesty teaches them that truth is survivable. Your explosive response to lies teaches them that the stakes of getting caught are high, which paradoxically increases lying.",
+  },
+  m40: {
+    body: "The discovery triggers fear about what it means. Is this stealing. Is this a character issue. Is this going to escalate. The fear is bigger than the item.",
+    brain: "Impulsive taking in ADHD children is usually want-then-take with no gap for the ethics assessment. The item was wanted. The hand took it. The \'should I\' question arrived after. This is impulse control failure, not moral failure.",
+    effect: "Return the item together, calmly. No humiliation. The conversation about property and impulse is important and it lands only when delivered without horror. They need to learn to build the pause, not to feel like a criminal.",
+  },
+  m41: {
+    body: "The irony stings. It is the fun thing and they still cannot get out the door. Your tolerance for the delay is lower because the destination is something you did for them.",
+    brain: "Anticipation creates a dopamine spike that makes the boring preparation steps even harder. The excitement about the destination and the executive function needed to get there are in direct opposition. They want to go. They cannot do the steps.",
+    effect: "Help with the logistics without resentment. Lay out the clothes. Pack the bag. Walk them through it. Their excitement is not enough fuel for the executive function. Your scaffolding is.",
+  },
+  m42: {
+    body: "The meltdown is fatigue masquerading as emotion. Every regulatory resource is depleted. They cannot identify the feeling as tiredness because ADHD interoception often does not accurately read internal states.",
+    brain: "ADHD interoception is unreliable. Hunger feels like irritability. Tiredness feels like distress. The child genuinely does not know they are tired. Telling them they are tired feels dismissive because the emotion feels real to them, and it is real, just mislabelled.",
+    effect: "Move toward rest without naming rest as the goal. \'Let\'s sit on the couch with a book\' works. \'You\'re just tired\' does not. Lower the stimulation gradually. Their body will do the rest if the environment allows it.",
+  },
+  m43: {
+    body: "Travel has removed every stabilising structure at once. New environment, new sensory inputs, new social demands, no routine. Your own ADHD is struggling with the same disruption.",
+    brain: "ADHD brains rely on external structure to compensate for internal executive function deficits. Travel removes all the environmental scaffolding simultaneously. The dysregulation is proportionate to the amount of structure that was lost.",
+    effect: "Build temporary micro-routines immediately. Mealtimes at consistent times. One familiar object from home. Three things that happen in order each morning. The routine does not need to be elaborate. It needs to be predictable.",
+  },
+  m44: {
+    body: "The pre-escalation provocation is testing your ability to intervene before it becomes a fight. You can feel the explosion coming. The tension in the room is building.",
+    brain: "Impulsive touch and space-invading is sensory-seeking behaviour. The sibling is the nearest source of proprioceptive input. They are not trying to start a fight. Their body needs input and their sibling is available.",
+    effect: "Redirect before it escalates. Give them something to do with their hands. Move them to a different part of the room. Intervene early and the intervention can be small. Wait until the fight starts and the intervention has to be large.",
+  },
+  m45: {
+    body: "You can feel the stares. Your rejection sensitivity is processing the judgment of strangers while you try to manage your child\'s behaviour. Double load. Double shame.",
+    brain: "Your ADHD rejection sensitivity means the perceived judgment of onlookers activates the same pain circuits as direct criticism. The stares may not even be judgmental. But your brain is processing them as attacks on your parenting.",
+    effect: "Their hyperactivity is their baseline. The environment\'s expectations are the mismatch, not your child. One quiet redirect. If it does not work, leave without drama. The judgment of strangers is not data about your parenting.",
+  },
+  m46: {
+    body: "You are in diagnostic mode. Running through variables. Dose, timing, sleep, breakfast, what happened at school. The uncertainty is itself stressful.",
+    brain: "ADHD medication effects interact with sleep, food, stress, and time of day. Isolating which variable is driving today\'s behaviour is genuinely complex. You are not overthinking. You are trying to solve a multivariate problem with incomplete data.",
+    effect: "Note the observations. Time, dose, sleep, food, behaviour. Do not try to solve it tonight. The data accumulates over time and patterns emerge with the prescriber\'s help. Right now, respond to the child you have in front of you.",
+  },
+  p23: {
+    body: "The dread of tomorrow is sitting in your stomach. An unmedicated school day is a predictable disaster and you cannot prevent it.",
+    brain: "The supply chain failure is external and beyond your control. Your guilt is misplaced. You did not cause the shortage. The shame of not being able to provide your child\'s medication is a parenting wound that the system is inflicting, not one you deserve.",
+    effect: "Write the school note. Set up a slightly easier morning. Inform the teacher specifically about what to expect. Then let go of the variables you cannot control.",
+  },
+  p24: {
+    body: "The irony is physical. Your ADHD forgot to manage their ADHD medication. The guilt is sharp and specific.",
+    brain: "This is the most direct example of your own executive function failure impacting your child. The refill required future planning, time awareness, and follow-through. Exactly the functions your ADHD impairs.",
+    effect: "Build the system. Recurring phone alarm seven days before the script runs out. Pharmacy auto-refill if available. Remove this task from working memory permanently. It is too important to live there.",
+  },
+  p25: {
+    body: "The recognition is landing in waves. You are seeing your entire life through a new lens. The overwhelm is not just intellectual. It is physical and emotional.",
+    brain: "Parent-recognised ADHD after child diagnosis is one of the most common adult ADHD discovery pathways. The pattern recognition is strong because you share the neurology. What you are seeing is real.",
+    effect: "Give yourself time. You do not need to diagnose, disclose, or decide anything tonight. But consider seeking assessment. Understanding your own brain changes how you parent, how you forgive yourself, and how you live.",
+  },
+  p26: {
+    body: "The grief is not self-pity. It is a legitimate loss. The version of your life that might have existed with support, understanding, and diagnosis is worth mourning.",
+    brain: "Late-recognised ADHD adults process a specific grief: the years of self-blame for neurological differences. Every \'lazy,\' \'careless,\' and \'not trying hard enough\' was incorrect information about a brain that was trying harder than anyone knew.",
+    effect: "The grief makes room for self-compassion. You were never the things they called you. Your child does not have to wait as long as you did. That is the gift your recognition gives them.",
+  },
+  p27: {
+    body: "The comment cut deep because it hit the self-doubt you already carry. The external criticism confirmed the internal critic you have been fighting.",
+    brain: "ADHD rejection sensitivity means the relative\'s words activated threat circuits, not just disagreement. The pain is neurological, not just emotional. You are not being thin-skinned. You are experiencing RSD in a context that matters deeply.",
+    effect: "You do not owe them a defence of ADHD tonight. Protect your child from their ignorance. Process the hurt with someone who understands. You are not a bad parent. They are an uninformed relative.",
+  },
+  p28: {
+    body: "The tension in the room is your nervous system processing the social cost of standing up for your child. The second-guessing is your rejection sensitivity, not your judgment.",
+    brain: "Advocating for your child against family pressure requires tolerating disapproval, which is exactly what ADHD rejection sensitivity makes hardest. You drew the boundary despite the pain. That is strength, not conflict.",
+    effect: "The boundary holds. You can soften the delivery later if needed. But the position does not change. Your child\'s needs are not negotiable because a relative is uncomfortable.",
+  },
+  p29: {
+    body: "The relief is physical. Your body relaxes when the demand stops. The guilt arrives immediately after, telling you the relief is wrong.",
+    brain: "Chronic caregiver stress depletes the same neurological resources that ADHD already provides less of. The relief you feel at a break is your nervous system recovering. This is not optional. It is physiological.",
+    effect: "The guilt is lying about what the relief means. It does not mean you do not love them. It means your nervous system has been running at unsustainable load and the break is medicine, not abandonment.",
+  },
+  p30: {
+    body: "Every nerve ending is saying stop. The hugs, the pulls, the constant physical contact. Your body has reached sensory saturation.",
+    brain: "ADHD sensory processing in the parent can reach overload from sustained physical contact, especially after a day of other sensory demands. Being \'touched out\' is a real, documented sensory state, not a failure of warmth.",
+    effect: "Name it kindly. \'My body needs a break from touching.\' Then take it. Five minutes of physical space restores more capacity than an hour of gritting through it.",
+  },
+  p31: {
+    body: "The guilt about the other child is a dull ache that never fully goes away. You can see the pattern and feel powerless to change it.",
+    brain: "Attention is a finite resource. The ADHD child\'s needs are louder, more urgent, and more visible. The neurotypical sibling adapts by becoming quieter and more self-sufficient, which reduces the signal to you that they need you.",
+    effect: "Ten minutes of undivided attention. Regularly. Where they are the only focus. Not a grand gesture. A reliable, small, predictable deposit in a relationship that has been running on leftovers.",
+  },
+  p32: {
+    body: "The comparison landed as grief. The other child looked easy. Yours looked hard. The gap between them felt like your failure.",
+    brain: "Comparison activates the ADHD rejection sensitivity circuit. The grief is not really about the other child. It is about the gap between the parenting experience you expected and the one you have.",
+    effect: "Your child is not less than. Their operating system is different. The comparison tells you something about your depletion, not their worth. Close the comparison window.",
+  },
+  p33: {
+    body: "The fear about their future has the quality of an ADHD rumination spiral. Full intensity, worst case, no off switch.",
+    brain: "ADHD brains project future scenarios with full emotional intensity. The catastrophe feels imminent because the emotional system does not distinguish between \'this might happen in fifteen years\' and \'this is happening now.\'",
+    effect: "You cannot solve their future tonight. The fear is a feeling, not a prediction. What you can do: show up tomorrow. The best predictor of outcomes for ADHD children is the quality of the parent-child relationship, which you are actively building.",
+  },
+  p34: {
+    body: "The screen time guilt is adding to the exhaustion that caused the screen time. A guilt loop on top of a depletion loop.",
+    brain: "Screens provide predictable, low-demand, high-stimulation input that regulates an ADHD child\'s nervous system effectively. You used the most reliable regulation tool available when your own regulation was gone.",
+    effect: "Do not add guilt to exhaustion. The screen kept them safe and regulated while you recovered. That is harm reduction, not failure.",
+  },
+  p35: {
+    body: "The invisible load is crushing. Every appointment, every form, every school communication, every medication refill, every routine. All held in your head while your ADHD head drops things.",
+    brain: "Being the household executive function while having impaired executive function yourself is a structural impossibility that most ADHD families face. The load is not sustainable at this level.",
+    effect: "You cannot do it all. One thing this week that can be automated, delegated, or dropped. A shared calendar, an auto-refill, a standing order. Each system that holds something is one less thing in your overloaded working memory.",
+  },
+  p36: {
+    body: "The phone buzz from the school triggers a physical stress response. Your body has been conditioned by repeated negative contact.",
+    brain: "Pavlovian conditioning. The school\'s name has been paired with problem reports enough times that the association is now automatic. The cortisol spike happens before you read the message.",
+    effect: "You can let the message sit for ten minutes. It will still be there. Read it when you have capacity, not when the notification demands it. And if you need to, set a separate notification sound for the school so you can choose when to engage.",
+  },
+  p37: {
+    body: "The polished parent on the screen made your reality feel worse. The comparison activated your shame about the gap between your parenting and the ideal.",
+    brain: "Social media comparison activates the same rejection sensitivity circuits as personal criticism. The curated content is not real parenting. It is performance. Your ADHD brain is comparing your unedited footage to their highlight reel.",
+    effect: "Close the app. The version of you that survived today, imperfectly, with snapping and recovering and trying again, is the real parent. The one on the screen does not exist.",
+  },
+  p38: {
+    body: "The bribe worked and now you feel guilty about it. Short-term survival versus long-term principle. The tension is real.",
+    brain: "Reward-based management is actually an evidence-based ADHD strategy. The guilt comes from framing it as bribery rather than as incentive. The difference is timing: bribery responds to escalation, incentive is planned in advance. Both are the same mechanism. One just feels worse.",
+    effect: "You survived the moment without anyone getting hurt. Next time, if you have capacity, set the incentive before the meltdown: \'If we get through this, we can have X.\' Same outcome, less guilt.",
+  },
+  p39: {
+    body: "The isolation is compounding the burnout. Fewer invitations accepted, fewer friends contacted, less support available. The loneliness feeds the depletion.",
+    brain: "Social withdrawal in burned-out ADHD parents is a self-protective strategy that becomes self-defeating. The energy required for social interaction feels unavailable, but the absence of social support makes the burnout worse.",
+    effect: "One connection this week. A text to someone who gets it. You do not have to go anywhere or perform anything. But the isolation needs a small crack in it.",
+  },
+  p40: {
+    body: "The parenting disagreements are no longer about this incident. They are about two fundamentally different approaches to a child who needs consistency between both adults.",
+    brain: "Co-parenting an ADHD child is harder because the child\'s needs are more complex and the stakes of inconsistency are higher. If one parent also has ADHD, the difference in parenting style may reflect their own regulation strategies, not conscious choices.",
+    effect: "The conversation is not \'who is right.\' It is \'what does this child need from us as a unit.\' Have it when neither of you is depleted, if possible with a therapist or coach who understands ADHD families.",
+  },
+  p41: {
+    body: "The resentment sits alongside the love. Both are real. The guilt about feeling resentful adds a third layer on top.",
+    brain: "Resentment in chronically stressed caregivers is a documented burnout symptom, not a moral failing. The load is measurably, structurally heavier than typical parenting. Your feelings are a proportionate response to a disproportionate demand.",
+    effect: "Naming resentment is the first step to managing it. You can love your child and resent the load at the same time. Both are true. Neither cancels the other. What helps is reducing the load, not denying the feeling.",
+  },
+  p42: {
+    body: "The deadline passed. The form was not returned. The window closed. The guilt is specific and sharp.",
+    brain: "This is your executive function failing on a task that had real consequences. The irony of an ADHD parent missing a deadline for their ADHD child\'s support is painful but predictable. The system was asking you to remember something important without any external support.",
+    effect: "Contact the school or organisation now. Most deadlines have more flexibility than they advertise. And build the system: calendar alerts, phone photos of forms, a designated landing spot for school papers. Remove this class of failure from working memory.",
+  },
+  k12: {
+    body: "They are barely eating during school hours. The stimulant directly suppresses appetite signals. They are not choosing to skip meals. The hunger signal is being chemically overridden.",
+    brain: "Stimulants increase dopamine and norepinephrine, which suppress the appetite centre in the hypothalamus. The child genuinely does not feel hungry while the medication is active. Forcing food during this window creates a negative association with eating.",
+    effect: "Maximise calories outside the medication window. Large breakfast before the dose kicks in. Protein-dense snack when it wears off. Monitor weight with the prescriber. Appetite suppression is the most common stimulant side effect and the most adjustable.",
+  },
+  k13: {
+    body: "They are lying in the dark with a brain running at full speed. The gap between exhaustion and sleep is filled with thoughts they cannot slow down.",
+    brain: "ADHD delayed sleep phase is biological. Melatonin releases later than in neurotypical children. The default mode network, which should quiet during sleep onset, activates and generates a stream of thoughts, worries, and ideas that feels impossible to stop.",
+    effect: "Consistent wake time is more important than bedtime. An audiobook or white noise gives the brain a single channel to track instead of generating its own. Melatonin timing with the prescriber. This is modifiable.",
+  },
+  k14: {
+    body: "The empty party invitations. The eating lunch alone. Your heart is breaking for something you cannot fix directly.",
+    brain: "ADHD social processing is slower. They miss cues, misread tone, interrupt, dominate play, or react too intensely. The social operating system is running on different timing than their peers. Each failed interaction adds to rejection sensitivity.",
+    effect: "One good friendship matters more than popularity. Social skills groups or coaching, if accessible, build the specific skills that ADHD impairs. Parental instruction on social behaviour is less effective because the gap is processing speed, not knowledge.",
+  },
+  k15: {
+    body: "The pain on their face after a neutral comment is genuine and disproportionate. They are experiencing rejection at an intensity that does not match the trigger.",
+    brain: "Rejection sensitive dysphoria is increasingly recognised as a core ADHD feature. The neural circuits that process social rejection overlap with physical pain circuits. A mild correction or unanswered text activates the same pathways as being publicly humiliated.",
+    effect: "Do not minimise. Validate the pain, then gently reality-test. \'That sounds really painful. What else could their comment have meant?\' The cognitive reframe works after the feeling is acknowledged, never before.",
+  },
+  k16: {
+    body: "The interrupting is constant. They finish your sentences, blurt answers, cannot hold a thought without immediately releasing it. Your patience is worn thin by the relentlessness.",
+    brain: "Verbal impulsivity is one of the most socially costly ADHD symptoms. The thought reaches the speech centre before the inhibition system can catch it. They are not being rude. The internal brake between thinking and saying is too slow.",
+    effect: "External brakes work better than internal willpower. A visual cue like a raised hand or a token they hold until it is their turn gives them something physical to anchor the pause. Practice in low-stakes settings builds the skill for high-stakes ones.",
+  },
 };
 
 export const DEFAULT_BRAIN = {

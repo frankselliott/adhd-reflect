@@ -161,5 +161,157 @@ export const KID_BRAIN = {
     brain: "ADHD social processing is slower than neurotypical. They miss social cues, interrupt, dominate play, or react too intensely to small social slights. The rejection sensitivity means each friendship loss lands harder. They are not bad at friends. They are running social software on slower hardware.",
     need: "Help them see the pattern without blaming them for it. 'What happened right before they got upset?' builds social awareness. Do not say 'If you would just...' because they cannot 'just.' Social skills coaching, if available, works better than parental correction of social behaviour.",
   },
+
+  // ─── 50 NEW CARDS ───
+  m22: {
+    body: "Their mood just crashed. They were fine an hour ago and now everything is wrong. They do not understand what happened. The shift feels sudden and frightening to them.",
+    brain: "The medication was providing dopamine that their brain cannot produce reliably on its own. When it left, the dopamine dropped below their natural baseline. They are temporarily less regulated than they would be completely unmedicated. They did not choose to crash.",
+    need: "Low demands, a snack, and patience. The crash passes in 30 to 60 minutes. Do not try to teach, correct, or reason during the rebound. Their prefrontal cortex is at its lowest point of the day.",
+  },
+  m23: {
+    body: "They are genuinely starving. The hunger is urgent and overwhelming. They may be shaky, irritable, or unable to think about anything except food.",
+    brain: "The stimulant suppressed their appetite signal all day. Now the suppression has lifted and the body is sending a catch-up hunger signal at full intensity. They are not being greedy. Their body is trying to recover a day of missed fuel.",
+    need: "Feed them without commentary. Protein and complex carbohydrates stabilise blood sugar fastest. Do not restrict quantity or lecture about dinner. Their body knows what it needs right now.",
+  },
+  m24: {
+    body: "They are not feeling the time pressure. The urgency you feel is invisible to them. They are not being defiant. The clock is an abstraction their brain cannot experience.",
+    brain: "Time blindness is one of the most consistent ADHD impairments. The passage of time is not felt internally. \'Five minutes\' means nothing to a brain that cannot gauge duration. They genuinely do not know they are being slow.",
+    need: "Visual timers, not verbal warnings. Physical proximity, not shouting from another room. One action at a time, not a list. Their brain needs the time made visible and the steps made concrete.",
+  },
+  m25: {
+    body: "The game was the best thing in their world and it just stopped. The loss is genuine and intense. Their nervous system is experiencing dopamine withdrawal.",
+    brain: "Games provide rapid, predictable dopamine cycles that match what the ADHD brain craves. Stopping is not a preference decision. It is a neurological transition that requires executive function their evening brain may not have. The rage is withdrawal, not entitlement.",
+    need: "Warnings before the end. A timer on the screen itself. Something to transition TO, not just away from. \'When the game is off, you choose what we have for snack.\' A next-reward bridges the dopamine gap.",
+  },
+  m26: {
+    body: "They ran before the thought arrived. Now they can see from your face that something terrifying almost happened. They may be confused by the intensity of your reaction because they did not experience the danger.",
+    brain: "The impulse to run reached the motor cortex before the safety assessment could fire. They did not decide to be dangerous. The decision-making step was skipped entirely. The younger the child, the shorter the gap between impulse and action.",
+    need: "Calm first, conversation later. They need to know they are safe, not that they nearly were not. The safety teaching lands tonight in a two-minute conversation, not in the parking lot while you are shaking.",
+  },
+  m27: {
+    body: "The climb or the dangerous action felt exciting, not scary. They may not understand why you are frightened because the danger did not register before or during the action.",
+    brain: "Risk assessment requires prefrontal cortex evaluation that happens after the motor action in ADHD. The thrill signal arrived first. The danger signal arrived after. They did not ignore the danger. They did not perceive it in time.",
+    need: "Concrete, specific safety information. Not \'be careful\' which is too abstract. \'That shelf can fall. Falling from that height breaks bones.\' Specific consequences connected to specific actions. Delivered calmly, later.",
+  },
+  m28: {
+    body: "The routine was their scaffolding and it disappeared. Every transition, every decision, every moment is now unpredictable. Their nervous system is in alarm because the predictability that regulated them is gone.",
+    brain: "ADHD brains use external structure as a substitute for internal executive function. When the routine breaks, every task that was automatic becomes a conscious decision requiring effort they may not have.",
+    need: "A temporary replacement structure. Three things that will happen, in order. Write them down and show them. The structure does not need to be good. It needs to exist. Something predictable in the chaos.",
+  },
+  m29: {
+    body: "The wrong food triggered a sensory alarm. The distress is real. The intensity is proportionate to how their nervous system experienced the input, not to how it looks from outside.",
+    brain: "Sensory rigidity around food is the nervous system trying to control unpredictable sensory input. The foods touching, the unexpected texture, the presentation being different. Each deviation is experienced as a violation of expected safety.",
+    need: "Accommodate where possible. Replace without judgment. \'I can see that is really bothering you. Let me fix it.\' Reducing the sensory violation reduces the meltdown. This is not giving in. It is respecting how their brain processes food.",
+  },
+  m30: {
+    body: "The sock seam is producing a signal in their nervous system that is closer to pain than discomfort. They are not being dramatic. The sensation is genuinely overwhelming.",
+    brain: "Tactile sensitivity in ADHD means fabric textures register at higher intensity. The seam that you cannot feel is dominating their entire sensory experience. They cannot think about anything else until it is resolved.",
+    need: "Remove the input. Seamless socks, tags cut out, inside-out if needed. Every sensory accommodation prevents a daily conflict and teaches them that their sensory needs are valid, not something to be ashamed of.",
+  },
+  m31: {
+    body: "The water is too hot or too cold. The toothpaste texture is wrong. Standing still is hard. The sequence of steps is confusing by evening. Every ADHD difficulty converges in the bathroom.",
+    brain: "Hygiene tasks combine sensory processing, executive function sequencing, and transition management. By evening, all three systems are at minimum capacity. The refusal is not laziness. It is depletion meeting sensory overload meeting executive dysfunction.",
+    need: "Choices over sensory details. Let them control the water temperature. Let them choose the toothpaste. Make the routine visual so they do not need to remember the sequence. The teeth get brushed. The method is their choice.",
+  },
+  m32: {
+    body: "They keep asking because the answer did not stick or did not resolve the anxiety driving the question. They are not trying to annoy you. The question keeps arising because something underneath it has not been addressed.",
+    brain: "Perseverative questioning can signal working memory failure (the answer drops out) or anxiety (the answer does not resolve the underlying worry). Both are ADHD-related. The repetition is a symptom, not a strategy.",
+    need: "Address the feeling under the question. \'You keep asking about tomorrow. Are you worried about something?\' Often resolves the loop faster than answering the surface question again.",
+  },
+  m33: {
+    body: "The noise they are making is their nervous system\'s baseline stimulation need. They are not choosing to be loud. The narration, sound effects, and constant talking are self-regulatory output.",
+    brain: "The ADHD nervous system requires more stimulation to maintain optimal arousal. Vocal output generates proprioceptive and auditory input that helps them regulate. Asking for silence removes a regulation tool.",
+    need: "Redirect rather than suppress. Headphones with music, a designated loud space, a time for noise and a time for quiet. Their need for output and your need for quiet can coexist with structure.",
+  },
+  m34: {
+    body: "They can see you struggling to help them. Your frustration is visible. They may feel responsible for your difficulty, which adds shame to an already hard task.",
+    brain: "Watching a parent struggle to explain something activates the child\'s rejection sensitivity. They may interpret your frustration as evidence that they are too hard to help. The shame makes the homework even harder.",
+    need: "Side-by-side, not face-to-face. Your calm presence is more useful than your explanation. If the teaching is not working, stop. \'Let\'s leave this and come back to it.\' A fresh attempt is better than a frustrated one.",
+  },
+  m35: {
+    body: "The pain is enormous and genuine. One comment has triggered a cascade of evidence that they are unlikeable, unwanted, and fundamentally wrong. The emotion has taken over their entire system.",
+    brain: "Rejection sensitive dysphoria activates the neural pain circuits. The comment was small. The accumulated weight of 20,000 more negative messages than their neurotypical peers made it feel enormous. Each new social wound adds to the pile.",
+    need: "Do not minimise. Do not explain why they are wrong to feel this way. Sit with them. \'That sounds like it really hurt.\' The validation has to come before the reframe. Otherwise the reframe feels like another rejection.",
+  },
+  m36: {
+    body: "They collapsed because your correction, however gentle, confirmed their worst fear about themselves. The shutdown is not defiance. It is self-protection from perceived devastation.",
+    brain: "Correction activates ADHD rejection sensitivity regardless of tone. Their brain processed \'you made a mistake\' as \'you are a mistake.\' The distinction that is obvious to you does not exist in their neural processing in that moment.",
+    need: "Space now. Warmth later. Do not push through the shutdown. Do not apologise for correcting them, but acknowledge the pain. \'I can see that was hard to hear. I am not angry.\' The correction can land tomorrow when their system is not in protection mode.",
+  },
+  m37: {
+    body: "The fun is ending and their body is resisting with everything it has. They are not being ungrateful. They are experiencing a genuine neurological loss.",
+    brain: "Leaving a preferred activity means transitioning from high dopamine to low dopamine. The ADHD brain experiences this drop as genuine distress. The meltdown is not about the specific activity. It is about the neurological withdrawal.",
+    need: "Something to move toward. \'When we get to the car you can pick the music.\' A transition object or activity bridges the dopamine gap. The loss is easier when there is a next thing.",
+  },
+  m38: {
+    body: "They are lying in the dark with their eyes open, their brain generating thoughts at a speed they cannot control. They are tired and cannot sleep. The frustration of being exhausted but wired is real.",
+    brain: "ADHD delayed sleep phase is a biological timing difference. Their melatonin releases later. The default mode network activates in the absence of stimulation and generates a stream of racing thoughts. This is not a choice or a habit.",
+    need: "Something for the brain to track. An audiobook on a timer. White noise. A breathing exercise. Reduce the demand from \'go to sleep\' to \'listen to this.\' Their body will do the rest.",
+  },
+  m39: {
+    body: "They lied and they can see from your face that you know. The fear of the consequence was bigger than the fear of the lie. Now both fears are present.",
+    brain: "The lie was impulsive and avoidant. The truth had a consequence that felt overwhelming in the moment. The prefrontal cortex could not weigh long-term trust against short-term relief. They know lying is wrong. The brakes failed.",
+    need: "Make truth safe. Give them a chance to correct. \'I saw what happened. Want to try again?\' If they tell the truth, your response needs to be calmer than your response to the lie would have been. They need to learn that honesty is survivable.",
+  },
+  m40: {
+    body: "They took the thing and the shame is already arriving. They may not understand why they did it. The want-then-take gap was too short for the \'should I\' question.",
+    brain: "Impulsive taking is want-then-action with no gap for ethical assessment. The item was desired. The hand took it. The \'is this right\' question arrived after. This is impulse control failure, not moral development failure.",
+    need: "Return the item together. Calmly. No humiliation. \'We are going to take this back because it is not ours.\' The teaching is in the action, not the lecture. They need to build the pause, not carry the shame of being \'a thief.\'",
+  },
+  m41: {
+    body: "They are excited and they cannot get ready. The excitement and the executive function are working against each other. They want to go. They cannot do the boring steps to get there.",
+    brain: "Anticipation creates a dopamine spike that makes the mundane preparation steps even harder to initiate. The contrast between the exciting destination and the boring logistics is neurologically paralysing.",
+    need: "Help with the logistics. Lay out clothes, pack the bag, walk them through step by step. Their excitement is not fuel for executive function. It is actually interference. Your scaffolding gets them there.",
+  },
+  m42: {
+    body: "They are melting down and they do not know they are tired. The emotion feels real and important to them because their interoception is not reporting tiredness accurately.",
+    brain: "ADHD interoception often misreads internal states. Tiredness registers as emotional distress, not sleepiness. They genuinely believe the emotion is about something, not about needing rest.",
+    need: "Do not tell them they are tired. Move toward rest without naming it. \'Let\'s sit on the couch with a book.\' Lower the stimulation. Their body will do the rest if the environment allows it.",
+  },
+  m43: {
+    body: "Everything is unfamiliar. The sounds, the smells, the bed, the schedule. Every sensory input is new and unfiltered. Their nervous system is on high alert because nothing is predictable.",
+    brain: "ADHD brains use familiarity as a regulation shortcut. Familiar environments require less executive function to navigate. New environments demand conscious processing of everything, which depletes resources rapidly.",
+    need: "One familiar object from home. Mealtimes at roughly consistent times. A micro-routine each morning. The predictability does not need to be much. It needs to exist.",
+  },
+  m44: {
+    body: "The poking and space-invading is their body seeking sensory input. The sibling is the nearest available source. They are not trying to start a fight. Their body has a need they cannot articulate.",
+    brain: "Proprioceptive-seeking behaviour uses physical contact to generate the sensory input the nervous system requires. The sibling is available, responsive, and provides unpredictable input, which is neurologically stimulating.",
+    need: "Redirect the sensory need. Something to squeeze, push, or press against. A cushion fight with rules. Physical activity that satisfies the input need without a victim. The need is valid. The target needs to change.",
+  },
+  m45: {
+    body: "They are being loud and fast and they do not feel the stares. Their arousal level is their normal. The environment\'s expectation of quiet is the mismatch, not their behaviour.",
+    brain: "Hyperactivity is the motor system generating the stimulation the ADHD brain needs to maintain baseline arousal. In a quiet environment, their baseline looks like \'too much.\' They are not choosing to be disruptive. They are running at their normal speed in a room that expects a different speed.",
+    need: "One quiet redirect. If it does not land, leave without drama. Do not layer shame on top of hyperactivity. They need environments that match their energy level, and environments that do not need brief visits, not lectures.",
+  },
+  m46: {
+    body: "They are having a hard day and they do not know why either. The adults are trying to figure out if it is the medication, the sleep, the food, or just a bad day. They can feel the scrutiny.",
+    brain: "Being observed and assessed is stressful. They may sense that the adults are trying to diagnose today\'s behaviour, which adds self-consciousness to whatever they are already dealing with.",
+    need: "Respond to them as a child having a hard day, not as a diagnostic puzzle. The medication assessment happens separately, with the prescriber, using data you quietly collected. Right now, they just need you to be present with them.",
+  },
+  k12: {
+    body: "They are not hungry during the day. The medication is chemically overriding their hunger signal. Being told to eat when they genuinely feel no hunger is confusing and pressuring.",
+    brain: "The stimulant is suppressing the appetite centre in the hypothalamus. They are not being difficult about food. They genuinely do not feel hungry. Forcing food during this window creates a negative association with eating.",
+    need: "Do not pressure them to eat while medicated. Large breakfast before the medication kicks in. Protein-dense snack when it wears off. Their body will catch up when the appetite signal returns.",
+  },
+  k13: {
+    body: "They are exhausted and wired at the same time. Their body wants to sleep. Their brain will not stop. The frustration of not being able to sleep is making the problem worse.",
+    brain: "The ADHD default mode network generates racing thoughts in the absence of external stimulation. A dark, quiet room is not calming for them. It is activating. Their melatonin releases later than their peers, so they are neurologically not ready for sleep even when behaviourally exhausted.",
+    need: "Something for the brain to follow. Audiobook, guided relaxation, white noise. Reduce the demand from \'sleep\' to \'rest.\' Consistent wake time, even on weekends. Talk to the prescriber about melatonin timing.",
+  },
+  k14: {
+    body: "The loneliness is real and accumulating. Each missed invitation, each lunch alone, each failed social interaction adds to the weight.",
+    brain: "ADHD social processing is slower. They miss subtle cues, misread social timing, interrupt, dominate, or react too intensely. The social operating system is running on different timing than their peers. Each failure adds to rejection sensitivity, which makes the next interaction harder.",
+    need: "One good friendship matters more than popularity. Structured social activities with clear rules are easier than unstructured play. Social skills coaching builds the specific skills that ADHD impairs. And regular, genuine validation from you that they are likeable and worth knowing.",
+  },
+  k15: {
+    body: "Every neutral comment lands as an attack. Every unanswered text means they are hated. The pain is constant and exhausting for both of you.",
+    brain: "Rejection sensitive dysphoria processes social signals through pain circuits. The volume control on incoming social information is broken. A mild correction arrives at the same intensity as deliberate cruelty. This is not sensitivity as a personality trait. It is neural processing.",
+    need: "Validate before you reframe. \'That sounds really painful\' first. Then, only when they are calm: \'What else could it mean?\' Build the habit of reality-testing interpretations. Over time, the cognitive skill can moderate the emotional response, slightly.",
+  },
+  k16: {
+    body: "The words come out before they can stop them. They finish your sentences, blurt in class, interrupt friends. They often do not realise they have done it until after.",
+    brain: "The gap between the thought arriving and the speech producing it is too short for the inhibition system to intervene. They are not being rude. The internal brake between thinking and saying does not fire fast enough.",
+    need: "External brakes. A raised hand signal. A token they hold until it is their turn. Practice in low-stakes settings. \'Hold that thought\' is more useful than \'stop interrupting.\' Give them a physical anchor for the pause their brain cannot produce internally.",
+  },
 };
 

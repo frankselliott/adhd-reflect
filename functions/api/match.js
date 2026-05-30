@@ -24,6 +24,31 @@ m17: When you were too hard on your kid for something you do yourself
 m18: When they keep losing or forgetting things
 m19: When they can't handle losing
 m20: When you checked your phone and they acted out to get you back
+m22: The 5pm crash when the meds wear off
+m23: They're hungry and feral now the meds are gone
+m24: We're going to be late again and they're moving in slow motion
+m25: Turning off the video game turned into a war
+m26: They bolted in the parking lot and my heart stopped
+m27: They climbed something dangerous before I could blink
+m28: The whole day fell apart the second the routine changed
+m29: The meltdown started over food being wrong
+m30: Getting dressed became a screaming match over a sock seam
+m31: Bath, shower, or teeth-brushing is a nightly fight
+m32: They asked the same question fifteen times and I snapped
+m33: The noise and constant talking maxed me out
+m34: I'm trying to help with homework but I can't focus either
+m35: They're convinced everyone hates them after one comment
+m36: I corrected them gently and they completely shut down
+m37: Leaving anywhere fun turns into a meltdown
+m38: They're wired at 10pm and physically cannot fall asleep
+m39: They lied straight to my face about something small
+m40: They took something that wasn't theirs
+m41: Getting out the door for the fun thing fell apart too
+m42: They're melting down because they're overtired but won't admit it
+m43: We're travelling and they've completely unravelled
+m44: They won't stop touching their sibling and it's about to blow
+m45: They're hyper and loud in public and people are staring
+m46: I can't tell if this is the meds or just a bad day
 
 PARENT-ONLY CARDS:
 p01: The shame spiral after losing it
@@ -47,6 +72,26 @@ p18: Medication timing making home worse than work
 p19: Oversharing your own problems with your child
 p20: Using your kid's ADHD as cover for your own
 p21: Freezing when both kids needed you at the same time
+p23: I couldn't fill their prescription and tomorrow is an unmedicated day
+p24: I forgot to reorder the meds in time
+p25: I think I have ADHD too and it's hitting me hard
+p26: Grieving the childhood I'd have had if someone had noticed
+p27: A relative said it's just bad parenting
+p28: I defended my kid to a relative and now there's tension
+p29: I'm secretly relieved when they're at school and I hate myself for it
+p30: I'm completely touched out and can't be needed for one more second
+p31: I gave my other kid less because this one needed everything
+p32: I keep comparing them to other kids and hating myself for it
+p33: I'm scared about who they'll become
+p34: I let them have too much screen time again because I had nothing left
+p35: I'm exhausted from being the family's executive function
+p36: I dread every school email and call
+p37: I compared my parenting to the calm parent online
+p38: I bribed them just to get through the moment
+p39: I'm lonely and isolated in this
+p40: My partner and I parent completely differently and it's splitting us
+p41: I'm resentful of how much harder my life is
+p42: I missed an important deadline or form for them
 
 KID-ONLY CARDS:
 k01: Losing things constantly
@@ -59,6 +104,11 @@ k07: Falling apart over perceived failure or criticism
 k08: School refusal or school anxiety
 k09: Saying the wrong thing at the wrong moment
 k10: Lying
+k12: They won't eat on the medication and it scares me
+k13: They can't fall asleep no matter what we try
+k14: They have no friends and aren't getting invited
+k15: They take everything personally and feel rejected constantly
+k16: They blurt things out and interrupt constantly
 `.trim();
 
 const SYSTEM_PROMPT = `You are a routing assistant for ADHD Reflect, a resource for ADHD parents raising ADHD kids.

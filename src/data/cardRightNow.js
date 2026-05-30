@@ -175,4 +175,157 @@ export const CARD_RIGHT_NOW = {
   "k10": {
     content: `They lied. Before responding, identify which kind of lie it is — impulsive denial, shame-avoidance, or deliberate deception — because they need different responses. For impulsive denial: "I think you know what happened. Let's talk about it." For shame-avoidance: address the shame before the behaviour. For deliberate deception: clear consequence for the deception, separate from the original issue.`,
   },
+
+  // ─── 50 NEW CARDS ───
+  "m22": {
+    content: `The crash is pharmacological, not behavioural. Their brain just lost the dopamine support it had all day. Don\'t try to reason with the rebound. Lower demands for the next 30 to 60 minutes. Snack, low-stimulation activity, minimal transitions. This passes. It is the medication leaving, not your child arriving.`,
+  },
+  "m23": {
+    content: `They ate almost nothing all day because the stimulant suppressed their appetite. Now the medication is gone and the hunger is intense, urgent, and dysregulating. Let them eat. Don\'t comment on quantity or speed. A large protein-heavy snack now is better than a battle about dinner later. The body is catching up.`,
+  },
+  "m24": {
+    content: `They are not choosing to be slow. Time blindness means they genuinely cannot feel the minutes passing. Saying \'hurry up\' adds pressure without adding speed. Walk to them. Give one concrete next action. \'Shoes on. Now.\' Set a visual timer if you have one. Reduce the words between you and the door.`,
+  },
+  "m25": {
+    content: `The game was providing the exact dopamine input their brain was locked onto. Removing it is neurologically like pulling a plug from a socket. The rage is the withdrawal. Next time: a two-minute warning, then a one-minute warning, then \'save now.\' Build the transition into the routine, not the end of it.`,
+  },
+  "m26": {
+    content: `Your adrenaline is real and justified. Breathe first. They are safe now. The bolt was impulsive, not intentional. Their brain acted before the safety assessment could fire. Hold their hand. Say less. Your shaking hands and sharp voice are telling their nervous system they did something terrifying, which they did, but the fear lecture can wait until you are both calm.`,
+  },
+  "m27": {
+    content: `They did the dangerous thing before the thought \'is this safe\' could arrive. That is the ADHD impulse gap. Secure them first. Check for injury. The safety conversation happens later, calmly, with specific language about what the danger was. In the moment, your fear is valid but your lecture will not land.`,
+  },
+  "m28": {
+    content: `The routine was the scaffolding. Without it, every decision and transition requires executive function that the structure was providing for free. Today will be harder. Lower your expectations now, not after the meltdown. Pick the three things that actually matter and let everything else go. Unstructured time is not a gift for an ADHD brain. It is a demand.`,
+  },
+  "m29": {
+    content: `The food being \'wrong\' is a sensory emergency in their nervous system, not a preference. The toast cut differently, the foods touching, the unexpected texture. Don\'t argue with it. Replace it if you can. If you can\'t, acknowledge the distress without dismissing it. \'I can see that\'s really bothering you\' costs nothing and prevents escalation.`,
+  },
+  "m30": {
+    content: `The seam is unbearable. The tag is painful. The waistband is wrong. These are real sensory experiences, not manipulation. Cut the tag. Turn the socks inside out. Buy the seamless ones. Every accommodation you make is one less morning battle. This is not giving in. It is accommodating a nervous system that processes sensation differently.`,
+  },
+  "m31": {
+    content: `Hygiene tasks combine sensory input, transition demands, and executive function sequencing in a way that hits every ADHD difficulty at once. Water temperature, toothpaste texture, the feeling of being wet. Reduce the steps. Make the routine visual. Let them have control over the sensory details. The teeth get brushed. The method can be flexible.`,
+  },
+  "m32": {
+    content: `The repetition was not intentional. They may have forgotten they asked, or the answer did not register, or the anxiety behind the question was not resolved by the answer. Your snap is sensory overload meeting their working memory gap. Step back. Answer once more, slowly. If the question keeps coming, address the anxiety underneath it, not the question itself.`,
+  },
+  "m33": {
+    content: `Your auditory processing is overloaded. The narration, the sound effects, the volume. Your ADHD sensory system is full and the input is still coming. This is not them being too much. It is you reaching capacity. Name it without blame. \'I need five minutes of quiet. My ears are full.\' Then actually take the five minutes.`,
+  },
+  "m34": {
+    content: `Two ADHD brains trying to do homework together is a structurally hard task. Your executive function is being asked to scaffold theirs while your own attention drifts. Sit side by side rather than facing. Do your own focused task while they do theirs. Body-doubling works better than active helping when both brains are struggling.`,
+  },
+  "m35": {
+    content: `The single comment triggered a rejection sensitivity response that has nothing to do with the size of the comment. They are not being dramatic. Their nervous system processed a neutral input as a devastating rejection. Do not explain why it was not a big deal. Sit with them. Validate the feeling. The reframe comes later.`,
+  },
+  "m36": {
+    content: `Your feedback was gentle. Their response was not proportionate. The shutdown is rejection sensitivity, not defiance. They are not punishing you for correcting them. Their nervous system interpreted the correction as proof they are fundamentally flawed. Give them space. Circle back later with warmth. The correction can land tomorrow. The relationship matters more right now.`,
+  },
+  "m37": {
+    content: `Leaving a preferred activity requires disengaging from a dopamine source. For an ADHD brain, this transition is neurologically painful. The meltdown is the withdrawal. Two-minute warnings help. A transition activity helps more. \'When we get in the car, you can choose the music.\' Give them something to move toward, not just something being taken away.`,
+  },
+  "m38": {
+    content: `Their brain will not stop. The default mode network is generating thoughts, worries, plans, replays at a speed they cannot control. They are not choosing to stay awake. Lying in the dark with a racing mind is genuinely distressing. An audiobook or calm music gives the brain something to track without activating it. Reduce the demand to \'just close your eyes,\' not \'go to sleep.\'`,
+  },
+  "m39": {
+    content: `They lied and you watched it happen. The lie was faster than the thought \'should I lie.\' Your hurt is real. Their impulsivity is real. Do not escalate. Say \'I saw what happened. Tell me again.\' Give them the chance to correct. If they do, that is the win. If they do not, address it later when the adrenaline is gone from both of you.`,
+  },
+  "m40": {
+    content: `The taking was impulsive, not planned. The gap between wanting and taking was too short for the ethics system to intervene. They know it is wrong. Address it calmly. Return the item together if possible. The conversation about stealing is important but it lands only when delivered without horror on your face. Normalise the impulse. Address the action.`,
+  },
+  "m41": {
+    content: `Getting out the door for something fun should be easier and it is not. The anticipation creates a dopamine spike that makes the boring preparation steps even harder. They want to go. They cannot do the steps to get there. Help them with the logistics without resentment. Their excitement and their executive function are working against each other.`,
+  },
+  "m42": {
+    content: `The meltdown is pure fatigue. Every regulatory system is depleted. They cannot identify the feeling as tiredness because ADHD interoception is unreliable. Naming it makes it worse because they experience \'you\'re tired\' as dismissive. Do not argue. Reduce demands. Move toward rest without making rest the stated goal.`,
+  },
+  "m43": {
+    content: `Every routine is gone. The environment is unfamiliar. The sensory input is new and unfiltered. They are dysregulated because every stabilising structure has been removed at once. Lower expectations drastically. Build temporary micro-routines: \'First we eat, then we go.\' Give them one predictable thing in the sea of novelty.`,
+  },
+  "m44": {
+    content: `The poking, grabbing, and space-invading is impulsive sensory-seeking, not deliberate provocation. They are not trying to start a fight. Their body needs input and their sibling is the nearest source. Redirect the sensory need. Give them something to do with their hands. Separate them before it escalates, not after.`,
+  },
+  "m45": {
+    content: `They are being loud and fast and \'too much\' and you can feel the stares. This is not a meltdown. This is their baseline arousal in an environment that expects quiet. The judgment is landing on you, not them. They do not feel the stares. You do. Manage your shame separately from their behaviour. One quiet redirect is enough. If it does not work, leave without drama.`,
+  },
+  "m46": {
+    content: `You are trying to reverse-engineer whether the behaviour is medication, mood, sleep, food, or situation. You will not solve this tonight. Note what you observed. Time, dose, sleep, food. Tell the prescriber at the next appointment. Right now, respond to the child in front of you, not the diagnostic puzzle in your head.`,
+  },
+  "p23": {
+    content: `The pharmacy is out. You have called five others. Tomorrow your child goes to school without medication and you cannot prevent it. Write a note to the teacher tonight: brief, factual, no apology. \'X will be unmedicated tomorrow due to a supply issue. They may need additional support with focus and impulse control.\' Then stop trying to fix it. You have done what you can.`,
+  },
+  "p24": {
+    content: `Your own ADHD executive function failed on the task of managing their ADHD medication. The irony is brutal. Do not spiral into self-blame. Call the surgery now. Call the pharmacy now. If there is a gap, write the school note. One step at a time. This is a systems problem, not a character problem. Build the refill reminder into your phone calendar with a seven-day lead time.`,
+  },
+  "p25": {
+    content: `You are reading about your child\'s brain and seeing your own life in every paragraph. The realisation is not small. Everything you struggled with has a name. Give yourself time with this. You do not need to diagnose yourself tonight. But know that the recognition is valid, common, and the beginning of understanding yourself better, not the end of something.`,
+  },
+  "p26": {
+    content: `The grief is real. The years of \'why can\'t you just,\' the academic failures that were not failures, the relationships that fell apart for reasons you could not name. You are grieving a version of your life that might have been different. Sit with it. This is not self-pity. This is a legitimate loss, and naming it is part of processing it.`,
+  },
+  "p27": {
+    content: `The comment landed like a blade because it hit the part of you that already wonders if they are right. They are not right. But explaining ADHD to someone who does not believe in it is rarely productive in the heat of the moment. You do not owe them an education tonight. Protect your child. Limit the exposure. Process the hurt separately.`,
+  },
+  "p28": {
+    content: `You drew a boundary for your child and now the room is tense. The relative is offended. You are second-guessing. Do not retract. The boundary was correct. You can soften the delivery later if needed, but the position holds. Your child saw you stand up for them. That matters more than the temporary tension.`,
+  },
+  "p29": {
+    content: `The relief is not a sign that you do not love them. It is a sign that your nervous system is under sustained, chronic demand and the break is physiologically necessary. Every caregiver needs relief. The guilt is lying to you about what the relief means. It means you are human, running a harder-than-average version of parenting, and your body knows it.`,
+  },
+  "p30": {
+    content: `Your sensory system is full. Every touch, every tug, every \'mum watch this\' is landing on a nervous system that has nothing left to receive. This is not rejection of your child. This is your ADHD sensory processing hitting capacity. Name it without guilt. \'I love you and my body needs five minutes without being touched.\' Then take the five minutes.`,
+  },
+  "p31": {
+    content: `The other child got the leftover version of you again. The ADHD child\'s needs are louder, more urgent, more visible. The quiet child learned to be quiet because it was the only way to get any attention at all. Notice this. You cannot fix it tonight but you can give the quiet one ten minutes of undivided attention. Ten minutes where they are not the afterthought.`,
+  },
+  "p32": {
+    content: `You watched the other child at the party and measured yours against them. The \'easy\' child who sits still, follows instructions, transitions without drama. The grief hit and then the shame of feeling it. Both are valid. Your child is not less than. They are running harder software on the same hardware. The comparison tells you something about your exhaustion, not about their worth.`,
+  },
+  "p33": {
+    content: `The fear spiralled from today into their entire future. Jobs, relationships, independence, safety. The catastrophising is your own ADHD brain doing what it does at 11pm: projecting the worst case with full emotional intensity. You cannot solve their future tonight. What you can do: show up tomorrow. The long game is built from the short ones.`,
+  },
+  "p34": {
+    content: `You gave them the screen because you had nothing else to give. That is not a parenting failure. That is resource management under chronic depletion. The screen kept them safe and regulated while you recovered enough to keep going. Do not add guilt to exhaustion. Tomorrow is a new day.`,
+  },
+  "p35": {
+    content: `You are the calendar, the reminder, the consequence tracker, the form returner, the appointment keeper, and the emotional regulator for the entire household. While your own ADHD brain is drowning in exactly those tasks. The invisible load is real and it is unsustainable. One thing you can offload this week. Just one. Find it and let it go.`,
+  },
+  "p36": {
+    content: `The school\'s name on your phone triggers a cortisol spike before you even read the message. It is almost never good news. You have been conditioned by repeated negative contact to dread every interaction. This is a learned stress response, not anxiety disorder. You can let the message sit for ten minutes before opening it. It will still be there.`,
+  },
+  "p37": {
+    content: `The polished parent online made it look effortless. The calm voice, the patient redirection, the aesthetically pleasing routine. They are showing you a highlight reel. You are comparing it to your unedited footage. The version of you that survived today is the real one. Close the app.`,
+  },
+  "p38": {
+    content: `You promised the treat to make the meltdown stop. It worked. Now you feel like you taught them that escalation gets rewards. Maybe. But you also got through the moment without anyone getting hurt or humiliated. Survival tactics are valid. The long-term boundary work happens on days when you have capacity. Today was not that day.`,
+  },
+  "p39": {
+    content: `You have stopped accepting invitations because outings are too unpredictable. The birthday parties, the playdates, the social events that other families do casually are exhausting for you. The isolation is real and it compounds the burnout. One connection this week. Text someone who gets it. You do not have to go anywhere. But the loneliness needs addressing.`,
+  },
+  "p40": {
+    content: `One of you is the structure parent and one is the flexibility parent, and the ADHD child plays the gap. This is not a marriage problem. It is a structural problem that most ADHD families face. The conversation is not \'who is right.\' It is \'what does the child need from us as a unit.\' Have it when neither of you is depleted. Not tonight.`,
+  },
+  "p41": {
+    content: `You love them and you resent the load. Both are true at the same time and neither cancels the other. The resentment is not about them. It is about the structural reality that parenting an ADHD child with your own ADHD brain is relentlessly, measurably harder. Naming resentment is not the same as acting on it. Let it exist without letting it define you.`,
+  },
+  "p42": {
+    content: `The deadline passed. The form was not returned. The window closed. Your ADHD executive function failed on a task that had real consequences for your child. Do not spiral. Contact the school or organisation now and explain. Most deadlines have more flexibility than they advertise. And build the reminder system that catches this next time.`,
+  },
+  "k12": {
+    content: `They are barely eating during the day. The stimulant suppresses appetite directly. This is not a food preference issue. It is a medication side effect. Track their weight. Talk to the prescriber. High-calorie breakfast before the dose kicks in. Protein-dense snacks after it wears off. Do not pressure them to eat while medicated. They genuinely are not hungry.`,
+  },
+  "k13": {
+    content: `Their brain will not power down. The delayed sleep phase means their circadian rhythm runs later than other children. The default mode network activates in the dark and quiet, generating thoughts at speed. Audiobook or white noise. Consistent wake time matters more than bedtime. Talk to the prescriber about timing if stimulants are contributing.`,
+  },
+  "k14": {
+    content: `The empty party invitations. The lunch table alone. The \'nobody likes me.\' Their social processing is slower, their impulses faster, their emotional reactions bigger. The combination makes friendships harder to build and keep. This is not a reflection of their worth. Social skills coaching, if accessible, works better than parental instruction. One good friend is enough.`,
+  },
+  "k15": {
+    content: `Every neutral comment lands as an attack. Every unanswered text means they are hated. Every correction means they are fundamentally flawed. This is rejection sensitive dysphoria. The feelings are real and disproportionate at the same time. Do not tell them they are overreacting. Validate the feeling, then gently reality-test the interpretation. \'That sounds really painful. What else could it mean?\'`,
+  },
+  "k16": {
+    content: `They interrupt, finish your sentences, blurt answers, and cannot wait their turn. They know they should wait. The impulse arrives at their mouth before the inhibition system can catch it. This is one of the most socially costly ADHD symptoms. Practice is more useful than punishment. \'Hold that thought\' with a visual cue gives them an external brake.`,
+  },
 };
+
