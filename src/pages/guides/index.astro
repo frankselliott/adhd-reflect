@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CardBrowser from '../../components/CardBrowser.jsx';
+import { TOPIC_GUIDES } from '../../data/topicGuides.js';
 ---
 <Base title="Guides" description="Research-backed guides for understanding ADHD parenting patterns." current="guides">
 
@@ -14,29 +14,38 @@ import CardBrowser from '../../components/CardBrowser.jsx';
 
   <div id="guide-browser-root"></div>
 
+  <script id="guides-data" type="application/json" set:html={JSON.stringify(TOPIC_GUIDES.map(g => ({
+    id: g.id,
+    title: g.title,
+    topic: g.topic,
+    patternTypes: g.patternTypes,
+    recognize: g.recognize,
+  })))} />
+
   <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
-    import CardBrowser from '../../components/CardBrowser.jsx';
+    import GuideBrowser from '../../components/GuideBrowser.jsx';
 
+    const guides = JSON.parse(document.getElementById('guides-data').textContent);
     const root = createRoot(document.getElementById('guide-browser-root'));
-    root.render(createElement(CardBrowser, { linkPrefix: '/guides/' }));
+    root.render(createElement(GuideBrowser, { guides }));
   </script>
 
 </Base>
 
 <style>
   .guides-hero { padding: 64px 0 32px; }
-  .guides-hero-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .guides-hero-inner { max-width: 720px; margin: 0 auto; padding: 0 24px; }
   .guides-label {
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--sage-dark); margin-bottom: 12px;
+    text-transform: uppercase; color: #7FA88E; margin-bottom: 12px;
   }
   .guides-title {
     font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 300;
-    line-height: 1.15; color: var(--slate); margin-bottom: 16px; font-variation-settings: 'opsz' 48;
+    line-height: 1.15; color: #191714; margin-bottom: 16px; font-variation-settings: 'opsz' 48;
   }
-  .guides-title em { font-style: italic; color: var(--sage-dark); }
-  .guides-body { font-size: 17px; line-height: 1.6; color: var(--pewter); max-width: 520px; }
+  .guides-title em { font-style: italic; color: #4B6B4E; }
+  .guides-body { font-size: 17px; line-height: 1.6; color: #6B6358; max-width: 520px; }
 </style>
 

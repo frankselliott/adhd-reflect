@@ -1,60 +1,54 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { TOPIC_GUIDES } from '../../data/topicGuides.js';
 import { CARDS } from '../../data/cards.js';
-import { GUIDE_CONTENT } from '../../data/guideContent.js';
 
 export function getStaticPaths() {
-  return CARDS.map(card => ({
-    params: { id: card.id },
-    props: { card },
+  return TOPIC_GUIDES.map(guide => ({
+    params: { id: guide.id },
+    props: { guide },
   }));
 }
 
-const { card } = Astro.props;
-const content = GUIDE_CONTENT[card.id] || {};
+const { guide } = Astro.props;
+const cardsMap = Object.fromEntries(CARDS.map(c => [c.id, c]));
+const relatedCardTitles = (guide.relatedCards || [])
+  .filter(id => cardsMap[id])
+  .map(id => ({ id, title: cardsMap[id].title }));
 ---
-<Base title={`${card.title} — Guide`} description={`Understand why this happens: ${card.title}`}>
+<Base title={`${guide.title} — Guide`} description={guide.recognize}>
 
-  <div id="guide-viewer-root"
-    data-card-id={card.id}
-    data-card-type={card.type}
-    data-card-title={card.title}
-  ></div>
+  <div id="guide-root"></div>
 
-  <script id="pg-data" type="application/json" set:html={JSON.stringify(content.parentGuide || '')} />
-  <script id="kg-data" type="application/json" set:html={JSON.stringify(content.kidGuide || '')} />
-  <script id="gc-data" type="application/json" set:html={JSON.stringify(content.content || '')} />
+  <script id="guide-data" type="application/json" set:html={JSON.stringify(guide)} />
+  <script id="related-data" type="application/json" set:html={JSON.stringify(relatedCardTitles)} />
 
   <script>
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
-    import GuideViewer from '../../components/GuideViewer.jsx';
+    import TopicGuideViewer from '../../components/TopicGuideViewer.jsx';
 
-    const el = document.getElementById('guide-viewer-root');
-    const parentGuide = JSON.parse(document.getElementById('pg-data').textContent);
-    const kidGuide = JSON.parse(document.getElementById('kg-data').textContent);
-    const guideContent = JSON.parse(document.getElementById('gc-data').textContent);
+    const guide = JSON.parse(document.getElementById('guide-data').textContent);
+    const relatedCardTitles = JSON.parse(document.getElementById('related-data').textContent);
 
-    const root = createRoot(el);
-    root.render(createElement(GuideViewer, {
-      cardId: el.dataset.cardId,
-      cardType: el.dataset.cardType,
-      title: el.dataset.cardTitle,
-      parentGuide,
-      kidGuide,
-      content: guideContent,
-    }));
+    const root = createRoot(document.getElementById('guide-root'));
+    root.render(createElement(TopicGuideViewer, { guide, relatedCardTitles }));
   </script>
 
 </Base>
 
 <style is:global>
-  .guide-content p {
-    font-size: 17px; line-height: 1.7; color: #6B6358; margin-bottom: 18px; max-width: 60ch;
+  .guide-prose p {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 16, "wght" 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #6B6358;
+    margin-bottom: 16px;
+    max-width: 60ch;
   }
-  .guide-content p:last-child { margin-bottom: 0; }
-  .guide-content strong { color: #191714; font-weight: 600; }
-  .guide-content em { font-style: italic; color: #191714; }
-  .guide-content hr { border: none; border-top: 1px solid rgba(25,23,20,0.08); margin: 28px 0; }
+  .guide-prose p:last-child { margin-bottom: 0; }
+  .guide-prose strong { color: #191714; font-variation-settings: "opsz" 16, "wght" 600; }
+  .guide-prose em { font-style: italic; color: #191714; }
 </style>
 

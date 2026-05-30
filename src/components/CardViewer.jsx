@@ -137,7 +137,7 @@ function ExpandSection({ label, children }) {
   );
 }
 
-export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, relatedGuides, brainProcess, activities, patternData, kidBrain }) {
+export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, brainProcess, activities, patternData, kidBrain, topicGuides }) {
   const isMoment = cardType === 'moment';
   const hasKid = isMoment && kidNow;
   const brain = brainProcess || null;
