@@ -515,4 +515,20 @@ export const DEFAULT_BRAIN = {
   body: "Your nervous system is activated. Cortisol and adrenaline are influencing how you think and react right now. This is physiology, not a character flaw.",
   brain: "The ADHD prefrontal cortex provides less reliable braking between feeling and action. The gap between trigger and response is neurologically shorter than in a neurotypical brain.",
   effect: "What happened makes sense when you understand how your brain is wired. The reaction isn\'t the problem to solve. The conditions that led to it are.",
+  // ─── Previously missing cards ───
+  m21: {
+    body: "The handoff from screen to real life is a dopamine cliff. Their nervous system was receiving high-frequency reward signals and now it has stopped. The irritability is withdrawal.",
+    brain: "Screen content provides rapid, predictable dopamine cycles that the ADHD brain craves. Removing the screen creates an instant dopamine deficit. The transition from high-stimulation to low-stimulation is neurologically painful, not just inconvenient.",
+    effect: "The meltdown after screen time is proportionate to the neurological loss, not to the child being spoiled. Transition activities that bridge the dopamine gap, a snack, a physical activity, something to look forward to, reduce the cliff.",
+  },
+  p22: {
+    body: "You are on the couch scrolling when you should be starting bedtime. You know you should move. You cannot make yourself start. The phone provides low-effort dopamine that your depleted brain cannot resist.",
+    brain: "ADHD task initiation requires a dopamine signal to start. At the end of a long day, your prefrontal cortex has nothing left. The phone provides predictable, controlled, low-demand input that your overwhelmed nervous system finds more manageable than the executive function demands of bedtime routine.",
+    effect: "The doom scroll is not laziness. It is your depleted brain choosing the lowest-effort stimulation available. The bedtime routine requires initiation, sequencing, patience, and sensory management. Your phone requires a thumb. The fix is reducing the activation energy to start, not adding guilt.",
+  },
+  k11: {
+    body: "Another friendship collapsed. They are hurt and confused and possibly do not understand what they did. The pattern is becoming familiar and each repetition adds to their conviction that something is wrong with them.",
+    brain: "ADHD social processing runs on different timing than neurotypical peers. They miss subtle cues, react too intensely, interrupt, dominate play, or say the wrong thing at the wrong moment. Each failed friendship adds to rejection sensitivity, which makes the next interaction more guarded and less natural.",
+    effect: "The friendship pattern is not a character flaw. It is a social processing speed issue compounded by accumulated rejection sensitivity. Social skills coaching builds the specific skills that ADHD impairs. One good friendship is more therapeutic than many shallow ones.",
+  },
 };

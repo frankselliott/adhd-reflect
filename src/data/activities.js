@@ -110,6 +110,10 @@ export const CARD_ACTIVITIES = {
   k14: ['perspective', 'grounding', 'breathing'],
   k15: ['perspective', 'grounding', 'breathing'],
   k16: ['perspective', 'breathing', 'grounding'],
+  // ─── Previously missing cards ───
+  m21: ['breathing', 'grounding', 'scale'],
+  p22: ['name-pattern', 'breathing', 'perspective'],
+  k11: ['perspective', 'grounding', 'breathing'],
 };
 
 // Pattern names for the name-pattern activity
@@ -129,5 +133,6 @@ export const PATTERN_NAMES = {
   p16: { name: 'The Drift', desc: 'Attention followed novelty away from your child. Not a choice. A dopamine redirect.' },
   p20: { name: 'The Cover', desc: 'Your ADHD hiding behind theirs. Both are real. Both need separating.' },
   k10: { name: 'The Escape Route', desc: 'Truth had a consequence that felt overwhelming. The lie was the path of least resistance.' },
+  p22: { name: 'The Scroll Trap', desc: 'Your depleted brain chose the lowest-effort dopamine source. The phone is not the problem. The depletion is.' },
 };
 

@@ -313,5 +313,16 @@ export const KID_BRAIN = {
     brain: "The gap between the thought arriving and the speech producing it is too short for the inhibition system to intervene. They are not being rude. The internal brake between thinking and saying does not fire fast enough.",
     need: "External brakes. A raised hand signal. A token they hold until it is their turn. Practice in low-stakes settings. \'Hold that thought\' is more useful than \'stop interrupting.\' Give them a physical anchor for the pause their brain cannot produce internally.",
   },
+  // ─── Previously missing cards ───
+  m21: {
+    body: "The screen just stopped and everything feels wrong. The world is suddenly too quiet, too slow, and too boring. Their body feels restless and irritable.",
+    brain: "The screen was providing rapid dopamine cycles that their ADHD brain was locked onto. Removing it created an instant neurological deficit. The irritability is genuine withdrawal from a dopamine source, not entitlement.",
+    need: "Something to transition TO, not just away from. A snack, a physical activity, a different engaging task. The dopamine gap needs bridging. Going from high stimulation to nothing is the hardest possible transition for their brain.",
+  },
+  k11: {
+    body: "They are hurt and confused. The friendship felt real and now it is gone. They may not understand what they did that caused the break.",
+    brain: "ADHD social processing is slower than neurotypical. They miss the cue that says stop talking, the signal that says this joke went too far, the moment when the other child needed space. The social operating system runs on different timing. They are not bad at being a friend. They are running social software on slower hardware.",
+    need: "Help them see the pattern without blaming them. One good friendship matters more than popularity. Social skills coaching, if accessible, builds the specific skills that ADHD impairs. And regular validation from you that they are worth knowing.",
+  },
 };
 

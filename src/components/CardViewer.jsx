@@ -326,20 +326,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   </span>
                 </a>
 
-                {relatedGuides && relatedGuides.length > 1 && (
-                  <ExpandSection label="related guides">
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      {relatedGuides.slice(1).map(g => (
-                        <a key={g.id} href={'/guides/' + g.id} style={{
-                          padding: '14px 0', borderBottom: '1px solid rgba(25,23,20,0.07)',
-                          textDecoration: 'none', fontFamily: 'var(--serif)',
-                          fontVariationSettings: '"opsz" 16, "wght" 380',
-                          fontSize: 15, lineHeight: 1.45, color: ink2,
-                        }}>{g.title}</a>
-                      ))}
-                    </div>
-                  </ExpandSection>
-                )}
+
               </div>
             )}
 
