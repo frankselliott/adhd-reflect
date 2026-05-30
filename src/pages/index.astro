@@ -27,6 +27,27 @@ import AIRouter from '../components/AIRouter.jsx';
     </div>
   </section>
 
+
+  <!-- ─── Install Prompt ─── -->
+  <section class="install-prompt" id="install-section" style="display:none">
+    <div class="install-inner">
+      <div class="install-content">
+        <div class="install-icon">
+          <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+            <path d="M32 6 C32 6, 48 16, 48 29 C48 37.8 40.8 44 32 44 C23.2 44 16 37.8 16 29 C16 16 32 6 32 6Z" fill="#4A6FA5"/>
+            <path d="M32 58 C32 58, 48 48, 48 35 C48 26.2 40.8 20 32 20 C23.2 20 16 26.2 16 35 C16 48 32 58 32 58Z" fill="#A8C3A0" opacity="0.75"/>
+          </svg>
+        </div>
+        <div>
+          <p class="install-title">Save to your home screen</p>
+          <p class="install-desc">Open straight to the search when you need it. No app store. One tap.</p>
+        </div>
+      </div>
+      <button class="install-btn" id="install-btn">Add</button>
+      <button class="install-dismiss" id="install-dismiss" aria-label="Dismiss">&times;</button>
+    </div>
+  </section>
+
   <!-- ─── What this is ─── -->
   <section class="what">
     <div class="what-inner">
@@ -66,6 +87,47 @@ import AIRouter from '../components/AIRouter.jsx';
     </div>
   </section>
 
+
+
+  <script>
+    let deferredPrompt = null;
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Don't show if already dismissed
+      if (localStorage.getItem('adhd-reflect-install-dismissed')) return;
+      
+      const section = document.getElementById('install-section');
+      if (section) section.style.display = 'block';
+    });
+    
+    document.getElementById('install-btn')?.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const result = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      document.getElementById('install-section').style.display = 'none';
+    });
+    
+    document.getElementById('install-dismiss')?.addEventListener('click', () => {
+      document.getElementById('install-section').style.display = 'none';
+      localStorage.setItem('adhd-reflect-install-dismissed', 'true');
+    });
+    
+    // Also show iOS install hint
+    if (navigator.standalone === false || (navigator.userAgent.match(/iPhone|iPad/) && !window.navigator.standalone)) {
+      const section = document.getElementById('install-section');
+      if (section && !localStorage.getItem('adhd-reflect-install-dismissed')) {
+        section.style.display = 'block';
+        const desc = section.querySelector('.install-desc');
+        if (desc) desc.textContent = 'Tap the share button, then Add to Home Screen. Opens straight to the search.';
+        const btn = document.getElementById('install-btn');
+        if (btn) btn.style.display = 'none';
+      }
+    }
+  </script>
 
 </Base>
 
@@ -135,6 +197,44 @@ import AIRouter from '../components/AIRouter.jsx';
   @media (max-width: 480px) {
     .newsletter-mock { flex-direction: column; }
     .newsletter-btn { width: 100%; }
+  }
+
+  .install-prompt {
+    padding: var(--space-md) 0;
+    border-top: 1px solid var(--mist-border);
+  }
+  .install-inner {
+    max-width: 640px; margin: 0 auto; padding: 0 var(--page-pad);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .install-content {
+    display: flex; align-items: center; gap: 14px; flex: 1;
+  }
+  .install-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--mist); display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+  }
+  .install-title {
+    font-family: var(--sans); font-size: 15px; font-weight: 600;
+    color: var(--slate); margin-bottom: 2px;
+  }
+  .install-desc {
+    font-family: var(--sans); font-size: 13px; color: var(--pewter);
+    line-height: 1.4;
+  }
+  .install-btn {
+    appearance: none; border: none; cursor: pointer;
+    background: var(--blue); color: white;
+    font-family: var(--sans); font-size: 14px; font-weight: 600;
+    padding: 10px 20px; border-radius: 100; white-space: nowrap;
+    min-height: 40px;
+  }
+  .install-dismiss {
+    appearance: none; border: none; cursor: pointer;
+    background: transparent; color: var(--pewter);
+    font-size: 20px; padding: 8px; line-height: 1;
+    opacity: 0.5;
   }
 </style>
 

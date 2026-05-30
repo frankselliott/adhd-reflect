@@ -59,7 +59,18 @@ export default function AIRouter() {
       if (data.crisis) { setState('crisis'); return; }
       if (data.unmatched) { setUnmatchedNote(data.suggestion || ''); setState('unmatched'); return; }
 
-      setMatches(data.matches || []);
+      const matches = data.matches || [];
+      setMatches(matches);
+      
+      // Auto-navigate to best match if confident
+      if (matches.length >= 1) {
+        // Store all matches in sessionStorage for "wrong match" flow
+        try { sessionStorage.setItem('adhd-reflect-matches', JSON.stringify(matches)); } catch(e) {}
+        try { sessionStorage.setItem('adhd-reflect-query', input.trim()); } catch(e) {}
+        // Navigate to best match
+        window.location.href = '/cards/' + matches[0].id;
+        return;
+      }
       setState('result');
     } catch (e) {
       setErrorMsg('Could not reach the matching service. Try again.');
@@ -209,7 +220,7 @@ export default function AIRouter() {
             animation: 'spin 0.8s linear infinite',
             margin: '0 auto 16px',
           }} />
-          <p style={{ fontSize: 15, color: 'var(--pewter)' }}>Working it out...</p>
+          <p style={{ fontSize: 15, color: 'var(--pewter)' }}>Finding what fits...</p>
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}

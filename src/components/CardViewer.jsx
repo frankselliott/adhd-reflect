@@ -137,6 +137,82 @@ function ExpandSection({ label, children }) {
   );
 }
 
+
+function WrongMatchBanner({ currentId }) {
+  const [matches, setMatches] = useState(null);
+  const [query, setQuery] = useState('');
+  const [showAlts, setShowAlts] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem('adhd-reflect-matches');
+      const storedQuery = sessionStorage.getItem('adhd-reflect-query');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.length > 0 && parsed[0].id === currentId) {
+          setMatches(parsed);
+          setQuery(storedQuery || '');
+        }
+      }
+    } catch(e) {}
+  }, []);
+
+  if (!matches || matches.length === 0) return null;
+
+  const alts = matches.filter(m => m.id !== currentId);
+
+  return (
+    <div style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
+      display: 'flex', flexDirection: 'column', alignItems: 'center',
+      padding: '0 16px 20px', pointerEvents: 'none',
+    }}>
+      {/* Alt matches dropdown */}
+      {showAlts && alts.length > 0 && (
+        <div style={{
+          background: 'white', borderRadius: 16, padding: 16,
+          boxShadow: '0 -4px 24px rgba(0,0,0,0.12)',
+          marginBottom: 8, width: '100%', maxWidth: 380, pointerEvents: 'auto',
+        }}>
+          <div style={{
+            fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.14em',
+            color: '#A09589', marginBottom: 10,
+          }}>other matches</div>
+          {alts.map(m => (
+            <a key={m.id} href={'/cards/' + m.id}
+              style={{
+                display: 'block', padding: '10px 12px', borderRadius: 10,
+                textDecoration: 'none', marginBottom: 4,
+                fontFamily: 'var(--serif)', fontSize: 15, color: '#191714',
+                background: 'rgba(25,23,20,0.03)',
+              }}>{m.title}</a>
+          ))}
+          <a href="/" style={{
+            display: 'block', padding: '10px 12px',
+            textDecoration: 'none',
+            fontFamily: 'var(--mono)', fontSize: 12, color: '#A09589',
+          }}>&#8592; search again</a>
+        </div>
+      )}
+
+      {/* Wrong match pill */}
+      <button onClick={() => setShowAlts(!showAlts)}
+        style={{
+          pointerEvents: 'auto',
+          appearance: 'none', border: 0, cursor: 'pointer',
+          background: 'rgba(25,23,20,0.85)', color: '#F5EFE0',
+          fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '0.04em',
+          padding: '10px 20px', borderRadius: 100,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+        }}>
+        {showAlts ? 'close' : 'not the right moment?'}
+      </button>
+    </div>
+  );
+}
+
 export default function CardViewer({ cardId, cardType, title, parentNow, kidNow, content, brainProcess, activities, patternData, kidBrain, topicGuides }) {
   const isMoment = cardType === 'moment';
   const hasKid = isMoment && kidNow;
@@ -368,12 +444,13 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         </div>
 
         <div style={{
-          padding: '12px 26px 20px', flexShrink: 0, textAlign: 'center',
+          padding: '12px 26px 40px', flexShrink: 0, textAlign: 'center',
           fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.08em', color: ink3,
         }}>
           not medical advice &middot; <a href="/legal/safety" style={{ color: ink3 }}>crisis support</a>
         </div>
       </div>
+      <WrongMatchBanner currentId={cardId} />
     </>
   );
 }
