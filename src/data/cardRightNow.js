@@ -329,14 +329,14 @@ export const CARD_RIGHT_NOW = {
   },
   // ─── Previously missing cards ───
   "m21": {
-    parentNow: `The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.`,
-    kidNow: `The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.`,
+    parentNow: \`The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.\`,
+    kidNow: \`The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.\`,
   },
   "p22": {
-    content: `You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.`,
+    content: \`You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.\`,
   },
   "k11": {
-    content: `Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.`,
+    content: \`Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.\`,
   },
 
   // ─── 15 NEW KID CARDS ───
@@ -384,6 +384,35 @@ export const CARD_RIGHT_NOW = {
   },
   "k31": {
     content: `Their brain does not wind down when the world goes quiet. It winds up. The default mode network activates and generates racing thoughts, worries, ideas, replays. Lying in the dark is not restful. It is activating. An audiobook gives the brain one thing to follow. Dim lights earlier. Consistent wake time. Talk to the prescriber if medication timing is contributing. The brain will not 'just switch off' because you need it to.`,
+  },
+
+  // ─── 9 NEW PARENT CARDS ───
+  "p43": {
+    content: `The tiny thing was not the trigger. It was the last input in a day of invisible demands. School emails, lunches, work, washing, noise, sibling conflict, transition deadlines. Each one small. The total enormous. Your snap was proportionate to the pile, not the final item. Stop. Ask yourself: what else is in the pile? Write three things down. Then reduce the next demand, not the child.`,
+  },
+  "p44": {
+    content: `You tightened because the uncertainty felt intolerable. If the routine was exact, if the shoes were by the door, if the bag was packed precisely, then the morning might not explode. The control was an attempt to prevent chaos. But it created a different kind. Choose one non-negotiable and let the rest be imperfect today. Perfect routines do not exist in ADHD households. Good enough ones do.`,
+  },
+  "p45": {
+    content: `The snap happened. You know it. They know it. The repair is sitting there undone and the longer it waits, the heavier it gets. The avoidance is not indifference. It is shame. The shame says if you apologise you are admitting you are a bad parent. But the apology says the opposite. It says you are a parent who notices. Twenty seconds. 'I snapped. That was too much. I am sorry.' Then return to normal. That is the whole repair.`,
+  },
+  "p46": {
+    content: `You can see every item that is out of place. The cognitive load of the mess is real. But the task of fixing it requires deciding what to pick up, where it goes, what order, what counts as done. Each decision costs executive function you do not have. Do not try to fix the whole room. Pick one surface. Set a five-minute timer. When it goes off, stop. One surface is enough.`,
+  },
+  "p47": {
+    content: `This is one of the hardest questions in ADHD parenting. The answer is usually: you are helping. But the fear is real. Accommodations that reduce demand while building capacity are support. Accommodations that remove all demand permanently are avoidance. The test: are you scaffolding toward independence, or building a permanent workaround? Both are sometimes necessary. The distinction is direction, not size.`,
+  },
+  "p48": {
+    content: `Things were quiet and your brain could not tolerate it. You started a new project, rearranged the furniture, picked a fight, or changed the rules. The calm felt uncomfortable because your ADHD nervous system reads low stimulation as boredom, which feels physically unpleasant. Notice the urge next time. Add safe stimulation: music, a walk, a podcast. Do not detonate the routine to feed the brain.`,
+  },
+  "p49": {
+    content: `Their anger arrived and yours met it. Limbic resonance means your nervous system entrained to theirs before your prefrontal cortex could intervene. You did not choose to match them. Your brain mirrored the nearest emotional signal. Lower your speed and volume first. Your regulation has to lead. They cannot calm down until you do. One of you has to go first and it has to be you.`,
+  },
+  "p50": {
+    content: `The chart was beautiful. The routine was detailed. The system was going to fix everything. By day three it collapsed and the shame of another abandoned system hit harder than the original problem. The system was too big. Shrink it. Keep the one part that worked today. A minimum viable routine that survives four days is worth more than a perfect one that lasts two. Restart without drama.`,
+  },
+  "p51": {
+    content: `Dinner, consequences, bedtime order, which child gets attention first, whether to enforce the rule or let it go. Each micro-decision costs executive function. By evening, the decision-making system is empty. Use defaults. Default dinner on Mondays. Default consequence for screens. Default bedtime order. Pre-decide the recurring choices so your depleted brain does not have to decide them fresh every night.`,
   },
 };
 

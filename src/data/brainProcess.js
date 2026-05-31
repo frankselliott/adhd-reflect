@@ -586,6 +586,53 @@ export const BRAIN_PROCESS = {
     brain: "ADHD delayed sleep phase means melatonin releases later than neurotypical. The default mode network, which should quiet for sleep, activates in the absence of external stimulation. The brain goes busy, not quiet. This is biological, not behavioural.",
     effect: "Give the brain one thing to follow. An audiobook, a guided relaxation, white noise. Reduce the demand from \'sleep\' to \'rest and listen.\' Consistent wake time matters more than bedtime. Talk to the prescriber about melatonin timing and whether medication is contributing.",
   },
+
+  // ─── 9 NEW PARENT CARDS ───
+  p43: {
+    body: "The snap felt disproportionate because it was. Not to the pile, to the final item. Your body had been absorbing demands all day without discharge. The cortisol accumulated invisibly until the last input tipped the system.",
+    brain: "ADHD executive load accumulates without the parent being aware of the total. Each demand is processed individually and seems manageable. But the cognitive and emotional overhead is cumulative, and the system does not have a visible meter showing how full it is.",
+    effect: "The child received a response sized for the whole day, delivered in response to one small thing. They do not know about the pile. A brief explanation later, \'I had a really full day and I took it out on you,\' helps them understand the mismatch.",
+  },
+  p44: {
+    body: "The tightening felt protective. If you controlled every variable, maybe the explosion would not happen. But the rigidity created its own pressure, on you and on everyone around you.",
+    brain: "Control is a common ADHD coping strategy for unpredictability. When executive function cannot reliably plan, sequence, or remember, controlling the environment becomes a substitute for controlling the brain. The need for control increases as depletion increases.",
+    effect: "Micromanagement removes your child\'s agency, which can increase their demand-avoidance response. Choose the one thing that genuinely matters today and let everything else be good enough. The mess by the door is survivable. The relationship is what you are protecting.",
+  },
+  p45: {
+    body: "The avoidance feels like self-protection. The shame of what you did is sitting between you and the repair. Every hour that passes makes the gap bigger and the repair harder to start.",
+    brain: "Repair requires emotional regulation after rupture, which is exactly the function that just failed. The shame of the snap activates the same avoidance circuits that drive ADHD procrastination. The repair feels like an impossible task because it requires confronting the failure.",
+    effect: "The repair does not need to be large. Twenty seconds. Two sentences. \'I snapped. That was too much.\' Then return to normal. The return to normal IS the repair. Your child needs to see that relationships survive rupture, not that you are perfect.",
+  },
+  p46: {
+    body: "The visual clutter is producing cognitive load. Every item out of place is a micro-decision waiting to be made. The overwhelm is real, not laziness.",
+    brain: "ADHD object permanence means items not in their designated place stop being tracked by working memory. They accumulate because the brain stops seeing them. Then suddenly the mess registers all at once and the task of addressing it requires dozens of decisions the executive function system cannot sustain.",
+    effect: "Reduce the decision load. Do not declutter the house. Triage one surface. Five minutes. Stop when the timer goes. Homes for high-use objects prevent accumulation. Reduce categories of things. Fewer things means fewer decisions about where things go.",
+  },
+  p47: {
+    body: "The fear sits in the background of every accommodation decision. Too much support and you are enabling. Too little and you are failing them. The uncertainty is exhausting.",
+    brain: "The cultural message that accommodations are excuses conflicts with the neurological reality that ADHD brains need external scaffolding. Scaffold-and-fade is the framework: provide the support now, reduce it gradually as the skill develops. The direction matters more than the amount.",
+    effect: "Ask: does this accommodation build capacity over time, or permanently avoid demand? Both may be temporarily necessary. A visual checklist builds independence. Doing everything for them does not. But sometimes doing it for them today is the right call because capacity is not available today.",
+  },
+  p48: {
+    body: "The quiet felt wrong. Not peaceful, uncomfortable. Your body was restless, your mind scanning for input. The urge to do something, anything, was stronger than the knowledge that the calm was working.",
+    brain: "ADHD brains require stimulation to maintain baseline arousal. Quiet can drop arousal below comfortable levels, producing restlessness, irritability, and an urgent need for input. The chaos-creation is the nervous system self-medicating through novelty and intensity.",
+    effect: "The next time calm arrives and your body starts scanning for input, notice the urge before you act on it. Add safe stimulation: music, a walk, a fidget, a phone call. The routine does not need to be sacrificed to feed the brain.",
+  },
+  p49: {
+    body: "Their emotional state entered your nervous system through limbic resonance. Mirror neurons copied their facial expression, tone, and body tension. Your amygdala read their alarm as your alarm and responded accordingly.",
+    brain: "Emotional contagion in ADHD parents is faster and less filtered than in neurotypical parents because the prefrontal cortex, which should moderate the resonance, is less reliable. You did not choose to catch their mood. The contagion happened before conscious processing.",
+    effect: "Co-regulation requires one person to be regulated first. When you match their anger, both systems amplify. Lower your volume, slow your movements, reduce your words. Your nervous system leads theirs. They will follow you down with a 30-second delay.",
+  },
+  p50: {
+    body: "The collapse of the system hit harder than the original problem. The shame of another abandoned routine, another failed chart, another fresh start that stalled.",
+    brain: "ADHD perfectionism is protective. If the system is perfect, it will compensate for the imperfect brain. But perfect systems require perfect maintenance, which requires the executive function the system was designed to replace. The collapse is structural, not motivational.",
+    effect: "Minimum viable routine. Keep the one part that worked. A three-item morning checklist that survives Monday to Friday is more useful than a colour-coded weekly planner that lasts until Wednesday. Design for relapse. Expect the restart. Remove the shame from the restart.",
+  },
+  p51: {
+    body: "The decision-making system is empty. Every choice feels equally weighted. Dinner feels as consequential as a boundary. The paralysis is depletion, not indecision.",
+    brain: "Decision fatigue is a documented cognitive phenomenon that is amplified by ADHD. Each decision uses prefrontal cortex resources. By evening, after hundreds of parenting micro-decisions, the system has nothing left to evaluate options.",
+    effect: "Pre-decide the recurring choices. Monday is pasta. The screen consequence is always the same. Bedtime order does not change. Each default removes one decision from the depleted system. Defaults are not rigidity. They are infrastructure.",
+  },
 };
 
 export const DEFAULT_BRAIN = {

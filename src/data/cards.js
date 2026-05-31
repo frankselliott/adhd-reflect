@@ -149,5 +149,16 @@ export const CARDS = [
   { id: 'k29', type: 'kid', category: 'siblings', title: 'They keep provoking their sibling even though they know it ends badly' },
   { id: 'k30', type: 'kid', category: 'movement', title: 'Their body is always moving and they can\'t make it stop' },
   { id: 'k31', type: 'kid', category: 'sleep', title: 'Bedtime makes them more awake, not less' },
+
+  // ─── 9 NEW PARENT CARDS ───
+  { id: 'p43', type: 'parent', category: 'demand-stacking', title: 'I lost it over something tiny because the whole day had stacked up' },
+  { id: 'p44', type: 'parent', category: 'control', title: 'I became so controlling that I made everything worse' },
+  { id: 'p45', type: 'parent', category: 'repair', title: 'I know I should apologise but I can\'t make myself do it' },
+  { id: 'p46', type: 'parent', category: 'clutter', title: 'The house is out of control and I can see the mess but can\'t start' },
+  { id: 'p47', type: 'parent', category: 'accommodation', title: 'Am I helping my child or letting them get away with it' },
+  { id: 'p48', type: 'parent', category: 'stimulation', title: 'I created chaos when things were finally calm' },
+  { id: 'p49', type: 'parent', category: 'contagion', title: 'I caught my child\'s mood and matched their anger instead of calming them' },
+  { id: 'p50', type: 'parent', category: 'perfectionism', title: 'I built a perfect system and abandoned it after three days' },
+  { id: 'p51', type: 'parent', category: 'decision-fatigue', title: 'I can\'t make basic parenting decisions anymore' },
 ];
 

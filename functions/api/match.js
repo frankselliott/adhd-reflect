@@ -92,6 +92,15 @@ p39: I'm lonely and isolated in this
 p40: My partner and I parent completely differently and it's splitting us
 p41: I'm resentful of how much harder my life is
 p42: I missed an important deadline or form for them
+p43: I lost it over something tiny because the whole day had stacked up
+p44: I became so controlling that I made everything worse
+p45: I know I should apologise but I can't make myself do it
+p46: The house is out of control and I can see the mess but can't start
+p47: Am I helping my child or letting them get away with it
+p48: I created chaos when things were finally calm
+p49: I caught my child's mood and matched their anger instead of calming them
+p50: I built a perfect system and abandoned it after three days
+p51: I can't make basic parenting decisions anymore
 
 KID-ONLY CARDS:
 k01: Losing things constantly
