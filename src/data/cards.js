@@ -132,5 +132,22 @@ export const CARDS = [
   { id: 'k14', type: 'kid', category: 'social', title: 'They have no friends and aren\'t getting invited' },
   { id: 'k15', type: 'kid', category: 'emotional', title: 'They take everything personally and feel rejected constantly' },
   { id: 'k16', type: 'kid', category: 'impulsivity', title: 'They blurt things out and interrupt constantly' },
+
+  // ─── 15 NEW KID CARDS ───
+  { id: 'k17', type: 'kid', category: 'task-initiation', title: 'They know what to do but they can\'t start' },
+  { id: 'k18', type: 'kid', category: 'demand-overwhelm', title: 'Every request feels like an attack to them' },
+  { id: 'k19', type: 'kid', category: 'attention', title: 'They hear me but they don\'t move' },
+  { id: 'k20', type: 'kid', category: 'boredom', title: 'They create chaos when they\'re bored' },
+  { id: 'k21', type: 'kid', category: 'interoception', title: 'They don\'t notice hunger, tiredness, or needing the toilet until it\'s a crisis' },
+  { id: 'k22', type: 'kid', category: 'sequencing', title: 'Multi-step tasks fall apart before they finish' },
+  { id: 'k23', type: 'kid', category: 'shame', title: 'They say they\'re stupid or bad' },
+  { id: 'k24', type: 'kid', category: 'frustration', title: 'They give up the second something gets hard' },
+  { id: 'k25', type: 'kid', category: 'anxiety', title: 'They need constant reassurance and it never seems enough' },
+  { id: 'k26', type: 'kid', category: 'emotional', title: 'They calm down and then feel awful about what they did' },
+  { id: 'k27', type: 'kid', category: 'transitions', title: 'They can\'t stop one thing and start the next' },
+  { id: 'k28', type: 'kid', category: 'sensory', title: 'Busy places are too much and they shut down or explode' },
+  { id: 'k29', type: 'kid', category: 'siblings', title: 'They keep provoking their sibling even though they know it ends badly' },
+  { id: 'k30', type: 'kid', category: 'movement', title: 'Their body is always moving and they can\'t make it stop' },
+  { id: 'k31', type: 'kid', category: 'sleep', title: 'Bedtime makes them more awake, not less' },
 ];
 

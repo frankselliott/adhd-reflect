@@ -114,6 +114,23 @@ export const CARD_ACTIVITIES = {
   m21: ['breathing', 'grounding', 'scale'],
   p22: ['name-pattern', 'breathing', 'perspective'],
   k11: ['perspective', 'grounding', 'breathing'],
+
+  // ─── 15 NEW KID CARDS ───
+  k17: ['perspective', 'breathing', 'grounding'],
+  k18: ['breathing', 'perspective', 'scale'],
+  k19: ['grounding', 'breathing', 'perspective'],
+  k20: ['room-reset', 'grounding', 'perspective'],
+  k21: ['grounding', 'perspective', 'scale'],
+  k22: ['perspective', 'grounding', 'breathing'],
+  k23: ['perspective', 'repair', 'breathing'],
+  k24: ['perspective', 'scale', 'breathing'],
+  k25: ['breathing', 'grounding', 'perspective'],
+  k26: ['repair', 'perspective', 'breathing'],
+  k27: ['breathing', 'grounding', 'scale'],
+  k28: ['breathing', 'grounding', 'room-reset'],
+  k29: ['room-reset', 'breathing', 'perspective'],
+  k30: ['breathing', 'grounding', 'perspective'],
+  k31: ['breathing', 'grounding', 'perspective'],
 };
 
 // Pattern names for the name-pattern activity

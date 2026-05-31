@@ -109,6 +109,21 @@ k13: They can't fall asleep no matter what we try
 k14: They have no friends and aren't getting invited
 k15: They take everything personally and feel rejected constantly
 k16: They blurt things out and interrupt constantly
+k17: They know what to do but they can't start
+k18: Every request feels like an attack to them
+k19: They hear me but they don't move
+k20: They create chaos when they're bored
+k21: They don't notice hunger, tiredness, or needing the toilet until it's a crisis
+k22: Multi-step tasks fall apart before they finish
+k23: They say they're stupid or bad
+k24: They give up the second something gets hard
+k25: They need constant reassurance and it never seems enough
+k26: They calm down and then feel awful about what they did
+k27: They can't stop one thing and start the next
+k28: Busy places are too much and they shut down or explode
+k29: They keep provoking their sibling even though they know it ends badly
+k30: Their body is always moving and they can't make it stop
+k31: Bedtime makes them more awake, not less
 `.trim();
 
 const SYSTEM_PROMPT = `You are a routing assistant for ADHD Reflect, a resource for ADHD parents raising ADHD kids.

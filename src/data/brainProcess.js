@@ -509,6 +509,83 @@ export const BRAIN_PROCESS = {
     brain: "Verbal impulsivity is one of the most socially costly ADHD symptoms. The thought reaches the speech centre before the inhibition system can catch it. They are not being rude. The internal brake between thinking and saying is too slow.",
     effect: "External brakes work better than internal willpower. A visual cue like a raised hand or a token they hold until it is their turn gives them something physical to anchor the pause. Practice in low-stakes settings builds the skill for high-stakes ones.",
   },
+
+  // ─── 15 NEW KID CARDS ───
+  k17: {
+    body: "They are standing in front of the task and their body is not moving. They may look frozen, distracted, or defiant. They are none of these. Their motor system is waiting for a dopamine signal that has not arrived.",
+    brain: "Task initiation requires planning, attention shift, working memory, motivation, and motor activation all firing simultaneously. This is the most executive-function-demanding moment in any task. ADHD impairs every one of those components.",
+    effect: "The gap between knowing and doing is neurological, not motivational. External scaffolding, doing the first step together, naming the first physical action, bypasses the initiation deficit by providing the activation signal the brain cannot generate internally.",
+  },
+  k18: {
+    body: "Their body went into defensive posture before you finished the sentence. Arms crossed, voice raised, or turned away. The threat response fired at the demand itself, not the content.",
+    brain: "Demand overwhelm occurs when the child\'s nervous system reads requests as threats. This can happen because accumulated demands have exceeded capacity, because the child expects failure, or because the emotional cost of compliance feels higher than the emotional cost of refusal.",
+    effect: "Smaller demands, genuine choices, and declarative language reduce the threat signal. \'The shoes go by the door\' is a statement about reality. \'Put your shoes away\' is a demand. Same outcome, different neural processing.",
+  },
+  k19: {
+    body: "They are physically present and auditorily receiving. Their attention is locked onto the current focus and their brain cannot release it to process the new input. They look like they are ignoring. They are stuck.",
+    brain: "Attention switching in ADHD requires the current focus to release, the new input to be processed, and the motor system to redirect. Each step uses executive function. When the current activity is preferred or stimulating, the release step can fail entirely.",
+    effect: "Physical proximity and a direct cue break the lock. Getting close, saying their name, and waiting for eye contact provides the external signal that their internal switching mechanism cannot generate. Calling from another room almost never works.",
+  },
+  k20: {
+    body: "The room is getting louder, more physical, more chaotic. They are generating input through movement, noise, conflict, or risk-taking. Their energy looks like misbehaviour. It is stimulation-seeking.",
+    brain: "The ADHD brain requires more stimulation to maintain baseline arousal. When the environment is under-stimulating, the nervous system generates its own input through the most available channels. Boredom is not a preference. It is a neurological state that feels physically uncomfortable.",
+    effect: "Channel the stimulation need before it finds its own outlet. Physical tasks, movement challenges, novel activities, or structured play provide the input the brain is seeking through a less destructive channel.",
+  },
+  k21: {
+    body: "They went from fine to crisis in what seemed like no time. The hunger, the toilet urgency, the exhaustion, it arrived all at once because the early signals were not reaching awareness.",
+    brain: "Interoception is the ability to perceive internal body states. In ADHD, these signals can be delayed, muted, or misread. Hunger feels like irritability. Tiredness feels like emotional distress. The toilet need arrives at urgency, not at gentle awareness. They genuinely did not notice earlier.",
+    effect: "External anchors replace unreliable internal signals. Regular snack times, water reminders, toilet stops at transitions. The goal is preventing the crisis by scheduling the check-in that their body does not provide.",
+  },
+  k22: {
+    body: "They started the task and stalled partway through. The room is half-cleaned, the bag half-packed, the sequence abandoned. They look like they gave up. Their working memory dropped the next step.",
+    brain: "Multi-step tasks require holding the plan in working memory while executing each step in sequence. ADHD working memory is shorter and smaller. By step three, the plan has often dropped out. They are not lazy. They lost the map.",
+    effect: "Visual checklists at the point of action replace the working memory demand. A list on the wall shows what \'done\' looks like. Do the first step together. The scaffolding is the system, not a crutch.",
+  },
+  k23: {
+    body: "The words came out and they meant them. The belief that they are stupid, bad, or broken has been built from thousands of interactions where they received correction, disappointment, or comparison.",
+    brain: "By age 12, a child with ADHD has received approximately 20,000 more corrective or negative messages than their neurotypical peers. Each correction that targets character rather than behaviour adds to a cumulative self-concept of defectiveness. The belief is not dramatic. It is data-driven, from their perspective.",
+    effect: "Separate behaviour from identity consistently. \'That was a hard moment\' not \'You always do this.\' Name specific strengths regularly, not general praise. \'You were really patient with your sister just now\' builds a counter-narrative one data point at a time.",
+  },
+  k24: {
+    body: "The task got hard and they stopped. The pencil went down, the body turned away, the words \'I can\'t\' arrived before the attempt. The quit was faster than the thought.",
+    brain: "Low frustration tolerance in ADHD means the emotional cost of effort registers before the cognitive system can evaluate whether the task is actually impossible. Past failures make this worse. Each quit reinforces the pattern. Each forced attempt under shame makes it worse too.",
+    effect: "Lower the bar to a height they can clear, then raise it gradually. \'Just do the first one\' builds more competence than \'Try harder.\' Praise the attempt, not the result. The willingness to start is the skill you are building.",
+  },
+  k25: {
+    body: "They asked the same question again. And again. The reassurance did not stick because the feeling underneath it is bigger than the answer you gave.",
+    brain: "Anxiety frequently co-occurs with ADHD. The uncertainty of ADHD executive function failures creates a generalised expectation of things going wrong. Reassurance addresses the surface question but not the underlying pattern of anticipated failure.",
+    effect: "Reduce uncertainty where possible. Visual schedules, written plans, predictable routines. Address the feeling under the question: \'I think you are worried about more than just tomorrow. What is the big worry?\' This reaches the root that reassurance cannot.",
+  },
+  k26: {
+    body: "The meltdown ended and now they are crying differently. The first tears were rage or frustration. These are shame. They can see what they did and the awareness is devastating.",
+    brain: "ADHD emotional responses arrive at full intensity before the reflective brain can moderate them. The action happens, the feeling drives it, and then the awareness of the impact arrives afterwards. The sequence is: feel, act, think. The shame is the thinking catching up with the acting.",
+    effect: "Do not add to the shame with a lecture about what they did. They know. Say: \'That was hard. You had a big feeling and it came out big. We can fix this.\' Then show them the repair. The repair teaches them that mistakes are survivable and relationships are recoverable.",
+  },
+  k27: {
+    body: "The current activity ended and the next one has not started. They are stuck in the gap between, either melting down about the loss or frozen about the next step.",
+    brain: "Transitions require four executive function steps in sequence: disengage, shift attention, plan next action, initiate. Each step uses the prefrontal cortex. In ADHD, any step can fail, and the more depleted the child, the more steps fail.",
+    effect: "Transition bridges reduce the executive demand. A countdown gives time to disengage. A named next activity gives something to shift toward. A physical cue gives the initiation signal. The bridge carries them across the gap their executive function cannot.",
+  },
+  k28: {
+    body: "The environment is producing more sensory input than their nervous system can filter. The noise, the lights, the movement of people, the smells. Everything is arriving at full volume with no dimmer.",
+    brain: "ADHD sensory gating is less efficient. Inputs that neurotypical children can background-process arrive at conscious awareness in the ADHD brain. A busy shopping centre produces hundreds of sensory inputs per minute. The child cannot choose which ones to ignore.",
+    effect: "Reduce the input or leave the environment. Headphones, sunglasses, a quiet corner, or departure. Forcing them to tolerate it does not build resilience. It builds aversion and makes the next visit harder.",
+  },
+  k29: {
+    body: "They poked, grabbed, or provoked their sibling again. They know it will end in a fight. They did it anyway because the impulse was faster than the knowledge.",
+    brain: "Sibling provocation in ADHD children is usually stimulation-seeking, not cruelty. The sibling provides unpredictable reactions, proprioceptive input, and emotional intensity, all of which are neurologically stimulating. The impulse to provoke fires before the social consequence can be weighed.",
+    effect: "Redirect the stimulation need to a different source. Physical play, a sensory tool, separate spaces. Intervene early, before the fight, not after. The need is valid. The target needs to change.",
+  },
+  k30: {
+    body: "They are bouncing, tapping, spinning, climbing. Their body is in constant motion. Asking them to stop produces a brief pause followed by more movement. They are not choosing to be disruptive.",
+    brain: "The ADHD motor system is under-stimulated at baseline. Movement generates proprioceptive and vestibular input that increases arousal to a functional level. Sitting still deprives the brain of the input it needs to think. They are actually less focused when still.",
+    effect: "Accommodate the movement rather than suppressing it. Wobble cushions, standing desks, fidget tools, movement breaks. They learn better, regulate better, and feel better when movement is permitted. Stillness is the demand, not the goal.",
+  },
+  k31: {
+    body: "Lights are off. Room is quiet. They are wide awake with racing thoughts. Their body is exhausted but their brain is running a highlights reel of the day, worries about tomorrow, and random ideas at full speed.",
+    brain: "ADHD delayed sleep phase means melatonin releases later than neurotypical. The default mode network, which should quiet for sleep, activates in the absence of external stimulation. The brain goes busy, not quiet. This is biological, not behavioural.",
+    effect: "Give the brain one thing to follow. An audiobook, a guided relaxation, white noise. Reduce the demand from \'sleep\' to \'rest and listen.\' Consistent wake time matters more than bedtime. Talk to the prescriber about melatonin timing and whether medication is contributing.",
+  },
 };
 
 export const DEFAULT_BRAIN = {

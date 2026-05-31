@@ -329,14 +329,61 @@ export const CARD_RIGHT_NOW = {
   },
   // ─── Previously missing cards ───
   "m21": {
-    parentNow: `The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.`,
-    kidNow: `The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.`,
+    parentNow: \`The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.\`,
+    kidNow: \`The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.\`,
   },
   "p22": {
-    content: `You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.`,
+    content: \`You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.\`,
   },
   "k11": {
-    content: `Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.`,
+    content: \`Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.\`,
+  },
+
+  // ─── 15 NEW KID CARDS ───
+  "k17": {
+    content: `They are not choosing to stand there. The gap between knowing and doing is where ADHD lives. Task initiation requires a dopamine signal their brain cannot generate on demand. Do not repeat the instruction louder. Walk to them. Name the first tiny action. 'Pick up the sock.' Not the whole task. The first physical movement. Start it with them if needed. Your presence is the ignition key their brain is missing.`,
+  },
+  "k18": {
+    content: `The request itself triggered their threat system. Before they heard what you asked, their body registered 'a demand is coming' and went into defence. Lower the demand size. 'Can you help me with one thing?' is smaller than 'Tidy your room.' Give two acceptable choices instead of one instruction. Declarative language works better: 'The shoes go by the door' instead of 'Put your shoes away.'`,
+  },
+  "k19": {
+    content: `They genuinely heard you. The sound reached their ears. But their attention is locked onto whatever they are currently doing and their brain cannot switch without an external bridge. Do not call from another room. Walk to them. Get close. Say their name. Wait for eye contact. Then give one instruction. Physical proximity is the bridge between hearing and doing.`,
+  },
+  "k20": {
+    content: `The chaos is self-made stimulation. Their brain is underfed and it is generating its own input through noise, movement, conflict, or risk. This is not bad behaviour. It is a nervous system meeting a need through the only channel available. Give them a movement job, a challenge, or a physical task. Meet the stimulation need through a better channel before the chaos channel takes over.`,
+  },
+  "k21": {
+    content: `They genuinely did not feel it coming. ADHD interoception means body signals arrive late or at crisis intensity. They were not ignoring the need to eat, drink, or use the toilet. The signal did not reach conscious awareness until it was urgent. Build regular check-in anchors: snack times, water prompts, toilet stops at transitions. Do not wait for them to notice. Their body does not reliably tell them.`,
+  },
+  "k22": {
+    content: `The task looks simple from outside. From inside their brain, it is an invisible obstacle course of decisions, sequences, and memory demands. 'Clean your room' requires deciding what to pick up first, where it goes, what order, what counts as done. Each step requires executive function they may not have available. Break it down visibly. Do the first step together. Show what done looks like.`,
+  },
+  "k23": {
+    content: `The words are the accumulation of thousands of corrective messages landing on a brain that processes criticism at pain intensity. They are not being dramatic. They are telling you what they believe about themselves. Do not dismiss it. Do not over-reassure. Say: 'I hear you saying that. I do not believe that is true. Here is what I see.' Then name one specific thing they did well today. Specific, not general.`,
+  },
+  "k24": {
+    content: `The difficulty triggered an escape response before problem-solving could start. ADHD makes effortful tasks neurologically expensive. Mistakes trigger shame. The quit is not laziness. It is their nervous system choosing escape from anticipated failure. Lower the bar. 'Just do the first line' is achievable. 'Just try harder' is not. Praise the attempt, not the result. Build tiny competence experiences.`,
+  },
+  "k25": {
+    content: `The reassurance is not landing because the anxiety underneath it is not being resolved by the answer. They ask again because the feeling persists after the words have been heard. Reduce uncertainty where you can. Use visual schedules. Write down what is happening next. And gently: 'I have answered that one. I think the worry is bigger than the question. What are you worried about underneath?'`,
+  },
+  "k26": {
+    content: `The emotional hangover after a meltdown is ADHD-specific. They felt the full intensity of the emotion, then acted on it before the brakes could fire, and now the awareness of what they did is arriving with its own emotional load. They are processing shame on top of the original distress. Do not add to it. Say: 'You had a hard time. That happens. We can fix this.' Then show them the repair, not the lecture.`,
+  },
+  "k27": {
+    content: `Every transition requires stopping the current dopamine source, shifting attention, planning the next action, and initiating it. That is four executive function steps in sequence. Each one uses the prefrontal cortex, which is the exact region ADHD impairs. Give countdowns. Show the next step. Use a transition bridge: 'When the timer goes, we move to snack.' Give them something to move toward, not just something ending.`,
+  },
+  "k28": {
+    content: `The shopping centre, the party, the assembly. Too many inputs, too many people, too many sounds, all arriving at a nervous system that cannot filter. The shutdown or explosion is sensory overload, not defiance. If you can, leave. If you cannot, find the quietest corner. Reduce talking. Let them use headphones if they have them. The environment is the problem, not the child.`,
+  },
+  "k29": {
+    content: `The provocation is stimulation-seeking. Their sibling provides unpredictable reactions, which are neurologically stimulating. They are not being cruel. Their body is generating input through the nearest available source. Redirect before it escalates. Give them something else to do with their hands. Separate early, not late. The need is real. The target needs to change.`,
+  },
+  "k30": {
+    content: `The fidgeting, the running, the climbing, the bouncing. Their body is generating the stimulation their brain needs to maintain baseline arousal. Sitting still costs them cognitive energy that they need for thinking. Movement is regulation, not misbehaviour. Give them a wobble cushion, a fidget, permission to stand. They are more focused when moving than when forced to be still.`,
+  },
+  "k31": {
+    content: `Their brain does not wind down when the world goes quiet. It winds up. The default mode network activates and generates racing thoughts, worries, ideas, replays. Lying in the dark is not restful. It is activating. An audiobook gives the brain one thing to follow. Dim lights earlier. Consistent wake time. Talk to the prescriber if medication timing is contributing. The brain will not 'just switch off' because you need it to.`,
   },
 };
 
