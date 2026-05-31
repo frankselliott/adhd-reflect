@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import { CARDS } from '../data/cards.js';
 import { TYPE_TO_GUIDES } from '../data/mappings.js';
+import { PATTERN_ICONS, PATTERN_COLORS } from './PatternIcons.jsx';
 
 /* ═══════════════════════════════════════════
    ADHD Reflect — Parenting Pattern Quiz
@@ -263,7 +264,55 @@ function IntroScreen({ onStart }) {
 }
 
 // ─── Question Screen ───
-function QuestionScreen({ question, index, total, answer, onAnswer, onNext, onBack }) {
+function PatternBars({ answers }) {
+  const patterns = {
+    reactor:   { label: 'reactor',   qs: [1,2,3], max: 12 },
+    juggler:   { label: 'juggler',   qs: [4,5], max: 8 },
+    looper:    { label: 'looper',    qs: [6,7], max: 8 },
+    spiraller: { label: 'spiraller', qs: [8,9], max: 8 },
+    escaper:   { label: 'escaper',   qs: [10,11], max: 8 },
+  };
+  
+  const scores = Object.entries(patterns).map(([key, p]) => {
+    const raw = p.qs.reduce((sum, qId) => sum + (answers[qId] || 0), 0);
+    const answeredCount = p.qs.filter(qId => answers[qId] !== undefined).length;
+    return { key, label: p.label, pct: answeredCount > 0 ? Math.round((raw / p.max) * 100) : 0, color: PATTERN_COLORS[key] };
+  });
+
+  const anyAnswered = scores.some(s => s.pct > 0);
+  if (!anyAnswered) return null;
+
+  return (
+    <div style={{ marginBottom: 24 }}>
+      <div style={{
+        fontFamily: 'var(--mono)', fontSize: 9, letterSpacing: '0.14em',
+        textTransform: 'uppercase', color: '#A09589', marginBottom: 10,
+      }}>your pattern so far</div>
+      <div style={{ display: 'flex', gap: 6 }}>
+        {scores.map(s => (
+          <div key={s.key} style={{ flex: 1 }}>
+            <div style={{
+              height: 4, borderRadius: 2, background: 'rgba(25,23,20,0.06)',
+              overflow: 'hidden', marginBottom: 4,
+            }}>
+              <div style={{
+                height: '100%', borderRadius: 2, background: s.color,
+                width: s.pct + '%', transition: 'width 0.4s ease',
+                opacity: 0.7,
+              }} />
+            </div>
+            <div style={{
+              fontFamily: 'var(--mono)', fontSize: 8, letterSpacing: '0.08em',
+              color: s.pct > 30 ? s.color : '#A09589', textAlign: 'center',
+            }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QuestionScreen({ question, index, total, answer, onAnswer, onNext, onBack, answers }) {
   return (
     <div style={styles.container}>
       <div style={styles.questionWrap}>
@@ -271,6 +320,7 @@ function QuestionScreen({ question, index, total, answer, onAnswer, onNext, onBa
         <div style={styles.progressBar}>
           <div style={{ ...styles.progressFill, width: `${((index + 1) / total) * 100}%` }} />
         </div>
+        <PatternBars answers={answers} />
         <p style={styles.questionText}>{question.text}</p>
         <div style={styles.scaleWrap}>
           {SCALE.map(s => (
@@ -316,7 +366,13 @@ function ResultScreen({ results }) {
     <div style={styles.container} ref={topRef}>
       <div style={styles.resultWrap}>
         <p style={styles.resultLabel}>Your pattern</p>
-        <h1 style={styles.resultName}>{patternName}</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 8 }}>
+          {(() => {
+            const Icon = PATTERN_ICONS[primary];
+            return Icon ? <Icon size={56} color={PATTERN_COLORS[primary]} /> : null;
+          })()}
+          <h1 style={{...styles.resultName, marginBottom: 0}}>{patternName}</h1>
+        </div>
         <p style={styles.resultValidating}>{r.validating}</p>
 
         {/* Secondary + tie + partner pressure */}
@@ -369,14 +425,45 @@ function ResultScreen({ results }) {
           ))}
         </ul>
 
-        {/* Email capture */}
+        {/* Email signup for 4-week practice sequence */}
         <div style={styles.emailBox}>
-          <h3 style={styles.emailTitle}>Get weekly practices matched to your pattern.</h3>
-          <p style={styles.emailBody}>Every week, one small thing to try — matched to the way your ADHD actually shows up at home. Not generic parenting advice. Specific to your pattern, specific to how the week typically goes.</p>
-          {/* Replace with actual email provider */}
-          <input style={styles.emailInput} type="email" placeholder="your@email.com" disabled />
-          <button style={{ ...styles.emailBtn, opacity: 0.5, cursor: 'default' }} disabled>Send me my weekly practice</button>
-          <p style={styles.emailNote}>Free. One email a week. Unsubscribe anytime.</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+            {(() => {
+              const Icon = PATTERN_ICONS[primary];
+              return Icon ? <Icon size={32} color={PATTERN_COLORS[primary]} /> : null;
+            })()}
+            <h3 style={{...styles.emailTitle, marginBottom: 0}}>Get your {patternName} practice plan</h3>
+          </div>
+          <p style={styles.emailBody}>Four weeks of small, specific practices matched to the way your ADHD actually shows up at home. One email a week. Each one takes under five minutes. Built for {patternName}s, not generic parents.</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: PATTERN_COLORS[primary] }}>week 1</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: 14, color: '#6B6358' }}>Noticing the pattern</span>
+            </div>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: PATTERN_COLORS[primary] }}>week 2</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: 14, color: '#6B6358' }}>The first interrupt</span>
+            </div>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: PATTERN_COLORS[primary] }}>week 3</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: 14, color: '#6B6358' }}>The repair practice</span>
+            </div>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: PATTERN_COLORS[primary] }}>week 4</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: 14, color: '#6B6358' }}>Making it stick</span>
+            </div>
+          </div>
+          {/* Replace with ConvertKit or email provider embed */}
+          <input style={styles.emailInput} type="email" placeholder="your@email.com" id="quiz-email" />
+          <button style={styles.emailBtn} onClick={() => {
+            const email = document.getElementById('quiz-email')?.value;
+            if (email) {
+              // Store for when email provider is connected
+              try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
+              alert('Thanks! We will connect the email system soon. Your pattern has been saved.');
+            }
+          }}>Send me my practice plan</button>
+          <p style={styles.emailNote}>Free. Four emails over four weeks. Then one per week if you want it. Unsubscribe anytime.</p>
         </div>
 
         {/* Disclaimer */}
@@ -407,6 +494,16 @@ export default function Quiz() {
       const r = calculateResults(answers);
       setResults(r);
       setScreen('result');
+      // Store for personalized guide suggestions
+      try {
+        localStorage.setItem('adhd-reflect-quiz-result', JSON.stringify({
+          primary: r.primary,
+          secondary: r.secondary,
+          partnerPressure: r.partnerPressure,
+          scores: r.scores,
+          timestamp: Date.now(),
+        }));
+      } catch(e) {}
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
@@ -435,6 +532,7 @@ export default function Quiz() {
       index={currentQ}
       total={QUESTIONS.length}
       answer={answers[q.id]}
+      answers={answers}
       onAnswer={handleAnswer}
       onNext={handleNext}
       onBack={handleBack}
