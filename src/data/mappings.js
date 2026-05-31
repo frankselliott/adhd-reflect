@@ -61,67 +61,12 @@ export const CARD_TO_GUIDES = {
   k10: ['k10', 'k09', 'k07', 'm10'],  // Lying → wrong thing, failure, instructions
 };
 
-// Quiz type → recommended guide IDs (ordered by relevance)
+// Quiz type → topic guide IDs (ordered by relevance)
 export const TYPE_TO_GUIDES = {
-  reactor: [
-    'm07', // When their meltdown triggers yours
-    'm08', // When the escalation won't stop
-    'm09', // When they lose it over something tiny
-    'm01', // Morning battle
-    'm02', // Homework explosion
-    'p01', // Shame spiral
-    'p09', // Day's frustration on your kid
-    'm06', // Public meltdown
-    'p03', // Overcorrecting after
-    'm03', // After-school collision
-  ],
-  juggler: [
-    'p14', // Forgetting something that mattered
-    'p15', // Losing the paperwork
-    'p16', // Distracted before finishing
-    'p17', // Cancelling something promised
-    'm18', // Keep losing things
-    'p05', // Caving on boundary
-    'p13', // Letting something go
-    'k01', // Losing things (kid)
-    'k02', // Forgetting things (kid)
-    'm01', // Morning battle
-  ],
-  looper: [
-    'm10', // Won't follow instructions
-    'm16', // Lectured instead of stopping
-    'm08', // Escalation won't stop
-    'p08', // Dragging old into new
-    'm17', // Too hard for something you do
-    'm02', // Homework explosion
-    'p04', // Contradicting partner
-    'm11', // Hyperfocused won't stop
-    'k10', // Lying
-    'm19', // Can't handle losing
-  ],
-  spiraller: [
-    'p01', // Shame spiral
-    'p02', // Repeating parents' behaviour
-    'p03', // Overcorrecting with affection
-    'm15', // Said the damaging thing
-    'p19', // Oversharing with child
-    'p09', // Day's frustration on kid
-    'm17', // Too hard for something you do
-    'p20', // Kid's ADHD as cover
-    'm07', // Meltdown triggers yours
-    'p11', // Leaving when should have stayed
-  ],
-  escaper: [
-    'p10', // Shutting down and going cold
-    'p11', // Leaving when should have stayed
-    'p12', // Pretending didn't see
-    'm20', // Phone checked out
-    'p13', // Letting something go
-    'p18', // Medication timing
-    'p10', // Shutdown
-    'm03', // After-school collision
-    'p01', // Shame spiral
-    'p17', // Cancelling promised
-  ],
+  reactor: ['g01', 'g04', 'g08', 'g09', 'g07', 'g11', 'g20'],
+  juggler: ['g02', 'g06', 'g09', 'g07', 'g19', 'g18'],
+  looper: ['g20', 'g04', 'g05', 'g12', 'g09'],
+  spiraller: ['g03', 'g05', 'g11', 'g14', 'g15', 'g16', 'g12', 'g13'],
+  escaper: ['g01', 'g08', 'g10', 'g15', 'g11', 'g17'],
 };
 

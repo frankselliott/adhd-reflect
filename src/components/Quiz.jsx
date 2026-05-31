@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import { CARDS } from '../data/cards.js';
 import { TYPE_TO_GUIDES } from '../data/mappings.js';
+import { TOPIC_GUIDES } from '../data/topicGuides.js';
 import { PATTERN_ICONS, PATTERN_COLORS } from './PatternIcons.jsx';
 
 /* ═══════════════════════════════════════════
@@ -417,13 +418,34 @@ function ResultScreen({ results }) {
         <p style={styles.prose}>{r.practice}</p>
         <div style={styles.scriptBox}>{r.script}</div>
 
-        {/* Start with these */}
-        <h2 style={styles.sectionTitle}>Start with these</h2>
-        <ul style={styles.cardList}>
-          {r.cards.map((card, i) => (
-            <li key={i} style={styles.cardItem}>{card}</li>
-          ))}
-        </ul>
+        {/* Guides for your pattern */}
+        <h2 style={styles.sectionTitle}>Guides for your pattern</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
+          {(() => {
+            const guideIds = TYPE_TO_GUIDES[primary] || [];
+            const guidesMap = Object.fromEntries((TOPIC_GUIDES || []).map(g => [g.id, g]));
+            return guideIds.slice(0, 6).map(id => {
+              const g = guidesMap[id];
+              if (!g) return null;
+              return (
+                <a key={id} href={'/guides/' + id} style={{
+                  display: 'block', padding: '14px 18px', borderRadius: 12,
+                  background: 'rgba(75,107,78,0.05)',
+                  border: '1px solid rgba(75,107,78,0.1)',
+                  textDecoration: 'none', transition: 'background 0.15s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(75,107,78,0.1)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'rgba(75,107,78,0.05)'}
+                >
+                  <span style={{
+                    fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 440',
+                    fontSize: 16, lineHeight: 1.4, color: '#191714',
+                  }}>{g.title}</span>
+                </a>
+              );
+            });
+          })()}
+        </div>
 
         {/* Email signup for 4-week practice sequence */}
         <div style={styles.emailBox}>

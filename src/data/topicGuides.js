@@ -7,6 +7,7 @@ export const TOPIC_GUIDES = [
     title: `Your nervous system under pressure`,
     topic: "nervous-system",
     patternTypes: ["reactor", "escaper"],
+    perspectives: ["me"],
     recognize: `You went from fine to furious in what felt like one second. Or you felt the heat building but could not stop the reaction. Or your body did something, yelled, snapped, threw something, before your brain had decided to do it.`,
     brain: `Your ADHD brain has a shorter gap between trigger and reaction than a neurotypical brain. This is not a metaphor. The prefrontal cortex, the part of the brain responsible for impulse control, emotional regulation, and pause-before-you-act, is the exact region most affected by ADHD. It develops later, works less consistently, and goes offline faster under stress.
 
@@ -39,6 +40,7 @@ The most reliable pattern interrupt is environmental, not cognitive. You cannot 
     title: `Working memory and the invisible load`,
     topic: "executive-function",
     patternTypes: ["juggler"],
+    perspectives: ["me"],
     recognize: `You forgot the form. You missed the appointment. You promised something and it fell out of your head before you could act on it. The systems you built last month have already collapsed. You are always rebuilding, never maintaining.`,
     brain: `ADHD working memory holds fewer items for a shorter duration than neurotypical working memory. This is one of the most consistently documented ADHD impairments across hundreds of studies. It is not about intelligence, effort, or caring. It is a capacity limitation.
 
@@ -68,6 +70,7 @@ The solution is never 'try harder to remember.' The solution is always 'build an
     title: `The shame spiral after you lose it`,
     topic: "emotional-regulation",
     patternTypes: ["spiraller"],
+    perspectives: ["me"],
     recognize: `You lost it. And then you spent the next two hours replaying exactly what you said and how their face looked. The shame is consuming the energy you need for the repair. You cannot stop the loop.`,
     brain: `ADHD is linked to heightened rejection sensitivity and a longer emotional hangover after distressing events. The emotions take longer to return to baseline than they do for neurotypical adults. The shame spiral is not self-indulgence. It is your nervous system staying activated long after the triggering event has passed.
 
@@ -97,6 +100,7 @@ The repair does not need to be large. Two sentences, delivered when both of you 
     title: `Two nervous systems in one room`,
     topic: "dual-adhd",
     patternTypes: ["reactor", "looper"],
+    perspectives: ["me", "kid"],
     recognize: `Your child melted down and you joined them. Or you started calm and within sixty seconds you were both yelling. Or you watched yourself escalate knowing you should stop and could not.`,
     brain: `Limbic resonance is the neurological mechanism by which one person's emotional state entrains the emotional state of another person nearby. When your child is dysregulated, your amygdala picks up their distress signals, tone of voice, facial expression, body tension, and begins matching them.
 
@@ -126,6 +130,7 @@ Leave the room. Lower the lights. Turn off the sound. Reduce the number of peopl
     title: `Rejection sensitivity in parent and child`,
     topic: "emotional-regulation",
     patternTypes: ["spiraller", "looper"],
+    perspectives: ["me", "kid"],
     recognize: `A mild comment devastated your child. Or a relative's remark about your parenting cut deeper than it should have. Or your partner said something reasonable and your body reacted as though they had attacked you.`,
     brain: `Rejection Sensitive Dysphoria is increasingly recognised as a core ADHD feature. The neural circuits that process social rejection overlap with physical pain circuits. A mild correction, an unanswered text, a perceived slight, these activate the same brain regions as being physically hurt.
 
@@ -159,6 +164,7 @@ The way through: deliver corrections in the lowest emotional temperature possibl
     title: `Time blindness and lateness`,
     topic: "executive-function",
     patternTypes: ["juggler"],
+    perspectives: ["me", "kid"],
     recognize: `You are late again. They are late again. The morning started fine and somehow you are still ten minutes behind. Time passed and neither of you felt it.`,
     brain: `Time blindness is one of the most consistent ADHD impairments. The internal clock that neurotypical brains use to estimate duration, pace activity, and feel urgency does not work reliably in ADHD brains. Five minutes feels like two. Thirty minutes feels like ten. The passage of time is not experienced internally, which means deadlines, transitions, and urgency all feel abstract until the crisis point.
 
@@ -180,6 +186,7 @@ This is not laziness or disrespect. It is a genuine perceptual deficit. Telling 
     title: `Medication, rebound, and the daily cycle`,
     topic: "medication",
     patternTypes: ["reactor", "juggler"],
+    perspectives: ["me", "kid"],
     recognize: `The medication wears off and everything changes. The regulated child from school is gone and in their place is someone weepy, raging, or feral with hunger. Or your own medication wore off and the patient parent from 3pm is nowhere to be found at 5pm.`,
     brain: `Stimulant medication works by increasing dopamine and norepinephrine availability in the prefrontal cortex. When the dose wears off, these neurotransmitters drop, sometimes below the pre-medication baseline temporarily. This rebound dip is pharmacological, not behavioural.
 
@@ -203,6 +210,7 @@ Appetite suppression is the most common stimulant side effect. The hunger signal
     title: `Sensory overload at home`,
     topic: "sensory",
     patternTypes: ["reactor", "escaper"],
+    perspectives: ["me", "kid"],
     recognize: `The noise is too much. The touching is too much. The mess is too much. Your child needs stimulation and you need silence and you share the same four walls.`,
     brain: `ADHD sensory processing is different, not defective, but different. Some ADHD brains are hypersensitive to sensory input: sounds are louder, textures are more intense, visual clutter is more distracting. Other ADHD brains are hyposensitive: they seek more input, more movement, more noise, more touch.
 
@@ -224,6 +232,7 @@ In a dual-ADHD household, you may have opposite sensory profiles. The parent who
     title: `Transitions and the dopamine gap`,
     topic: "transitions",
     patternTypes: ["reactor", "juggler"],
+    perspectives: ["me", "kid"],
     recognize: `Leaving the park is a meltdown. Turning off the screen is a war. Changing from one activity to another, even a good one, produces a reaction that seems wildly disproportionate.`,
     brain: `Transitions require executive function: stopping the current activity, mentally shifting to the next, initiating the new behaviour. Every step in that sequence uses the prefrontal cortex, which is the exact region ADHD impairs.
 
@@ -249,6 +258,7 @@ Warnings help because they give the brain time to begin the internal transition.
     title: `Sleep and the racing mind`,
     topic: "sleep",
     patternTypes: ["reactor", "escaper"],
+    perspectives: ["me", "kid"],
     recognize: `It is 10pm and they are wired. Or it is 11pm and you are scrolling, unable to stop even though you are exhausted. The brain will not switch off for either of you.`,
     brain: `ADHD sleep problems affect 25 to 50 percent of people with ADHD. Three separate mechanisms are at work.
 
@@ -276,6 +286,7 @@ The result: a child lying in bed with their eyes open and their brain running, a
     title: `The repair after rupture`,
     topic: "repair",
     patternTypes: ["spiraller", "reactor"],
+    perspectives: ["me", "kid"],
     recognize: `Something happened. You yelled, snapped, said the wrong thing, or checked out when they needed you. Now there is a gap between you and your child that needs closing. The repair feels bigger than it needs to be.`,
     brain: `The repair is the most important parenting skill for ADHD families, because ruptures happen more often. The ADHD parent has a shorter fuse, a more impulsive tongue, and a regulatory system that fails more frequently. This means more repairs are needed, which means getting good at repair is not optional. It is a core skill.
 
@@ -299,6 +310,7 @@ The good news: research consistently shows that children's outcomes are determin
     title: `Your partner does not see what you see`,
     topic: "relationships",
     patternTypes: ["spiraller", "reactor", "looper"],
+    perspectives: ["me", "partner"],
     recognize: `They see the reaction but not the thirty minutes of load that preceded it. They think the child is fine because the child is fine at the moment they are looking. They parent differently and the gap between your approaches is straining the relationship.`,
     brain: `ADHD is invisible. The internal experience of overwhelm, sensory overload, executive function failure, and emotional dysregulation is not visible to someone standing next to you. Your partner sees the output (the snap, the forgotten form, the caved boundary) but not the process that led to it.
 
@@ -323,6 +335,7 @@ The conversation is not 'who is right.' It is 'what does this child need from us
     title: `Your child's social world`,
     topic: "social",
     patternTypes: ["spiraller"],
+    perspectives: ["kid"],
     recognize: `They are eating lunch alone. The party invitations have stopped. They said something that pushed a friend away and they do not understand what they did wrong. Your heart is breaking for something you cannot directly fix.`,
     brain: `ADHD social processing is slower than neurotypical. Your child misses subtle social cues, misreads tone, interrupts, dominates play, or reacts too intensely to small social slights. The social operating system is running on different timing than their peers.
 
@@ -349,6 +362,7 @@ One good friendship matters more than popularity. Structured social activities w
     title: `I think I have ADHD too`,
     topic: "identity",
     patternTypes: ["spiraller", "juggler"],
+    perspectives: ["me"],
     recognize: `You were reading about your child's brain and you saw yourself in every paragraph. The disorganisation, the emotional intensity, the forgotten promises, the feeling of always running but never catching up. It has a name. It has always had a name. Nobody told you.`,
     brain: `Parent-recognised ADHD after child diagnosis is one of the most common adult ADHD discovery pathways. The pattern recognition is strong because you share the neurology. What you are seeing is real.
 
@@ -371,6 +385,7 @@ The realisation arrives in stages. First, recognition: 'that is me.' Then refram
     title: `Burnout and being touched out`,
     topic: "burnout",
     patternTypes: ["escaper", "spiraller"],
+    perspectives: ["me"],
     recognize: `You counted down to school drop-off and then drowned in guilt for the relief. You flinched when they hugged you because your body had nothing left to receive. You stopped accepting invitations because outings are too unpredictable. You are running on less than empty.`,
     brain: `Caregiver burnout in ADHD parents is not generic tiredness. It is the depletion of the specific neurological resources that ADHD already provides less of. Regulatory capacity, executive function, sensory processing bandwidth, emotional resilience, these are all finite and depletable, and ADHD means you start with less.
 
@@ -393,6 +408,7 @@ Being touched out is a real sensory state. After sustained physical contact, aud
     title: `Extended family and judgment`,
     topic: "relationships",
     patternTypes: ["spiraller", "reactor"],
+    perspectives: ["me", "partner"],
     recognize: `A grandparent said your child just needs more discipline. A relative implied you are too soft, too permissive, or that ADHD is not real. The comment cut deep because it hit the part of you that already wonders if they are right.`,
     brain: `ADHD rejection sensitivity means the relative's words activated pain circuits, not just disagreement. The comment was uninformed. The pain is real.
 
@@ -415,6 +431,7 @@ Extended family who do not understand ADHD often default to the parenting paradi
     title: `When to get more help`,
     topic: "support",
     patternTypes: ["reactor", "spiraller", "escaper", "juggler", "looper"],
+    perspectives: ["me", "kid"],
     recognize: `The pattern keeps happening. The cards help in the moment but the moments keep coming. You are wondering if you need more than self-help. You might be right.`,
     brain: `Self-awareness and self-management have limits. If the same pattern plays out weekly despite your best efforts, the issue may be structural: unoptimised medication, unaddressed co-occurring conditions, or a family dynamic that needs professional intervention.
 
@@ -437,6 +454,7 @@ Seeking help is not failure. It is the executive function decision to outsource 
     title: `Your child at school`,
     topic: "school",
     patternTypes: ["spiraller", "juggler"],
+    perspectives: ["kid"],
     recognize: `The school's name on your phone makes your stomach drop. It is another problem, another meeting, another email about behaviour. You dread the contact because it is almost never good news.`,
     brain: `Parents of children with ADHD receive approximately three times more phone calls from school than other parents. They are 29 percent less likely to attend optional school events. The conditioning is Pavlovian: school contact has been paired with negative reports so many times that the association is now automatic.
 
@@ -461,6 +479,7 @@ School refusal is not laziness. It is their nervous system anticipating a day of
     title: `Food, clothing, and the daily sensory battles`,
     topic: "sensory",
     patternTypes: ["reactor", "juggler"],
+    perspectives: ["me", "kid"],
     recognize: `The sock seam. The food touching. The wrong texture. The tag that must be cut. The toothpaste that gags. Every morning and every mealtime is a negotiation with a nervous system that processes sensation differently.`,
     brain: `Sensory processing differences frequently co-occur with ADHD. Inputs that neurotypical brains filter out arrive at full intensity in your child's nervous system. The sock seam is not uncomfortable. It is unbearable. The food texture is not unpleasant. It triggers alarm.
 
@@ -485,6 +504,7 @@ The foods they will eat, the clothes they will wear, the textures they can toler
     title: `The argument loop`,
     topic: "communication",
     patternTypes: ["looper"],
+    perspectives: ["me", "kid"],
     recognize: `You are three explanations deep and they stopped listening two explanations ago. You can see it is not working and you cannot stop. The pull to explain, justify, and make them understand is stronger than the evidence that it is making things worse.`,
     brain: `ADHD brains have a strong justice sensitivity and a need for cognitive closure. When your child challenges a decision, your brain does not just hear a child being difficult. It hears an unresolved problem that requires a response.
 
