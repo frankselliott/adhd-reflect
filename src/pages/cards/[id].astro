@@ -21,9 +21,64 @@ const activities = CARD_ACTIVITIES[card.id] || ['breathing'];
 const patternData = PATTERN_NAMES[card.id] || null;
 const kidBrain = KID_BRAIN[card.id] || null;
 const topicGuides = CARD_TO_TOPIC_GUIDES[card.id] || [];
----
-<Base title={card.title} description={`ADHD Reflect: ${card.title}`}>
 
+const rightNowText = content.parentNow || content.content || '';
+const metaDescription = rightNowText.replace(/\*\*.*?\*\*/g, '').replace(/\n/g, ' ').slice(0, 155).trim() + '...';
+const typeLabel = { moment: 'ADHD parenting moment', parent: 'ADHD parent behaviour', kid: 'ADHD child behaviour' }[card.type];
+---
+<Base title={card.title} description={metaDescription}>
+
+  <!-- SEO: structured data for this card -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": card.title,
+    "description": metaDescription,
+    "author": { "@type": "Organization", "name": "ADHD Reflect" },
+    "publisher": { "@type": "Organization", "name": "ADHD Reflect", "url": "https://adhdreflect.com" },
+    "mainEntityOfPage": `https://adhdreflect.com/cards/${card.id}`,
+    "datePublished": "2026-05-31",
+    "dateModified": "2026-05-31",
+    "about": [
+      { "@type": "Thing", "name": "ADHD" },
+      { "@type": "Thing", "name": "Parenting" },
+      { "@type": "Thing", "name": typeLabel }
+    ],
+  })} />
+
+  <!-- SEO: server-rendered content for crawlers (React renders over this) -->
+  <article id="seo-content" class="seo-article">
+    <h1>{card.title}</h1>
+    <p class="seo-type">{typeLabel}</p>
+    <section>
+      <h2>What to do right now</h2>
+      <p>{rightNowText.replace(/\*\*/g, '').slice(0, 500)}</p>
+    </section>
+    {brain && (
+      <section>
+        <h2>What your brain just did</h2>
+        <h3>Your body</h3>
+        <p>{brain.body}</p>
+        <h3>Your brain</h3>
+        <p>{brain.brain}</p>
+        <h3>What this did</h3>
+        <p>{brain.effect}</p>
+      </section>
+    )}
+    {kidBrain && (
+      <section>
+        <h2>What your child is experiencing</h2>
+        <h3>Their body</h3>
+        <p>{kidBrain.body}</p>
+        <h3>Their brain</h3>
+        <p>{kidBrain.brain}</p>
+        <h3>What they need</h3>
+        <p>{kidBrain.need}</p>
+      </section>
+    )}
+  </article>
+
+  <!-- React app renders over the SEO content -->
   <div id="card-viewer-root"
     data-card-id={card.id}
     data-card-type={card.type}
@@ -40,6 +95,10 @@ const topicGuides = CARD_TO_TOPIC_GUIDES[card.id] || [];
   <script id="tg-data" type="application/json" set:html={JSON.stringify(topicGuides)} />
 
   <script>
+    // Hide SEO content once React loads
+    const seoEl = document.getElementById('seo-content');
+    if (seoEl) seoEl.style.display = 'none';
+
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import CardViewer from '../../components/CardViewer.jsx';
@@ -64,4 +123,16 @@ const topicGuides = CARD_TO_TOPIC_GUIDES[card.id] || [];
   </script>
 
 </Base>
+
+<style>
+  .seo-article {
+    max-width: 640px; margin: 0 auto; padding: 40px 24px;
+    font-family: var(--serif); color: #6B6358; line-height: 1.7;
+  }
+  .seo-article h1 { font-size: 28px; font-weight: 300; color: #191714; margin-bottom: 8px; }
+  .seo-article h2 { font-size: 20px; font-weight: 400; color: #191714; margin-top: 24px; }
+  .seo-article h3 { font-size: 16px; font-weight: 500; color: #4B6B4E; margin-top: 16px; }
+  .seo-article p { margin-bottom: 12px; }
+  .seo-type { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: #4A6FA5; text-transform: uppercase; }
+</style>
 

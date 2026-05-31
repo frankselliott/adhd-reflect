@@ -101,7 +101,7 @@ You do not need a crisis to talk to a professional. Some signs it might be worth
 
 A GP, a psychologist or a counsellor can help you sort out which kind of support fits. They can also help with referral, diagnosis and Medicare or insurance pathways.
 
-In Australia, a good first step is your **GP**, who can prepare a **Mental Health Treatment Plan** that gives you Medicare-subsidised psychology sessions. Pathways in other countries vary. Our country support pages have more details.
+A good first step is your primary care doctor, who can refer you to a therapist or psychiatrist familiar with ADHD. Pathways vary by country.
 
 ---
 
@@ -150,3 +150,4 @@ Search for **"child protection [your country]"** or call the relevant national h
 We have written ADHD Reflect because we know what it feels like to be in those moments. We know how alone they can feel and how easy it is to spiral after one. The cards and guides on the site are meant to take a little of that weight, and to point you back to the next small thing you can do.
 
 They are not a replacement for real support, real rest or real connection. If you need any of those, please make space for them.
+

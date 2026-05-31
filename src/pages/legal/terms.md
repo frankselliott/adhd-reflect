@@ -111,7 +111,7 @@ We may remove content, suspend an account or take other action if these rules ar
 
 If you are worried you may hurt yourself, your child or someone else, **step away from the screen if it is safe to do so** and contact emergency services or a crisis line in your country.
 
-In Australia, you can call **000** for emergencies, **Lifeline on 13 11 14**, or **Kids Helpline on 1800 55 1800**.
+In the US, call **988** (Suicide and Crisis Lifeline) or **911** for emergencies. See our [safety page](/legal/safety) for resources in other countries.
 
 You can find more options on the [Important safety information](/important-safety-information) page.
 
@@ -172,7 +172,7 @@ ADHD parenting is hard. We have written ADHD Reflect to be useful, honest and gr
 
 We provide ADHD Reflect "as is" and "as available". Where the law allows, we exclude all implied warranties.
 
-This does not affect any rights you have under the **Australian Consumer Law** or equivalent consumer protection laws in your country. Those rights still apply.
+This does not affect any rights you have under the **applicable consumer protection law** or equivalent consumer protection laws in your country. Those rights still apply.
 
 ---
 
@@ -187,7 +187,7 @@ To the maximum extent allowed by law, we are not responsible for:
 
 If we are found liable for something, our total liability for the past 12 months is limited to the amount you have paid us in that period, or AUD 100, whichever is higher.
 
-Nothing in these terms excludes liability that cannot be excluded under the Australian Consumer Law or other applicable law, including liability for gross negligence, fraud or death and personal injury caused by our negligence.
+Nothing in these terms excludes liability that cannot be excluded under the applicable consumer protection law or other applicable law, including liability for gross negligence, fraud or death and personal injury caused by our negligence.
 
 ---
 
@@ -209,7 +209,7 @@ If you keep using ADHD Reflect after a change, you accept the new version.
 
 ## Governing law
 
-These terms are governed by the laws of **Queensland, Australia**. Any dispute will be heard in the courts of Queensland. If you live elsewhere, you may also have rights under the consumer laws of your country.
+These terms are governed by the laws of the **United States**. If you live elsewhere, you may also have rights under the consumer laws of your country.
 
 ---
 
@@ -217,4 +217,5 @@ These terms are governed by the laws of **Queensland, Australia**. Any dispute w
 
 **General contact:** hello@adhdreflect.com
 **Privacy:** privacy@adhdreflect.com
-**Postal:** [Postal address, Brisbane QLD, Australia]
+**Postal:** 
+
