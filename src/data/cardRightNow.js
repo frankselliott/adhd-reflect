@@ -329,14 +329,14 @@ export const CARD_RIGHT_NOW = {
   },
   // ─── Previously missing cards ───
   "m21": {
-    parentNow: \`The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.\`,
-    kidNow: \`The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.\`,
+    parentNow: `The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.`,
+    kidNow: `The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.`,
   },
   "p22": {
-    content: \`You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.\`,
+    content: `You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.`,
   },
   "k11": {
-    content: \`Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.\`,
+    content: `Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.`,
   },
 
   // ─── 15 NEW KID CARDS ───
