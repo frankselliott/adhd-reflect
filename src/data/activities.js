@@ -142,6 +142,33 @@ export const CARD_ACTIVITIES = {
   p49: ['breathing', 'name-pattern', 'grounding'],
   p50: ['perspective', 'name-pattern', 'scale'],
   p51: ['breathing', 'perspective', 'grounding'],
+
+  // ─── 25 MORE CARDS ───
+  m47: ['breathing', 'repair', 'perspective'],
+  m48: ['breathing', 'perspective', 'scale'],
+  m49: ['breathing', 'grounding', 'room-reset'],
+  m50: ['breathing', 'perspective', 'scale'],
+  m51: ['breathing', 'grounding', 'repair'],
+  m52: ['breathing', 'scale', 'name-pattern'],
+  m53: ['breathing', 'perspective', 'scale'],
+  m54: ['perspective', 'scale', 'breathing'],
+  m55: ['grounding', 'breathing', 'perspective'],
+  m56: ['breathing', 'perspective', 'scale'],
+  p52: ['perspective', 'breathing', 'grounding'],
+  p53: ['perspective', 'name-pattern', 'room-reset'],
+  p54: ['breathing', 'perspective', 'scale'],
+  p55: ['breathing', 'perspective', 'scale'],
+  p56: ['breathing', 'perspective', 'scale'],
+  p57: ['breathing', 'perspective', 'scale'],
+  p58: ['breathing', 'perspective', 'scale'],
+  k32: ['perspective', 'grounding', 'breathing'],
+  k33: ['perspective', 'scale', 'breathing'],
+  k34: ['breathing', 'grounding', 'perspective'],
+  k35: ['breathing', 'perspective', 'scale'],
+  k36: ['breathing', 'perspective', 'scale'],
+  k37: ['breathing', 'perspective', 'scale'],
+  k38: ['breathing', 'perspective', 'scale'],
+  k39: ['room-reset', 'perspective', 'scale'],
 };
 
 // Pattern names for the name-pattern activity

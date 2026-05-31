@@ -633,6 +633,98 @@ export const BRAIN_PROCESS = {
     brain: "Decision fatigue is a documented cognitive phenomenon that is amplified by ADHD. Each decision uses prefrontal cortex resources. By evening, after hundreds of parenting micro-decisions, the system has nothing left to evaluate options.",
     effect: "Pre-decide the recurring choices. Monday is pasta. The screen consequence is always the same. Bedtime order does not change. Each default removes one decision from the depleted system. Defaults are not rigidity. They are infrastructure.",
   },
+
+  // ─── 25 MORE CARDS ───
+  m47: {
+    body: "The words activated your rejection sensitivity at full force. Your body is processing parental rejection, the specific wound of your child wanting to hurt you.",
+    brain: "They used words as weapons because their verbal impulsivity gave them access to the most devastating thing they could say before their social-emotional brain could filter it. They aimed for maximum impact because their pain was at maximum intensity.",
+    effect: "They meant it in the moment. They will not mean it in twenty minutes. The words are the emotion, not the relationship. Your response to the words matters more than the words themselves.",
+  },
+  m48: {
+    body: "Double load: managing your child\'s dysregulation while processing the social judgment of another parent. Your rejection sensitivity is reading their face as confirmation you are failing.",
+    brain: "ADHD rejection sensitivity means the perceived judgment of the other parent activates pain circuits alongside the parenting stress. You are running two threat responses simultaneously.",
+    effect: "The other parent\'s opinion is not relevant right now. Your child needs you present. The social shame can be processed later. Focus on the child, not the audience.",
+  },
+  m49: {
+    body: "Sensory overload plus social demand plus disrupted routine plus sugar plus anticipation. Every input channel is maxed simultaneously.",
+    brain: "Parties combine every ADHD trigger: sensory overload, unstructured time, social processing, transitions between activities, and emotional intensity. The anticipated joy creates a dopamine spike that makes the crash harder.",
+    effect: "Early departure is not failure. A quiet break mid-party is strategy. Telling the host \'we need to step out for five minutes\' is reasonable. Forcing them to enjoy themselves does not work.",
+  },
+  m50: {
+    body: "The medication refusal triggers anxiety about the day ahead. You know what an unmedicated school day looks like. The urgency is making you push harder, which makes them push back harder.",
+    brain: "Medication refusal in children can signal genuine side effects they cannot articulate, control-seeking in a life where little feels controllable, or simple morning executive function failure making the task of swallowing a pill feel enormous.",
+    effect: "Force does not work and damages the medication relationship long-term. Explore the reason calmly. If it persists, talk to the prescriber about formulation changes, timing adjustments, or whether the refusal is telling you something important.",
+  },
+  m51: {
+    body: "The sound of something breaking activated your alarm system. The visual of the destruction is sitting in the room. Your body is processing shock, anger, and the cost simultaneously.",
+    brain: "Destructive impulses in ADHD are the nervous system seeking a high-intensity discharge for overwhelming emotion. The destruction was not planned. The impulse found the nearest breakable object faster than the consequence assessment could fire.",
+    effect: "Secure safety. Then silence. They know what they did. The shame is already enormous. The property conversation happens tomorrow. Tonight: \'That was a big feeling. We will figure out the rest when we are both calm.\'",
+  },
+  m52: {
+    body: "Their rage at \'no\' activated your own threat response. The intensity of the reaction makes you question whether the boundary was worth it.",
+    brain: "ADHD emotional regulation has no dimmer on incoming disappointment. \'No\' arrives at the same intensity as a genuine loss. Their brain processed the denial of a want as a denial of a need. The rage is proportionate to how the input was experienced, not to the size of what was denied.",
+    effect: "The boundary holds. Caving teaches that sufficient intensity overrides decisions. Staying calm during the explosion teaches that disappointment is survivable. You do not need to explain again. You need to outlast the wave.",
+  },
+  m53: {
+    body: "The anticipatory dread of the school call is a conditioned stress response. Your cortisol spiked before you heard the content.",
+    brain: "Pavlovian conditioning. School contact has been paired with negative reports enough times that the association is automatic. Your ADHD rejection sensitivity amplifies every school concern into a judgment of your parenting.",
+    effect: "Ask for specifics before you react. \'What exactly happened and what do you need from me?\' keeps the conversation concrete. You are not obligated to solve it on the phone.",
+  },
+  m54: {
+    body: "Their distress about the unfairness is genuine and intense. Your frustration at their inability to let it go is building because you can see it is consuming them disproportionately.",
+    brain: "ADHD justice sensitivity activates pain circuits when fairness is violated. The loop persists because the emotional resolution the brain is seeking cannot be achieved through logical argument. They are stuck because the feeling has not been processed, not because they do not understand the situation.",
+    effect: "Validate the feeling before addressing the facts. The emotional processing has to happen before the cognitive processing can begin.",
+  },
+  m55: {
+    body: "The six hours of held-in distress is landing on you at once. Your sensory system is filling up as theirs empties. You are becoming the container for everything they suppressed at school.",
+    brain: "After-school emotional dumping is decompression. They held it together all day using the masking mechanism and now the mask is off. You are the safe person. The dumping is not about the events. It is about discharging the accumulated regulatory cost of the day.",
+    effect: "Fifteen minutes of listening without fixing is more effective than any solution. Their nervous system needs to discharge before their cognitive system can process. After the dump, they may not even need the fix.",
+  },
+  m56: {
+    body: "Fluorescent lights, unfamiliar people, unpredictable waiting, anticipation of discomfort. Every sensory and executive function challenge in one room.",
+    brain: "Waiting rooms combine sensory overload, uncertainty, time without structure, and anticipatory anxiety. The ADHD brain has no mechanism for patient, unstructured waiting in an uncomfortable environment.",
+    effect: "Preparation reduces meltdowns. Bring sensory tools, headphones, a fidget. Ask to wait outside or in the car. Tell the receptionist your child has ADHD and long waits are difficult. Most will accommodate if asked.",
+  },
+  p52: {
+    body: "The meeting felt adversarial. Your expertise as the person who knows this child best was subtly dismissed. The institutional resistance is exhausting.",
+    brain: "Advocating for your child in an institutional setting requires sustained executive function, emotional regulation under pressure, and tolerance of perceived criticism. Every one of these is harder with ADHD. The meeting depletes you of exactly what you need most.",
+    effect: "Document everything in writing. Follow up by email. Request specific accommodations with specific language. The paper trail matters more than the conversation.",
+  },
+  p53: {
+    body: "Two ADHD adults trying to maintain a household is a systems problem that feels like a personal failure. Neither brain can reliably track, plan, or follow through, and neither can compensate for the other\'s gaps.",
+    brain: "In a dual-ADHD household, there is no neurotypical anchor to catch what falls. Working memory failures multiply. Emotional dysregulation synchronises. The chaos is structural, not evidence of a bad relationship.",
+    effect: "Externalise everything. Shared calendar, whiteboard, automated reminders. Accept that the house will not look like a neurotypical house. Pick the three things that matter and build systems for those. Let the rest be imperfect.",
+  },
+  p54: {
+    body: "The primal protective response is running at full intensity. Your own rejection sensitivity is amplifying the pain because you know what it feels like to be excluded.",
+    brain: "Your ADHD history of social rejection may be compounding your response to your child\'s bullying. You are processing their current pain through the lens of your own past wounds. Separate the two before you act.",
+    effect: "Listen first. Ask what they need. Contact the school specifically and calmly. Your regulated advocacy teaches them that problems can be addressed without panic.",
+  },
+  p55: {
+    body: "The shame is visceral. Your child hurt someone and the label \'bully\' is landing on both of you.",
+    brain: "ADHD impulsivity means the behaviour may have been less planned and more reactive than typical bullying. This does not excuse it but it changes the intervention. Impulse-driven cruelty responds to skill-building. Calculated cruelty responds to consequences.",
+    effect: "Get the specific facts. Talk to your child without horror. Address the behaviour, repair with the other family, and identify the skill gap. Were they seeking social status? Discharging frustration? Mimicking behaviour they experienced? The why determines the how.",
+  },
+  p56: {
+    body: "Your body is bracing for the familiar words. \'Does not complete work.\' \'Easily distracted.\' \'Could try harder.\' The report card feels like a judgment of both of you.",
+    brain: "The report card measures the gap between what the system expects and what the ADHD brain provides. It does not measure effort, which is invisible and enormous. Your rejection sensitivity processes the grades as a reflection of your parenting.",
+    effect: "Read it once. Put it away. The useful data is specific: which subjects, which skills, which contexts. Use that to guide support. The grades are information about the environment fit, not about your child\'s worth.",
+  },
+  p57: {
+    body: "The questioning hit the exact spot where your own doubt lives. The part of you that still wonders if everyone is right and you are making excuses.",
+    brain: "Your ADHD rejection sensitivity means the questioning activated pain circuits. The doubt is neurological, not rational. The diagnosis was made by a professional with training, assessment tools, and clinical judgment. A casual observer does not have those.",
+    effect: "You do not need to defend the diagnosis socially. \'We are working with professionals\' is enough. The people who need to understand ADHD are the ones involved in your child\'s care. Everyone else gets the short version.",
+  },
+  p58: {
+    body: "The instinct that something else is going on is sitting alongside the fear of what it might mean. You want to be wrong. You also want to know.",
+    brain: "ADHD frequently co-occurs with anxiety, depression, autism, learning disabilities, and other conditions. Noticing that the ADHD explanation does not cover everything is pattern recognition, not catastrophising. Parents who raise the question early get better outcomes for their children.",
+    effect: "Talk to the prescriber or request a broader assessment. Name the specific behaviours that do not fit the ADHD picture. Trust your observation. You see your child in more contexts than any professional does.",
+  },
+  k32: {
+    body: "The question landed with weight. They are aware of the difference and they are asking you to make sense of it.",
+    brain: "By school age, most ADHD children are aware that something is different about them. The question is not just about information. It is about identity. How you answer shapes how they understand themselves.",
+    effect: "Be honest without being clinical. \'Your brain works differently\' is accurate. Name one hard thing and one strength. Avoid making ADHD sound like a superpower (dismisses the struggle) or a disability (defines by deficit). It is a difference that needs support.",
+  },
 };
 
 export const DEFAULT_BRAIN = {

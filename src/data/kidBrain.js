@@ -401,5 +401,97 @@ export const KID_BRAIN = {
     brain: "Melatonin releases later in ADHD. The default mode network generates thought-streams in the absence of external input. A dark, quiet room is the worst possible environment for an ADHD brain trying to switch off.",
     need: "An audiobook or calm podcast gives the brain one channel to follow instead of generating its own. White noise fills the silence without activating. Consistent wake time anchors the circadian rhythm. Reduce the demand from \'sleep\' to \'listen and rest.\'",
   },
+
+  // ─── 25 MORE CARDS ───
+  m47: {
+    body: "They wanted you to feel what they were feeling. The words were the biggest weapon they had. They may be crying behind the door right now, not from the argument but from the horror of what they said.",
+    brain: "Verbal impulsivity under emotional flooding means the most devastating thought became the spoken word before any filter could intervene. They aimed for maximum impact because their pain was at maximum.",
+    need: "Ten minutes of space. Then a quiet knock. \'I am here when you are ready.\' Do not demand an apology in the heat. The repair comes later when both nervous systems are calm.",
+  },
+  m48: {
+    body: "They are dysregulated AND aware of being watched by an unfamiliar adult. The social judgment adds shame to the overload. They cannot perform composure while their nervous system is in alarm.",
+    brain: "Social awareness of being observed during a meltdown adds a layer of rejection sensitivity to the dysregulation. They feel exposed and judged, which makes regulation harder.",
+    need: "Remove the audience before addressing the behaviour. Move them away from the observer. Your attention on them, not on the other parent\'s reaction, signals safety.",
+  },
+  m49: {
+    body: "The party was supposed to be fun and now it is too much. The noise, the people, the excitement, the sugar, the unstructured time. Every input is arriving at full volume.",
+    brain: "Anticipated joy creates a dopamine spike that raises arousal before the party starts. The sensory overload of the event pushes arousal past threshold. The crash is the gap between what they expected to feel and what they actually feel.",
+    need: "A quiet break, not a removal. Five minutes in a quieter space can reset enough to rejoin. If not, leave without shaming them. \'We had fun and now our bodies need to go.\' They will remember the exit more than the party.",
+  },
+  m50: {
+    body: "They do not want to take the pill and they may not be able to tell you why. It might taste bad, feel stuck, remind them they are different, or just be one more demand in a morning that is already too much.",
+    brain: "Medication refusal can signal sensory aversion (the pill\'s texture or taste), identity resistance (\'I do not want to need this\'), executive function failure (the act of taking a pill is itself a task requiring initiation), or genuine side effects they cannot articulate.",
+    need: "Choice of method, not choice of whether. \'With juice or yoghurt?\' If the refusal persists across days, explore why. The answer matters. Some children need a different formulation, timing, or a conversation about what the medication means to them.",
+  },
+  m51: {
+    body: "Something is broken and they may be in shock at what their body just did. The destruction happened faster than the thought \'I should not do this.\'",
+    brain: "The impulse to discharge overwhelming emotion through physical action reached the motor system before the consequence assessment could fire. The destruction was not planned. It was the nervous system finding the fastest discharge route.",
+    need: "Do not itemise the damage. They can see it. The shame is already doing the accounting. \'That was a big feeling. Are you okay?\' Then, later, when calm: discuss what happened and how to handle the big feeling differently next time.",
+  },
+  m52: {
+    body: "The \'no\' hit them like a physical blow. The disappointment arrived at full intensity with no dimmer. Their body is in fight mode because the denial felt like a threat.",
+    brain: "ADHD emotional regulation cannot moderate incoming disappointment. The \'no\' was processed at the same neural intensity as a genuine loss. The rage is proportionate to how they experienced it, not to what was denied.",
+    need: "The boundary holds. But validate the feeling: \'I can see you really wanted that and the answer is still no.\' Naming the feeling while holding the limit teaches them that disappointment is survivable and does not change the outcome.",
+  },
+  m53: {
+    body: "They may already know the school is calling. They may be anxious, defiant, or checked out. The anticipation of consequences is itself a stressor.",
+    brain: "If your child knows they are in trouble at school, they have been carrying that knowledge alongside the school day\'s demands. The anxiety of anticipated consequences depletes the same regulatory resources they need to manage the school environment.",
+    need: "When you address the school\'s concern, be specific and factual. Do not add disappointment to the facts. \'The school told me X happened. Tell me what it looked like from your side.\' Their perspective may reveal something the school did not see.",
+  },
+  m54: {
+    body: "The unfairness is consuming them. They cannot think about anything else. The feeling is stuck on repeat and no amount of reasoning is getting through.",
+    brain: "Justice sensitivity in ADHD produces a loop where the emotional response to unfairness persists long after the cognitive understanding of the situation has been achieved. They may know it is not a big deal. The feeling disagrees.",
+    need: "The feeling needs an exit, not an explanation. \'What would help this feel better?\' gives them agency over the resolution. Sometimes the answer is surprisingly small. Sometimes they just need someone to agree that it was unfair, even if it was also reasonable.",
+  },
+  m55: {
+    body: "They are unloading everything they held in all day. The emotional dump feels urgent and overwhelming to both of you.",
+    brain: "School masking uses enormous regulatory resources. The decompression at home is the cost of that performance. They are not choosing to be difficult. They are discharging the accumulated stress of six hours of suppression.",
+    need: "Listen without fixing for fifteen minutes. Snack first, conversation second. Do not ask \'how was school\' (too vague). Do not try to solve the problems they describe. They need the discharge, not the fix. The fix, if needed, comes tomorrow when the emotional load has cleared.",
+  },
+  m56: {
+    body: "They are in an unfamiliar environment with strange sounds, smells, and the anticipation of something uncomfortable happening to their body.",
+    brain: "The combination of sensory novelty, unpredictable waiting, and anticipatory anxiety exceeds the regulatory capacity of an ADHD nervous system. They cannot \'just sit still and wait\' because every part of the environment is demanding processing they cannot provide.",
+    need: "Preparation, distraction, and accommodation. Tell them exactly what will happen in advance. Bring a fidget, headphones, or a screen for the wait. Ask the clinic about sensory-friendly appointment times. The meltdown is preventable with preparation.",
+  },
+  k32: {
+    body: "The question carries weight. They are looking at you for how to understand themselves. Your face, your tone, and your words will shape how they carry the answer.",
+    brain: "Identity formation in ADHD children is complicated by accumulated negative messages. They need a narrative that is honest about the challenges without defining them by deficit. \'Different\' is more useful than \'disordered.\'",
+    need: "Be honest. Name the hard thing and the strong thing. \'Your brain works differently. That makes some things harder and some things easier.\' One specific example of each. Not a speech. A sentence. They will come back to this conversation many times as they grow.",
+  },
+  k33: {
+    body: "The unfairness is stuck. They know they should move on. They cannot. The loop is producing distress that is now bigger than the original event.",
+    brain: "ADHD emotional processing loops persist because the feeling has not been adequately discharged. Logic does not discharge emotion. Validation does. The loop will continue until the feeling is acknowledged.",
+    need: "Validate first, reason later. \'That feels really unfair\' has to come before \'but here is why it happened.\' The validation is the exit. Once the feeling is acknowledged, the loop can release.",
+  },
+  k34: {
+    body: "Their body is reacting to something that has not happened yet. The anxiety is producing real physical symptoms: stomach ache, headache, restlessness, tears.",
+    brain: "The ADHD brain cannot distinguish between imagining a future event and experiencing it. The anticipatory anxiety activates the same stress circuits as the actual event would. Tomorrow\'s worry is producing today\'s suffering.",
+    need: "Make the unknown known. Write down the steps of what will happen. Show them the plan. Reduce uncertainty wherever you can. And: \'Whatever happens, we will handle it together.\' The reassurance is not about the outcome. It is about not being alone in it.",
+  },
+  k35: {
+    body: "They are understimulated and uncomfortable. The boredom is not optional. It is a neurological state that feels physically unpleasant.",
+    brain: "ADHD baseline arousal is lower than neurotypical. When stimulation drops below threshold, the discomfort drives stimulation-seeking behaviour. They are not being lazy or unimaginative. Their brain is asking for input it cannot generate internally.",
+    need: "Movement, novelty, or challenge. Not a list of suggestions. Two choices or a physical task. The boredom resolves when the stimulation meets the threshold, not when they \'decide to do something.\'",
+  },
+  k36: {
+    body: "The pet was hurt and they may not fully understand how. The force they applied felt normal to them even though it was too much.",
+    brain: "Proprioceptive calibration in ADHD can be unreliable. The amount of force that feels moderate to them may be excessive. The impulse to interact was not malicious. The moderation system did not calibrate accurately.",
+    need: "Physical teaching, not verbal instruction. Guide their hand. Show the pressure difference. \'This is too much. This is right.\' Supervised practice until the calibration improves. They need the physical experience of \'gentle,\' not the concept.",
+  },
+  k37: {
+    body: "They lied about homework because the truth felt worse than the lie. The homework itself was the threat. The lie was the escape route.",
+    brain: "Homework avoidance lying is the ADHD brain choosing short-term relief over long-term consequence. The executive function cost of starting homework feels enormous. The lie removes the demand instantly.",
+    need: "Make starting less threatening. \'Ten minutes together\' is smaller than \'do your homework.\' And make honesty safe: your calm response to \'I need help\' must be more manageable than your reaction to the lie.",
+  },
+  k38: {
+    body: "They are repeating the behaviour because it gets a reaction. The reaction is stimulating. The stimulation is what their brain wants.",
+    brain: "Copied behaviour persists when it generates social feedback. ADHD brains are especially responsive to novel, high-stimulation social reactions. The behaviour is maintained by the response it generates, not by the child\'s values.",
+    need: "Reduce the audience reaction. Remove the stimulation reward. Redirect without amplifying. \'That works differently here\' is enough. Do not make it a big discussion, which provides the attention the behaviour was seeking.",
+  },
+  k39: {
+    body: "The chore feels enormous even though it takes five minutes. The resistance is not about the task. It is about the executive function cost of starting, sequencing, and sustaining effort on something that provides no dopamine reward.",
+    brain: "Non-preferred tasks have the highest executive function cost and the lowest dopamine return. Every step of a chore requires initiation, attention, and working memory. All are depleted by evening. The fight about the chore costs more energy than the chore itself.",
+    need: "Visual checklist. One step visible at a time. A small immediate acknowledgment after completion. The chore system needs to be simpler than the argument about the chore.",
+  },
 };
 

@@ -118,6 +118,31 @@ k13: They can't fall asleep no matter what we try
 k14: They have no friends and aren't getting invited
 k15: They take everything personally and feel rejected constantly
 k16: They blurt things out and interrupt constantly
+m47: They screamed I hate you and slammed the door
+m48: The playdate went wrong and the other parent saw everything
+m49: The birthday party was too much and they fell apart
+m50: They refused to take their medication this morning
+m51: They destroyed something in anger and now everyone is in shock
+m52: They exploded because I said no
+m53: The school called again and I am dreading the conversation
+m54: They are spiralling about something unfair and cannot let it go
+m55: They came home from school and emotionally dumped everything on me
+m56: The waiting room meltdown at the doctor or dentist
+p52: The IEP or accommodation meeting left me feeling dismissed
+p53: Both of us have ADHD and the house is in freefall
+p54: I found out they have been bullied and I do not know what to do
+p55: The school told me my child bullied someone
+p56: Report card day and I am bracing for the worst
+p57: Someone questioned whether my child really has ADHD
+p58: I think there is something else going on underneath the ADHD
+k32: They asked why they are different from other kids
+k33: They fixate on what is unfair and cannot move past it
+k34: They are anxious about tomorrow and cannot switch it off
+k35: They keep saying they are bored and expecting me to fix it
+k36: They were rough with the pet and did not mean to hurt it
+k37: They said they have no homework when they do
+k38: They copy bad behaviour from other kids then cannot stop
+k39: They will not do any chores or responsibilities without a fight
 k17: They know what to do but they can't start
 k18: Every request feels like an attack to them
 k19: They hear me but they don't move

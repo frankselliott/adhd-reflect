@@ -329,14 +329,14 @@ export const CARD_RIGHT_NOW = {
   },
   // ─── Previously missing cards ───
   "m21": {
-    parentNow: `The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.`,
-    kidNow: `The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.`,
+    parentNow: \`The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.\`,
+    kidNow: \`The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.\`,
   },
   "p22": {
-    content: `You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.`,
+    content: \`You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.\`,
   },
   "k11": {
-    content: `Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.`,
+    content: \`Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.\`,
   },
 
   // ─── 15 NEW KID CARDS ───
@@ -413,6 +413,83 @@ export const CARD_RIGHT_NOW = {
   },
   "p51": {
     content: `Dinner, consequences, bedtime order, which child gets attention first, whether to enforce the rule or let it go. Each micro-decision costs executive function. By evening, the decision-making system is empty. Use defaults. Default dinner on Mondays. Default consequence for screens. Default bedtime order. Pre-decide the recurring choices so your depleted brain does not have to decide them fresh every night.`,
+  },
+
+  // ─── 25 MORE CARDS ───
+  "m47": {
+    content: `The words hit you in the chest. They meant them to. In that moment, they wanted you to feel what they were feeling. Do not respond to the content. Do not defend yourself. Do not follow them to the door. Let them have the room. The door slam was the exit strategy their brain chose instead of something worse. Give them ten minutes. Then a quiet knock. 'I am here when you are ready.' The words were the feeling, not the truth.`,
+  },
+  "m48": {
+    content: `The other parent saw the meltdown, the refusal, the physical behaviour. Your shame is running alongside your child's dysregulation. You are managing two things at once. Deal with your child first. The other parent's opinion is not data about your parenting. If you need to, a brief 'they are having a tough day' is enough. You do not owe a stranger a neurological explanation.`,
+  },
+  "m49": {
+    content: `Too many people, too much noise, too much anticipation, too much sugar, too much unstructured time. The party that was supposed to be fun became overwhelming. This is sensory overload plus transition demands plus social processing all at once. Find a quiet corner or leave early without drama. Their meltdown is not ingratitude. It is their nervous system exceeding capacity at the worst possible moment.`,
+  },
+  "m50": {
+    content: `They know they need it. You know they need it. But this morning they are refusing. The medication battle is its own category of hard. Do not force. Do not threaten. Do not negotiate endlessly. Offer the choice of how, not whether: 'With juice or with yoghurt?' If the refusal holds, note it, tell the teacher, and address it with the prescriber. One unmedicated day is manageable. The relationship is not worth the pill.`,
+  },
+  "m51": {
+    content: `Something is broken. A toy, a wall, a sibling's creation, your phone. The destruction was the impulse finding the nearest outlet. They may already be horrified at what they did. Secure safety first. Then silence. Do not itemise the damage. Do not calculate the cost out loud. The shame is already doing that inside them. The conversation about property comes later, when both nervous systems are back.`,
+  },
+  "m52": {
+    content: `The 'no' triggered a full explosion. Not a pout, not a whine, a rage response. Denial of a want activated the same neural circuits as denial of a need. To their nervous system, 'no' is a threat. The boundary holds. You do not need to explain it again. 'My answer is not changing. I can see you are upset.' Then wait. They need to feel the disappointment without you caving or escalating.`,
+  },
+  "m53": {
+    content: `The school name on your phone and your stomach drops. Another call. Another problem. Another conversation where you feel judged. Before you answer, take one breath. Ask: 'Can you tell me specifically what happened and what you need from me?' This keeps the conversation concrete. You are not obligated to solve it on the phone. 'Let me think about this and get back to you' is a complete answer.`,
+  },
+  "m54": {
+    content: `Something was unfair and they cannot let it go. The sibling got more. The rule changed. The teacher was wrong. ADHD justice sensitivity means the unfairness is producing a pain-level signal. Arguing that it was fair will not work. Validate first: 'I can see that feels really unfair.' Then, only if they are calm enough: 'What would make it feel okay?' The solution matters less than being heard.`,
+  },
+  "m55": {
+    content: `They walked in the door and unleashed everything. The teacher was mean. Nobody sat with them. The work was too hard. They are dumping six hours of held-in distress onto the nearest safe person, which is you. Do not fix. Do not problem-solve. Do not call the school. Listen. 'That sounds like a really hard day.' Fifteen minutes of being heard is more regulating than any solution you could offer right now.`,
+  },
+  "m56": {
+    content: `The waiting room has fluorescent lights, unfamiliar people, nothing to do, and the anticipation of something unpleasant. Every ADHD difficulty converges here. Bring something to do with their hands. Let them wear headphones. Do not expect them to sit still in a plastic chair under fluorescent lights without input. If the meltdown starts, ask the receptionist if you can wait outside or in the car.`,
+  },
+  "p52": {
+    content: `The meeting felt like performing your child's struggles for an audience that had already decided. The accommodations you asked for were questioned. Your expertise as the parent was subtly dismissed. The frustration is valid. Document what was discussed. Follow up in writing. Request the specific accommodations in an email so there is a record. You are not asking for special treatment. You are asking for what your child needs to access the same education.`,
+  },
+  "p53": {
+    content: `Both of you have ADHD and the household systems keep collapsing. Neither brain can reliably maintain the routines, track the logistics, or regulate in the hard moments. The chaos is structural, not personal. Pick the one system that matters most this week. Make it as simple as possible. Expect it to need restarting. The goal is not a perfect house. It is a house that works enough.`,
+  },
+  "p54": {
+    content: `The discovery that your child has been bullied activates a primal protective response amplified by your own rejection sensitivity. You want to fix it, fight it, remove them from the situation. Before you act, listen. Ask what they need, not what you want to do. Contact the school calmly and specifically. Your child needs to see you regulated while you advocate fiercely.`,
+  },
+  "p55": {
+    content: `The call you never expected. Your child hurt another child, not physically but with words, exclusion, or cruelty. The shame is enormous. But ADHD impulsivity means the behaviour may have been less calculated than it looks from outside. Ask specifically what happened. Talk to your child without horror on your face. Address the behaviour, repair with the other family, and use it to build the skill they are missing.`,
+  },
+  "p56": {
+    content: `You are opening the report card and your body is already bracing. The comments will say 'could try harder,' 'easily distracted,' 'does not complete work.' You know the translation: their ADHD is showing and the school is measuring the symptom, not the effort. Read it once. Put it away. The grades are data about the school environment, not about your child's worth or your parenting.`,
+  },
+  "p57": {
+    content: `Someone said 'they seem fine to me' or 'all kids are like that' or 'are you sure about the diagnosis.' The questioning landed on your rejection sensitivity and activated every doubt you have ever had. They are not right. The diagnosis was made by a professional who assessed your child. You do not need to defend it in a social setting. A brief 'we are working with professionals on this' is enough.`,
+  },
+  "p58": {
+    content: `Something does not add up. The ADHD explains some of it but not all of it. The anxiety seems bigger than ADHD anxiety. The mood is lower than it should be. The rigidity goes beyond preference. Trust your instinct. You know your child better than anyone. Talk to the prescriber or ask for a broader assessment. Naming the question is not catastrophising. It is good parenting.`,
+  },
+  "k32": {
+    content: `They asked the question and your heart broke. 'Why am I different?' 'Why is my brain like this?' 'Why can nobody else take medication?' Do not dismiss it. Do not over-celebrate neurodivergence. Be honest. 'Your brain works differently. It makes some things harder and some things easier. The hard things are real and we are working on them. The good things are real too.' Name one specific strength they showed this week.`,
+  },
+  "k33": {
+    content: `The unfairness is consuming them. The sibling got a bigger piece. The rule changed without warning. The teacher picked someone else. ADHD justice sensitivity means unfairness produces a pain-level response. They cannot 'just let it go' because the feeling is stuck in a loop. Validate the feeling, not the interpretation. 'I can see that feels really unfair' is more regulating than explaining why it was actually fair.`,
+  },
+  "k34": {
+    content: `Tomorrow has not arrived and they are already in it. The test, the social event, the change in routine. ADHD plus anxiety means the uncertainty is producing worst-case scenarios at full emotional intensity. Do not say 'it will be fine.' They do not believe you because their brain is showing them evidence it will not be. Write down what will actually happen, step by step. Make the unknown known.`,
+  },
+  "k35": {
+    content: `They are bored and it is your problem. 'I am bored' is not a statement. It is a request for stimulation that their brain cannot generate internally. Do not list twenty activities. Give them two choices. Better: give them a physical task. The boredom is neurological discomfort, not a failure of imagination. A movement challenge, a building project, or a timed race meets the need without you becoming the entertainment.`,
+  },
+  "k36": {
+    content: `They squeezed too hard. They pulled the tail. They threw the cat. The pet got hurt and your child looks confused because they did not mean to cause pain. Impulsive force calibration is an ADHD issue. They did not choose to be rough. The impulse to touch arrived before the assessment of how much force to use. Address the pet's safety first. Then teach the specific skill: 'gentle means this pressure' with a physical demonstration.`,
+  },
+  "k37": {
+    content: `They said there was no homework. There was homework. The lie was avoidance, not deception. The homework felt overwhelming before they even opened the bag. The lie removed the immediate threat of having to do it. Do not make the lie bigger than the homework. Address both: 'I know homework feels hard. Lying about it makes tomorrow harder. Let us do ten minutes together and see how far we get.'`,
+  },
+  "k38": {
+    content: `They picked up the word, the attitude, the behaviour from a friend or a screen. Now they are repeating it and your correction is not landing because the social reward of the behaviour is stronger than your disapproval. ADHD brains are especially susceptible to peer influence because social feedback is high-stimulation input. Address it without making it forbidden, which increases its appeal. 'That behaviour works differently in our house.'`,
+  },
+  "k39": {
+    content: `The chore battle happens every day. Emptying the dishwasher, putting clothes away, feeding the pet. Each one requires task initiation, sequencing, and sustained effort on a non-preferred activity. Every ADHD difficulty in one demand. Do not argue about whether they should do it. Make the chore smaller, more visual, more routine, and more immediate. A checklist on the wall beats a verbal instruction every time.`,
   },
 };
 
