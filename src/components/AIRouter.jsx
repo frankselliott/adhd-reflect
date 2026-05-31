@@ -91,7 +91,7 @@ export default function AIRouter() {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) return;
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     const rec = new SR();
-    rec.lang = 'en-AU';
+    rec.lang = 'en-US';
     rec.continuous = false;
     rec.interimResults = false;
     rec.onresult = (e) => { setInput(e.results[0][0].transcript); setListening(false); };

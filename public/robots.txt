@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adhdreflect.com/sitemap.xml
+
+# Welcome. We built this for ADHD parents raising ADHD kids.
+

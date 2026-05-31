@@ -40,10 +40,41 @@ const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta property="og:url" content={`https://adhdreflect.com${Astro.url.pathname}`} />
   <meta property="og:site_name" content="ADHD Reflect" />
 
   <!-- Prevent indexing until ready to launch -->
-  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href={`https://adhdreflect.com${Astro.url.pathname}`} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ADHD Reflect",
+    "url": "https://adhdreflect.com",
+    "description": "For ADHD parents raising ADHD kids. Describe what just happened and find what helps.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://adhdreflect.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ADHD Reflect",
+    "url": "https://adhdreflect.com",
+    "description": "Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in.",
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
   <Nav current={current} />
