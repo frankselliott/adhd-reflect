@@ -1,180 +1,1055 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Resources" description="Find support options in your country. Crisis support, ADHD education, professional directories and more." current="resources">
+<Base title="Resources" description="Curated ADHD resources worth reading, listening to and following." current="resources">
 
-  <section class="resources">
-    <div class="resources-inner">
-      <p class="resources-label">Support</p>
-      <h1 class="resources-title">Need more <em>support?</em></h1>
-      <p class="resources-body">ADHD Reflect can help you understand hard parenting moments, repair after conflict and practise small changes. But sometimes a guide is not enough.</p>
-      <p class="resources-body">If the same pattern keeps happening, if you feel overwhelmed, or if you are worried about safety, these resources may help you find the next right step.</p>
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Resources</p>
+  <h1 class="hero-title">Things worth <em>reading,<br>listening to</em> and following</h1>
+  <p class="hero-body">A curated mix of organisations, researchers, creators and communities who actually understand ADHD family life. Not a comprehensive list. A useful one.</p>
+</section>
 
-      <!-- Safety block - always first -->
-      <div class="safety-block">
-        <h2>If someone may be unsafe</h2>
-        <p>If you are worried you may hurt yourself, your child or someone else, step away if safe and contact emergency services or a crisis support service in your country.</p>
-        <p>ADHD Reflect does not provide crisis care.</p>
-        <div class="crisis-numbers">
-          <div class="crisis-country">
-            <h3>Australia</h3>
-            <p>Emergency: <strong>000</strong></p>
-            <p>Lifeline: <strong>13 11 14</strong> (24/7)</p>
-            <p>Parentline: <strong>1300 301 300</strong></p>
-            <p>Kids Helpline: <strong>1800 551 800</strong></p>
-          </div>
-          <div class="crisis-country">
-            <h3>United States</h3>
-            <p>Emergency: <strong>911</strong></p>
-            <p>988 Suicide & Crisis Lifeline: <strong>988</strong></p>
-            <p>Crisis Text Line: text <strong>HOME</strong> to <strong>741741</strong></p>
-          </div>
-          <div class="crisis-country">
-            <h3>United Kingdom</h3>
-            <p>Emergency: <strong>999</strong></p>
-            <p>Samaritans: <strong>116 123</strong> (24/7)</p>
-            <p>NSPCC: <strong>0808 800 5000</strong></p>
-          </div>
-          <div class="crisis-country">
-            <h3>New Zealand</h3>
-            <p>Emergency: <strong>111</strong></p>
-            <p>Need to Talk: <strong>1737</strong> (24/7)</p>
-            <p>Parentline: <strong>0800 568 856</strong></p>
-          </div>
-          <div class="crisis-country">
-            <h3>Canada</h3>
-            <p>Emergency: <strong>911</strong></p>
-            <p>Talk Suicide Canada: <strong>988</strong></p>
-            <p>Crisis Text Line: text <strong>HOME</strong> to <strong>686868</strong></p>
-          </div>
-          <div class="crisis-country">
-            <h3>Ireland</h3>
-            <p>Emergency: <strong>112</strong> or <strong>999</strong></p>
-            <p>Samaritans: <strong>116 123</strong> (24/7)</p>
-            <p>Parentline: <strong>1890 927 277</strong></p>
-          </div>
-        </div>
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All <span style="opacity:0.5;font-size:11px;margin-left:2px" id="count-all"></span></button>
+  <button class="filter-btn" data-filter="podcasts">
+    <span class="filter-dot" style="background:var(--eucalyptus)"></span>
+    Podcasts
+  </button>
+  <button class="filter-btn" data-filter="social">
+    <span class="filter-dot" style="background:#C07848"></span>
+    Social &amp; YouTube
+  </button>
+  <button class="filter-btn" data-filter="academic">
+    <span class="filter-dot" style="background:var(--blue)"></span>
+    Organisations
+  </button>
+  <button class="filter-btn" data-filter="books">
+    <span class="filter-dot" style="background:var(--clay)"></span>
+    Books
+  </button>
+  <button class="filter-btn" data-filter="community">
+    <span class="filter-dot" style="background:var(--lavender)"></span>
+    Communities
+  </button>
+</div>
+
+<!-- COUNT -->
+<div class="count-bar">
+  <span class="count-text" id="count-label">Showing all resources</span>
+</div>
+
+<!-- GRID -->
+<div class="resource-grid" id="grid">
+
+  <!-- ══════════════ PODCASTS ══════════════ -->
+
+  <div class="card" data-category="podcasts" data-country="AU">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇦🇺 AU</span>
       </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Mums</div>
+      <div class="card-creator">Jane McFadden</div>
+    </div>
+    <p class="card-desc">Raw, honest conversations about ADHD parenting from an Australian perspective. If you've ever felt like the worst parent in the world at 7pm on a Tuesday, start here. McFadden speaks from lived experience, not theory.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">mothers</span><span class="tag">australia</span><span class="tag">relatable</span></div>
+      <a href="https://adhdmums.com.au" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
 
-      <!-- Coming soon sections -->
-      <div class="coming-soon-block">
-        <h2>More support options coming soon</h2>
-        <p>We're building a country-specific support directory covering ADHD education, professional directories, coaching options and practical parenting support. The goal is to help you find the next right step, not sell you something.</p>
-        <p>For now, if you need support beyond what a guide can offer, your GP or family doctor is usually the safest first step.</p>
-        <p>Questions or suggestions: <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+  <div class="card" data-category="podcasts" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Tilt Parenting</div>
+      <div class="card-creator">Debbie Reber</div>
+    </div>
+    <p class="card-desc">Expert interviews about raising neurodivergent kids. 400+ episodes, 10 million downloads, consistently high quality. Covers ADHD, 2e, autism and the messy overlaps. Better for deep dives than quick answers.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">neurodivergent</span><span class="tag">expert interviews</span><span class="tag">deep dive</span></div>
+      <a href="https://tiltparenting.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="podcasts" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Women and ADHD</div>
+      <div class="card-creator">Katy Weber</div>
+    </div>
+    <p class="card-desc">Interviews with women diagnosed with ADHD — many of them as adults. If your ADHD was missed until adulthood, or you only figured it out after your kid was diagnosed, this podcast gets that experience specifically.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">women</span><span class="tag">late diagnosis</span><span class="tag">identity</span></div>
+      <a href="https://www.womenandadhd.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="podcasts" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Hacking Your ADHD</div>
+      <div class="card-creator">Will Curb</div>
+    </div>
+    <p class="card-desc">Short, practical episodes — most under 15 minutes. Good for when you have a commute, not an afternoon. Focused on strategies, systems and making ADHD brains work a bit better in everyday life.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">practical</span><span class="tag">short</span><span class="tag">strategies</span></div>
+      <a href="https://www.hackingyouradhd.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="podcasts" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Experts Podcast</div>
+      <div class="card-creator">ADDitude Magazine</div>
+    </div>
+    <p class="card-desc">Recorded webinars with psychiatrists, psychologists and ADHD specialists. More clinical than most. The quality control is high and the guest list is genuinely impressive. Use the topic search rather than starting from the beginning.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">clinical</span><span class="tag">expert</span><span class="tag">research-backed</span></div>
+      <a href="https://www.additudemag.com/adhd-expert-webinars-podcasts/" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="podcasts" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-podcasts">Podcast</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD reWired</div>
+      <div class="card-creator">Eric Tivers</div>
+    </div>
+    <p class="card-desc">For adults with ADHD trying to make their own lives work — not specifically about parenting, but useful if you want to understand your own ADHD-driven habits before you can help your kid with theirs.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">adult adhd</span><span class="tag">productivity</span><span class="tag">habits</span></div>
+      <a href="https://www.adhdrewired.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ══════════════ SOCIAL / YOUTUBE ══════════════ -->
+
+  <div class="card" data-category="social" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">YouTube</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">How to ADHD</div>
+      <div class="card-creator">Jessica McCabe</div>
+    </div>
+    <p class="card-desc">The clearest explanations of ADHD on the internet. Research-backed, accessible, not condescending. Good for understanding why your brain works the way it does — and for showing your partner, teacher or employer the thing you've been trying to explain for years.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">explainer</span><span class="tag">accessible</span><span class="tag">research-backed</span></div>
+      <a href="https://www.youtube.com/@HowtoADHD" class="card-link" target="_blank" rel="noopener">Watch <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="social" data-country="UK">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">YouTube</span>
+        <span class="badge badge-country">🇬🇧 UK</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Love</div>
+      <div class="card-creator">Zoe &amp; Alex</div>
+    </div>
+    <p class="card-desc">A couple where both partners have ADHD. One of the very few channels that shows the relationship side honestly — the miscommunications, the forgotten things, the moments where two ADHD brains crash into each other. Funny and genuinely useful.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">couples</span><span class="tag">relationship</span><span class="tag">both ADHD</span></div>
+      <a href="https://www.youtube.com/@ADHDLove" class="card-link" target="_blank" rel="noopener">Watch <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="social" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">YouTube</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Dr. Russell Barkley</div>
+      <div class="card-creator">Russell Barkley PhD</div>
+    </div>
+    <p class="card-desc">Long, lecture-style videos from the most cited ADHD researcher alive. Not light viewing. But if you want to understand what ADHD actually is at a biological level — why it's not a motivation problem, why willpower doesn't fix it — this is where the science lives.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">research</span><span class="tag">clinical science</span><span class="tag">deep dive</span></div>
+      <a href="https://www.youtube.com/@russellbarkleyphd2023" class="card-link" target="_blank" rel="noopener">Watch <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="social" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">Instagram</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Dani Donovan</div>
+      <div class="card-creator">@danidonovan</div>
+    </div>
+    <p class="card-desc">Infographics and illustrations that explain ADHD experiences in a way words often can't. The "ADHD paralysis" and "time blindness" posts are particularly good for showing people who don't have ADHD what it actually feels like inside.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">visual</span><span class="tag">infographic</span><span class="tag">shareable</span></div>
+      <a href="https://www.danidonovan.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="social" data-country="International">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">Instagram</span>
+        <span class="badge badge-country">🌐 International</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Alien</div>
+      <div class="card-creator">Pina Varnel · @adhd_alien</div>
+    </div>
+    <p class="card-desc">Simple webcomics about what living with ADHD actually feels like from the inside. The kind of thing you screenshot and send to your partner with no caption because it says everything. Good for reducing shame — yours and theirs.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">comics</span><span class="tag">relatable</span><span class="tag">shame reduction</span></div>
+      <a href="https://www.instagram.com/adhd_alien/" class="card-link" target="_blank" rel="noopener">Follow <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="social" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-social">YouTube / Facebook</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free + Paid</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Dude</div>
+      <div class="card-creator">Ryan Wexelblatt</div>
+    </div>
+    <p class="card-desc">Focused specifically on parents of boys with ADHD. Practical, direct and non-judgemental. The free content on YouTube is solid. The paid membership includes courses and live Q&amp;A sessions. Note: this is about parenting your child, not about your own ADHD.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">boys</span><span class="tag">parenting</span><span class="tag">practical</span></div>
+      <a href="https://www.adhddude.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ══════════════ ORGANISATIONS ══════════════ -->
+
+  <div class="card" data-category="academic" data-country="AU">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Organisation</span>
+        <span class="badge badge-country">🇦🇺 AU</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Australia</div>
+      <div class="card-creator">National advocacy body</div>
+    </div>
+    <p class="card-desc">Australia's national ADHD support and advocacy organisation. Good starting point for navigating Australian ADHD services, finding local support groups, understanding advocacy efforts and following what's happening at a policy level.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">australia</span><span class="tag">official</span><span class="tag">support</span></div>
+      <a href="https://adhdaustralia.org.au" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="AU">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Clinical guideline</span>
+        <span class="badge badge-country">🇦🇺 AU</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Australian ADHD Clinical Practice Guideline</div>
+      <div class="card-creator">AADPA</div>
+    </div>
+    <p class="card-desc">The evidence-based guidelines that Australian GPs, psychiatrists and psychologists should be following. Useful if you want to understand what good clinical care looks like, or if you feel like you're not getting it. The parent-facing summary is the most accessible entry point.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">australia</span><span class="tag">clinical</span><span class="tag">evidence-based</span></div>
+      <a href="https://aadpa.com.au/clinical-practice-guideline/" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Organisation</span>
+        <span class="badge badge-country">🇺🇸 US</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">CHADD</div>
+      <div class="card-creator">Children and Adults with ADHD</div>
+    </div>
+    <p class="card-desc">The largest US ADHD advocacy organisation, with 200+ local chapters. Good research summaries, webinars and an ADHD professional directory. Reliable and well-maintained. The "About ADHD" section is a solid reference.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">us</span><span class="tag">advocacy</span><span class="tag">research</span></div>
+      <a href="https://chadd.org" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="UK">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Organisation</span>
+        <span class="badge badge-country">🇬🇧 UK</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD UK</div>
+      <div class="card-creator">UK charity</div>
+    </div>
+    <p class="card-desc">UK-focused charity for adults with ADHD. Strong on explaining the NHS pathway, your rights under Right to Choose, and what to do when you've been waiting 3 years for an assessment. Very honest about how difficult the system is to navigate.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">uk</span><span class="tag">nhs</span><span class="tag">adult adhd</span></div>
+      <a href="https://adhduk.co.uk" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="CA">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Organisation</span>
+        <span class="badge badge-country">🇨🇦 CA</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">CADDAC</div>
+      <div class="card-creator">Centre for ADHD Awareness Canada</div>
+    </div>
+    <p class="card-desc">Canada's primary ADHD advocacy organisation. Information on assessment, diagnosis and support across provinces. Note: pathways vary significantly by province, so use the provincial resources alongside national information.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">canada</span><span class="tag">advocacy</span><span class="tag">assessment</span></div>
+      <a href="https://caddac.ca" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Website</span>
+        <span class="badge badge-country">🌐 International</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADDitude Magazine</div>
+      <div class="card-creator">additudemag.com</div>
+    </div>
+    <p class="card-desc">The largest ADHD content resource online. Dense, sometimes overwhelming, but the research-backed articles are genuinely good. Use the search bar for specific topics rather than browsing. The expert webinar library alone is worth the visit.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">research</span><span class="tag">parenting</span><span class="tag">adult adhd</span></div>
+      <a href="https://www.additudemag.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="academic" data-country="US">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-academic">Website</span>
+        <span class="badge badge-country">🌐 International</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">Understood.org</div>
+      <div class="card-creator">understood.org</div>
+    </div>
+    <p class="card-desc">Broad neurodivergence resource — ADHD, dyslexia, autism and co-occurring conditions. Good for explaining ADHD to schools, understanding what's happening in your child's brain, and making sense of co-occurring conditions. More US-centric than it claims to be.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">neurodivergent</span><span class="tag">education</span><span class="tag">children</span></div>
+      <a href="https://www.understood.org" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ══════════════ BOOKS ══════════════ -->
+
+  <div class="card" data-category="books" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-books">Book</span>
+      </div>
+      <span class="free-badge paid-badge">Paid</span>
+    </div>
+    <div>
+      <div class="card-title">Scattered Minds</div>
+      <div class="card-creator">Gabor Maté</div>
+    </div>
+    <p class="card-desc">A doctor with ADHD explores its roots in early attachment, stress and family dynamics. Probably the most emotionally honest ADHD book written. Read it for the "oh, that's me" moments — especially if you've spent years wondering what went wrong. Not a strategy guide. A human one.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">memoir</span><span class="tag">attachment</span><span class="tag">emotional</span></div>
+      <a href="https://drgabormate.com/book/scattered-minds/" class="card-link" target="_blank" rel="noopener">Find it <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="books" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-books">Book</span>
+      </div>
+      <span class="free-badge paid-badge">Paid</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD 2.0</div>
+      <div class="card-creator">Hallowell &amp; Ratey</div>
+    </div>
+    <p class="card-desc">Updated science on ADHD from two psychiatrists who both have it. Strengths-based without being naively positive about the hard parts. A good overview of where the science has landed and what it means practically. Start here if you want one book that covers the whole picture.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">science</span><span class="tag">strengths</span><span class="tag">overview</span></div>
+      <span class="card-no-link">Find at your local library or bookshop</span>
+    </div>
+  </div>
+
+  <div class="card" data-category="books" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-books">Book</span>
+      </div>
+      <span class="free-badge paid-badge">Paid</span>
+    </div>
+    <div>
+      <div class="card-title">Your Brain's Not Broken</div>
+      <div class="card-creator">Tamara Rosier</div>
+    </div>
+    <p class="card-desc">Written by an ADHD coach who also has ADHD. Practical and emotionally intelligent, without assuming you already have your life together. Good for understanding why the usual advice doesn't work and building approaches that actually fit how your brain works.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">practical</span><span class="tag">adhd coach</span><span class="tag">accessible</span></div>
+      <span class="card-no-link">Find at your local library or bookshop</span>
+    </div>
+  </div>
+
+  <div class="card" data-category="books" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-books">Book / Blog</span>
+      </div>
+      <span class="free-badge paid-badge">Paid</span>
+    </div>
+    <div>
+      <div class="card-title">Order from Chaos</div>
+      <div class="card-creator">Jaclyn Paul — The ADHD Homestead</div>
+    </div>
+    <p class="card-desc">A parent with ADHD writes about managing a household and family life when your executive function is unreliable. Specific to the experience of running a home with an ADHD brain. The blog is free and worth reading before the book.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">parenting</span><span class="tag">household</span><span class="tag">adhd parent</span></div>
+      <a href="https://theadhdHomestead.com" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ══════════════ COMMUNITIES ══════════════ -->
+
+  <div class="card" data-category="community" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-community">Reddit</span>
+        <span class="badge badge-country">🌐 International</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">r/ADHD</div>
+      <div class="card-creator">1.5M+ members</div>
+    </div>
+    <p class="card-desc">Messy, sometimes overwhelming, occasionally brilliant. The best place to ask "is this an ADHD thing?" and get 500 people confirming yes. Read the community rules before posting. Moderated reasonably well for a group that large. Not a substitute for professional support.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">community</span><span class="tag">peer support</span><span class="tag">relatable</span></div>
+      <a href="https://www.reddit.com/r/adhd" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="community" data-country="">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-community">Reddit</span>
+        <span class="badge badge-country">🌐 International</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">r/ADHDparenting</div>
+      <div class="card-creator">Focused community</div>
+    </div>
+    <p class="card-desc">A smaller, quieter version of r/ADHD focused specifically on parenting a child with ADHD. More useful for specific parenting questions — homework, meltdowns, IEPs, school meetings. Lower volume means posts get more thoughtful responses.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">parenting</span><span class="tag">community</span><span class="tag">specific</span></div>
+      <a href="https://www.reddit.com/r/adhdparenting" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="card" data-category="community" data-country="AU">
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-community">Facebook group</span>
+        <span class="badge badge-country">🇦🇺 AU</span>
+      </div>
+      <span class="free-badge">Free</span>
+    </div>
+    <div>
+      <div class="card-title">ADHD Mums Community</div>
+      <div class="card-creator">Jane McFadden</div>
+    </div>
+    <p class="card-desc">An Australian Facebook community for mothers with ADHD or raising ADHD kids. Honest, non-judgemental and active. You'll need a Facebook account and to request to join. The Australian focus means the conversation is relevant to local systems, funding pathways and services.</p>
+    <div class="card-footer">
+      <div class="card-tags"><span class="tag">mothers</span><span class="tag">australia</span><span class="tag">community</span></div>
+      <a href="https://www.facebook.com/groups/adhdmumscommunity" class="card-link" target="_blank" rel="noopener">Visit <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- NO RESULTS -->
+  <div class="no-results" id="no-results" style="display:none;">
+    <div class="no-results-title">Nothing here for that filter yet.</div>
+    <p style="font-size:14px;color:var(--pewter);">We're adding resources regularly. Check back soon.</p>
+  </div>
+
+</div>
+
+<!-- COMING SOON: THERAPIST MATCHING -->
+<div class="coming-soon">
+  <div class="coming-soon-inner">
+    <div class="coming-soon-left">
+      <div class="coming-soon-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#4A6FA5" stroke-width="1.5"/>
+          <path d="M8 12h8M12 8v8" stroke="#4A6FA5" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="coming-soon-label">Coming soon</p>
+        <h2 class="coming-soon-title">Find an ADHD-informed therapist or coach</h2>
+        <p class="coming-soon-desc">We're building a directory of therapists, psychologists and coaches who actually understand what it's like to parent with ADHD — not just treat ADHD in children. Country-aware, clearly labelled, with transparent pricing and wait times where available.</p>
       </div>
     </div>
-  </section>
+    <button class="coming-soon-btn" onclick="this.textContent='✓ We\'ll let you know'">
+      Notify me when it's ready
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER NOTE -->
+<footer class="footer-note" style="margin-top:40px;">
+  <p>ADHD Reflect does not endorse or formally review every resource listed here. These are curated based on reputation, relevance and usefulness to ADHD families — not paid placement. Where a resource costs money, it is labelled.</p>
+  <p>Resources are not a substitute for professional assessment, diagnosis or treatment. If you are in crisis or concerned about your safety or your child's safety, <a href="/support" style="color:var(--blue);">see our support page</a> for crisis lines in your country.</p>
+</footer>
+
+
+
+<script>
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.card[data-category]');
+const noResults = document.getElementById('no-results');
+const countLabel = document.getElementById('count-label');
+const countAll = document.getElementById('count-all');
+
+countAll.textContent = cards.length;
+
+const categoryNames = {
+  all: 'all resources',
+  podcasts: 'podcasts',
+  social: 'social &amp; YouTube',
+  academic: 'organisations',
+  books: 'books',
+  community: 'communities'
+};
+
+function updateCount(filter, visible) {
+  if (filter === 'all') {
+    countLabel.textContent = `Showing all ${visible} resources`;
+  } else {
+    countLabel.innerHTML = `Showing ${visible} ${categoryNames[filter]}`;
+  }
+}
+
+function filterCards(filter) {
+  let visible = 0;
+  cards.forEach((card, i) => {
+    const show = filter === 'all' || card.dataset.category === filter;
+    if (show) {
+      card.classList.remove('hidden');
+      card.style.animationDelay = `${(visible * 0.04)}s`;
+      void card.offsetWidth; // reflow
+      card.style.animation = 'none';
+      requestAnimationFrame(() => {
+        card.style.animation = '';
+      });
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+  updateCount(filter, visible);
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterCards(btn.dataset.filter);
+  });
+});
+
+// Init
+updateCount('all', cards.length);
+
+</script>
 
 </Base>
 
 <style>
-  .resources {
-    padding: 64px 0 96px;
-  }
-  .resources-inner {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .resources-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 12px;
-  }
-  .resources-title {
-    font-family: var(--serif);
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--slate);
-    margin-bottom: 16px;
-    font-variation-settings: 'opsz' 48;
-  }
-  .resources-title em {
-    font-style: italic;
-    color: var(--blue);
-  }
-  .resources-body {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--pewter);
-    max-width: 560px;
-    margin-bottom: 12px;
-  }
 
-  .safety-block {
-    margin-top: 40px;
-    padding: 24px;
-    background: white;
-    border-radius: 16px;
-    border: 1px solid rgba(201,123,106,0.2);
-  }
-  .safety-block h2 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--slate);
-    margin-bottom: 12px;
-  }
-  .safety-block > p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--pewter);
-    margin-bottom: 12px;
-  }
-  .crisis-numbers {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
-  }
-  .crisis-country {
-    padding: 16px;
-    background: var(--cloud);
-    border-radius: 12px;
-  }
-  .crisis-country h3 {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--slate);
-    margin-bottom: 8px;
-  }
-  .crisis-country p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--pewter);
-    margin-bottom: 4px;
-  }
-  .crisis-country strong {
-    color: var(--slate);
-  }
+:root {
+  --cloud:      #F7F5F0;
+  --mist:       #EDEFEE;
+  --blue:       #4A6FA5;
+  --blue-deep:  #3A5A8C;
+  --sage:       #A8C3A0;
+  --eucalyptus: #7FA88E;
+  --slate:      #1F2A37;
+  --pewter:     #56606E;
+  --lavender:   #9B8BB4;
+  --apricot:    #E8A87C;
+  --clay:       #C97B6A;
+  --mist-border: rgba(31,42,55,0.08);
 
-  .coming-soon-block {
-    margin-top: 40px;
-    padding: 24px;
-    background: var(--mist);
-    border-radius: 16px;
-  }
-  .coming-soon-block h2 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--slate);
-    margin-bottom: 12px;
-  }
-  .coming-soon-block p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--pewter);
-    margin-bottom: 12px;
-  }
-  .coming-soon-block a {
-    color: var(--blue);
-  }
+  --serif: 'Fraunces', Georgia, serif;
+  --mono:  'IBM Plex Mono', 'Courier New', monospace;
+  --sans:  'Lexend', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cloud);
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--slate);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 40px 40px;
+}
+.hero-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--slate);
+  margin-bottom: 16px;
+  font-variation-settings: "opsz" 48;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--blue);
+}
+.hero-body {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--pewter);
+  max-width: 560px;
+}
+
+/* ─── FILTER BAR ─── */
+.filter-bar {
+  max-width: 960px;
+  margin: 40px auto 0;
+  padding: 0 40px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--mist-border);
+  background: white;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pewter);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.filter-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.filter-btn.active {
+  background: var(--slate);
+  border-color: var(--slate);
+  color: white;
+}
+.filter-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ─── COUNT BAR ─── */
+.count-bar {
+  max-width: 960px;
+  margin: 20px auto 0;
+  padding: 0 40px;
+}
+.count-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--pewter);
+  opacity: 0.7;
+}
+
+/* ─── GRID ─── */
+.resource-grid {
+  max-width: 960px;
+  margin: 24px auto 0;
+  padding: 0 40px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* ─── CARD ─── */
+.card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--mist-border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: fadeIn 0.25s ease both;
+}
+.card:hover {
+  box-shadow: 0 4px 24px rgba(31,42,55,0.09);
+  transform: translateY(-2px);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card.hidden { display: none; }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.badge-type-podcasts  { background: rgba(127,168,142,0.15); color: var(--eucalyptus); }
+.badge-type-social    { background: rgba(232,168,124,0.15); color: #C07848; }
+.badge-type-academic  { background: rgba(74,111,165,0.15);  color: var(--blue); }
+.badge-type-books     { background: rgba(201,123,106,0.15); color: var(--clay); }
+.badge-type-community { background: rgba(155,139,180,0.15); color: var(--lavender); }
+
+.badge-country {
+  background: var(--mist);
+  color: var(--pewter);
+}
+
+.free-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(127,168,142,0.12);
+  color: var(--eucalyptus);
+  white-space: nowrap;
+}
+.paid-badge {
+  background: rgba(201,123,106,0.12);
+  color: var(--clay);
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--slate);
+  font-variation-settings: "opsz" 24;
+}
+.card-creator {
+  font-size: 12px;
+  color: var(--pewter);
+  margin-top: -6px;
+  font-weight: 400;
+}
+.card-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--pewter);
+  flex: 1;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 11px;
+  color: var(--pewter);
+  opacity: 0.65;
+}
+.tag::before { content: '#'; }
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.card-link:hover { color: var(--blue-deep); }
+.card-link svg { transition: transform 0.15s; }
+.card-link:hover svg { transform: translateX(2px); }
+
+.card-no-link {
+  font-size: 12px;
+  color: var(--pewter);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ─── AU HIGHLIGHT ─── */
+.card[data-country="AU"] {
+  border-left: 3px solid var(--sage);
+}
+
+/* ─── COMING SOON STRIP ─── */
+.coming-soon {
+  max-width: 960px;
+  margin: 0 auto 16px;
+  padding: 0 40px;
+}
+.coming-soon-inner {
+  background: linear-gradient(135deg, rgba(74,111,165,0.06), rgba(155,139,180,0.08));
+  border: 1px solid rgba(74,111,165,0.15);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.coming-soon-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.coming-soon-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(74,111,165,0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.coming-soon-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+.coming-soon-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--slate);
+  margin-bottom: 6px;
+  font-variation-settings: "opsz" 24;
+}
+.coming-soon-desc {
+  font-size: 14px;
+  color: var(--pewter);
+  line-height: 1.55;
+  max-width: 480px;
+}
+.coming-soon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: var(--blue);
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+}
+.coming-soon-btn:hover { background: var(--blue-deep); }
+
+/* ─── NO RESULTS ─── */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 64px 20px;
+  color: var(--pewter);
+}
+.no-results-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  font-variation-settings: "opsz" 28;
+}
+
+/* ─── FOOTER NOTE ─── */
+.footer-note {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+  border-top: 1px solid var(--mist-border);
+  padding-top: 32px;
+}
+.footer-note p {
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+  opacity: 0.75;
+}
+.footer-note p + p { margin-top: 8px; }
+
+/* ─── SECTION DIVIDERS ─── */
+.section-heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 4px;
+  margin-top: 16px;
+}
+.section-heading-line {
+  flex: 1;
+  height: 1px;
+  background: var(--mist-border);
+}
+.section-heading-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  opacity: 0.6;
+}
+
+@media (max-width: 680px) {
+  .nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 40px 20px 28px; }
+  .hero-title { font-size: 26px; }
+  .filter-bar { padding: 0 20px; }
+  .count-bar { padding: 0 20px; }
+  .resource-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
+  .coming-soon { padding: 0 20px; }
+  .coming-soon-inner { flex-direction: column; }
+  .footer-note { padding: 0 20px 48px; }
+}
+
 </style>
 
