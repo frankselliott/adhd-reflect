@@ -138,6 +138,64 @@ function ExpandSection({ label, children }) {
 }
 
 
+
+function GuideLink({ guide, accentColor }) {
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const list = JSON.parse(localStorage.getItem('adhd-reflect-saved-guides') || '[]');
+      setSaved(list.some(g => g.id === guide.id));
+    } catch(e) {}
+  }, []);
+
+  function toggleSave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      let list = JSON.parse(localStorage.getItem('adhd-reflect-saved-guides') || '[]');
+      if (saved) {
+        list = list.filter(g => g.id !== guide.id);
+      } else {
+        list.push({ id: guide.id, title: guide.title, savedAt: Date.now() });
+      }
+      localStorage.setItem('adhd-reflect-saved-guides', JSON.stringify(list));
+      setSaved(!saved);
+    } catch(e) {}
+  }
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 0,
+      background: 'rgba(75,107,78,0.05)', borderRadius: 12,
+      border: '1px solid rgba(75,107,78,0.08)',
+      overflow: 'hidden',
+    }}>
+      <a href={'/guides/' + guide.id} style={{
+        flex: 1, display: 'flex', alignItems: 'flex-start', gap: 12,
+        padding: '14px 16px', textDecoration: 'none', color: '#191714',
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor, flexShrink: 0, marginTop: 8 }}/>
+        <span style={{
+          fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 430',
+          fontSize: 15, lineHeight: 1.45,
+        }}>{guide.title}</span>
+      </a>
+      <button onClick={toggleSave} style={{
+        appearance: 'none', border: 0, cursor: 'pointer',
+        background: 'transparent', padding: '14px 14px',
+        color: saved ? accentColor : '#A09589',
+        transition: 'color 0.15s',
+        flexShrink: 0,
+      }} title={saved ? 'Remove from saved' : 'Save for later'}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill={saved ? accentColor : 'none'} stroke={saved ? accentColor : 'currentColor'} strokeWidth="1.5">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
 function WrongMatchBanner({ currentId }) {
   const [matches, setMatches] = useState(null);
   const [query, setQuery] = useState('');
@@ -390,20 +448,20 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
                   </>
                 )}
 
-                <a href={'/guides/' + cardId} style={{
-                  display: 'flex', alignItems: 'flex-start', gap: 13,
-                  background: 'rgba(75,107,78,0.08)', borderRadius: 14, padding: '17px 18px',
-                  marginTop: 20, textDecoration: 'none', color: ink,
-                }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: currentTab.accent, flexShrink: 0, marginTop: 7 }}/>
-                  <span>
-                    <span style={{ fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 16, "wght" 480', fontSize: 15, display: 'block', color: ink }}>Go deeper</span>
-                    <span style={{ fontFamily: 'var(--serif)', fontVariationSettings: '"opsz" 14, "wght" 360', fontSize: 13, color: ink3 }}>Full guide with strategies for next time</span>
-                  </span>
-                </a>
-
-
-              </div>
+                {/* Topic guides with save option */}
+                {topicGuides && topicGuides.length > 0 && (
+                  <div style={{ marginTop: 24 }}>
+                    <div style={{
+                      fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.18em',
+                      textTransform: 'lowercase', color: currentTab.accent, marginBottom: 14,
+                    }}>read when you are ready</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {topicGuides.map(g => (
+                        <GuideLink key={g.id} guide={g} accentColor={currentTab.accent} />
+                      ))}
+                    </div>
+                  </div>
+                )}              </div>
             )}
 
             {/* YOUR KID */}
