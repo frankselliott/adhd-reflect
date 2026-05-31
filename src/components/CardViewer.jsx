@@ -196,6 +196,74 @@ function GuideLink({ guide, accentColor }) {
   );
 }
 
+
+function SaveCardButton({ cardId, cardTitle }) {
+  const [saved, setSaved] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    try {
+      const list = JSON.parse(localStorage.getItem('adhd-reflect-saved-cards') || '[]');
+      setSaved(list.some(c => c.id === cardId));
+      // Show hint on first visit
+      if (!localStorage.getItem('adhd-reflect-save-hint-seen')) {
+        setTimeout(() => setShowHint(true), 3000);
+        setTimeout(() => {
+          setShowHint(false);
+          localStorage.setItem('adhd-reflect-save-hint-seen', 'true');
+        }, 8000);
+      }
+    } catch(e) {}
+  }, []);
+
+  function toggleSave() {
+    try {
+      let list = JSON.parse(localStorage.getItem('adhd-reflect-saved-cards') || '[]');
+      if (saved) {
+        list = list.filter(c => c.id !== cardId);
+      } else {
+        list.push({ id: cardId, title: cardTitle, savedAt: Date.now() });
+      }
+      localStorage.setItem('adhd-reflect-saved-cards', JSON.stringify(list));
+      setSaved(!saved);
+    } catch(e) {}
+  }
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <button onClick={toggleSave} style={{
+        appearance: 'none', border: 0, cursor: 'pointer',
+        background: 'transparent', padding: '4px',
+        color: saved ? '#B85038' : ink3,
+        transition: 'color 0.2s, transform 0.15s',
+        transform: saved ? 'scale(1.1)' : 'scale(1)',
+      }} title={saved ? 'Remove from saved' : 'Save this card'}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill={saved ? '#B85038' : 'none'} stroke={saved ? '#B85038' : 'currentColor'} strokeWidth="1.5">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+        </svg>
+      </button>
+      {showHint && (
+        <div style={{
+          position: 'absolute', top: '100%', right: 0, marginTop: 8,
+          background: '#191714', color: '#F5EFE0', borderRadius: 10,
+          padding: '8px 14px', whiteSpace: 'nowrap',
+          fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.04em',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+          animation: 'panel-in 300ms ease both',
+          zIndex: 10,
+        }}>
+          tap to save for later
+          <div style={{
+            position: 'absolute', top: -4, right: 14,
+            width: 8, height: 8, background: '#191714',
+            transform: 'rotate(45deg)',
+          }}/>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function WrongMatchBanner({ currentId }) {
   const [matches, setMatches] = useState(null);
   const [query, setQuery] = useState('');

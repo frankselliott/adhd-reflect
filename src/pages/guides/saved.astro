@@ -1,92 +1,108 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { TOPIC_GUIDES } from '../../data/topicGuides.js';
+import { CARDS } from '../../data/cards.js';
 ---
-<Base title="Saved Guides" description="Your saved guides for later reading." current="saved">
+<Base title="Saved" description="Your saved cards and guides." current="saved">
 
   <section class="saved-hero">
     <div class="saved-inner">
       <p class="saved-label">Your reading list</p>
-      <h1 class="saved-title">Saved <em>guides</em></h1>
-      <p class="saved-body">Guides you've bookmarked from cards. Read them when you have the space to go deeper.</p>
+      <h1 class="saved-title"><em>Saved</em></h1>
+      <p class="saved-body">Cards and guides you have bookmarked. Read them when you have the space.</p>
     </div>
   </section>
 
   <div id="saved-root"></div>
 
-  <script id="all-guides-data" type="application/json" set:html={JSON.stringify(TOPIC_GUIDES.map(g => ({
-    id: g.id,
-    title: g.title,
-    topic: g.topic,
-    recognize: g.recognize,
+  <script id="all-guides" type="application/json" set:html={JSON.stringify(TOPIC_GUIDES.map(g => ({
+    id: g.id, title: g.title, topic: g.topic,
+  })))} />
+  <script id="all-cards" type="application/json" set:html={JSON.stringify(CARDS.map(c => ({
+    id: c.id, title: c.title, type: c.type,
   })))} />
 
   <script>
-    const allGuides = JSON.parse(document.getElementById('all-guides-data').textContent);
+    const allGuides = JSON.parse(document.getElementById('all-guides').textContent);
+    const allCards = JSON.parse(document.getElementById('all-cards').textContent);
     const root = document.getElementById('saved-root');
+    const guidesMap = Object.fromEntries(allGuides.map(g => [g.id, g]));
+    const cardsMap = Object.fromEntries(allCards.map(c => [c.id, c]));
 
     function render() {
-      let saved = [];
-      try { saved = JSON.parse(localStorage.getItem('adhd-reflect-saved-guides') || '[]'); } catch(e) {}
+      let savedCards = [];
+      let savedGuides = [];
+      try { savedCards = JSON.parse(localStorage.getItem('adhd-reflect-saved-cards') || '[]'); } catch(e) {}
+      try { savedGuides = JSON.parse(localStorage.getItem('adhd-reflect-saved-guides') || '[]'); } catch(e) {}
 
-      if (saved.length === 0) {
+      const cards = savedCards.map(s => ({ ...s, ...(cardsMap[s.id] || {}) })).filter(s => s.title);
+      const guides = savedGuides.map(s => ({ ...s, ...(guidesMap[s.id] || {}) })).filter(s => s.title);
+
+      if (cards.length === 0 && guides.length === 0) {
         root.innerHTML = `
           <div style="max-width:640px;margin:0 auto;padding:40px 24px;text-align:center">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#A09589" stroke-width="1.5" style="margin-bottom:16px;opacity:0.4">
               <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
             </svg>
-            <p style="font-family:var(--serif);font-size:18px;color:#6B6358;margin-bottom:8px">No saved guides yet</p>
+            <p style="font-family:var(--serif);font-size:18px;color:#6B6358;margin-bottom:8px">Nothing saved yet</p>
             <p style="font-family:var(--serif);font-size:15px;color:#A09589;margin-bottom:24px">
-              When you find a guide on a card, tap the bookmark icon to save it here.
+              Tap the bookmark icon on any card or guide to save it here for later.
             </p>
-            <a href="/guides" style="
-              display:inline-flex;align-items:center;gap:8px;
-              padding:10px 24px;border-radius:100;
-              background:var(--blue);color:white;
-              text-decoration:none;font-family:var(--sans);font-size:15px;font-weight:600;
-            ">Browse all guides</a>
-          </div>
-        `;
+            <a href="/" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:100;background:#4A6FA5;color:white;text-decoration:none;font-family:var(--sans);font-size:15px;font-weight:600;">Search for a moment</a>
+          </div>`;
         return;
       }
 
-      const guidesMap = Object.fromEntries(allGuides.map(g => [g.id, g]));
-      const items = saved
-        .map(s => ({ ...s, ...(guidesMap[s.id] || {}) }))
-        .filter(s => s.title);
+      let html = '<div style="max-width:640px;margin:0 auto;padding:0 24px 80px">';
 
-      root.innerHTML = `
-        <div style="max-width:640px;margin:0 auto;padding:0 24px 80px">
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:#A09589;margin-bottom:16px">
-            ${items.length} saved guide${items.length !== 1 ? 's' : ''}
-          </div>
-          ${items.map(g => `
-            <div style="display:flex;align-items:center;gap:0;background:white;border-radius:14px;border:1px solid rgba(25,23,20,0.06);margin-bottom:10px;overflow:hidden">
-              <a href="/guides/${g.id}" style="
-                flex:1;padding:16px 18px;text-decoration:none;color:#191714;
-              ">
-                <span style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;color:#4B6B4E;text-transform:lowercase">${g.topic || ''}</span>
-                <span style="display:block;font-family:var(--serif);font-size:16px;line-height:1.4;margin-top:4px">${g.title}</span>
+      if (cards.length > 0) {
+        html += `<div style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#B85038;margin-bottom:12px;margin-top:8px">saved cards · ${cards.length}</div>`;
+        cards.forEach(c => {
+          const typeColor = c.type === 'moment' ? '#4A6FA5' : c.type === 'parent' ? '#9B8BB4' : '#A8C3A0';
+          html += `
+            <div style="display:flex;align-items:center;gap:0;background:white;border-radius:14px;border:1px solid rgba(25,23,20,0.06);margin-bottom:8px;overflow:hidden">
+              <a href="/cards/${c.id}" style="flex:1;padding:14px 18px;text-decoration:none;color:#191714">
+                <span style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+                  <span style="width:6px;height:6px;border-radius:50%;background:${typeColor}"></span>
+                  <span style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:${typeColor};text-transform:lowercase">${c.type}</span>
+                </span>
+                <span style="display:block;font-family:var(--serif);font-size:15px;line-height:1.35">${c.title}</span>
               </a>
-              <button onclick="removeGuide('${g.id}')" style="
-                appearance:none;border:0;cursor:pointer;background:transparent;
-                padding:16px;color:#B85038;flex-shrink:0;
-              " title="Remove from saved">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#B85038" stroke="#B85038" stroke-width="1.5">
-                  <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
-                </svg>
+              <button onclick="removeCard('${c.id}')" style="appearance:none;border:0;cursor:pointer;background:transparent;padding:14px;color:#B85038;flex-shrink:0" title="Remove">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#B85038" stroke="#B85038" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
               </button>
-            </div>
-          `).join('')}
-          <div style="margin-top:24px;text-align:center">
-            <a href="/guides" style="
-              font-family:var(--mono);font-size:12px;color:#A09589;text-decoration:none;
-            ">browse all guides →</a>
-          </div>
-        </div>
-      `;
+            </div>`;
+        });
+      }
+
+      if (guides.length > 0) {
+        html += `<div style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#4B6B4E;margin-bottom:12px;margin-top:24px">saved guides · ${guides.length}</div>`;
+        guides.forEach(g => {
+          html += `
+            <div style="display:flex;align-items:center;gap:0;background:white;border-radius:14px;border:1px solid rgba(25,23,20,0.06);margin-bottom:8px;overflow:hidden">
+              <a href="/guides/${g.id}" style="flex:1;padding:14px 18px;text-decoration:none;color:#191714">
+                <span style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:#4B6B4E;text-transform:lowercase">${g.topic || ''}</span>
+                <span style="display:block;font-family:var(--serif);font-size:15px;line-height:1.35;margin-top:4px">${g.title}</span>
+              </a>
+              <button onclick="removeGuide('${g.id}')" style="appearance:none;border:0;cursor:pointer;background:transparent;padding:14px;color:#4B6B4E;flex-shrink:0" title="Remove">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#4B6B4E" stroke="#4B6B4E" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>`;
+        });
+      }
+
+      html += `<div style="margin-top:24px;text-align:center"><a href="/" style="font-family:var(--mono);font-size:12px;color:#A09589;text-decoration:none">search for a moment →</a></div></div>`;
+      root.innerHTML = html;
     }
 
+    window.removeCard = function(id) {
+      try {
+        let list = JSON.parse(localStorage.getItem('adhd-reflect-saved-cards') || '[]');
+        list = list.filter(c => c.id !== id);
+        localStorage.setItem('adhd-reflect-saved-cards', JSON.stringify(list));
+        render();
+      } catch(e) {}
+    };
     window.removeGuide = function(id) {
       try {
         let list = JSON.parse(localStorage.getItem('adhd-reflect-saved-guides') || '[]');
@@ -104,14 +120,8 @@ import { TOPIC_GUIDES } from '../../data/topicGuides.js';
 <style>
   .saved-hero { padding: 64px 0 32px; }
   .saved-inner { max-width: 640px; margin: 0 auto; padding: 0 24px; }
-  .saved-label {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #B85038; margin-bottom: 12px;
-  }
-  .saved-title {
-    font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 300;
-    line-height: 1.15; color: #191714; margin-bottom: 16px;
-  }
+  .saved-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #B85038; margin-bottom: 12px; }
+  .saved-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 300; line-height: 1.15; color: #191714; margin-bottom: 16px; }
   .saved-title em { font-style: italic; color: #B85038; }
   .saved-body { font-size: 17px; line-height: 1.6; color: #6B6358; max-width: 480px; }
 </style>

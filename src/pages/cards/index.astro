@@ -1,70 +1,116 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { CARDS } from '../../data/cards.js';
+
+const momentCards = CARDS.filter(c => c.type === 'moment');
+const parentCards = CARDS.filter(c => c.type === 'parent');
+const kidCards = CARDS.filter(c => c.type === 'kid');
 ---
-<Base title="Cards" description="Short, specific guides for the moment you're in. When ADHD and parenting collide." current="cards">
+<Base title="All Cards — ADHD Parenting Moments" description="Every ADHD parenting moment, behaviour, and pattern we cover. For the moment you are in, when ADHD and parenting collide.">
 
-  <section class="cards-hero">
-    <div class="cards-hero-inner">
-      <p class="cards-label">Guide library</p>
-      <h1 class="cards-title">Guides for the <em>moment</em></h1>
-      <p class="cards-body">Short, specific guides for the moment you're in. When you've just yelled, when homework has fallen apart, when you've checked out and feel guilty about it.</p>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "ADHD Reflect Card Library",
+    "description": "Practical support cards for ADHD parents raising ADHD kids. Covers meltdowns, medication, sensory overload, school, sleep, shame, and more.",
+    "numberOfItems": CARDS.length,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": CARDS.slice(0, 50).map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.title,
+        "url": `https://adhdreflect.com/cards/${c.id}`,
+      })),
+    },
+  })} />
+
+  <article class="card-index">
+    <div class="card-index-inner">
+      <h1>Every moment we cover</h1>
+      <p class="card-index-intro">
+        {CARDS.length} cards for ADHD parents raising ADHD kids. Each one covers a specific moment: what to do right now, what your brain just did, what your child is experiencing, and where to go deeper. Find yours by searching on the <a href="/">homepage</a>, or browse below.
+      </p>
+
+      <section>
+        <h2 class="section-label moment">When you are both in it <span class="count">{momentCards.length}</span></h2>
+        <p class="section-desc">Parent and child, same room, same moment. What to do when ADHD parenting and ADHD childhood collide.</p>
+        <div class="card-list">
+          {momentCards.map(c => (
+            <a href={`/cards/${c.id}`} class="card-link moment">{c.title}</a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-label parent">When it is about you <span class="count">{parentCards.length}</span></h2>
+        <p class="section-desc">Your shame, your burnout, your patterns. The things you do as an ADHD parent that you wish you could change.</p>
+        <div class="card-list">
+          {parentCards.map(c => (
+            <a href={`/cards/${c.id}`} class="card-link parent">{c.title}</a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-label kid">When it is about your child <span class="count">{kidCards.length}</span></h2>
+        <p class="section-desc">Their behaviours, their struggles, their brain. What is happening inside your ADHD child and what they need from you.</p>
+        <div class="card-list">
+          {kidCards.map(c => (
+            <a href={`/cards/${c.id}`} class="card-link kid">{c.title}</a>
+          ))}
+        </div>
+      </section>
     </div>
-  </section>
-
-  <div id="card-browser-root"></div>
-
-  <script>
-    import { createElement } from 'react';
-    import { createRoot } from 'react-dom/client';
-    import CardBrowser from '../../components/CardBrowser.jsx';
-
-    const root = createRoot(document.getElementById('card-browser-root'));
-    root.render(createElement(CardBrowser));
-  </script>
+  </article>
 
 </Base>
 
 <style>
-  .cards-hero {
-    padding: 64px 0 32px;
-  }
-  .cards-hero-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .cards-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 12px;
-  }
-  .cards-title {
-    font-family: var(--serif);
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--slate);
-    margin-bottom: 16px;
+  .card-index { padding: 0 0 80px; }
+  .card-index-inner { max-width: 760px; margin: 0 auto; padding: 40px 24px; }
+  .card-index-inner h1 {
+    font-family: var(--serif); font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300; color: #191714; margin-bottom: 16px;
     font-variation-settings: 'opsz' 48;
   }
-  .cards-title em {
-    font-style: italic;
-    color: var(--blue);
+  .card-index-intro {
+    font-size: 17px; line-height: 1.6; color: #6B6358;
+    max-width: 560px; margin-bottom: 40px;
   }
-  .cards-body {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--pewter);
-    max-width: 520px;
+  .card-index-intro a { color: #4A6FA5; }
+
+  section { margin-bottom: 40px; }
+  .section-label {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    margin-bottom: 6px; display: flex; align-items: baseline; gap: 10px;
+  }
+  .section-label.moment { color: #4A6FA5; }
+  .section-label.parent { color: #9B8BB4; }
+  .section-label.kid { color: #A8C3A0; }
+  .count {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    opacity: 0.5;
+  }
+  .section-desc {
+    font-size: 15px; line-height: 1.5; color: #A09589; margin-bottom: 16px;
+    max-width: 480px;
   }
 
-  @media (min-width: 768px) {
-    .cards-hero-inner {
-      padding: 0 40px;
-    }
+  .card-list { display: 'flex'; flex-direction: column; }
+  .card-link {
+    display: block; padding: 12px 16px; margin-bottom: 4px;
+    border-radius: 10px; text-decoration: none;
+    font-family: var(--serif); font-size: 16px; line-height: 1.4;
+    color: #191714; transition: background 0.15s;
+    border-left: 3px solid transparent;
   }
+  .card-link:hover { background: rgba(25,23,20,0.03); }
+  .card-link.moment { border-left-color: rgba(74,111,165,0.3); }
+  .card-link.parent { border-left-color: rgba(155,139,180,0.3); }
+  .card-link.kid { border-left-color: rgba(168,195,160,0.3); }
+  .card-link.moment:hover { border-left-color: #4A6FA5; }
+  .card-link.parent:hover { border-left-color: #9B8BB4; }
+  .card-link.kid:hover { border-left-color: #A8C3A0; }
 </style>
 
