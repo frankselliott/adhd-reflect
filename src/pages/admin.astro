@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Admin" robots="noindex" description="Search analytics">
+  <meta name="robots" content="noindex, nofollow" />
+  <div id="admin-root" style="max-width:800px;margin:0 auto;padding:40px 24px 80px">
+    <h1 style="font-family:var(--serif);font-size:28px;font-weight:300;margin-bottom:24px">Search Analytics</h1>
+
+    <div id="auth-form">
+      <input type="password" id="admin-key" placeholder="Admin key" style="
+        font-family:var(--sans);font-size:15px;padding:12px 16px;
+        border:1.5px solid rgba(31,42,55,0.1);border-radius:10px;
+        background:white;width:100%;max-width:320px;margin-right:8px;
+      "/>
+      <button onclick="loadData()" style="
+        font-family:var(--sans);font-size:15px;font-weight:600;
+        padding:12px 24px;border-radius:10px;border:none;
+        background:var(--blue);color:white;cursor:pointer;
+      ">Load</button>
+    </div>
+
+    <div id="dashboard" style="display:none">
+      <!-- Summary -->
+      <div id="summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0"></div>
+
+      <!-- Unmatched queries - THE KEY SECTION -->
+      <div style="margin:32px 0">
+        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:4px">
+          Unmatched queries
+        </h2>
+        <p style="font-size:14px;color:var(--pewter);margin-bottom:16px">
+          What people searched for that did not match a card. These are your gaps.
+        </p>
+        <div id="unmatched-list"></div>
+      </div>
+
+      <!-- Top cards -->
+      <div style="margin:32px 0">
+        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:16px">
+          Most matched cards
+        </h2>
+        <div id="top-cards"></div>
+      </div>
+
+      <!-- Recent searches -->
+      <div style="margin:32px 0">
+        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:16px">
+          Recent searches
+        </h2>
+        <div id="recent-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadData() {
+      const key = document.getElementById('admin-key').value;
+      if (!key) return;
+
+      try {
+        const res = await fetch('/api/admin?key=' + encodeURIComponent(key));
+        const data = await res.json();
+
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        document.getElementById('auth-form').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+
+        // Summary cards
+        const s = data.summary;
+        document.getElementById('summary').innerHTML = [
+          { label: 'Total searches', value: s.total, color: '#4A6FA5' },
+          { label: 'Matched', value: s.matched, color: '#4B6B4E' },
+          { label: 'Unmatched', value: s.unmatched, color: '#B85038' },
+          { label: 'Crisis detected', value: s.crisisDetected, color: '#C97B6A' },
+          { label: 'Unique queries', value: s.uniqueQueries, color: '#9B8BB4' },
+        ].map(c => `
+          <div style="background:white;border-radius:14px;padding:18px 20px;border:1px solid rgba(31,42,55,0.06)">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:${c.color};text-transform:uppercase;margin-bottom:6px">${c.label}</div>
+            <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:#191714">${c.value}</div>
+          </div>
+        `).join('');
+
+        // Unmatched queries
+        if (data.unmatchedQueries.length === 0) {
+          document.getElementById('unmatched-list').innerHTML = '<p style="color:var(--pewter);font-size:14px">No unmatched queries yet. Every search found a card.</p>';
+        } else {
+          document.getElementById('unmatched-list').innerHTML = data.unmatchedQueries.map(q => `
+            <div style="background:rgba(184,80,56,0.04);border:1px solid rgba(184,80,56,0.1);border-radius:10px;padding:12px 16px;margin-bottom:8px">
+              <div style="font-family:var(--serif);font-size:15px;color:#191714;margin-bottom:4px">"${q.query}"</div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--pewter)">${new Date(q.timestamp).toLocaleDateString()} ${new Date(q.timestamp).toLocaleTimeString()}</div>
+            </div>
+          `).join('');
+        }
+
+        // Top cards
+        document.getElementById('top-cards').innerHTML = data.topCards.map((c, i) => `
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+            <span style="font-family:var(--mono);font-size:12px;color:var(--pewter);width:28px">${c.count}x</span>
+            <span style="font-family:var(--mono);font-size:11px;color:var(--blue);width:36px">${c.id}</span>
+            <span style="font-family:var(--serif);font-size:15px;color:#191714">${c.title}</span>
+          </div>
+        `).join('');
+
+        // Recent searches
+        document.getElementById('recent-list').innerHTML = data.recentSearches.map(s => `
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+            <span style="
+              font-family:var(--mono);font-size:9px;padding:3px 6px;border-radius:4px;flex-shrink:0;margin-top:2px;
+              ${s.matched ? 'background:rgba(75,107,78,0.1);color:#4B6B4E' : s.crisis ? 'background:rgba(201,123,106,0.1);color:#C97B6A' : 'background:rgba(184,80,56,0.1);color:#B85038'}
+            ">${s.matched ? 'MATCH' : s.crisis ? 'CRISIS' : 'MISS'}</span>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:var(--serif);font-size:14px;color:#191714;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"${s.query}"</div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:2px">
+                ${s.topMatch ? s.topMatch + ' · ' + (s.topMatchTitle || '') : 'no match'}
+                · ${new Date(s.timestamp).toLocaleString()}
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (e) {
+        alert('Error: ' + e.message);
+      }
+    }
+
+    // Enter key to submit
+    document.getElementById('admin-key')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') loadData();
+    });
+  </script>
+</Base>
+
