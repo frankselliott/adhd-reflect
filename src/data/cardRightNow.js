@@ -3,11 +3,27 @@
 
 export const CARD_RIGHT_NOW = {
   "m01": {
-    parentNow: `You're being asked to project-manage a chaotic small human before your brain has actually started. Your ADHD executive function doesn't warm up gradually — it either fires or it doesn't, and early morning is the hardest time to make it fire. Stop talking. Put one object directly in their hands — shoes, toothbrush, bag — and point without words. One thing. Then the next.`,
+    parentNow: `Stop repeating the instruction. Walk to them. Get close. Give one concrete action: shoes, teeth, bag. Not the whole routine. One thing. Then the next one. The morning will not be perfect. Get out the door. That is the only goal.
+
+---
+
+**Next words**
+"Shoes on. That is the only job right now."
+
+**If they push back**
+"I hear you. Shoes first. Then we figure out the rest."`,
     kidNow: `Your child isn't refusing — they're stuck. The ADHD brain can see what needs to happen but can't fire the engine to start it, especially first thing. Don't repeat the instruction. Put the first thing directly in front of them and stay nearby without talking. Your calm presence is more regulating than your words right now.`,
   },
   "m02": {
-    parentNow: `After-school homework is hitting a brain that has already been holding it together all day. Yours too. Your child isn't being dramatic — they're genuinely depleted and the task is too hard to start. Take the fight off the table: "We'll do ten minutes. Then we stop." Ten minutes of anything is better than forty minutes of war.`,
+    parentNow: `Stop the fight before restarting the work. Your raised voice activated their amygdala and made starting neurologically harder, not easier. Step back. Lower the temperature. The homework will still be there in five minutes. Your relationship with your child will remember how this went.
+
+---
+
+**Next words**
+"We are stopping for five minutes."
+
+**Later**
+"I got too loud. Homework was hard, and I added pressure. Next time I am going to try stopping earlier."`,
     kidNow: `Your child has used up everything they had by the time they get home. Homework is arriving into an empty tank. Don't start with pressure — start with food, ten minutes of something they enjoy, and your physical proximity. Your calm body near them is worth more than any instruction right now.`,
   },
   "m03": {
@@ -15,7 +31,15 @@ export const CARD_RIGHT_NOW = {
     kidNow: `Your child is decompressing — they're releasing everything they held together all day. This is trust, not attack. Don't absorb it head-on. Put some food down and step back slightly. Let them land without narrating what's happening. Your quiet presence is the co-regulation. You don't have to fix anything in this window.`,
   },
   "m04": {
-    parentNow: `Your brain is done and theirs is winding up. This is biology, not defiance. You cannot out-patience them at bedtime — your reserves are gone. Stop negotiating. Say the final thing once and walk out. "Lights out in five minutes. I'll come back to check." Then actually come back, briefly. The return is the regulation.`,
+    parentNow: `You are exhausted. Your regulatory capacity is at its lowest point of the day. The patience you had at 8am is genuinely gone. Shorten the routine. Fewer words. Fewer steps. Physical proximity instead of instructions from the doorway.
+
+---
+
+**Next words**
+"We are doing the short version tonight. Teeth, book, lights."
+
+**If they push back**
+"I know you want more. Tonight is a short night. We will have more time tomorrow."`,
     kidNow: `Your child's brain isn't ready for sleep when you are. Their arousal system is still running and the dark quiet room is genuinely difficult for them. Go back once after lights out, briefly, without engaging in conversation. "Just checking. You're okay. Goodnight." A short return is more settling than a firm boundary, because they're not trying to avoid sleep — they're trying to feel safe enough to let it happen.`,
   },
   "m05": {
@@ -23,7 +47,15 @@ export const CARD_RIGHT_NOW = {
     kidNow: `The car is a sensory container and it's making everything feel more intense. Acknowledge the feeling, not the content of the complaint. "I can see you're really upset. We're almost there." Music on, your voice level, no further engagement until you're somewhere that has more space. Duration is your friend here — most car meltdowns end when the car stops.`,
   },
   "m06": {
-    parentNow: `The audience is making this worse for both of you. Your job is not to perform good parenting — it's to get somewhere lower-stakes as fast as possible. "We're going to step outside for a minute." Then move. Don't explain to strangers. Don't finish the errand. Remove both of you from the audience. The errand can wait. The relationship can't.`,
+    parentNow: `Your body is in threat mode and your social anxiety system is firing simultaneously. You are managing your child's dysregulation AND the perceived judgment of strangers. Move to a quieter space first. Reduce the audience before you address the behaviour.
+
+---
+
+**Next words**
+"We are going somewhere quieter."
+
+**If they push back**
+"I am not punishing you. I am helping. Let us move."`,
     kidNow: `Your child's sensory and emotional system is overwhelmed and the public setting is making it worse. Exit the environment before attempting any management. Outside, car, quiet corner — anywhere lower-stimulus. Once you're out: minimal language, reduce physical demands, wait for the peak to pass. The meltdown has a natural arc. Your job is to let it complete somewhere safe, not to stop it.`,
   },
   "m07": {
@@ -79,11 +111,27 @@ export const CARD_RIGHT_NOW = {
     kidNow: `The reaction to losing is proportional to their emotional intensity, not to the importance of the game. Don't assess the size of the reaction in the moment. Acknowledge it, ride it out, stay near. The lesson about losing well comes after the system has settled — not inside the storm.`,
   },
   "m20": {
-    parentNow: `They escalated because they felt you leave. The phone isn't the problem — your attentional absence is. You don't have to put the phone down permanently. But right now, put it down, look at them, and make brief, warm contact. Thirty seconds of actual attention will settle what five minutes of physical-presence-mental-absence created.`,
+    parentNow: `You are physically present but neurologically elsewhere. The phone provides predictable, controlled, low-demand input that your overwhelmed nervous system finds more manageable than the chaos of family life. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Then look at them.
+
+---
+
+**Next words**
+"I am back. I drifted for a minute."
+
+**Later**
+"I checked out when things got too much. I am going to try coming back sooner next time."`,
     kidNow: `Your child escalated because they felt your attention leave. The acting out is a bid for attentional reconnection. The most efficient response is the one they're seeking: brief, genuine eye contact and warmth. Not as a reward for the behaviour, but because thirty seconds of real presence is what restores the regulation. Then, once connected, address the behaviour briefly and calmly.`,
   },
   "p01": {
-    content: `You've already replayed it twice. The spiral is not accountability — it's your nervous system staying activated long after the event has passed. One sentence: "That happened. I'm going to repair it." Then do one small ordinary thing. The spiral wants more attention. Give it less.`,
+    content: `The shame is running but the repair is what matters. Stop replaying it. You do not need to feel worse to do better. Set a time limit on the guilt: thirty minutes, then you do the repair.
+
+---
+
+**Next words**
+"I yelled. That was too much. I am sorry."
+
+**Later**
+"I lost it and I should not have. You did not deserve that volume. I am going to work on stopping before I get there."`,
   },
   "p02": {
     content: `You heard yourself and you recognised something. That recognition is already different from what your own parent did. Stop the current moment: "I need to take a second." Then come back differently. The fact that you noticed means the pattern has a gap in it — and a gap is somewhere to put something new.`,
@@ -95,10 +143,29 @@ export const CARD_RIGHT_NOW = {
     content: `You disagreed with what your partner just did or said, and your child saw it. The split is now visible. Don't compound it — hold the current position, even if it's not your preference. "Okay, what Dad said stands. We can talk about it later." Later means later. After the kids are in bed, not after dinner.`,
   },
   "p05": {
-    content: `You gave in on something your partner just held. The boundary has bent. Don't elaborate — don't explain why you gave in or try to build it back up right now. That creates more confusion. "I hear you. We'll talk to both of you about it later." Later actually happens. Before bed, or tomorrow.`,
+    content: `The pressure of your child's distress was more than your nervous system could hold. You said something in the heat of it that you cannot or should not follow through on. Do not double down to save face. It is better to walk it back honestly than to enforce something disproportionate.
+
+---
+
+**Next words**
+"I said something too big. Let me think about what is fair."
+
+**If they push back**
+"The answer is still coming. Give me a minute to get it right."
+
+**Later**
+"I threatened something I should not have. The real consequence is this. I am going to try to be calmer next time before I decide."`,
   },
   "p06": {
-    content: `You directed something at your partner that was about the situation, not about them. The mismatch is already done. Don't compound it with a defence of what you said. "That wasn't about you. I'm sorry. I'm having a hard time with [what's actually happening]." One sentence. Then give yourself thirty seconds before you continue the conversation.`,
+    content: `The anger landed on the wrong person, or the right person said the wrong thing at the wrong time. Do not process the parenting disagreement in front of the child. Contain it. Deal with it later.
+
+---
+
+**Next words**
+"Please do not correct me in front of them."
+
+**Later**
+"When you corrected me in front of them, I got more reactive. Next time, back me up in the moment and we will talk after."`,
   },
   "p07": {
     content: `If it's already happened: don't send any more messages or make any more calls today. Take twenty-four hours. The follow-up communication that happens in the heat of your reaction will make it worse, not better. Tomorrow: a brief, specific, calm acknowledgment. "I was more heated than was useful yesterday. I'd like to have the conversation differently."`,
@@ -155,7 +222,15 @@ export const CARD_RIGHT_NOW = {
     content: `Their nervous system is overwhelmed by a sensory input. This is not manipulative and it is not minor to them. Remove the sensory trigger if you can. If you can't, reduce everything else: lower the room volume, reduce demands, give physical space. Don't add more words — that's more sensory input. Wait for the peak to pass.`,
   },
   "k04": {
-    content: `Food is becoming a confrontation. Step back from it. Put what's available on the table without commentary, without pressure, without the conversation about nutrition. If they eat something, something is better than a battle. The mealtime relationship matters more than tonight's nutritional balance.`,
+    content: `Mealtimes are a battleground. The food refusal feels personal, wasteful, or worrying. But ADHD sensory sensitivity extends to taste, texture, temperature, and smell. Food aversions are neurological, not behavioural. One safe food on every plate. No commentary on what they did not eat.
+
+---
+
+**Next words**
+"You do not have to eat that. Here is your safe food."
+
+**If they push back**
+"Your tummy gets to decide. The other food is there if you want it."`,
   },
   "k05": {
     content: `They're moving because their body needs to. A direct conflict about sitting still at the table is going to cost more than it gains. Let them eat standing, or at the end of the table with more space, or with a fidget tool under the table. The goal is eating together. The goal is not perfect stillness.`,
@@ -187,7 +262,15 @@ export const CARD_RIGHT_NOW = {
     content: `They are not choosing to be slow. Time blindness means they genuinely cannot feel the minutes passing. Saying \'hurry up\' adds pressure without adding speed. Walk to them. Give one concrete next action. \'Shoes on. Now.\' Set a visual timer if you have one. Reduce the words between you and the door.`,
   },
   "m25": {
-    content: `The game was providing the exact dopamine input their brain was locked onto. Removing it is neurologically like pulling a plug from a socket. The rage is the withdrawal. Next time: a two-minute warning, then a one-minute warning, then \'save now.\' Build the transition into the routine, not the end of it.`,
+    content: `The game was providing the exact dopamine input their brain was locked onto. Removing it is neurologically like pulling a plug from a socket. The rage is the withdrawal. Hold the limit and reduce the argument.
+
+---
+
+**Next words**
+"The screen is finished. I am not adding more words."
+
+**If they push back**
+"You can be angry. The screen is still finished."`,
   },
   "m26": {
     content: `Your adrenaline is real and justified. Breathe first. They are safe now. The bolt was impulsive, not intentional. Their brain acted before the safety assessment could fire. Hold their hand. Say less. Your shaking hands and sharp voice are telling their nervous system they did something terrifying, which they did, but the fear lecture can wait until you are both calm.`,
@@ -329,14 +412,14 @@ export const CARD_RIGHT_NOW = {
   },
   // ─── Previously missing cards ───
   "m21": {
-    parentNow: `The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.`,
-    kidNow: `The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.`,
+    parentNow: \`The screen is going off and the meltdown is starting. Do not negotiate. The transition was always going to be hard. Say what is happening next, not what is ending. 'Screen is going off. We are having a snack.' Give them the next thing to move toward. If the rage comes, let it peak and pass. Do not re-engage the screen to stop the crying. The boundary holds.\`,
+    kidNow: \`The screen stopped and everything is wrong. Their body is restless, their mood has crashed, and they cannot explain why they feel so bad. The irritability is real. A snack, a physical activity, or something to do with their hands bridges the gap between the screen dopamine and whatever comes next.\`,
   },
   "p22": {
-    content: `You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.`,
+    content: \`You are scrolling instead of starting bedtime. You can see the clock. You know what you should be doing. You cannot make yourself start. Put the phone face down. Not away, not in another room, face down on the cushion next to you. Stand up. That is the hardest part. Once you are standing, walk to the bathroom and start the water. You do not need to be ready. You need to be moving. The rest follows the movement.\`,
   },
   "k11": {
-    content: `Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.`,
+    content: \`Another friendship has broken. They are hurt and they may not understand why. Do not try to fix it tonight. Sit with them. Let them talk if they want to. Do not say 'you will make other friends' because that dismisses this loss. Say 'that sounds really painful.' Tomorrow, if they are open to it, gently explore what happened. Not to assign blame. To help them see the pattern so they can do it differently next time.\`,
   },
 
   // ─── 15 NEW KID CARDS ───
