@@ -1,0 +1,101 @@
+---
+import AIRouter from '../components/AIRouter.jsx';
+---
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>ADHD Reflect</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#F7F5F0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lexend:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --serif: 'Fraunces', serif;
+      --sans: 'Lexend', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --cloud: #F7F5F0; --mist: #EDEFEE; --blue: #4A6FA5;
+      --sage: #A8C3A0; --sage-dark: #7FA88E; --slate: #1F2A37;
+      --pewter: #56606E; --apricot: #E8A87C; --clay: #C97B6A;
+      --lavender: #9B8BB4; --mist-border: #E2E4E3;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--sans);
+      background: var(--cloud);
+      color: var(--slate);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    .app-shell {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px;
+      width: 100%;
+    }
+    .app-logo {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--pewter);
+      text-align: center;
+      margin-bottom: 32px;
+      font-variation-settings: 'opsz' 18;
+      letter-spacing: -0.01em;
+    }
+    .app-title {
+      font-family: var(--serif);
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--slate);
+      text-align: center;
+      margin-bottom: 12px;
+      font-variation-settings: 'opsz' 48;
+    }
+    .app-title em { font-style: italic; color: var(--blue); }
+    .app-sub {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--pewter);
+      text-align: center;
+      margin-bottom: 28px;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .app-footer {
+      text-align: center;
+      margin-top: 32px;
+    }
+    .app-footer a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--pewter);
+      opacity: 0.4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <p class="app-logo">adhd reflect</p>
+    <h1 class="app-title">What just <em>happened?</em></h1>
+    <p class="app-sub">Describe the moment. We will find what helps.</p>
+    <AIRouter client:load />
+    <div class="app-footer">
+      <a href="/">adhdreflect.com</a>
+    </div>
+  </div>
+</body>
+</html>
+

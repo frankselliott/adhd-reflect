@@ -197,6 +197,97 @@ function GuideLink({ guide, accentColor }) {
 }
 
 
+
+function InstallPopup() {
+  const [show, setShow] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    // Don't show if already installed or dismissed recently
+    if (window.matchMedia('(display-mode: standalone)').matches) return;
+    if (window.navigator.standalone) return;
+    const dismissed = localStorage.getItem('adhd-reflect-install-popup-dismissed');
+    if (dismissed && Date.now() - parseInt(dismissed) < 7 * 24 * 60 * 60 * 1000) return;
+
+    // iOS detection
+    const ios = /iPhone|iPad/.test(navigator.userAgent) && !window.navigator.standalone;
+    setIsIOS(ios);
+
+    // Android/desktop
+    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); };
+    window.addEventListener('beforeinstallprompt', handler);
+
+    // Show popup after 5 seconds on card page
+    const timer = setTimeout(() => setShow(true), 5000);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (!show) return null;
+
+  function handleInstall() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => { setShow(false); setDeferredPrompt(null); });
+    }
+  }
+
+  function handleDismiss() {
+    setShow(false);
+    localStorage.setItem('adhd-reflect-install-popup-dismissed', String(Date.now()));
+  }
+
+  return (
+    <div style={{
+      position: 'fixed', bottom: 80, left: '50%', transform: 'translateX(-50%)',
+      width: 'calc(100% - 32px)', maxWidth: 380, zIndex: 100,
+      animation: 'panel-in 300ms ease both',
+    }}>
+      <div style={{
+        background: 'white', borderRadius: 18, padding: '18px 20px',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+        display: 'flex', alignItems: 'center', gap: 14,
+      }}>
+        <div style={{
+          width: 42, height: 42, borderRadius: 12, flexShrink: 0,
+          background: 'rgba(74,111,165,0.08)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6FA5" strokeWidth="1.5" strokeLinecap="round">
+            <path d="M12 5v14M5 12l7-7 7 7"/><rect x="3" y="19" width="18" height="2" rx="1"/>
+          </svg>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{
+            fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600,
+            color: '#191714', marginBottom: 2,
+          }}>Save to home screen</p>
+          <p style={{
+            fontFamily: 'var(--sans)', fontSize: 12, color: '#A09589', lineHeight: 1.35,
+          }}>{isIOS ? 'Tap share, then Add to Home Screen' : 'Open straight to the search next time'}</p>
+        </div>
+        {!isIOS && deferredPrompt && (
+          <button onClick={handleInstall} style={{
+            appearance: 'none', border: 0, cursor: 'pointer',
+            background: '#4A6FA5', color: 'white',
+            fontFamily: 'var(--sans)', fontSize: 13, fontWeight: 600,
+            padding: '8px 16px', borderRadius: 100, flexShrink: 0,
+          }}>Add</button>
+        )}
+        <button onClick={handleDismiss} style={{
+          appearance: 'none', border: 0, cursor: 'pointer',
+          background: 'transparent', color: '#A09589',
+          fontSize: 18, padding: '4px 4px', lineHeight: 1, flexShrink: 0,
+        }}>&times;</button>
+      </div>
+    </div>
+  );
+}
+
 function SaveCardButton({ cardId, cardTitle }) {
   const [saved, setSaved] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -577,6 +668,7 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
         </div>
       </div>
       <WrongMatchBanner currentId={cardId} />
+      <InstallPopup />
     </>
   );
 }

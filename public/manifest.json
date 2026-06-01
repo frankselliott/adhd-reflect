@@ -2,10 +2,10 @@
   "name": "ADHD Reflect",
   "short_name": "Reflect",
   "description": "For ADHD parents raising ADHD kids. Find what helps.",
-  "start_url": "/",
+  "start_url": "/app",
   "display": "standalone",
   "background_color": "#F7F5F0",
-  "theme_color": "#4A6FA5",
+  "theme_color": "#F7F5F0",
   "orientation": "portrait",
   "icons": [
     {
@@ -20,4 +20,3 @@
     }
   ]
 }
-
