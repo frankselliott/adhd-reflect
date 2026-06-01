@@ -41,8 +41,29 @@ export default function AIRouter() {
     return () => clearInterval(timer);
   }, [input, state]);
 
+  // Client-side crisis keyword check
+  const CRISIS_WORDS = [
+    'kill myself', 'kill my', 'want to die', 'suicid', 'self harm', 'self-harm',
+    'hurt myself', 'hurt my child', 'hurt my kid', 'hit my child', 'hit my kid',
+    'shook my', 'shaking my', 'harm my', 'abuse', 'abusing',
+    'not safe', 'unsafe', 'can\'t go on', 'end it', 'no point',
+    'punch my', 'choke', 'suffocate', 'drown',
+  ];
+
+  function isCrisisInput(text) {
+    const lower = text.toLowerCase();
+    return CRISIS_WORDS.some(w => lower.includes(w));
+  }
+
   async function handleSubmit() {
     if (!input.trim() || input.trim().length < 3) return;
+
+    // Immediate client-side crisis check
+    if (isCrisisInput(input)) {
+      setState('crisis');
+      return;
+    }
+
     setState('loading');
     setMatches([]);
     setErrorMsg('');
@@ -229,22 +250,72 @@ export default function AIRouter() {
       {state === 'crisis' && (
         <div style={{
           background: 'white', borderRadius: 16,
-          border: '1px solid rgba(201,123,106,0.3)', padding: 24,
+          border: '2px solid rgba(201,123,106,0.4)', padding: 28,
         }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: 14,
+            background: 'rgba(201,123,106,0.1)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            marginBottom: 16,
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C97B6A" strokeWidth="2" strokeLinecap="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
           <h3 style={{
-            fontFamily: 'var(--serif)', fontSize: 20, fontWeight: 400,
-            color: 'var(--slate)', marginBottom: 12,
-          }}>This sounds like it needs more than a guide right now.</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--pewter)', marginBottom: 16 }}>
-            If you or your child are unsafe, please reach out to crisis support.
+            fontFamily: 'var(--serif)', fontSize: 22, fontWeight: 400,
+            color: 'var(--slate)', marginBottom: 10, lineHeight: 1.3,
+          }}>This sounds like it needs more than a card right now.</h3>
+          <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--pewter)', marginBottom: 20 }}>
+            If you or your child are in danger, please reach out now. You do not have to handle this alone.
           </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+            <a href="tel:988" style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 18px', borderRadius: 12,
+              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
+              textDecoration: 'none', color: 'var(--slate)',
+            }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 600, color: '#C97B6A' }}>988</span>
+              <span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Suicide & Crisis Lifeline</span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>Call or text, 24/7</span>
+              </span>
+            </a>
+            <a href="tel:911" style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 18px', borderRadius: 12,
+              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
+              textDecoration: 'none', color: 'var(--slate)',
+            }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 600, color: '#C97B6A' }}>911</span>
+              <span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Emergency services</span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>If anyone is in immediate danger</span>
+              </span>
+            </a>
+            <a href="sms:741741&body=HELLO" style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 18px', borderRadius: 12,
+              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
+              textDecoration: 'none', color: 'var(--slate)',
+            }}>
+              <span style={{ fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 600, color: '#C97B6A' }}>TEXT</span>
+              <span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Crisis Text Line</span>
+                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>Text HELLO to 741741</span>
+              </span>
+            </a>
+          </div>
+
           <a href="/resources" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '12px 24px', borderRadius: 100,
             background: 'var(--blue)', color: 'white',
             textDecoration: 'none', fontFamily: 'var(--sans)',
             fontSize: 15, fontWeight: 600, minHeight: 44,
-          }}>See support options</a>
+          }}>More support options</a>
           <button onClick={handleReset} style={{
             display: 'block', marginTop: 16, background: 'none',
             border: 'none', color: 'var(--pewter)', fontSize: 14,
