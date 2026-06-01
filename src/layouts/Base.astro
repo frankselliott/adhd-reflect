@@ -83,6 +83,13 @@ const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`
   </main>
   <Footer />
   <script>
+    // Capture install prompt early before React loads
+    window.__installPrompt = null;
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      window.__installPrompt = e;
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }

@@ -216,40 +216,53 @@ function ShareButton({ title, url }) {
 
 function InstallPopup() {
   const [show, setShow] = useState(false);
-  const [platform, setPlatform] = useState('other');
+  const [isIOS, setIsIOS] = useState(false);
+  const [hasPrompt, setHasPrompt] = useState(false);
 
   useEffect(() => {
-    // Don't show if already installed
+    // Already installed or dismissed
     if (window.matchMedia('(display-mode: standalone)').matches) return;
     if (window.navigator.standalone) return;
-    
-    // Don't show if dismissed in last 7 days
     const dismissed = localStorage.getItem('adhd-reflect-install-dismissed');
     if (dismissed && Date.now() - parseInt(dismissed) < 7 * 24 * 60 * 60 * 1000) return;
 
-    // Detect platform
-    const ua = navigator.userAgent;
-    if (/iPhone|iPad/.test(ua)) setPlatform('ios');
-    else if (/Android/.test(ua)) setPlatform('android');
-    else setPlatform('other');
+    // Desktop: don't show
+    if (!/iPhone|iPad|Android|Mobile/i.test(navigator.userAgent)) return;
 
-    // Show after 5 seconds
-    const timer = setTimeout(() => setShow(true), 5000);
-    return () => clearTimeout(timer);
+    const ios = /iPhone|iPad/.test(navigator.userAgent);
+    setIsIOS(ios);
+
+    if (!ios && window.__installPrompt) {
+      setHasPrompt(true);
+    }
+
+    // Check again after a delay (event might fire late)
+    const checkTimer = setTimeout(() => {
+      if (!ios && window.__installPrompt) setHasPrompt(true);
+      setShow(true);
+    }, 4000);
+
+    return () => clearTimeout(checkTimer);
   }, []);
 
   if (!show) return null;
+  // On Android without prompt available, don't show
+  if (!isIOS && !hasPrompt) return null;
+
+  function handleInstall() {
+    if (window.__installPrompt) {
+      window.__installPrompt.prompt();
+      window.__installPrompt.userChoice.then(() => {
+        window.__installPrompt = null;
+        setShow(false);
+      });
+    }
+  }
 
   function handleDismiss() {
     setShow(false);
     localStorage.setItem('adhd-reflect-install-dismissed', String(Date.now()));
   }
-
-  const instructions = {
-    ios: 'Tap the share button in Safari, then "Add to Home Screen"',
-    android: 'Tap the menu (three dots), then "Add to Home Screen" or "Install app"',
-    other: 'Use your browser menu to add this site to your home screen',
-  };
 
   return (
     <div style={{
@@ -258,38 +271,42 @@ function InstallPopup() {
       animation: 'panel-in 300ms ease both',
     }}>
       <div style={{
-        background: 'white', borderRadius: 18, padding: '18px 20px',
+        background: 'white', borderRadius: 18, padding: '16px 18px',
         boxShadow: '0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+        display: 'flex', alignItems: 'center', gap: 12,
       }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <div style={{
-            width: 42, height: 42, borderRadius: 12, flexShrink: 0,
-            background: 'rgba(74,111,165,0.08)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6FA5" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M12 5v14M5 12l7-7 7 7"/><rect x="3" y="19" width="18" height="2" rx="1"/>
-            </svg>
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{
-              fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600,
-              color: '#191714', marginBottom: 4,
-            }}>Save to home screen</p>
-            <p style={{
-              fontFamily: 'var(--sans)', fontSize: 12, color: '#6B6358', lineHeight: 1.4,
-            }}>{instructions[platform]}</p>
-            <p style={{
-              fontFamily: 'var(--mono)', fontSize: 10, color: '#A09589', marginTop: 6,
-              letterSpacing: '0.04em',
-            }}>Opens straight to the search. No app store.</p>
-          </div>
-          <button onClick={handleDismiss} style={{
-            appearance: 'none', border: 0, cursor: 'pointer',
-            background: 'transparent', color: '#A09589',
-            fontSize: 20, padding: '0 4px', lineHeight: 1, flexShrink: 0,
-          }}>&times;</button>
+        <div style={{
+          width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+          background: 'rgba(74,111,165,0.08)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg width="18" height="18" viewBox="0 0 64 64" fill="none">
+            <path d="M32 6C32 6 48 16 48 29C48 37.8 40.8 44 32 44C23.2 44 16 37.8 16 29C16 16 32 6 32 6Z" fill="#4A6FA5"/>
+            <path d="M32 58C32 58 48 48 48 35C48 26.2 40.8 20 32 20C23.2 20 16 26.2 16 35C16 48 32 58 32 58Z" fill="#A8C3A0" opacity="0.75"/>
+          </svg>
         </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600, color: '#191714', marginBottom: 1 }}>
+            {isIOS ? 'Add to home screen' : 'Install ADHD Reflect'}
+          </p>
+          <p style={{ fontFamily: 'var(--sans)', fontSize: 12, color: '#A09589', lineHeight: 1.3 }}>
+            {isIOS ? 'Tap share ↑ then "Add to Home Screen"' : 'One tap. Opens straight to the search.'}
+          </p>
+        </div>
+        {hasPrompt && !isIOS && (
+          <button onClick={handleInstall} style={{
+            appearance: 'none', border: 0, cursor: 'pointer',
+            background: '#4A6FA5', color: 'white',
+            fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600,
+            padding: '10px 20px', borderRadius: 100, flexShrink: 0,
+            minHeight: 40,
+          }}>Install</button>
+        )}
+        <button onClick={handleDismiss} style={{
+          appearance: 'none', border: 0, cursor: 'pointer',
+          background: 'transparent', color: '#A09589',
+          fontSize: 20, padding: '0 2px', lineHeight: 1, flexShrink: 0,
+        }}>&times;</button>
       </div>
     </div>
   );
