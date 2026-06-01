@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function renderMarkdown(md) {
   if (!md) return '';
@@ -15,6 +15,35 @@ function renderMarkdown(md) {
 }
 
 const ink = '#191714', ink2 = '#6B6358', ink3 = '#A09589';
+
+
+function GuideShareButton({ title, guideId }) {
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => {
+    setCanShare(typeof navigator !== 'undefined' && !!navigator.share);
+  }, []);
+
+  if (!canShare) return null;
+
+  function handleShare() {
+    navigator.share({
+      title: title + ' — ADHD Reflect',
+      text: title,
+      url: 'https://adhdreflect.com/guides/' + guideId,
+    }).catch(() => {});
+  }
+
+  return (
+    <button onClick={handleShare} style={{
+      appearance: 'none', border: 0, cursor: 'pointer',
+      background: 'transparent', padding: '4px', color: '#A09589',
+    }} title="Share">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
+      </svg>
+    </button>
+  );
+}
 
 function Section({ label, accentColor, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -52,14 +81,17 @@ export default function TopicGuideViewer({ guide, relatedCardTitles }) {
     <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 24px 96px' }}>
       {/* Header */}
       <div style={{ paddingTop: 40, marginBottom: 32 }}>
-        <a href="/guides" style={{
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-          fontFamily: 'var(--mono)', fontSize: 12, color: ink3,
-          textDecoration: 'none', marginBottom: 16,
-        }}>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
-          all guides
-        </a>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <a href="/guides" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            fontFamily: 'var(--mono)', fontSize: 12, color: ink3,
+            textDecoration: 'none',
+          }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+            all guides
+          </a>
+          <GuideShareButton title={guide.title} guideId={guide.id} />
+        </div>
 
         <div style={{
           display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14,

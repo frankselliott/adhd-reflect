@@ -288,6 +288,35 @@ function InstallPopup() {
   );
 }
 
+
+function ShareButton({ title, url }) {
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => {
+    setCanShare(typeof navigator !== 'undefined' && !!navigator.share);
+  }, []);
+
+  if (!canShare) return null;
+
+  function handleShare() {
+    navigator.share({
+      title: title + ' — ADHD Reflect',
+      text: title,
+      url: 'https://adhdreflect.com' + url,
+    }).catch(() => {});
+  }
+
+  return (
+    <button onClick={handleShare} style={{
+      appearance: 'none', border: 0, cursor: 'pointer',
+      background: 'transparent', padding: '4px', color: ink3,
+    }} title="Share">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
+      </svg>
+    </button>
+  );
+}
+
 function SaveCardButton({ cardId, cardTitle }) {
   const [saved, setSaved] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -492,9 +521,9 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
             back
           </a>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.05em', color: ink3 }}>
-            matched
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4B6B4E', animation: 'pulse-live 2.8s ease-out infinite' }}/>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <ShareButton title={title} url={'/cards/' + cardId} />
+            <SaveCardButton cardId={cardId} cardTitle={title} />
           </div>
         </div>
 
