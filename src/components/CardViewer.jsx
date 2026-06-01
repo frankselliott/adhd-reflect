@@ -200,46 +200,40 @@ function GuideLink({ guide, accentColor }) {
 
 function InstallPopup() {
   const [show, setShow] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [isIOS, setIsIOS] = useState(false);
+  const [platform, setPlatform] = useState('other');
 
   useEffect(() => {
-    // Don't show if already installed or dismissed recently
+    // Don't show if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) return;
     if (window.navigator.standalone) return;
-    const dismissed = localStorage.getItem('adhd-reflect-install-popup-dismissed');
+    
+    // Don't show if dismissed in last 7 days
+    const dismissed = localStorage.getItem('adhd-reflect-install-dismissed');
     if (dismissed && Date.now() - parseInt(dismissed) < 7 * 24 * 60 * 60 * 1000) return;
 
-    // iOS detection
-    const ios = /iPhone|iPad/.test(navigator.userAgent) && !window.navigator.standalone;
-    setIsIOS(ios);
+    // Detect platform
+    const ua = navigator.userAgent;
+    if (/iPhone|iPad/.test(ua)) setPlatform('ios');
+    else if (/Android/.test(ua)) setPlatform('android');
+    else setPlatform('other');
 
-    // Android/desktop
-    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); };
-    window.addEventListener('beforeinstallprompt', handler);
-
-    // Show popup after 5 seconds on card page
+    // Show after 5 seconds
     const timer = setTimeout(() => setShow(true), 5000);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   if (!show) return null;
 
-  function handleInstall() {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => { setShow(false); setDeferredPrompt(null); });
-    }
-  }
-
   function handleDismiss() {
     setShow(false);
-    localStorage.setItem('adhd-reflect-install-popup-dismissed', String(Date.now()));
+    localStorage.setItem('adhd-reflect-install-dismissed', String(Date.now()));
   }
+
+  const instructions = {
+    ios: 'Tap the share button in Safari, then "Add to Home Screen"',
+    android: 'Tap the menu (three dots), then "Add to Home Screen" or "Install app"',
+    other: 'Use your browser menu to add this site to your home screen',
+  };
 
   return (
     <div style={{
@@ -250,70 +244,38 @@ function InstallPopup() {
       <div style={{
         background: 'white', borderRadius: 18, padding: '18px 20px',
         boxShadow: '0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
-        display: 'flex', alignItems: 'center', gap: 14,
       }}>
-        <div style={{
-          width: 42, height: 42, borderRadius: 12, flexShrink: 0,
-          background: 'rgba(74,111,165,0.08)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6FA5" strokeWidth="1.5" strokeLinecap="round">
-            <path d="M12 5v14M5 12l7-7 7 7"/><rect x="3" y="19" width="18" height="2" rx="1"/>
-          </svg>
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{
-            fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600,
-            color: '#191714', marginBottom: 2,
-          }}>Save to home screen</p>
-          <p style={{
-            fontFamily: 'var(--sans)', fontSize: 12, color: '#A09589', lineHeight: 1.35,
-          }}>{isIOS ? 'Tap share, then Add to Home Screen' : 'Open straight to the search next time'}</p>
-        </div>
-        {!isIOS && deferredPrompt && (
-          <button onClick={handleInstall} style={{
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+          <div style={{
+            width: 42, height: 42, borderRadius: 12, flexShrink: 0,
+            background: 'rgba(74,111,165,0.08)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6FA5" strokeWidth="1.5" strokeLinecap="round">
+              <path d="M12 5v14M5 12l7-7 7 7"/><rect x="3" y="19" width="18" height="2" rx="1"/>
+            </svg>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{
+              fontFamily: 'var(--sans)', fontSize: 14, fontWeight: 600,
+              color: '#191714', marginBottom: 4,
+            }}>Save to home screen</p>
+            <p style={{
+              fontFamily: 'var(--sans)', fontSize: 12, color: '#6B6358', lineHeight: 1.4,
+            }}>{instructions[platform]}</p>
+            <p style={{
+              fontFamily: 'var(--mono)', fontSize: 10, color: '#A09589', marginTop: 6,
+              letterSpacing: '0.04em',
+            }}>Opens straight to the search. No app store.</p>
+          </div>
+          <button onClick={handleDismiss} style={{
             appearance: 'none', border: 0, cursor: 'pointer',
-            background: '#4A6FA5', color: 'white',
-            fontFamily: 'var(--sans)', fontSize: 13, fontWeight: 600,
-            padding: '8px 16px', borderRadius: 100, flexShrink: 0,
-          }}>Add</button>
-        )}
-        <button onClick={handleDismiss} style={{
-          appearance: 'none', border: 0, cursor: 'pointer',
-          background: 'transparent', color: '#A09589',
-          fontSize: 18, padding: '4px 4px', lineHeight: 1, flexShrink: 0,
-        }}>&times;</button>
+            background: 'transparent', color: '#A09589',
+            fontSize: 20, padding: '0 4px', lineHeight: 1, flexShrink: 0,
+          }}>&times;</button>
+        </div>
       </div>
     </div>
-  );
-}
-
-
-function ShareButton({ title, url }) {
-  const [canShare, setCanShare] = useState(false);
-  useEffect(() => {
-    setCanShare(typeof navigator !== 'undefined' && !!navigator.share);
-  }, []);
-
-  if (!canShare) return null;
-
-  function handleShare() {
-    navigator.share({
-      title: title + ' — ADHD Reflect',
-      text: title,
-      url: 'https://adhdreflect.com' + url,
-    }).catch(() => {});
-  }
-
-  return (
-    <button onClick={handleShare} style={{
-      appearance: 'none', border: 0, cursor: 'pointer',
-      background: 'transparent', padding: '4px', color: ink3,
-    }} title="Share">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
-      </svg>
-    </button>
   );
 }
 
