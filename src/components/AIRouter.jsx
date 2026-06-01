@@ -41,6 +41,83 @@ export default function AIRouter() {
     return () => clearInterval(timer);
   }, [input, state]);
 
+
+const CRISIS_LINES = {
+  US: [
+    { number: '988', label: 'Suicide & Crisis Lifeline', desc: 'Call or text, 24/7', href: 'tel:988' },
+    { number: '911', label: 'Emergency services', desc: 'If anyone is in immediate danger', href: 'tel:911' },
+    { number: 'TEXT', label: 'Crisis Text Line', desc: 'Text HELLO to 741741', href: 'sms:741741&body=HELLO' },
+  ],
+  AU: [
+    { number: '000', label: 'Emergency services', desc: 'Police, fire, ambulance', href: 'tel:000' },
+    { number: '13 11 14', label: 'Lifeline Australia', desc: '24/7 crisis support', href: 'tel:131114' },
+    { number: '1800 55 1800', label: 'Kids Helpline', desc: 'For children and young people', href: 'tel:1800551800' },
+  ],
+  GB: [
+    { number: '999', label: 'Emergency services', desc: 'Police, fire, ambulance', href: 'tel:999' },
+    { number: '116 123', label: 'Samaritans', desc: '24/7, free to call', href: 'tel:116123' },
+    { number: '0800 1111', label: 'Childline', desc: 'For children and young people', href: 'tel:08001111' },
+  ],
+  CA: [
+    { number: '988', label: 'Suicide Crisis Helpline', desc: 'Call or text, 24/7', href: 'tel:988' },
+    { number: '911', label: 'Emergency services', desc: 'If anyone is in immediate danger', href: 'tel:911' },
+    { number: 'TEXT', label: 'Crisis Text Line', desc: 'Text CONNECT to 686868', href: 'sms:686868&body=CONNECT' },
+  ],
+  NZ: [
+    { number: '111', label: 'Emergency services', desc: 'Police, fire, ambulance', href: 'tel:111' },
+    { number: '1737', label: 'Need to Talk?', desc: 'Call or text, 24/7', href: 'tel:1737' },
+  ],
+  IE: [
+    { number: '999', label: 'Emergency services', desc: 'Police, fire, ambulance', href: 'tel:999' },
+    { number: '116 123', label: 'Samaritans Ireland', desc: '24/7, free to call', href: 'tel:116123' },
+    { number: '1800 66 66 66', label: 'Childline Ireland', desc: 'For children and young people', href: 'tel:1800666666' },
+  ],
+};
+
+function detectCountry() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (tz.startsWith('Australia')) return 'AU';
+    if (tz.startsWith('Europe/London') || tz.startsWith('Europe/Belfast')) return 'GB';
+    if (tz.startsWith('America/Toronto') || tz.startsWith('America/Vancouver') || tz.startsWith('America/Edmonton') || tz.startsWith('America/Winnipeg') || tz.startsWith('America/Halifax') || tz.startsWith('America/St_Johns')) return 'CA';
+    if (tz.startsWith('Pacific/Auckland')) return 'NZ';
+    if (tz.startsWith('Europe/Dublin')) return 'IE';
+    if (tz.startsWith('America/')) return 'US';
+    if (tz.startsWith('US/')) return 'US';
+  } catch(e) {}
+  return 'US';
+}
+
+function CrisisNumbers() {
+  const country = detectCountry();
+  const lines = CRISIS_LINES[country] || CRISIS_LINES.US;
+
+  const linkStyle = {
+    display: 'flex', alignItems: 'center', gap: 12,
+    padding: '14px 18px', borderRadius: 12,
+    background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
+    textDecoration: 'none', color: 'var(--slate)',
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+      {lines.map((line, i) => (
+        <a key={i} href={line.href} style={linkStyle}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: line.number.length > 4 ? 13 : 18, fontWeight: 600, color: '#C97B6A', minWidth: 52 }}>{line.number}</span>
+          <span>
+            <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>{line.label}</span>
+            <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>{line.desc}</span>
+          </span>
+        </a>
+      ))}
+      <a href="/resources" style={{
+        fontFamily: 'var(--mono)', fontSize: 12, color: '#A09589',
+        textDecoration: 'none', textAlign: 'center', padding: '8px 0',
+      }}>support in other countries &#8594;</a>
+    </div>
+  );
+}
+
   // Client-side crisis keyword check
   const CRISIS_WORDS = [
     'kill myself', 'kill my', 'want to die', 'suicid', 'self harm', 'self-harm',
@@ -270,44 +347,7 @@ export default function AIRouter() {
             If you or your child are in danger, please reach out now. You do not have to handle this alone.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
-            <a href="tel:988" style={{
-              display: 'flex', alignItems: 'center', gap: 12,
-              padding: '14px 18px', borderRadius: 12,
-              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
-              textDecoration: 'none', color: 'var(--slate)',
-            }}>
-              <span style={{ fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 600, color: '#C97B6A' }}>988</span>
-              <span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Suicide & Crisis Lifeline</span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>Call or text, 24/7</span>
-              </span>
-            </a>
-            <a href="tel:911" style={{
-              display: 'flex', alignItems: 'center', gap: 12,
-              padding: '14px 18px', borderRadius: 12,
-              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
-              textDecoration: 'none', color: 'var(--slate)',
-            }}>
-              <span style={{ fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 600, color: '#C97B6A' }}>911</span>
-              <span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Emergency services</span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>If anyone is in immediate danger</span>
-              </span>
-            </a>
-            <a href="sms:741741&body=HELLO" style={{
-              display: 'flex', alignItems: 'center', gap: 12,
-              padding: '14px 18px', borderRadius: 12,
-              background: 'rgba(201,123,106,0.06)', border: '1px solid rgba(201,123,106,0.15)',
-              textDecoration: 'none', color: 'var(--slate)',
-            }}>
-              <span style={{ fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 600, color: '#C97B6A' }}>TEXT</span>
-              <span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600, display: 'block' }}>Crisis Text Line</span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: 13, color: 'var(--pewter)' }}>Text HELLO to 741741</span>
-              </span>
-            </a>
-          </div>
+          <CrisisNumbers />
 
           <a href="/resources" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
