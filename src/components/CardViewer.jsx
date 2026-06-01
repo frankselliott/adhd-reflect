@@ -198,6 +198,22 @@ function GuideLink({ guide, accentColor }) {
 
 
 
+
+function ShareButton({ title, url }) {
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => { setCanShare(typeof navigator !== 'undefined' && !!navigator.share); }, []);
+  if (!canShare) return null;
+  return (
+    <button onClick={() => navigator.share({ title: title + ' — ADHD Reflect', text: title, url: 'https://adhdreflect.com' + url }).catch(() => {})} style={{
+      appearance: 'none', border: 0, cursor: 'pointer', background: 'transparent', padding: '4px', color: '#A09589',
+    }} title="Share">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
+      </svg>
+    </button>
+  );
+}
+
 function InstallPopup() {
   const [show, setShow] = useState(false);
   const [platform, setPlatform] = useState('other');
