@@ -229,6 +229,18 @@ export async function onRequestPost(context) {
       return new Response(JSON.stringify({ error: 'Please keep it shorter.' }), { status: 400, headers });
     }
 
+    // Cache lookup
+    const cacheKey = 'cache:' + userInput.toLowerCase().trim().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').slice(0, 150);
+    if (env.SEARCH_LOGS) {
+      try {
+        const cached = await env.SEARCH_LOGS.get(cacheKey);
+        if (cached) {
+          env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: true, cached: true, topMatch: JSON.parse(cached).matches?.[0]?.id || null, topMatchTitle: JSON.parse(cached).matches?.[0]?.title || null }), { expirationTtl: 7776000 });
+          return new Response(cached, { status: 200, headers });
+        }
+      } catch(e) {}
+    }
+
     const apiKey = env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       return new Response(JSON.stringify({ error: 'Service not configured.' }), { status: 500, headers });
@@ -267,6 +279,14 @@ export async function onRequestPost(context) {
     } catch (e) {
       console.error('Failed to parse Claude response:', text);
       return new Response(JSON.stringify({ error: 'Could not process the match.' }), { status: 500, headers });
+    }
+
+    // Cache + log
+    if (env.SEARCH_LOGS) {
+      try {
+        if (!result.crisis && result.matches?.length > 0) env.SEARCH_LOGS.put(cacheKey, JSON.stringify(result), { expirationTtl: 2592000 });
+        env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: !result.crisis && result.matches?.length > 0, crisis: result.crisis || false, cached: false, topMatch: result.matches?.[0]?.id || null, topMatchTitle: result.matches?.[0]?.title || null }), { expirationTtl: 7776000 });
+      } catch(e) {}
     }
 
     return new Response(JSON.stringify(result), { status: 200, headers });
