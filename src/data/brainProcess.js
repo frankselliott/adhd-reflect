@@ -725,6 +725,258 @@ export const BRAIN_PROCESS = {
     brain: "By school age, most ADHD children are aware that something is different about them. The question is not just about information. It is about identity. How you answer shapes how they understand themselves.",
     effect: "Be honest without being clinical. \'Your brain works differently\' is accurate. Name one hard thing and one strength. Avoid making ADHD sound like a superpower (dismisses the struggle) or a disability (defines by deficit). It is a difference that needs support.",
   },
+
+  // ─── 50 NEW CARDS ───
+  k40: {
+    body: "The consequence was delivered. It did not change the behaviour. The frustration of watching the same pattern repeat despite clear consequences is real.",
+    brain: "ADHD brains discount future consequences at a rate neurotypical brains do not. A punishment that arrives an hour after the behaviour is neurologically disconnected from the event. The consequence fails not because the child does not care, but because the temporal bridge between action and outcome is too long for their working memory to maintain.",
+    effect: "Natural, immediate consequences work better than imposed, delayed ones. Collaborative problem-solving addresses the underlying skill deficit. The goal shifts from \'make them stop\' to \'help them build the skill they are missing.\'",
+  },
+  k41: {
+    body: "The reward chart worked for three days and then stopped. The stickers lost their power. The promised reward stopped motivating.",
+    brain: "Reward systems rely on sustained motivation toward a delayed outcome. ADHD interest-based nervous systems provide motivation through novelty, urgency, and personal interest. When the novelty of the chart fades, the motivational fuel runs out. The reward did not stop working. The dopamine source that powered it expired.",
+    effect: "Rotate rewards frequently. Keep them small and immediate. A reward earned today is worth ten earned next week. The system needs to match the brain\'s motivational architecture, not the other way around.",
+  },
+  k42: {
+    body: "They apologised sincerely. They repeated the behaviour. Your trust in their apologies is eroding.",
+    brain: "The apology used reflective cognition. The repeated behaviour used impulsive action. These are two different brain systems. The reflective system that produced the apology is slower and weaker than the impulsive system that produced the behaviour. They meant the sorry. They also could not stop the impulse.",
+    effect: "Shift from \'are they sorry\' to \'what skill are they missing.\' The apology shows they understand. The repetition shows they cannot yet execute. Build the execution skill.",
+  },
+  k43: {
+    body: "They can state the rule perfectly. They violated it thirty seconds later. The gap between knowing and doing feels impossible.",
+    brain: "Rule knowledge is stored in declarative memory. Rule-following under pressure requires executive function: inhibition, working memory, and self-monitoring, all running simultaneously. ADHD impairs the execution system, not the knowledge system. They know. They cannot do, under load.",
+    effect: "Move the rule from their memory to the environment. A sign on the wall, a visual cue at the point of action. External reminders bypass the internal system that fails under pressure.",
+  },
+  m57: {
+    body: "The consequence triggered a bigger problem than the original behaviour. The meltdown about the punishment consumed the rest of the evening.",
+    brain: "ADHD emotional reactivity to consequences can be disproportionate because the loss or restriction activates the same neural circuits as a genuine threat. The child is not being dramatic. Their nervous system processed the consequence at a higher intensity than intended.",
+    effect: "Scale consequences down. A consequence that generates a 45-minute meltdown is not teaching anything. It is consuming regulatory resources that both of you need for the rest of the day.",
+  },
+  p59: {
+    body: "The uncertainty is constant. Every decision about boundaries, consequences, and accommodation feels like a test you might be failing.",
+    brain: "ADHD parenting requires hundreds of micro-decisions per day about where to hold and where to flex. Each decision uses executive function. The uncertainty amplifies the cognitive load because there is no reliable formula. What works Monday fails Wednesday.",
+    effect: "The middle ground is not a fixed point. It moves. Being too soft one day and too harsh the next is not inconsistency. It is a human being doing their best with variable resources. Pick the option that protects the relationship.",
+  },
+  p60: {
+    body: "Another person who does not live your life told you what your child needs. The advice landed on your rejection sensitivity and activated both shame and rage.",
+    brain: "External parenting advice triggers an ADHD parent\'s rejection sensitivity because it implies the current approach is wrong. The advice-giver cannot see the invisible context: the medication timing, the sensory profile, the morning that preceded this moment, the fourteen other strategies you tried before this one.",
+    effect: "You do not owe anyone an explanation. \'We are working with professionals on this\' is a complete response. The people inside your house know what your child needs. The people outside it are guessing.",
+  },
+  m58: {
+    body: "The removal made them worse. The thing you took away became the only thing they could think about. The lesson was lost in the emotional response.",
+    brain: "Loss aversion in ADHD is amplified. The removed item or privilege occupies working memory at the expense of the lesson the removal was supposed to teach. The child is not learning from the consequence. They are mourning the loss.",
+    effect: "Try adding contingent access instead of removing existing access. \'You can have screen time after homework\' works better than \'No screen time because you did not do homework.\' Same outcome, different neural processing.",
+  },
+  k44: {
+    body: "The accident happened or nearly happened. They are embarrassed, you are frustrated, and the situation needs handling.",
+    brain: "ADHD interoception processes internal signals on a delayed timeline. The bladder signal arrived at urgent rather than at aware. They did not choose to wait. The signal was late.",
+    effect: "Build external prompts. Toilet stops at every transition point: before leaving, after meals, before activities. Do not wait for them to notice. Schedule the check-in their body does not provide.",
+  },
+  k45: {
+    body: "The hidden underwear is the evidence of a problem they could not face. The shame of the accident was bigger than the shame of hiding.",
+    brain: "Avoidance of shame is a powerful ADHD driver. The hiding was the path of least immediate emotional cost. Long-term consequences were discounted in favour of short-term shame avoidance.",
+    effect: "Make the discovery a non-event. \'Found these, no big deal, into the wash.\' Your calm reaction this time determines whether they hide or tell you next time.",
+  },
+  k46: {
+    body: "Wiping requires motor planning, sensory tolerance, and body awareness that their development may not have caught up with yet.",
+    brain: "The task is a multi-step motor sequence requiring proprioceptive feedback that ADHD and sensory processing differences can impair. It is genuinely harder, not lazier.",
+    effect: "Solve the mechanics. Wet wipes are easier than dry toilet paper. A bidet attachment removes the skill demand. Teach the specific physical technique rather than repeating the instruction.",
+  },
+  p61: {
+    body: "The exhaustion is specific and unglamorous. No parenting book covers this. No social media account discusses this. You are alone with it.",
+    brain: "ADHD hygiene challenges combine interoception delays, sensory aversion, executive function gaps, and shame avoidance. The result lands on you as the daily manager of a problem that should not still exist at this age. The should is what exhausts you.",
+    effect: "This is a legitimate challenge, not a failure. Practical solutions reduce the load: bidet attachments, scheduled toilet times, wet wipes, matter-of-fact language. Shame makes it worse. Systems make it better.",
+  },
+  k47: {
+    body: "They cannot smell themselves. They resist the shower. The social consequences are starting to arrive.",
+    brain: "Olfactory habituation means they genuinely do not detect their own scent. The shower requires sensory tolerance plus a multi-step sequence, both of which ADHD impairs. The resistance is avoidance of a genuinely uncomfortable sensory experience.",
+    effect: "Reduce the shower demand. Three minutes, no hair wash, their choice of products. Build the habit at the lowest possible threshold. Add steps gradually once the routine is established.",
+  },
+  k48: {
+    body: "New hygiene demands arrived alongside hormonal changes, social pressure, and identity formation. Everything is harder simultaneously.",
+    brain: "Puberty adds executive function demands to a system that was already at capacity. Each new hygiene task is another sequence to initiate, remember, and sustain. The child is also managing emotional and social changes that consume the same regulatory resources.",
+    effect: "Written checklists in the bathroom. Products they chose. Zero shame. Approach every hygiene conversation as skill-building, not character correction. They need systems, not lectures.",
+  },
+  k49: {
+    body: "You expected the reminding to end by now. It has not. The scaffolding you provide is still the scaffolding they need.",
+    brain: "Executive function development in ADHD is delayed by approximately 30 percent. A twelve-year-old may have the executive function of an eight-year-old. The reminding is not enabling. It is matching support to developmental reality.",
+    effect: "Shift the reminding from your voice to their environment. Visual checklists, phone alarms, a laminated routine card. The cue moves from internal (you remembering to remind) to external (the environment providing the prompt).",
+  },
+  p62: {
+    body: "The resentment sits alongside the love. Both are real. The guilt of feeling resentment adds weight to the resentment itself.",
+    brain: "Chronic unrelenting demand depletes the caregiver\'s emotional resources. Resentment is the signal that the demand has exceeded capacity for too long. It is not a character flaw. It is a depletion signal.",
+    effect: "Name it to a therapist or trusted person. Resentment that stays hidden compounds. Resentment that is acknowledged can be addressed through load reduction, respite, and support.",
+  },
+  p63: {
+    body: "You love them and you do not want to be in the same room as them. The dissonance is painful.",
+    brain: "Sustained exposure to high-intensity emotional output depletes the caregiver\'s own regulatory capacity. The avoidance impulse is protective, not selfish.",
+    effect: "Find one moment of genuine connection today. Not manufactured. Not a parenting performance. Something small and real. Five minutes of a shared interest. The relationship repairs in micro-moments, not grand gestures.",
+  },
+  p64: {
+    body: "Your body is braced for the next crisis. The quiet moments do not feel peaceful. They feel like the countdown.",
+    brain: "Hypervigilance is a trauma response to unpredictable emotional intensity. Your nervous system has learned that calm precedes chaos, so calm no longer feels safe. The cortisol is chronic.",
+    effect: "This is worth professional support. Your nervous system is stuck in a mode designed for emergencies, not daily life. Trauma-informed therapy can help recalibrate the threat detection system.",
+  },
+  p65: {
+    body: "The fear is real. During the outburst, you were genuinely frightened. The admission feels like a failure.",
+    brain: "A child in a violent meltdown activates the parent\'s threat detection system appropriately. The fear is proportionate to the physical reality, regardless of the child\'s intention.",
+    effect: "Safety planning for violent meltdowns is a reasonable, responsible step. This is not about blame. It is about keeping everyone safe. Professional support can help build de-escalation strategies.",
+  },
+  p66: {
+    body: "The physical impact is sitting in your body. The explanation that it was the ADHD does not erase the pain.",
+    brain: "Your body processes physical impact as threat regardless of context. Understanding the neurology does not override the stress response. Both things are true: it was the ADHD and it hurt you.",
+    effect: "You are allowed to say \'that hurt me and it is not okay\' without it being punitive. Physical safety is non-negotiable for everyone in the house, including you.",
+  },
+  p67: {
+    body: "The cruel words are on repeat. Your rejection sensitivity is amplifying each replay.",
+    brain: "ADHD rumination locks onto emotionally charged content. The replay loop persists because the emotional charge has not been discharged. Each repetition intensifies rather than resolves.",
+    effect: "Write it down. Then write what you know to be true. The written counter-narrative interrupts the loop that the internal one cannot. The words were the emotion, not the truth.",
+  },
+  p68: {
+    body: "You feel nothing where love used to be. The numbness is frightening.",
+    brain: "Emotional shutdown is a protective mechanism under sustained overload. The feeling system conserves by going offline. This is burnout, not indifference.",
+    effect: "The love is underneath the numbness. When the pressure reduces, feeling returns. If it does not, professional support can help. Numbness is a signal worth listening to.",
+  },
+  p69: {
+    body: "It is afternoon and you are still carrying the morning. The residue has coloured everything since.",
+    brain: "ADHD emotional residue persists in working memory because the processing was interrupted. The morning event was never fully processed, so it remains active, consuming cognitive resources needed for the rest of the day.",
+    effect: "Name it: \'I am still carrying this morning.\' Then one physical reset. A walk, a shower, a change of environment. The brain needs an external signal that the context has changed.",
+  },
+  p70: {
+    body: "Another article told you to meditate, take a bath, go for a walk. You want to throw your phone at the wall.",
+    brain: "Self-care advice assumes available executive function, time, and someone to hold the load. You may have none of these. The advice is not wrong. It is inaccessible in your current circumstances.",
+    effect: "What you need is load reduction, not addition. One thing removed from tomorrow is worth more than an hour of self-care you cannot access. Cancel something. Lower a standard. Remove a demand.",
+  },
+  p71: {
+    body: "Your other child is being patient, invisible, or both. They are watching the attention flow toward the loudest need.",
+    brain: "The neurotypical or less-impacted sibling learns that intensity determines attention allocation. They may suppress their own needs to avoid adding to the load. This is its own form of harm.",
+    effect: "Name what you see: \'I noticed you waited. That was mature. I appreciate it.\' Then follow it with undivided attention. Even five minutes. They are counting.",
+  },
+  m59: {
+    body: "The sibling\'s patience has run out. The resentment is spoken now, not hidden.",
+    brain: "Living with a high-intensity sibling depletes the other child\'s emotional resources. Their resentment is proportionate to their experience, even if it is painful to hear.",
+    effect: "Validate without betraying: \'I know it is hard when things get loud. Your feelings about that are fair.\' Protect their space. A locked door, headphones, a sibling-free zone. Their need for peace is as valid as their sibling\'s need for support.",
+  },
+  m60: {
+    body: "The special moment was interrupted. The sibling whose day it was is devastated. You are managing guilt across two children.",
+    brain: "The ADHD child could not sustain regulation through the heightened emotional context of someone else\'s celebration. The sibling experienced loss of their moment.",
+    effect: "Validate the sibling\'s loss specifically: \'That was your moment and it got interrupted. I am sorry.\' Do not explain the ADHD today. Today they need their disappointment acknowledged.",
+  },
+  m61: {
+    body: "Everyone is in the car. The outing ended early. Multiple children are upset for different reasons.",
+    brain: "The decision to leave was correct. The cost of staying exceeded the benefit. Every family member experienced it differently and needs a different response.",
+    effect: "Do not process it in the car. Get home safely. Then address each child individually. The ADHD child needs: \'That was hard for your body.\' The siblings need: \'I know that was not fair to you.\'",
+  },
+  p72: {
+    body: "The list of places you no longer go is growing. The world is getting smaller.",
+    brain: "Avoidance is a rational response to repeated negative experiences. It is also progressive. Each avoided outing removes a data point that could have gone well.",
+    effect: "One low-demand outing this week. Short, with an exit plan. Rebuild gradually. A twenty-minute park visit with a successful exit teaches more than a full-day event that ends in crisis.",
+  },
+  p73: {
+    body: "You protected one child and the other felt rejected. The impossibility of serving both needs simultaneously is crushing.",
+    brain: "Both children needed you in the same moment. The intervention for one was perceived as rejection by the other. This is structural, not a parenting failure.",
+    effect: "Go back to the ADHD child after: \'I stopped you because your sibling was getting hurt. I love you. Both of those are true.\' They need to hear both parts.",
+  },
+  p74: {
+    body: "The easier child is a relief to be around. Then the guilt arrives for noticing.",
+    brain: "Your nervous system recovers in the presence of lower demand. Enjoying that recovery is not favouritism. It is physiology.",
+    effect: "Accept the relief without guilt. The enjoyment only becomes a problem if it stops you from investing in the harder relationship. Do one deliberate thing with your ADHD child this week. Small. Genuine.",
+  },
+  m62: {
+    body: "Two dysregulated nervous systems are feeding each other. Your partner\'s volume raised your child\'s intensity.",
+    brain: "Co-escalation occurs when two nervous systems mirror each other\'s alarm signals. Each escalation triggers the next.",
+    effect: "Do not join. Signal a swap: \'I have got this. Take a minute.\' Address the parenting disagreement later, privately.",
+  },
+  p75: {
+    body: "Your partner sees accommodation as softness. The disagreement is eroding your co-parenting.",
+    brain: "The fundamental disagreement is about whether ADHD is a discipline problem or a neurological one. Until both parents share the same frame, every parenting decision becomes a proxy battle.",
+    effect: "Share one resource. Not in the heat of a fight. On a calm evening. \'I want us to be on the same page. Can you read this?\'",
+  },
+  p76: {
+    body: "The blame landed. Whether it was spoken or implied, you heard: this is your fault.",
+    brain: "ADHD rejection sensitivity processes blame at pain intensity. The accusation activated shame circuits alongside defensive anger.",
+    effect: "Nothing you did caused the ADHD. If the blame is a pattern, couples therapy with an ADHD-informed therapist is practical, not dramatic.",
+  },
+  m63: {
+    body: "The same argument again. ADHD or behaviour. Nature or parenting. You are both exhausted by the loop.",
+    brain: "The answer is both, which satisfies neither of you. The ADHD explains why. The behaviour still needs addressing. The disagreement is about method, not about whether it matters.",
+    effect: "Find the shared ground: \'We both want them to learn. Let us talk about how.\'",
+  },
+  m64: {
+    body: "One of you stayed calm. The other did not. The calm one feels righteous. The escalating one feels judged.",
+    brain: "Regulatory capacity varies based on depletion, trigger history, and time spent with the child. The calm parent may simply have more left. The escalating parent may carry more of the daily load.",
+    effect: "Discuss it later without scorekeeping. \'What do you need from me when you are getting activated?\' is more useful than \'Why did you yell?\'",
+  },
+  p77: {
+    body: "Your partner left the room again. You are alone with the meltdown.",
+    brain: "The checking out may be avoidance, overwhelm, or a genuine belief that you handle it better. Whatever the reason, the pattern leaves you as the sole container for the hardest moments.",
+    effect: "Name it without accusation: \'I need you to stay in the room even when it is hard. I cannot do this alone.\' If it persists, this is a couples issue, not a parenting one.",
+  },
+  p78: {
+    body: "Every parenting conversation becomes a fight. You are both defensive before the topic is even raised.",
+    brain: "Sustained parenting stress makes both partners hypervigilant to criticism. Each conversation begins with both nervous systems in defensive mode.",
+    effect: "Schedule the conversation. Saturday morning, coffee, one topic, fifteen minutes. Remove the ambush conversations that happen at 10pm when neither of you has anything left.",
+  },
+  k50: {
+    body: "Watching your child be rejected is one of the most painful parts of ADHD parenting. You can see what other children see and it breaks your heart.",
+    brain: "ADHD social processing runs at a different speed. Your child is louder, faster, more intense, more physical than the social norm. The rejection is real and the pattern recognition is painful.",
+    effect: "Social skills are teachable. But the teaching happens outside the social moment, not inside it. Role-play at home. Practice specific scenarios. Find the children who match their energy.",
+  },
+  k51: {
+    body: "They are too fast, too physical, too loud. Other children pull away or ask them to stop.",
+    brain: "ADHD arousal regulation means they cannot match their energy to the group\'s energy. The intensity is not chosen. It is the baseline their nervous system operates at.",
+    effect: "Smaller groups. One-on-one playdates. Activities where intensity is an asset. Find the contexts where their energy matches, rather than trying to suppress it in contexts where it does not.",
+  },
+  k52: {
+    body: "They need to control the game because uncertainty is intolerable. When other children do not comply, they feel rejected.",
+    brain: "The bossiness is anxiety-driven control-seeking, not a power grab. Uncertainty about social outcomes activates threat responses. Controlling the game is an attempt to control the anxiety.",
+    effect: "Teach the specific skill: \'Try asking what they want to play.\' Role-play turn-taking. The control impulse decreases as the social confidence increases.",
+  },
+  k53: {
+    body: "The game crossed from fun to fighting and they did not notice the transition.",
+    brain: "Social cue reading is slower in ADHD. The facial expression, tone shift, and body language that signal \'this is not fun anymore\' were not processed in time.",
+    effect: "Teach the specific cue: \'When the other person stops laughing or starts pulling away, the game has changed.\' Concrete, observable, practisable.",
+  },
+  k54: {
+    body: "They were told to stop. They did not stop. The other person is now upset or angry.",
+    brain: "The instruction to stop reached their auditory processing. It did not reach their motor system before the next impulse fired. The braking system is slower than the accelerator.",
+    effect: "Verbal instructions alone may not work. A physical cue, a hand on the shoulder, a visual signal reaches the motor system faster than words.",
+  },
+  k55: {
+    body: "They said something rude to an adult and you are mortified.",
+    brain: "ADHD verbal impulsivity means the thought became the spoken word before the social filter engaged. The rudeness was not calculated. The output was faster than the assessment.",
+    effect: "Address it after, not during. Give them the replacement phrase, not just the correction: \'Next time, try saying it like this.\'",
+  },
+  k56: {
+    body: "The conversation cannot end. They keep coming back with one more thing.",
+    brain: "Perseverative speech in ADHD means the conversational loop does not close because the emotional resolution the brain is seeking has not arrived. They cannot stop because the feeling driving the words has not been discharged.",
+    effect: "Walking away is not losing. \'We are done talking about this for now.\' Then physically move. The conversation ends when you stop participating, not when they agree to stop.",
+  },
+  k57: {
+    body: "They dominate every conversation. Other people stop trying to contribute.",
+    brain: "The thought is at full volume in their head. The impulse to speak is faster than the social awareness that someone else is talking. They are not dismissing others. They are unable to hold the thought while waiting for their turn.",
+    effect: "Teach the pause. Give them a physical anchor: something to hold while they wait. Practice at home: \'Hold that thought for ten seconds.\' The skill exists. It needs building.",
+  },
+  k58: {
+    body: "The anger is scaling. The child who threw toys now punches walls. The physical intensity is frightening.",
+    brain: "Emotional intensity scales with physical development. Regulation skills have not kept pace. The gap between the size of the feeling and the capacity to manage it is widening.",
+    effect: "This is the point where professional support becomes important. Targeted intervention for emotional regulation. Not because you failed. Because the gap needs specialised help to close.",
+  },
+  k59: {
+    body: "They want independence. They cannot manage the basics that independence requires.",
+    brain: "The mismatch between chronological age and executive function age is approximately 30 percent. A twelve-year-old may have the executive function of an eight-year-old. The desire for autonomy is age-appropriate. The capacity is not.",
+    effect: "Scaffold the independence: build the skill, then extend the freedom. \'You can walk to school when you can remember your bag three days in a row.\' The freedom follows the competence.",
+  },
+  k60: {
+    body: "They refuse the chart, the checklist, the timer. The supports feel like evidence that something is wrong with them.",
+    brain: "By adolescence, ADHD children are acutely aware of their differences. Supports that highlight the difference are rejected to protect identity. The rejection is self-preservation, not defiance.",
+    effect: "Reframe the tool. Phone reminders instead of wall charts. \'Athletes use checklists\' instead of \'You need this because you forget.\' Match the tool to their self-concept, not their diagnosis.",
+  },
+  p79: {
+    body: "Without you, nothing happens. You are the operating system the whole household runs on.",
+    brain: "ADHD households often lack a neurotypical anchor to maintain systems. When both parents have ADHD, or the primary caregiver does, the executive function load falls on a brain that is already at capacity.",
+    effect: "Externalise everything possible. Alarms, automated reminders, visual schedules, default routines. Each system that runs without your voice is one less demand on your depleted brain.",
+  },
 };
 
 export const DEFAULT_BRAIN = {

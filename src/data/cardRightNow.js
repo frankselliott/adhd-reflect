@@ -574,5 +574,157 @@ export const CARD_RIGHT_NOW = {
   "k39": {
     content: `The chore battle happens every day. Emptying the dishwasher, putting clothes away, feeding the pet. Each one requires task initiation, sequencing, and sustained effort on a non-preferred activity. Every ADHD difficulty in one demand. Do not argue about whether they should do it. Make the chore smaller, more visual, more routine, and more immediate. A checklist on the wall beats a verbal instruction every time.`,
   },
+
+  // ─── 50 NEW CARDS ───
+  "k40": {
+    content: `Consequences are designed for brains that can connect action to outcome across time. ADHD brains discount future consequences so heavily that the punishment feels disconnected from the behaviour. The consequence did not fail because you chose the wrong one. It failed because consequences rely on a cognitive function your child does not have reliable access to. What works better: natural consequences that happen immediately, collaborative problem-solving, and reducing the demand that caused the behaviour.`,
+  },
+  "k41": {
+    content: `Reward charts work for about three days because novelty provides the dopamine the chart needs to function. When the novelty fades, the reward system collapses. This is not your child being manipulative. This is the interest-based nervous system doing what it does. Rotate rewards. Keep them small and immediate. A reward that arrives in a week may as well arrive never. The system needs to match the brain, not the other way around.`,
+  },
+  "k42": {
+    content: `They meant the apology when they said it. The next time the situation arose, the apology was in long-term memory and the impulse was in the present. The impulse won. They are not lying when they say sorry. They are not choosing to repeat it. The gap between intention and action is where ADHD lives. Teach the skill, not the remorse. They already have the remorse.`,
+  },
+  "k43": {
+    content: `They can recite the rule. They understood it when you explained it. In the moment, the rule was in their prefrontal cortex and the impulse was in their amygdala. The amygdala fires faster. Knowing a rule and being able to follow it under pressure are two completely different cognitive functions. One is memory. The other is executive function under load. ADHD impairs the second one.`,
+  },
+  "m57": {
+    content: `You set a consequence and now the consequence itself has become the crisis. The original behaviour is forgotten. You are now managing a meltdown about the punishment, not about the thing that happened. This is the consequence trap. The consequence needs to be small enough that it does not generate a bigger problem than the one it was meant to address. Reduce the consequence. Address the original behaviour later when both of you are calm.`,
+  },
+  "p59": {
+    content: `Too soft means they never learn. Too harsh means you damage the relationship. The middle ground feels impossible because it changes every day depending on their regulation, your regulation, the time of day, and whether anyone has eaten. You are not too soft or too harsh. You are making hundreds of micro-decisions with imperfect information and a depleted brain. Pick the one that protects the relationship today.`,
+  },
+  "p60": {
+    content: `The person telling you to be firmer does not live inside your house at 6pm when the medication has worn off and three demands are competing for the same executive function. Firmness works when the child can process the boundary. ADHD brains under stress cannot process boundaries. They process threat. You are not failing to be firm. You are choosing not to escalate a nervous system that is already at capacity.`,
+  },
+  "m58": {
+    content: `You took away the thing and now they are angrier than before. The removal was supposed to teach a lesson. Instead it activated loss aversion at ADHD intensity, which is louder, longer, and more physical than neurotypical disappointment. The lesson did not land because the emotional response consumed all available processing. If removal consistently makes things worse, it is not the right tool for this child. Try adding a preferred activity contingent on the behaviour you want, instead of removing one contingent on the behaviour you do not.`,
+  },
+  "k44": {
+    content: `They genuinely did not notice until it was urgent. ADHD interoception means the bladder signal arrives at crisis intensity, not at gentle awareness. The accident or the near-miss is not laziness or defiance. The signal was late. Build external prompts: toilet stops at transitions, before leaving the house, after meals. Do not wait for them to notice. Their body does not reliably tell them in time.`,
+  },
+  "k45": {
+    content: `They hid it because the shame of the accident was worse than the risk of being caught. The hiding is avoidance, not deception. React to this with less than they expect. 'I found these. Let us put them in the wash. No big deal.' The calmer your response, the less likely they are to hide next time. The goal is making honesty safer than hiding.`,
+  },
+  "k46": {
+    content: `Wiping requires motor sequencing, body awareness, and sensory tolerance that ADHD and sensory processing differences can impair. They are not being lazy. The task is genuinely harder for them than it looks. Teach the specific skill matter-of-factly. Wet wipes are easier than toilet paper. A bidet attachment removes the skill demand entirely. Solve the problem, do not add shame to it.`,
+  },
+  "p61": {
+    content: `You did not sign up for this specific exhaustion. The poop-related challenges of ADHD parenting are real, unglamorous, and almost never discussed. The combination of interoception delays, sensory aversion to wiping, and executive function gaps around hygiene routines creates a situation that no parenting book prepared you for. You are allowed to be tired of this. It does not make you a bad parent. It makes you a parent dealing with something genuinely hard.`,
+  },
+  "k47": {
+    content: `They cannot smell what you smell. Olfactory habituation means they have adapted to their own scent. The shower requires task initiation, sensory tolerance of water pressure and temperature, and a multi-step sequence. Every part of that is harder with ADHD. Make the routine shorter. Offer a choice of how, not whether. A three-minute shower with no hair washing is better than no shower at all. Build the habit before adding the steps.`,
+  },
+  "k48": {
+    content: `Puberty added new hygiene demands to a brain that was already struggling with the old ones. Deodorant, showering daily, changing underwear, managing body hair. Each one is a new executive function task arriving at a developmental stage where the child is also managing identity, social pressure, and hormonal changes. Approach it as skill-building, not character correction. Written checklists in the bathroom. Products they chose themselves. Zero shame.`,
+  },
+  "k49": {
+    content: `You thought they would outgrow the reminding. They have not. The reminding is the scaffold their executive function needs. Removing it does not build independence. It creates failure. The question is not why they still need you. The question is how to gradually shift the prompting from your voice to their own systems. Visual checklists, phone alarms, a laminated card on the bathroom mirror. Move the cue from you to the environment.`,
+  },
+  "p62": {
+    content: `The resentment is not a failure of love. It is the accumulation of unrelenting demand on a nervous system that was not designed for this intensity. You resent the situation, not the child, even though it feels aimed at them. Name it honestly, to yourself or to a therapist. Resentment that stays hidden grows. Resentment that is named can be addressed. You are not a bad parent for feeling this. You are an exhausted one.`,
+  },
+  "p63": {
+    content: `You love them. You do not like being around them right now. Both of those things are true simultaneously and the guilt of admitting the second one is enormous. ADHD children are neurologically intense. The constant demands, the unpredictability, the sensory output. Being around that every day depletes you in ways that are not your fault. Find one small pocket of genuine enjoyment today. Not manufactured quality time. Something real, even if it is five minutes.`,
+  },
+  "p64": {
+    content: `Your nervous system is in permanent threat-scan mode. Every quiet moment is the breath before the next explosion. This is hypervigilance and it is your body protecting you from unpredictable emotional intensity. The problem is that the protection itself is exhausting you. Your cortisol is running at a level designed for occasional danger, not daily life. This is worth talking to someone about. Your body is stuck in a mode it was never meant to sustain.`,
+  },
+  "p65": {
+    content: `Being scared of your own child is one of the most isolating experiences in parenting. You cannot say it to anyone because it sounds like you are failing. You are not failing. A child in a violent meltdown is genuinely frightening and your fear response is proportionate. Prioritise physical safety. Yours and theirs. If the outbursts are escalating, this needs professional support. Not because you cannot handle it. Because no one should have to handle it alone.`,
+  },
+  "p66": {
+    content: `They hit you, kicked you, bit you, threw something at you. The meltdown ended but the bruise or the shock is still sitting in your body. You are supposed to be the adult who understands that it was the ADHD, not them. But your body does not care about the explanation. Your body was hurt. You are allowed to need time to recover. You are allowed to say 'that hurt me and it is not okay' without it being punitive. Safety planning for violent meltdowns is a reasonable next step.`,
+  },
+  "p67": {
+    content: `The words are on repeat. They said the worst thing they could think of and your rejection sensitivity is playing it on a loop. Every replay adds intensity. The words were the emotion, not the truth. But your brain is treating them as data about your worth as a parent. Interrupt the loop. Write down what they said. Then write down what you know to be true about your relationship. The loop needs a counter-narrative to stop cycling.`,
+  },
+  "p68": {
+    content: `The numbness is not indifference. It is your nervous system shutting down under sustained overload. You went through anger, frustration, guilt, and shame so many times that your emotional system switched to conservation mode. This is burnout. The love is still there underneath the numbness. It will come back when the pressure reduces. If it does not come back, that is worth exploring with a professional. Numbness is a signal, not a character flaw.`,
+  },
+  "p69": {
+    content: `The morning explosion happened at 7am and you are still carrying it at 3pm. Your ADHD brain cannot compartmentalise the way a neurotypical brain can. The emotional residue sits in working memory, taking up space that you need for the rest of the day. Name what is happening: 'I am still carrying this morning.' Then: one physical reset. A walk, a shower, a change of environment. Your brain needs an external signal that the context has changed.`,
+  },
+  "p70": {
+    content: `The self-care advice is coming from people who have never tried to take a bath while a child bangs on the door. Self-care requires executive function, time, and someone else to hold the load while you step away. You may not have any of those. The advice is not wrong. It is inaccessible. What you need is load reduction, not bubble baths. One demand removed from tomorrow is worth more than an hour of meditation you cannot access.`,
+  },
+  "p71": {
+    content: `Your other child is watching. They are learning that the child who is loudest gets the most attention. They are being patient, or invisible, or resentful, or all three. They need to hear from you that you see them. Not a big speech. A specific sentence: 'I noticed you waited while I dealt with that. That was really mature and I appreciate it.' Then follow it with five minutes of undivided attention. They are counting.`,
+  },
+  "m59": {
+    content: `Your neurotypical child or your less-impacted child is running out of patience with their sibling. The resentment is building. They did not choose to live with this level of intensity. Validate their frustration without betraying their sibling: 'I know it is hard when things get loud. Your feelings about that are fair.' Then protect their space. A locked bedroom door is a reasonable accommodation for the sibling who needs quiet.`,
+  },
+  "m60": {
+    content: `The birthday party, the concert, the sports day. It was supposed to be about the other child and the ADHD child could not hold it together. Everyone is upset. The sibling whose moment was ruined needs to hear: 'That was your moment and it got interrupted. I am sorry. That was not fair.' Do not explain the ADHD. Just acknowledge the loss. They can understand the explanation another day. Today they need their disappointment validated.`,
+  },
+  "m61": {
+    content: `Everyone is in the car. The outing is over. One child is still dysregulated. The others are furious or silent. You are managing guilt, logistics, and your own nervous system simultaneously. Do not process it in the car. Get everyone home safely. Address each child separately later. The ADHD child needs: 'That was hard for your body.' The siblings need: 'I know that was not fair to you.'`,
+  },
+  "p72": {
+    content: `You stopped going places because the risk of a meltdown is higher than the reward of the outing. The avoidance is rational. It is also shrinking your family's world. Start with one low-demand outing this week. Short, with an exit plan. 'We are going for twenty minutes. If it gets too much, we leave without drama.' Rebuild the tolerance gradually. Do not aim for a full day at the zoo. Aim for a successful trip to the park.`,
+  },
+  "p73": {
+    content: `You stepped in to protect the sibling and your ADHD child felt rejected. Both children needed you and you could only serve one in that moment. The guilt is the impossibility of the situation, not a failure of your parenting. Later, go to the ADHD child: 'I stopped you because your sibling was getting hurt. I love you. Those two things are both true.' They need to hear both parts.`,
+  },
+  "p74": {
+    content: `Time with your easier child feels like relief. Then the guilt arrives. You are allowed to enjoy the child who does not require constant executive function from you. That enjoyment is not favouritism. It is your nervous system recovering. The guilt only becomes a problem if it stops you from investing in the harder relationship. Notice the relief, accept it, and then do one deliberate thing with your ADHD child this week. Small. Genuine.`,
+  },
+  "m62": {
+    content: `Your partner raised their voice and your child escalated. Two dysregulated nervous systems are now feeding each other. You are the third nervous system in the room. Do not join the escalation. Do not correct your partner in front of the child. Signal a swap: 'I have got this. Take a minute.' Address the parenting disagreement later, privately. The child needs one calm adult. Right now, that is you.`,
+  },
+  "p75": {
+    content: `Your partner thinks accommodations are excuses. They see you adjusting expectations, reducing demands, letting things slide, and they interpret it as softness. The disagreement is real and it is corrosive. What helps: share one specific article or resource that explains why traditional discipline does not work for ADHD brains. Not in the heat of the moment. On a calm evening. 'I want us to be on the same page. Can you read this?'`,
+  },
+  "p76": {
+    content: `Your partner said it is your fault, or implied it, or you heard it underneath the words. The blame landed on your rejection sensitivity and it is burning. Parenting is not causing the ADHD. Nothing you did or did not do created this. If your partner genuinely believes the behaviour is your fault, that is a relationship issue, not a parenting one. Couples therapy with someone who understands ADHD is not dramatic. It is practical.`,
+  },
+  "m63": {
+    content: `One of you says ADHD. The other says behaviour. The argument is circular because you are both partly right. ADHD explains why the behaviour happens. It does not excuse it. The child still needs to learn. The disagreement is about method, not about whether the behaviour matters. Find the shared ground: 'We both want them to learn. Let us talk about how, not why.'`,
+  },
+  "m64": {
+    content: `One parent stays regulated while the other escalates. The calm parent feels superior. The escalating parent feels judged. Both positions are corrosive. The calm parent is not better. They may have more regulatory capacity left, or fewer triggers, or less time with the child. The escalating parent is not worse. They may be more depleted, more triggered, or carrying more of the daily load. Discuss it later without scorekeeping.`,
+  },
+  "p77": {
+    content: `Your partner disappears when it gets hard. The bathroom, the garage, the phone. You are left holding the meltdown alone. The checking out may be their own dysregulation, avoidance, or a genuine belief that you handle it better. Whatever the reason, it is not sustainable. Name it without accusation: 'I need you to stay in the room even when it is hard. I cannot do this part alone.'`,
+  },
+  "p78": {
+    content: `Every conversation about the kids becomes a fight. You are both defensive because you are both exhausted and you both feel criticised. The topic is too hot to discuss when you are both depleted. Schedule it. Literally. 'Saturday morning, coffee, fifteen minutes, one topic.' Remove the spontaneous ambush conversations that happen at 10pm when neither of you has anything left.`,
+  },
+  "k50": {
+    content: `You can see why the other children pull away. Your child is too loud, too physical, too intense, too controlling. Watching your child be rejected is one of the most painful parts of ADHD parenting. They are not bad. They are running social software at a different speed. The social skills they lack can be taught. But the teaching happens outside the social moment, not inside it. Role-play at home. Practice specific scenarios.`,
+  },
+  "k51": {
+    content: `They are too fast, too physical, too loud, too much. Other children regulate their energy to match the group. Your child cannot. The intensity that makes them exhausting is also what makes them passionate, creative, and loyal. The mismatch is real. Smaller groups work better. One-on-one playdates work better. Find the children who match their energy or appreciate their intensity.`,
+  },
+  "k52": {
+    content: `They want to control the game because uncertainty is intolerable for their nervous system. When other children do not comply, they feel rejected, not corrected. The bossiness is an anxiety response, not a power grab. Teach the specific skill: 'Other kids want to choose too. Try asking what they want to play.' Role-play taking turns leading. The skill exists. It just needs building.`,
+  },
+  "k53": {
+    content: `The game changed from fun to fighting and they did not notice the transition. Social cue reading in ADHD is slower. By the time they register that the other child stopped enjoying it, the damage is done. They are confused because from their perspective, the game was still going. Teach the specific cue: 'When the other person stops laughing, the game has changed.' Specific, observable, concrete.`,
+  },
+  "k54": {
+    content: `They were told to stop. They did not stop. This is not defiance. The impulse to continue is stronger than the instruction to stop. The braking system is slower than the accelerator. They need a more concrete stop signal: a physical cue, a hand on the shoulder, a visual sign. Verbal instructions alone may not reach the motor system in time.`,
+  },
+  "k55": {
+    content: `They said the thing, or used the tone, and you are mortified. The rudeness was not calculated. ADHD verbal impulsivity means the thought became the spoken word before the social filter could engage. Address it after, not during. 'The way you spoke to that person came across as rude. I know you did not mean it that way. Next time, try this instead.' Give them the replacement, not just the correction.`,
+  },
+  "k56": {
+    content: `Every argument ends with them getting the last word. The conversation cannot close because their need for resolution is stronger than your need for it to stop. The last word is perseverative. Walking away is not losing. Say: 'We are done talking about this for now.' Then physically move to a different space. The conversation ends when you stop participating, not when they agree to stop.`,
+  },
+  "k57": {
+    content: `They talk over everyone. They dominate every conversation. They do not do this because they think their ideas are more important. They do it because the thought is in their head at full volume and the impulse to speak is faster than the social awareness that someone else is talking. Teach the pause: 'Hold that thought for ten seconds.' Give them a physical anchor: a stone in their pocket to squeeze while they wait.`,
+  },
+  "k58": {
+    content: `The meltdowns have changed. They are bigger, louder, more physical, more frightening. The same child who threw toys at five is punching walls at twelve. The anger is scaling with their body while the regulation skills have not kept pace. This is the point where professional support becomes important. Not because you failed. Because the gap between the emotional intensity and the self-regulation capacity is widening and it needs targeted intervention.`,
+  },
+  "k59": {
+    content: `They want the freedom of their age without the executive function to manage it. They want to walk to school alone but cannot remember to take their bag. They want a phone but cannot manage screen limits. The mismatch between chronological age and executive function age is one of the hardest parts of ADHD parenting. Scaffold the independence: 'You can walk to school when you can remember your bag three days in a row.' Build the skill, then extend the freedom.`,
+  },
+  "k60": {
+    content: `The chart is babyish. The checklist is embarrassing. The timer is for little kids. They are rejecting the supports that help them because the supports feel like evidence that something is wrong with them. Reframe the tool: 'Athletes use checklists. Pilots use checklists. The checklist is not because you cannot do it. It is because it works.' Find tools that look age-appropriate. A phone reminder is more acceptable than a wall chart at twelve.`,
+  },
+  "p79": {
+    content: `You are the human reminder system. Without you, the morning does not happen, the homework does not start, the bag does not get packed, the teeth do not get brushed. You are exhausted from being the family's executive function and there is no one to hand it to. Externalise what you can. Alarms, visual schedules, automated reminders. Each system that runs without your voice is one less demand on your depleted brain. You cannot outsource all of it. But you can outsource some of it.`,
+  },
 };
 

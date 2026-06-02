@@ -143,6 +143,56 @@ k36: They were rough with the pet and did not mean to hurt it
 k37: They said they have no homework when they do
 k38: They copy bad behaviour from other kids then cannot stop
 k39: They will not do any chores or responsibilities without a fight
+k40: Consequences do not work and I do not know what else to do
+k41: Rewards do not work either and now I feel out of options
+k42: They say sorry and then do the same thing again
+k43: They know the rule but still cannot follow it in the moment
+m57: Every consequence turns into an argument or explosion
+p59: I cannot tell if I am being too soft or too harsh
+p60: People keep telling me to be firmer and I want to scream
+m58: Taking things away just makes them angrier
+k44: They waited too long to go to the toilet and now everything is a crisis
+k45: I found hidden dirty underwear and I do not know how to react
+k46: They will not wipe properly and I am trying not to shame them
+p61: I am so tired of poop
+k47: They smell bad but will not shower or use deodorant
+k48: Puberty has started and hygiene is suddenly a daily fight
+k49: They are old enough to do basic hygiene but still need me
+p62: I resent my child and I hate that I feel that
+p63: I do not like being around my child right now
+p64: I am always waiting for the next explosion
+p65: I am scared of my child during violent outbursts
+p66: They hurt me during a meltdown and I cannot just move on
+p67: They said something cruel and I cannot stop replaying it
+p68: I feel numb instead of loving
+p69: One bad morning from them ruins my whole day
+p70: I am sick of being told to look after myself when I have nothing left
+p71: My other child is getting the leftovers of me
+m59: My other child is starting to hate their ADHD sibling
+m60: They ruined their sibling\'s special moment again
+m61: The whole family had to leave because one child could not cope
+p72: We avoid normal family outings because of one child\'s triggers
+p73: I protected the sibling and now I feel like I rejected my ADHD child
+p74: I feel guilty when I enjoy time with my easier child
+m62: My partner yells and the meltdown gets worse
+p75: My partner thinks I am too soft
+p76: My partner blames me for our child\'s behaviour
+m63: We fight about whether this is ADHD or bad behaviour
+m64: One of us stays calm and the other one escalates
+p77: My partner checks out and leaves me to handle the hard parts
+p78: We cannot talk about parenting without both getting defensive
+k50: Other kids do not like them and I can see why
+k51: They are too much for other children
+k52: They boss other kids around and then feel rejected
+k53: They cannot tell when the game has stopped being fun
+k54: They keep annoying people after being asked to stop
+k55: They are rude to adults and I feel humiliated
+k56: They always need the last word
+k57: They take over every conversation
+k58: They are older now and the anger is bigger
+k59: They want to be treated older but cannot manage basic things
+k60: They refuse supports because they feel babyish
+p79: Every routine still needs me to remember the routine
 k17: They know what to do but they can't start
 k18: Every request feels like an attack to them
 k19: They hear me but they don't move
