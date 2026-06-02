@@ -523,5 +523,352 @@ Your child, if they also have ADHD, has the same drive. Two people with ADHD who
     moreHelp: `If the argument loops are happening daily, if they are escalating to shouting or physical intensity, or if your child is developing adversarial patterns with you specifically, family therapy can help rebuild the communication pattern. The therapist can teach both of you to recognise the loop and exit it before it runs.`,
     relatedCards: ["m10", "m16", "m08", "p08", "m17", "m11"],
   },
+
+  // ─── 12 NEW GUIDES ───
+  {
+    id: "g21",
+    title: `When consequences do not work`,
+    topic: "discipline",
+    patternTypes: ["reactor", "looper", "juggler"],
+    perspectives: ["me", "kid"],
+    recognize: `You have tried every consequence you can think of. Taking things away. Grounding. Loss of screen time. Raised voices. Calm voices. Nothing changes. The behaviour repeats and you are running out of ideas and patience.`,
+    brain: `Consequences rely on a cognitive bridge between the action and the outcome. The child needs to connect what they did to what happened next, hold that connection in working memory, and use it to inhibit the behaviour next time. ADHD impairs every step of that sequence.
+
+The consequence did not fail because you chose the wrong one. It failed because consequences are designed for brains that can reliably connect present actions to future outcomes. Your child's brain discounts future events at a rate neurotypical brains do not. A punishment arriving an hour after the behaviour is neurologically disconnected from the event it was meant to address.`,
+    kidBrain: `From your child's perspective, the consequence feels unrelated to the thing they did. They may understand the link when you explain it, but in the next moment, the impulse fires before the memory of the consequence can intervene. They are not choosing to ignore the lesson. The lesson is stored in the wrong part of the brain to be useful under pressure.
+
+The repeated failure of consequences builds a narrative: 'Nothing I do makes a difference, so why try.' This is learned helplessness, and it compounds the original problem.`,
+    dualDynamic: `When you also have ADHD, the consequence cycle is doubly exhausting. You set a consequence impulsively in the heat of the moment, then cannot remember or sustain it consistently. Your child learns that consequences are unpredictable, which makes them less effective, not more. The inconsistency is not a character flaw. It is two ADHD brains trying to operate a system designed for neurotypical consistency.`,
+    strategies: [
+      `Use natural, immediate consequences instead of imposed, delayed ones. The phone falls and cracks because they were running with it. That is more instructive than losing phone time tomorrow.`,
+      `Collaborative problem-solving: 'This keeps happening. What do you think would help?' gives them agency and addresses the underlying skill deficit rather than the surface behaviour.`,
+      `Replace removal with contingent access. 'Screen time is available after homework' works better than 'No screens because you did not do homework.' Same outcome, different neural framing.`,
+      `Reduce the size of consequences until they no longer generate a bigger problem than the one they were meant to address. A consequence that causes a forty-five-minute meltdown taught nothing.`,
+      `Address the skill gap, not the behaviour. If the behaviour keeps repeating, the child is missing a skill, not a lesson.`,
+    ],
+    scripts: [
+      {situation: `After the same behaviour repeats despite consequences`, say: `The old consequences are not working for either of us. Let us figure out what would actually help.`},
+      {situation: `When you catch yourself escalating the punishment`, say: `I am going to take a minute before I decide what happens next.`},
+      {situation: `When they say they do not care about the consequence`, say: `I hear you. The consequence is not the point. The point is figuring out what makes this easier next time.`},
+    ],
+    partner: `If your co-parent believes stricter consequences are the answer, this is the guide to share. The research is clear: traditional consequences work less effectively for ADHD brains. This is not about being soft. It is about using tools that match the neurology. The conversation is easier when both parents understand why the current approach keeps failing.`,
+    moreHelp: `If no consequence or strategy is changing the behaviour, consider whether the behaviour is communicating an unmet need. Occupational therapy, a functional behaviour assessment, or a conversation with the prescriber about whether the current support is sufficient can reveal what consequences cannot.`,
+    relatedCards: ["k40", "k41", "k42", "k43", "m57", "m58", "p59"],
+  },
+  {
+    id: "g22",
+    title: `ADHD or bad behaviour`,
+    topic: "discipline",
+    patternTypes: ["reactor", "looper", "spiraller"],
+    perspectives: ["me", "kid", "partner"],
+    recognize: `You are standing in the aftermath of something your child did and you genuinely cannot tell: was that the ADHD or was that a choice? The question haunts every parenting decision. If it is ADHD, consequences are unfair. If it is behaviour, accommodation is enabling. The line between the two feels impossible to find.`,
+    brain: `The question assumes ADHD and behaviour are two separate categories. They are not. ADHD is the reason the behaviour happens. The behaviour is still real and still needs addressing. The shift is from 'is this ADHD or bad behaviour' to 'what skill is missing that caused this behaviour, and how is ADHD impairing that skill.'
+
+When you frame it as a skill deficit rather than a character deficit, the intervention changes. You stop asking 'how do I make them stop' and start asking 'how do I help them build the capacity to do this differently.'`,
+    kidBrain: `Your child is not making a calculated choice to misbehave. They are also not a passive victim of their neurology. The truth is messier: they have less control than you think, and more agency than pure determinism suggests. They can learn. The learning is slower, requires more repetition, and needs different methods than neurotypical children.
+
+What looks like defiance is often frustration. What looks like laziness is often overwhelm. What looks like manipulation is often a nervous system using the fastest available strategy to escape discomfort.`,
+    dualDynamic: `When both parent and child have ADHD, the 'is this ADHD' question applies to your own behaviour too. Your yelling, your inconsistency, your impulsive consequences. The same framework applies: your behaviour is real, your ADHD explains why it happens, and you can still work on changing it. Extending that understanding to yourself makes it easier to extend it to your child.`,
+    strategies: [
+      `Replace 'ADHD or behaviour' with 'what skill is missing here.' Impulse control, emotional regulation, working memory, frustration tolerance. Name the specific deficit.`,
+      `Hold the child accountable for repair, not for the impulse. They could not stop the impulse. They can learn to fix the aftermath.`,
+      `When in doubt, address the behaviour with compassion and address the skill with teaching. You do not need to solve the philosophical question to respond effectively.`,
+      `Watch for patterns: if the behaviour only happens when tired, hungry, unmedicated, or overstimulated, the behaviour is a symptom of the state, not a character problem.`,
+    ],
+    scripts: [
+      {situation: `When your partner says it is just bad behaviour`, say: `I think it is both. The ADHD made it harder to stop. The behaviour still matters. Can we focus on what to teach rather than what to punish?`},
+      {situation: `When you are unsure whether to accommodate or hold firm`, say: `I am going to hold the expectation and change the method.`},
+      {situation: `When someone else judges the behaviour`, say: `There is more going on than what you can see in this moment.`},
+    ],
+    partner: `This is the most common parenting disagreement in ADHD families. One parent sees ADHD. The other sees behaviour. Both are seeing part of the picture. The productive conversation is not 'who is right' but 'how do we respond in a way that teaches the skill without damaging the relationship.' Share this guide as a starting point for that conversation.`,
+    moreHelp: `If you are consistently unsure whether behaviour is ADHD-related, a functional behaviour assessment from a psychologist who understands ADHD can help. They can identify which behaviours are skill deficits and which are genuinely within the child's current control. This removes the guesswork from the daily parenting decisions.`,
+    relatedCards: ["k43", "m57", "p59", "p60", "m63"],
+  },
+  {
+    id: "g23",
+    title: `Toileting, wiping, and body signals`,
+    topic: "hygiene",
+    patternTypes: ["juggler", "spiraller"],
+    perspectives: ["me", "kid"],
+    recognize: `The accidents, the near-misses, the hidden underwear, the wiping battles. You thought this would be over by now. Your child is old enough to manage basic toileting but their body does not send the signals on time and the motor skills needed for wiping are harder than they look.`,
+    brain: `You are managing a problem that feels like it should not exist at this age. The shame of dealing with toileting issues in an older child is isolating because no one talks about it. Your frustration is compounded by the invisibility of the issue. You cannot ask other parents for help without feeling exposed.
+
+The cognitive load of managing another person's body awareness on top of everything else you are tracking is real. You are doing a job that should have been handed over years ago, and the handover keeps failing.`,
+    kidBrain: `ADHD interoception means body signals arrive late or at crisis intensity. Your child genuinely did not feel the need to go until it was urgent. The hiding of accidents is shame avoidance, not deception. The wiping difficulty is a motor sequencing and sensory tolerance issue, not laziness.
+
+Every accident adds to their shame. Every reaction from you, no matter how measured, registers on a child who already knows this should not still be happening. They want this to be over as much as you do.`,
+    dualDynamic: `If you also have ADHD, you may struggle to maintain the consistent prompting schedule that your child needs. You forget to remind them because your own executive function is managing fifteen other things. The system that would prevent the accidents requires the exact cognitive resource you are shortest on.`,
+    strategies: [
+      `Schedule toilet stops at every transition: before leaving, after meals, before activities, at every context change. Do not wait for them to notice. Their body will not tell them in time.`,
+      `Solve the wiping problem mechanically. Wet wipes are easier than toilet paper. A bidet attachment removes the skill demand entirely. Solve the problem, do not add shame to it.`,
+      `When you find hidden underwear: 'Found these. No big deal. Into the wash.' Your calm response this time determines whether they hide or tell you next time.`,
+      `Talk to the paediatrician if accidents are frequent. There may be a physiological component alongside the interoception issue.`,
+    ],
+    scripts: [
+      {situation: `When they have an accident`, say: `Bodies do that sometimes. Let us get you cleaned up.`},
+      {situation: `When you find hidden underwear`, say: `Found these. No big deal. Straight in the wash.`},
+      {situation: `When they resist toilet stops`, say: `Everyone goes before we leave. It is just what we do.`},
+    ],
+    partner: `This is one of the most isolating ADHD parenting challenges because it is too embarrassing to discuss with most people. If your partner does not understand why this is still happening, the short version is: ADHD interoception means body signals arrive late. It is neurological, not behavioural. The child needs scheduled prompts, not lectures. And both of you need to agree on a calm, shame-free response.`,
+    moreHelp: `If toileting issues persist beyond what interoception alone explains, consult the paediatrician. Encopresis, constipation, and sensory processing differences can all contribute. An occupational therapist can help with the motor sequencing aspects of wiping and hygiene.`,
+    relatedCards: ["k44", "k45", "k46", "p61", "k21"],
+  },
+  {
+    id: "g24",
+    title: `Hygiene, puberty, and growing bodies`,
+    topic: "hygiene",
+    patternTypes: ["juggler", "spiraller", "escaper"],
+    perspectives: ["me", "kid"],
+    recognize: `Puberty arrived and brought a set of hygiene demands your child was not ready for. Deodorant, daily showers, changing underwear, managing body hair, skin care. Each one is a new executive function task landing on a system that was already struggling with the old ones.`,
+    brain: `You are watching your child face social consequences for hygiene failures that are neurological, not motivational. The peer feedback is starting, or you are dreading when it will. You want to protect them from social rejection while also getting them to shower, which feels like an impossible dual mandate.
+
+The conversations are awkward. You are trying to teach body awareness to a brain that does not reliably receive body signals. The adolescent push for autonomy makes them resistant to the very scaffolding they need.`,
+    kidBrain: `They cannot smell what you smell. Olfactory habituation means they have adapted to their own scent. The shower is a multi-step sequence requiring sensory tolerance of water pressure, temperature, and product textures. Every step is harder than it looks.
+
+Puberty also brought identity concerns. Being told they smell or need to shower feels like being told something is wrong with them. The instruction lands on rejection sensitivity. They hear 'you are gross' when you say 'time to shower.'`,
+    dualDynamic: `If you also have ADHD, you may recognise your own hygiene struggles in your child. Your executive function is already managing their routines plus your own. Adding puberty hygiene coaching to the load is another demand on a system running at capacity.`,
+    strategies: [
+      `Make the routine shorter, not longer. A three-minute shower with no hair washing is better than no shower at all. Build the habit first, add steps later.`,
+      `Let them choose their own products. Ownership increases compliance. A deodorant they picked is more likely to be used.`,
+      `Written checklists in the bathroom. The executive function demand of remembering all the steps is reduced by making them visible.`,
+      `Approach every conversation as skill-building, not character correction. 'Let me show you how this works' rather than 'You need to start doing this.'`,
+    ],
+    scripts: [
+      {situation: `When they resist showering`, say: `Three minutes, no hair wash. Just a rinse. That is the whole job.`},
+      {situation: `When introducing deodorant`, say: `Your body is changing and this is a new step. Everyone starts this at some point. Pick one you like.`},
+      {situation: `When peers have commented`, say: `Some kids said something. That must have felt awful. Let us make a plan so it does not happen again.`},
+    ],
+    partner: `Hygiene conversations during puberty need to come from the right parent at the right time. If the child is more receptive to one parent, that parent leads. If both parents have ADHD, decide who owns this responsibility and write the checklist together so neither has to remember it from scratch.`,
+    moreHelp: `If hygiene resistance is extreme and accompanied by significant distress, sensory processing disorder may be a contributing factor. An occupational therapist can assess sensory tolerances and suggest accommodations. Some children benefit from specific water pressure settings, certain fabric types, or fragrance-free products.`,
+    relatedCards: ["k47", "k48", "k49", "p61", "k21"],
+  },
+  {
+    id: "g25",
+    title: `When your child becomes physically unsafe`,
+    topic: "safety",
+    patternTypes: ["reactor", "spiraller"],
+    perspectives: ["me", "kid"],
+    recognize: `The meltdowns have become physical. Hitting, kicking, throwing things, breaking objects, hurting you or siblings. You are genuinely frightened during the outbursts and you do not know how to talk about it because admitting you are scared of your own child feels like the ultimate parenting failure.`,
+    brain: `Being scared of your child activates a primal conflict: the person you are wired to protect is the same person threatening your safety. Your threat detection system fires appropriately during the outburst, but the shame that follows tells you the fear itself is wrong. It is not wrong. It is proportionate.
+
+The hypervigilance between outbursts is exhausting. You are scanning for the next escalation constantly. Your nervous system is stuck in a mode designed for occasional danger, not daily life.`,
+    kidBrain: `Your child is not choosing violence. The emotional intensity exceeds their regulatory capacity and the excess energy discharges through physical action. The impulse reaches the motor system before the braking system can intervene. They are often as horrified by what they did as you are.
+
+The pattern escalates with physical development. The child who threw toys at five can punch walls at twelve. The feelings are the same size. The body is bigger. The gap between emotional intensity and self-regulation capacity is widening.`,
+    dualDynamic: `If you also have ADHD, your own dysregulation during these moments is harder to control. The co-escalation risk is higher. Two nervous systems in alarm mode amplify each other. Your capacity to stay calm when physically threatened is reduced by your own regulatory limitations.`,
+    strategies: [
+      `Safety first, processing later. During the outburst: protect yourself, protect other children, remove dangerous objects. Do not try to teach, reason, or process in the moment.`,
+      `Create a safety plan for the household. Where do siblings go? What is the de-escalation sequence? What is the threshold for calling for help? Write it down before the next outburst.`,
+      `After the outburst: 'That was a big feeling. Hitting is not safe. We need to find a different way for that feeling to come out.' Address it once, briefly, when both are calm.`,
+      `Seek professional support. This is not optional at this stage. A therapist who specialises in ADHD and emotional regulation can provide targeted intervention.`,
+    ],
+    scripts: [
+      {situation: `During the outburst`, say: `I am going to keep everyone safe. I am not leaving. I am right here.`},
+      {situation: `After the outburst`, say: `That was hard. You had a big feeling and it came out physically. We need to find a different way.`},
+      {situation: `When they express shame after`, say: `You are not a bad person. The feeling was too big for your body to hold. We are going to work on this together.`},
+    ],
+    partner: `Both parents need to be on the same page about the safety plan. This is not a conversation to have during or after an outburst. It needs to happen on a calm day with a clear head. Decide together: what are the steps, what is the threshold for outside help, and how do you talk about it with the child.`,
+    moreHelp: `If outbursts are escalating in frequency or intensity, this needs professional intervention. A psychiatrist can assess whether medication adjustments are needed. A therapist specialising in ADHD can work on emotional regulation skills. If anyone in the household is being regularly hurt, this is beyond what self-help can address. Reach out to your paediatrician or a crisis line for guidance.`,
+    relatedCards: ["p65", "p66", "m51", "k58", "m52"],
+  },
+  {
+    id: "g26",
+    title: `The sibling who is living beside the storm`,
+    topic: "siblings",
+    patternTypes: ["spiraller", "juggler", "reactor"],
+    perspectives: ["kid", "partner"],
+    recognize: `Your other child is being patient, invisible, resentful, or all three. They live with a level of intensity they did not choose. The meltdowns, the attention imbalance, the ruined events, the early departures. They are learning that the loudest need gets the most response.`,
+    brain: `The guilt of under-serving one child while managing another is constant. You know the sibling is getting less of you. You can see them adjusting, accommodating, shrinking to fit the space that is left. The awareness of this does not give you more capacity to change it.
+
+The sibling relationship is being shaped by the ADHD dynamic in ways that may persist. Resentment, parentification, anxiety, and withdrawal are all documented responses in siblings of ADHD children.`,
+    kidBrain: `The sibling is learning several things simultaneously: that intensity determines attention allocation, that their needs are secondary, that managing their own emotions is their responsibility because the household cannot absorb more. Some siblings become helpers. Some become invisible. Some become angry. All of them need to hear that you see them.`,
+    dualDynamic: `In a dual-ADHD household, the sibling may also have ADHD, which adds complexity. Or the sibling may be neurotypical, which creates a different kind of isolation: being the only regulated person in a dysregulated household.`,
+    strategies: [
+      `Name what you see: 'I noticed you waited while I dealt with that. That was really mature and I appreciate it.' Specific acknowledgment, not general praise.`,
+      `Protect their space. A locked bedroom door, headphones, a sibling-free zone. Their need for peace is as valid as their sibling's need for support.`,
+      `Schedule one-on-one time that is protected from interruption. Even fifteen minutes weekly that is theirs alone.`,
+      `Do not make them the helper, the mediator, or the emotional support for you. They are a child, not a co-parent.`,
+      `Validate their frustration without betraying their sibling: 'I know it is hard when things get loud. Your feelings about that are fair.'`,
+    ],
+    scripts: [
+      {situation: `When they express resentment toward their sibling`, say: `Your feelings about that are fair. Living with this level of noise is hard.`},
+      {situation: `When their moment was interrupted by a meltdown`, say: `That was your moment and it got interrupted. I am sorry. That was not fair.`},
+      {situation: `When they ask why their sibling gets away with things`, say: `It looks different and I understand why that feels unfair. Your sibling's brain needs different support, the same way you need different things too.`},
+    ],
+    partner: `Both parents need to actively protect the sibling's experience. This means one parent can handle the ADHD child's meltdown while the other stays with the sibling. If you are a single parent, this is harder. But even naming the sibling's experience — 'I know that was tough on you' — makes a measurable difference.`,
+    moreHelp: `If the sibling is showing signs of anxiety, depression, withdrawal, or behavioural changes, they may need their own support. Therapy for siblings of ADHD children is a legitimate and helpful intervention. They deserve a space where they are the priority.`,
+    relatedCards: ["p71", "m59", "m60", "m61", "p73", "p74", "p31"],
+  },
+  {
+    id: "g27",
+    title: `When one child shapes the whole family`,
+    topic: "siblings",
+    patternTypes: ["escaper", "juggler", "spiraller"],
+    perspectives: ["me", "partner"],
+    recognize: `The family's schedule, outings, holidays, and daily decisions are all shaped around one child's triggers. You avoid restaurants. You leave events early. You choose holidays based on sensory profiles. The family's world is shrinking around the needs of one member.`,
+    brain: `The avoidance is rational. Every time you tried the normal thing, it ended badly. The cost-benefit calculation favours staying home. But the avoidance is also progressive. Each thing you stop doing removes a data point that could have gone well and narrows the family's experience further.
+
+The resentment from other family members, including you, is building. You did not plan for a life organised around trigger-avoidance.`,
+    kidBrain: `Your ADHD child is not choosing to limit the family. They may not even be aware of the impact. Or they may be acutely aware and carrying guilt about it. Either way, the accommodation happened around them, not by them.`,
+    dualDynamic: `If you have ADHD too, you may have your own avoidance patterns layering on top of your child's. Your sensory triggers may overlap, making it easier to avoid outings for both your sakes and harder to distinguish whose avoidance is driving the decision.`,
+    strategies: [
+      `One low-demand outing per week with an exit plan. Twenty minutes at the park with a clear exit is better than a full-day event that ends in crisis.`,
+      `Let the other children have experiences without the ADHD child sometimes. This is not exclusion. It is recognising that different children need different things.`,
+      `Rebuild the family's tolerance gradually. Start small and build on successes. Each successful outing is a data point that challenges the avoidance.`,
+      `Name the pattern to yourself: 'We are avoiding things because of one child's needs. I want to expand our world again.' The naming is the first step.`,
+    ],
+    scripts: [
+      {situation: `When planning a family event`, say: `We are going to try this. We will stay for thirty minutes. If we need to leave, we leave without drama.`},
+      {situation: `When the ADHD child asks why they cannot go somewhere`, say: `We are working on building up to bigger outings. Today we are doing a short one to practise.`},
+      {situation: `When a sibling is upset about restrictions`, say: `I know you miss doing those things. Let us plan one for you this week.`},
+    ],
+    partner: `Both parents need to agree on the gradual re-expansion. If one parent is more avoidant and the other wants to push, find the middle: planned, short, exit-ready outings that test the waters without betting the whole day on success.`,
+    moreHelp: `If the avoidance is severe and the family's world has contracted significantly, a family therapist who understands ADHD can help rebuild the range of family activities systematically. This is not about forcing the ADHD child into overwhelming situations. It is about finding the sustainable middle ground.`,
+    relatedCards: ["p72", "m61", "m49", "m06", "k28"],
+  },
+  {
+    id: "g28",
+    title: `Parent resentment and the thoughts you are ashamed of`,
+    topic: "burnout",
+    patternTypes: ["spiraller", "escaper", "reactor"],
+    perspectives: ["me"],
+    recognize: `You resent your child. You do not like being around them. You feel numb where love used to be. You are waiting for the next explosion. You replay the cruel things they said. You enjoy your easier child more. These thoughts exist and you are ashamed of every one of them.`,
+    brain: `Resentment is not a failure of love. It is a depletion signal. Your nervous system has been running at emergency capacity for so long that the emotional system has started to conserve. The numbness, the avoidance, the preference for the easier child — these are all signs that you have exceeded your sustainable load.
+
+The shame of having these thoughts adds weight to the thoughts themselves. You cannot address the depletion while also performing constant guilt about the depletion. Something has to give.`,
+    kidBrain: `Your child does not know you feel this way, or they sense it without understanding it. Children are precise readers of emotional withdrawal. If you are pulling back, they feel the distance even if they cannot name it. This can increase their behaviour as they escalate to find your emotional presence.`,
+    dualDynamic: `If you have ADHD, you are managing your own dysregulation alongside the depletion. Your emotional responses are less filtered, which means the resentment is felt more intensely and expressed less carefully. The thoughts may leak in ways you regret.`,
+    strategies: [
+      `Name the resentment honestly to a therapist, a trusted friend, or a journal. Resentment that stays hidden compounds. Resentment that is acknowledged can be addressed.`,
+      `Distinguish between the child and the situation. You resent the relentless demand. You resent the lack of support. You resent the gap between the parenting you wanted to do and the parenting you are surviving. The child is the context, not the cause.`,
+      `Pursue load reduction, not self-care. One demand removed from tomorrow is worth more than an hour of meditation you cannot access. Cancel something. Lower a standard. Ask for help.`,
+      `Find one moment of genuine connection with your ADHD child this week. Not manufactured. Not performative. Something small and real. The relationship repairs in micro-moments.`,
+    ],
+    scripts: [
+      {situation: `When talking to a therapist or trusted person`, say: `I feel resentment toward my child and I need to say it out loud because the shame of it is making everything worse.`},
+      {situation: `When the guilt hits after enjoying time with the easier child`, say: `Enjoying one child does not mean I love the other one less. My nervous system needs recovery.`},
+      {situation: `When the numbness frightens you`, say: `The numbness is not indifference. It is my brain protecting me from overload. The feeling will come back when the pressure reduces.`},
+    ],
+    partner: `If your partner does not understand the resentment, it may be because they carry less of the daily load, or process the intensity differently. The conversation is not about blame. It is about load distribution. 'I need more support because I am running out of capacity' is more productive than 'You do not understand what I am going through.'`,
+    moreHelp: `If the resentment or numbness persists and is affecting your ability to parent, your relationship, or your daily functioning, this is clinical burnout and it deserves professional support. A therapist who understands ADHD parenting can help you rebuild capacity without adding guilt.`,
+    relatedCards: ["p62", "p63", "p64", "p68", "p70", "p74", "p67"],
+  },
+  {
+    id: "g29",
+    title: `When your child is too much for other children`,
+    topic: "social",
+    patternTypes: ["reactor", "juggler"],
+    perspectives: ["me", "kid"],
+    recognize: `Other children pull away. Playdates end early. Birthday party invitations stop arriving. You can see what other children see: your child is too loud, too physical, too intense, too controlling. Watching your child be rejected is one of the most painful parts of ADHD parenting.`,
+    brain: `Your rejection sensitivity compounds your child's social rejection. You feel it alongside them. The pain of watching your child be excluded activates your own social wound. You want to fix it, explain it, or protect them from it, and none of those options are fully available.
+
+The temptation to blame other children or their parents is real. The temptation to blame your child is also real. Neither helps.`,
+    kidBrain: `Your child is running social software at a different speed. They are louder, faster, more physical, more intense than the social norm requires. They cannot regulate their energy to match the group because their arousal system does not have that dial.
+
+The bossiness is anxiety-driven control-seeking. The interrupting is impulsive. The physical intensity is stimulation-seeking. None of it is malicious. All of it has social consequences they feel but cannot prevent.`,
+    dualDynamic: `If you had similar social struggles as a child, watching your child repeat the pattern is re-traumatising. Your own unresolved social pain makes it harder to respond to theirs with the calm, practical support they need.`,
+    strategies: [
+      `One-on-one playdates work better than groups. Find the one child who tolerates or enjoys the intensity.`,
+      `Teach specific social skills outside the social moment. Role-play at home: 'When the other person stops laughing, the game has changed.' Concrete, observable, practisable.`,
+      `Activities where intensity is an asset: martial arts, swimming, drama, climbing. Find the contexts where their energy matches rather than trying to suppress it.`,
+      `Do not hover during playdates. Your anxious observation adds pressure. Brief the other parent: 'My child can be intense. If it is too much, just tell me.'`,
+      `After a social failure, avoid the post-mortem lecture. One specific thing: 'Next time, try asking what they want to play before you decide.'`,
+    ],
+    scripts: [
+      {situation: `When they ask why no one invites them`, say: `Making friends is harder for some people. That does not mean something is wrong with you. It means we need to practise some things.`},
+      {situation: `When a playdate went badly`, say: `That was a tough one. What is one thing you would do differently?`},
+      {situation: `When they are upset about being rejected`, say: `That hurts. I know it does. You are worth knowing and we are going to figure this out.`},
+    ],
+    partner: `Social rejection affects both parents. Discuss the strategy together: which activities to try, how to manage playdates, whether social skills coaching is worth exploring. Present a united approach so the child gets consistent support.`,
+    moreHelp: `Social skills groups run by therapists who understand ADHD can provide structured practice in a safe environment. These work better than general social skills programmes because they address ADHD-specific social processing differences. Ask the school psychologist or your child's therapist for recommendations.`,
+    relatedCards: ["k50", "k51", "k52", "k53", "k54", "k55", "k11", "k14"],
+  },
+  {
+    id: "g30",
+    title: `Older kids, younger supports`,
+    topic: "development",
+    patternTypes: ["juggler", "spiraller", "escaper"],
+    perspectives: ["me", "kid"],
+    recognize: `They want the freedom of their age but cannot manage the basics. They want a phone but cannot track their belongings. They want to walk alone but cannot remember their route. They reject the supports that help them because the supports feel babyish. The gap between chronological age and executive function age is widening.`,
+    brain: `Executive function in ADHD is delayed by approximately thirty percent. Your twelve-year-old may have the executive function of an eight-year-old. The desire for autonomy is age-appropriate. The capacity is not. You are caught between honouring their developmental need for independence and knowing they are not ready.
+
+The conversations about supports feel like you are taking something away. They feel like you are highlighting their deficiency. Every scaffold you maintain is evidence, in their eyes, that something is wrong with them.`,
+    kidBrain: `By adolescence, ADHD children are acutely aware of their differences. They see their peers managing things they cannot. The supports that helped at eight feel like evidence of failure at twelve. The rejection of the chart, the checklist, the timer is identity protection. They are saying 'I do not want to be the kid who needs this.'
+
+The anger about the supports is often bigger than the anger about the ADHD itself. The supports make the invisible visible.`,
+    dualDynamic: `If you also have ADHD, you understand the frustration of needing supports you wish you did not need. Your empathy is high but your ability to consistently provide the scaffolding may be low. The supports your child needs require executive function from you that you may not have available.`,
+    strategies: [
+      `Reframe the tool, not the child. 'Athletes use checklists. Pilots use checklists. The checklist is not because you cannot do it. It is because it works.'`,
+      `Match the tool to the age. Phone reminders instead of wall charts. A smartwatch alarm instead of a parent reminder. The function stays. The form grows up.`,
+      `Scaffold the independence: build the skill, then extend the freedom. 'You can walk to school when you can remember your bag three days in a row.'`,
+      `Let some things fail safely. A forgotten lunch is a natural consequence that teaches more than a parental reminder. Choose the failures that are survivable.`,
+    ],
+    scripts: [
+      {situation: `When they refuse a support as babyish`, say: `You are right that the chart is not working for you anymore. What would work better? A phone reminder? An alarm?`},
+      {situation: `When they want freedom they are not ready for`, say: `I want you to have that freedom. Let us build toward it. Show me you can do X three times and it is yours.`},
+      {situation: `When they compare themselves to peers`, say: `Your brain works differently. Some things take longer to build. That is not failure. That is your timeline.`},
+    ],
+    partner: `Both parents need to agree on what independence is being extended and what scaffolds remain. Inconsistency between parents on this is especially confusing for the child. Decide together: what are the non-negotiables, what are the growth edges, and how do you respond when they reject the support.`,
+    moreHelp: `An ADHD coach who works with adolescents can help bridge the gap between parental scaffolding and self-management. The coach relationship is peer-like rather than parental, which makes it more acceptable to the teenager. Executive function coaching builds the skills the brain is still developing.`,
+    relatedCards: ["k59", "k60", "k49", "p79"],
+  },
+  {
+    id: "g31",
+    title: `When school sees behaviour but misses distress`,
+    topic: "school",
+    patternTypes: ["spiraller", "looper", "reactor"],
+    perspectives: ["me", "kid"],
+    recognize: `The school sees disruption. You see distress. They report behaviour. You know the behaviour is the visible tip of an invisible struggle. The gap between what the school observes and what your child experiences feels impossible to bridge. Every email, every call, every meeting reinforces the feeling that the school is managing a problem rather than supporting a child.`,
+    brain: `The school is measuring the symptom, not the cause. The talking out is anxiety. The refusal is overwhelm. The aggression is dysregulation. You know this because you see the child at home, after school, when the mask comes off. The school sees the mask and the moments the mask slips.
+
+Every school meeting activates your rejection sensitivity. You hear 'your child is a problem' when they say 'your child is struggling.' The advocacy required to bridge this gap uses executive function you are already short on.`,
+    kidBrain: `Your child at school is performing. The masking uses enormous cognitive and emotional resources. The behaviour the school reports is often the moment the mask failed. The child is not choosing to be disruptive. They are running out of the regulatory resources needed to hold it together.
+
+The restraint collapse at home is evidence of how hard they worked at school. The behaviour at school is evidence of when the work exceeded capacity.`,
+    dualDynamic: `If you have ADHD, the school communication is its own executive function demand. The emails, the meetings, the follow-ups, the documentation. The advocacy your child needs requires sustained administrative effort from a brain that struggles with sustained administrative effort.`,
+    strategies: [
+      `Reframe the conversation with school: 'When you see this behaviour, it usually means this is happening underneath. What can we do to address the cause rather than the behaviour?'`,
+      `Request that the school contact you about patterns, not individual incidents. Daily behaviour reports increase shame without improving outcomes.`,
+      `Document everything in email. The paper trail matters more than the conversation.`,
+      `Ask for the school psychologist's involvement. They can bridge between the teacher's behavioural observations and the neurological reality.`,
+    ],
+    scripts: [
+      {situation: `When school calls about behaviour`, say: `Can you tell me specifically what happened and what was going on around them at the time? I want to understand the context.`},
+      {situation: `During a school meeting`, say: `When he does that, it usually means he is overwhelmed, not defiant. What accommodations can we put in place for those moments?`},
+      {situation: `When the school suggests stricter consequences`, say: `We have found that consequences without support make the behaviour worse, not better. Can we talk about what support looks like?`},
+    ],
+    partner: `School advocacy is exhausting and one parent often carries most of it. If possible, share the load: one parent handles email communication, the other attends meetings. If you are a single parent, ask whether the school has a parent advocate or whether a support organisation can attend meetings with you.`,
+    moreHelp: `If the school is not responsive to accommodation requests, know your rights. In the US, a 504 Plan or IEP provides legal protections for children with ADHD. Request an evaluation in writing. The school is legally required to respond. Advocacy organisations like CHADD and Understood have resources for navigating this process.`,
+    relatedCards: ["p52", "m53", "p56", "k08", "m14"],
+  },
+  {
+    id: "g32",
+    title: `When ADHD does not explain everything`,
+    topic: "comorbidity",
+    patternTypes: ["spiraller", "looper"],
+    perspectives: ["me", "kid"],
+    recognize: `Something does not add up. The ADHD explains some of it but not all of it. The anxiety seems bigger than ADHD anxiety. The mood is lower than it should be. The rigidity goes beyond preference. The social differences are more than impulsivity. You have a feeling that there is more going on and you are afraid to name it.`,
+    brain: `Naming the question feels like catastrophising. You want to be wrong. You also want to know. The fear of another diagnosis sits alongside the fear of missing something important. The parental instinct that something else is happening is often the first clinical signal.
+
+ADHD rarely travels alone. Approximately seventy percent of people with ADHD have at least one co-occurring condition. Anxiety, depression, autism, learning disabilities, sensory processing disorder, oppositional defiant disorder. The overlap makes diagnosis harder and treatment more complex.`,
+    kidBrain: `Your child may be experiencing the world through multiple neurological lenses simultaneously. The ADHD creates one set of challenges. The co-occurring condition creates another. The combination creates a third set that is different from either one alone.
+
+If autism co-occurs, the social difficulties have a different quality: not just impulsive social errors but fundamental differences in social processing. If anxiety co-occurs, the avoidance and rigidity go beyond ADHD novelty-seeking. If depression co-occurs, the motivation issues are deeper than dopamine.`,
+    dualDynamic: `If you also have undiagnosed co-occurring conditions, you may recognise in your child what you have normalised in yourself. Your own anxiety, depression, or autistic traits may have been attributed to personality rather than neurology. Your child's assessment may prompt your own.`,
+    strategies: [
+      `Trust your instinct. Write down the specific behaviours that do not fit the ADHD picture. Not interpretations. Observations. 'She lines up her toys by colour every time.' 'He has not smiled in three weeks.' 'She covers her ears at sounds that do not bother other children.'`,
+      `Talk to the prescriber or request a broader assessment. Bring your observations. The clinician sees a snapshot. You see the whole film.`,
+      `Do not let fear of another diagnosis prevent you from seeking one. An accurate diagnosis leads to accurate support. An inaccurate one leads to strategies that do not work.`,
+      `Read about common ADHD co-occurrences. Anxiety, autism, depression, learning disabilities. Not to diagnose, but to recognise patterns that may need professional assessment.`,
+    ],
+    scripts: [
+      {situation: `When raising concerns with the clinician`, say: `The ADHD treatment is helping with some things but these specific things are not changing. I would like to explore whether something else is contributing.`},
+      {situation: `When your partner thinks you are overreacting`, say: `I might be wrong. But I would rather check and find nothing than miss something that could be helped.`},
+      {situation: `When your child asks why they are different from their ADHD peers`, say: `Everyone's brain is different in its own way. We are figuring out exactly how yours works so we can support you better.`},
+    ],
+    partner: `If one parent suspects a co-occurring condition and the other does not, share the specific observations rather than the interpretation. 'Did you notice she does this?' is more productive than 'I think she has autism.' Let the observations build the case rather than the label leading the conversation.`,
+    moreHelp: `A comprehensive neuropsychological evaluation can assess for ADHD and co-occurring conditions simultaneously. This is the gold standard for understanding a complex presentation. Ask your paediatrician or psychiatrist for a referral. If cost is a barrier, university psychology clinics often offer assessments at reduced rates.`,
+    relatedCards: ["p58", "k25", "k34", "p64"],
+  },
 ];
 
