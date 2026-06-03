@@ -509,13 +509,23 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
       }}>
         {/* Chrome */}
         <div style={{ padding: '22px 26px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-          <a href="/" style={{
-            fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.07em',
-            color: ink2, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 5,
-          }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
-            back
-          </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <a href="/" style={{
+              fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.07em',
+              color: ink2, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 5,
+            }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+              back
+            </a>
+            <a href="/" style={{
+              fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.07em',
+              color: ink3, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4,
+              opacity: 0.7,
+            }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              new search
+            </a>
+          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <ShareButton title={title} url={'/cards/' + cardId} />
             <SaveCardButton cardId={cardId} cardTitle={title} />
@@ -696,4 +706,3 @@ export default function CardViewer({ cardId, cardType, title, parentNow, kidNow,
     </>
   );
 }
-

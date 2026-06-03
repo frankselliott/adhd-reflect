@@ -25,6 +25,15 @@ const EXAMPLES = [
 export default function AIRouter() {
   const [input, setInput] = useState('');
   const [state, setState] = useState('idle');
+
+  // Prevent loop on back-navigation
+  useEffect(() => {
+    if (sessionStorage.getItem('adhd-reflect-navigated')) {
+      sessionStorage.removeItem('adhd-reflect-navigated');
+      setInput('');
+      setState('idle');
+    }
+  }, []);
   const [matches, setMatches] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
   const [unmatchedNote, setUnmatchedNote] = useState('');
@@ -166,7 +175,8 @@ function CrisisNumbers() {
         try { sessionStorage.setItem('adhd-reflect-matches', JSON.stringify(matches)); } catch(e) {}
         try { sessionStorage.setItem('adhd-reflect-query', input.trim()); } catch(e) {}
         // Navigate to best match
-        window.location.href = '/cards/' + matches[0].id;
+        sessionStorage.setItem('adhd-reflect-navigated', 'true');
+        window.location.replace('/cards/' + matches[0].id);
         return;
       }
       setState('result');
@@ -443,4 +453,3 @@ function CrisisNumbers() {
     </div>
   );
 }
-
