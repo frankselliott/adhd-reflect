@@ -477,12 +477,28 @@ function ResultScreen({ results }) {
           </div>
           {/* Replace with ConvertKit or email provider embed */}
           <input style={styles.emailInput} type="email" placeholder="your@email.com" id="quiz-email" />
-          <button style={styles.emailBtn} onClick={() => {
-            const email = document.getElementById('quiz-email')?.value;
-            if (email) {
-              // Store for when email provider is connected
-              try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
-              alert('Thanks! We will connect the email system soon. Your pattern has been saved.');
+          <button style={styles.emailBtn} data-signup-btn onClick={async () => {
+            const emailEl = document.getElementById('quiz-email');
+            const email = emailEl?.value;
+            if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+            const btn = document.querySelector('[data-signup-btn]');
+            if (btn) { btn.textContent = 'Signing up...'; btn.disabled = true; }
+            try {
+              const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, pattern: primary }),
+              });
+              const data = await res.json();
+              if (data.success) {
+                if (btn) btn.textContent = 'You are in!';
+                if (emailEl) emailEl.style.display = 'none';
+                try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
+              } else {
+                if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
+              }
+            } catch(e) {
+              if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
             }
           }}>Send me my practice plan</button>
           <p style={styles.emailNote}>Free. Four emails over four weeks. Then one per week if you want it. Unsubscribe anytime.</p>
