@@ -17,7 +17,7 @@ export async function onRequestGet({ request, env }) {
   // Set token cookie for 2 years
   const headers = new Headers(response.headers);
   headers.set('Set-Cookie',
-    'grow_token=' + token + '; Path=/grow; HttpOnly; Secure; SameSite=Lax; Max-Age=' + (60*60*24*365*2)
+    'grow_token=' + token + '; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=' + (60*60*24*365*2)
   );
 
   return new Response(null, {

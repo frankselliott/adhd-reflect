@@ -66,7 +66,7 @@ export async function onRequestPost({ request, env }) {
       expirationTtl: kvTtl,
     });
 
-    const accessUrl = '/grow/access?token=' + token;
+    const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
     return new Response(JSON.stringify({
       success: true,
       accessUrl,
