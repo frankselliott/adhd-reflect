@@ -13,7 +13,7 @@ const { current = '' } = Astro.props;
       <li><a href="/guides" class:list={[{ active: current === 'guides' }]}>Guides</a></li>
       <li><a href="/guides/saved" class:list={[{ active: current === 'saved' }]}>Saved</a></li>
       <li><a href="/resources" class:list={[{ active: current === 'resources' }]}>Resources</a></li>
-      <li><a href="/about" class:list={[{ active: current === 'about' }]}>About</a></li>
+      <li><a href="/quiz" class:list={[{ active: current === 'quiz' }]}>Pattern</a></li>
       <li><a href="/grow" class:list={[{ active: current === 'grow' }]} class="nav-grow">Grow</a></li>
     </ul>
     <button class="nav-mobile-btn" aria-label="Menu" aria-expanded="false">
@@ -31,7 +31,7 @@ const { current = '' } = Astro.props;
     <a href="/guides">Guides</a>
     <a href="/guides/saved">Saved</a>
     <a href="/resources">Resources</a>
-    <a href="/about">About</a>
+    <a href="/quiz">Pattern</a>
     <a href="/grow" style="color: var(--blue);">Grow</a>
   </div>
 </div>
