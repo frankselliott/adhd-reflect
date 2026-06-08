@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MODULES, getNextSuggestion } from '../data/growModules.js';
+import { MODULES, getNextSuggestion, MODULE_CONTENT } from '../data/growModules.js';
 
 const BRAND = {
   blue: '#4A6FA5',
@@ -175,6 +175,24 @@ export function GrowModule({ moduleId }) {
     } catch (e) { setSubmitting(false); }
   };
 
+
+// Module prose styles injected via global style tag
+if (typeof document !== 'undefined' && !document.getElementById('module-prose-styles')) {
+  const style = document.createElement('style');
+  style.id = 'module-prose-styles';
+  style.textContent = `
+    .module-prose { margin-bottom: 32px; }
+    .module-prose p { font-family: 'Lexend', sans-serif; font-size: 15px; color: #56606E; line-height: 1.75; margin-bottom: 16px; }
+    .module-prose p strong { color: #1F2A37; font-weight: 500; }
+    .module-prose p em { font-style: italic; color: #1F2A37; }
+    .module-prose h3 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 400; color: #1F2A37; line-height: 1.3; margin: 32px 0 12px; font-variation-settings: 'opsz' 20; }
+    .module-prose ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+    .module-prose ul li { font-family: 'Lexend', sans-serif; font-size: 15px; color: #56606E; line-height: 1.6; padding-left: 20px; position: relative; }
+    .module-prose ul li::before { content: '—'; position: absolute; left: 0; color: rgba(31,42,55,0.3); }
+  `;
+  document.head.appendChild(style);
+}
+
   if (!module) return (
     <div style={{ padding: '64px 24px', textAlign: 'center', fontFamily: "'Lexend', sans-serif", color: '#56606E' }}>
       Module not found. <a href="/grow/home" style={{ color: '#4A6FA5' }}>Back to your program</a>
@@ -210,11 +228,7 @@ export function GrowModule({ moduleId }) {
           </p>
         </div>
 
-        <div style={{ padding: '24px', background: BRAND.mist, borderRadius: '12px', marginBottom: '32px', fontFamily: "'Lexend', sans-serif", fontSize: '15px', color: BRAND.pewter, lineHeight: 1.7 }}>
-          Full module content for Module {module.rank} loads here. This module is about: <strong style={{ color: BRAND.slate }}>{module.tagline}</strong>
-          <br/><br/>
-          This is the development placeholder. The complete ~600-word module text gets added per module in the next build phase.
-        </div>
+        <div className="module-prose" dangerouslySetInnerHTML={{ __html: MODULE_CONTENT[module.id] || '' }} />
 
         <RightNowCard module={module} />
 
