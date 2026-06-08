@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Halfway" description="Mid-course check-in." current="grow">
+  <div class="checkin-wrap">
+    <div class="checkin-label">Halfway through</div>
+    <h1 class="checkin-title">Ten modules.<br/>Three questions.</h1>
+    <p class="checkin-sub">Your answers are saved privately and appear in your summary card at the end.</p>
+    <div class="checkin-form">
+      <div class="checkin-q">
+        <label class="checkin-q-label">Which module surprised you most?</label>
+        <textarea id="q1" class="checkin-textarea" rows="3" placeholder="The one you didn't expect to land the way it did."></textarea>
+      </div>
+      <div class="checkin-q">
+        <label class="checkin-q-label">What's one thing you've actually tried since starting?</label>
+        <textarea id="q2" class="checkin-textarea" rows="3" placeholder="Something you did differently, even once."></textarea>
+      </div>
+      <div class="checkin-q">
+        <label class="checkin-q-label">What's one thing from the first ten modules you haven't tried yet?</label>
+        <textarea id="q3" class="checkin-textarea" rows="3" placeholder="Not a judgment — just noticing."></textarea>
+      </div>
+      <button id="checkin-submit" class="checkin-btn">Save and continue</button>
+    </div>
+  </div>
+</Base>
+<style>
+.checkin-wrap { max-width: 640px; margin: 0 auto; padding: var(--space-3xl) var(--page-pad) var(--space-4xl); }
+.checkin-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: var(--space-md); }
+.checkin-title { font-family: var(--serif); font-size: clamp(32px, 7vw, 48px); font-weight: 300; color: var(--slate); line-height: 1.15; font-variation-settings: 'opsz' 48; margin-bottom: var(--space-lg); }
+.checkin-sub { font-family: var(--sans); font-size: 15px; color: var(--pewter); line-height: 1.6; margin-bottom: var(--space-3xl); }
+.checkin-form { display: flex; flex-direction: column; gap: var(--space-xl); }
+.checkin-q { display: flex; flex-direction: column; gap: var(--space-sm); }
+.checkin-q-label { font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--slate); font-style: italic; font-variation-settings: 'opsz' 20; line-height: 1.4; }
+.checkin-textarea { width: 100%; padding: 16px; font-family: var(--sans); font-size: 15px; color: var(--slate); background: white; border: 1.5px solid rgba(31,42,55,0.15); border-radius: 10px; resize: vertical; outline: none; line-height: 1.6; box-sizing: border-box; }
+.checkin-textarea:focus { border-color: var(--lavender); }
+.checkin-btn { display: block; width: 100%; padding: 18px; background: var(--blue); color: white; font-family: var(--sans); font-size: 16px; font-weight: 500; border: none; border-radius: var(--radius-pill); cursor: pointer; }
+.checkin-btn:hover { background: var(--blue-deep); }
+.checkin-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+</style>
+<script>
+  const btn = document.getElementById('checkin-submit');
+  if (btn) {
+    btn.addEventListener('click', async () => {
+      const q1 = document.getElementById('q1').value.trim();
+      const q2 = document.getElementById('q2').value.trim();
+      const q3 = document.getElementById('q3').value.trim();
+      btn.disabled = true;
+      btn.textContent = 'Saving...';
+      try {
+        await fetch('/api/grow/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ midCourseCheckin: { q1, q2, q3, completedAt: new Date().toISOString() } }),
+        });
+        window.location.href = '/grow/home';
+      } catch(e) { btn.disabled = false; btn.textContent = 'Save and continue'; }
+    });
+  }
+</script>

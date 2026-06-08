@@ -1,0 +1,333 @@
+---
+import Base from '../../layouts/Base.astro';
+const authRequired = Astro.url.searchParams.get('auth');
+const invalid = Astro.url.searchParams.get('invalid');
+---
+<Base title="When Both of You Are Dysregulated" description="A self-guided program for parents with ADHD raising children with ADHD. 20 modules. Works on a phone." current="grow">
+  <div class="grow-sales">
+
+    {authRequired && (
+      <div class="grow-notice">
+        <p>Use the access link from your confirmation email to get back in.</p>
+        <p class="grow-notice-sub">Can't find it? Email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+      </div>
+    )}
+
+    {invalid && (
+      <div class="grow-notice grow-notice-warn">
+        <p>That access link isn't valid. Try copying the full link from your email.</p>
+        <p class="grow-notice-sub">Still stuck? Email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+      </div>
+    )}
+
+    <div class="grow-hero">
+      <div class="grow-label">A self-guided program</div>
+      <h1 class="grow-title">When Both of<br/>You Are<br/>Dysregulated</h1>
+      <p class="grow-sub">For parents with ADHD raising children with ADHD.</p>
+    </div>
+
+    <div class="grow-premise">
+      <p>Every parenting course assumes the adult in the room is the regulated one.</p>
+      <p><strong>This one doesn't.</strong></p>
+      <p>It's written for the household where both of you have ADHD. Where the advice keeps failing not because you're failing at it — but because it was built for a different family.</p>
+    </div>
+
+    <div class="grow-includes">
+      <div class="grow-includes-label">What's included</div>
+      <ul class="grow-includes-list">
+        <li><span class="grow-check">✓</span> 20 text-based modules — readable on a phone in 10-15 minutes each</li>
+        <li><span class="grow-check">✓</span> Your first 5 modules suggested by your quiz pattern</li>
+        <li><span class="grow-check">✓</span> A right now card per module — print it, put it on your fridge</li>
+        <li><span class="grow-check">✓</span> A practice tracker per module — no dates, no streaks, no shame</li>
+        <li><span class="grow-check">✓</span> A complete script library — every script organised by situation</li>
+        <li><span class="grow-check">✓</span> A household map built across three modules</li>
+        <li><span class="grow-check">✓</span> A personalised summary card at the end — built from your own words</li>
+        <li><span class="grow-check">✓</span> Progress saved so you can come back and pick up where you left off</li>
+      </ul>
+    </div>
+
+    <div class="grow-modules-preview">
+      <div class="grow-includes-label">The 20 modules</div>
+      <div class="grow-module-layers">
+        <div class="grow-layer">
+          <div class="grow-layer-label">Foundation — start here</div>
+          <ol class="grow-module-list">
+            <li>Why nothing you've tried has actually fixed it</li>
+            <li>What your body does before your brain catches up</li>
+            <li>What's happening inside your child when they fall apart</li>
+            <li>When both of you go under at the same time</li>
+            <li>The repair. It matters more than the moment.</li>
+          </ol>
+        </div>
+        <div class="grow-layer">
+          <div class="grow-layer-label">Your pattern — suggested from your quiz result</div>
+          <ol class="grow-module-list" start="6">
+            <li>There's a moment before you snap — how to find it <span class="grow-tag">Reactor</span></li>
+            <li>Fewer words. Lower temperature. <span class="grow-tag">Reactor</span></li>
+            <li>Why the morning keeps collapsing <span class="grow-tag">Juggler</span></li>
+            <li>One routine you can actually keep <span class="grow-tag">Juggler</span></li>
+            <li>Why you can't stop once it starts <span class="grow-tag">Looper</span></li>
+            <li>How to stop without feeling like you lost <span class="grow-tag">Looper</span></li>
+            <li>The two hours after you lost it <span class="grow-tag">Spiraller</span></li>
+            <li>Getting from the spiral to the repair <span class="grow-tag">Spiraller</span></li>
+            <li>Why you leave even when you stay <span class="grow-tag">Escaper</span></li>
+            <li>The small return <span class="grow-tag">Escaper</span></li>
+          </ol>
+        </div>
+        <div class="grow-layer">
+          <div class="grow-layer-label">The wider household</div>
+          <ol class="grow-module-list" start="16">
+            <li>You were in the same room. You have completely different versions.</li>
+            <li>The child who isn't struggling out loud</li>
+            <li>The school sees the behaviour. You see the child underneath it.</li>
+            <li>When ADHD doesn't explain all of it</li>
+            <li>You don't need to be consistent. You need to catch it slightly earlier.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="grow-disclaimer">
+      <p>This program is not therapy and not a clinical intervention. It's structured practical content grounded in published ADHD research, written by a parent with ADHD raising a child with ADHD. If you need professional support, the <a href="/resources">resources page</a> can help you find it.</p>
+    </div>
+
+    <div class="grow-buy" id="buy">
+      <div class="grow-price-block">
+        <div class="grow-price">$49 <span class="grow-price-currency">USD</span></div>
+        <div class="grow-price-note">One payment. Lifetime access. Works on any device.</div>
+      </div>
+      <button class="grow-cta" id="grow-checkout-btn">
+        Start the program
+      </button>
+      <p class="grow-cta-sub">You'll get an access link by email immediately after payment.<br/>No account needed. No password to remember.</p>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+.grow-sales {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--page-pad) var(--space-4xl);
+}
+.grow-notice {
+  background: var(--blue-light);
+  border: 1px solid var(--blue);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.grow-notice p { font-family: var(--sans); font-size: 15px; color: var(--slate); margin-bottom: 4px; }
+.grow-notice-sub { color: var(--pewter) !important; font-size: 13px !important; }
+.grow-notice-sub a { color: var(--blue); }
+.grow-notice-warn { background: rgba(201,123,106,0.08); border-color: var(--clay); }
+.grow-hero { margin-bottom: var(--space-3xl); }
+.grow-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+}
+.grow-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 10vw, 64px);
+  font-weight: 300;
+  color: var(--slate);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 72;
+  margin-bottom: var(--space-lg);
+}
+.grow-sub {
+  font-family: var(--sans);
+  font-size: 18px;
+  color: var(--pewter);
+  line-height: 1.5;
+}
+.grow-premise {
+  margin-bottom: var(--space-3xl);
+  padding: var(--space-xl) var(--space-xl);
+  background: rgba(74,111,165,0.05);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.grow-premise p {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--slate);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+.grow-premise p:last-child { margin-bottom: 0; }
+.grow-includes { margin-bottom: var(--space-3xl); }
+.grow-includes-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: var(--space-lg);
+}
+.grow-includes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.grow-includes-list li {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.5;
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+.grow-check {
+  color: var(--sage-dark);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.grow-modules-preview { margin-bottom: var(--space-3xl); }
+.grow-module-layers { display: flex; flex-direction: column; gap: var(--space-xl); }
+.grow-layer {
+  padding: var(--space-lg);
+  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mist-border);
+}
+.grow-layer-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+}
+.grow-module-list {
+  padding-left: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.grow-module-list li {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+  line-height: 1.5;
+}
+.grow-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.grow-disclaimer {
+  margin-bottom: var(--space-3xl);
+  padding: var(--space-lg);
+  background: var(--mist);
+  border-radius: var(--radius-md);
+}
+.grow-disclaimer p {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+}
+.grow-disclaimer a { color: var(--blue); }
+.grow-buy {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--mist-border);
+  box-shadow: 0 2px 16px rgba(31,42,55,0.06);
+}
+.grow-price-block { margin-bottom: var(--space-xl); }
+.grow-price {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 60;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+.grow-price-currency {
+  font-size: 24px;
+  color: var(--pewter);
+  vertical-align: super;
+}
+.grow-price-note {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+}
+.grow-cta {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto var(--space-md);
+  padding: 18px 32px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+.grow-cta:hover { background: var(--blue-deep); transform: translateY(-1px); }
+.grow-cta:active { transform: translateY(0); }
+.grow-cta:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.grow-cta-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+}
+</style>
+
+<script>
+  const btn = document.getElementById('grow-checkout-btn');
+  if (btn) {
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      btn.textContent = 'Opening checkout...';
+      try {
+        // Try to get pattern from localStorage (set by quiz)
+        const pattern = localStorage.getItem('adhd_pattern') || '';
+        const res = await fetch('/api/grow/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pattern }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Start the program';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = 'Start the program';
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  }
+</script>

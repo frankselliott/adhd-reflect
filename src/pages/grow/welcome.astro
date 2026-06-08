@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+const sessionId = Astro.url.searchParams.get('session_id');
+---
+<Base title="You're in" description="Welcome to When Both of You Are Dysregulated." current="grow">
+  <div class="grow-welcome">
+    <div class="grow-welcome-inner">
+      <div class="grow-welcome-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="23" stroke="#4A6FA5" stroke-width="1.5"/>
+          <path d="M14 24l8 8 12-16" stroke="#4A6FA5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1 class="grow-welcome-title">You're in.</h1>
+      <p class="grow-welcome-body">Check your email for your access link. It's on its way now.</p>
+      <p class="grow-welcome-body">The link is how you get back in — bookmark it or save the email.</p>
+      <p class="grow-welcome-note">Didn't get it within a few minutes? Check your spam folder, or email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+      <a href="/grow" class="grow-welcome-back">Back to the program page</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+.grow-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: var(--space-3xl) var(--page-pad);
+}
+.grow-welcome-inner {
+  max-width: 480px;
+  text-align: center;
+}
+.grow-welcome-icon { margin-bottom: var(--space-xl); }
+.grow-welcome-title {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 48;
+  margin-bottom: var(--space-lg);
+}
+.grow-welcome-body {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--pewter);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+.grow-welcome-note {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+.grow-welcome-note a { color: var(--blue); }
+.grow-welcome-back {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--blue);
+  text-decoration: none;
+}
+</style>

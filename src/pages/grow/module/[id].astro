@@ -1,0 +1,12 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { GrowModule } from '../../../components/GrowModule.jsx';
+const { id } = Astro.params;
+export function getStaticPaths() {
+  const ids = ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16','m17','m18','m19','m20'];
+  return ids.map(id => ({ params: { id } }));
+}
+---
+<Base title="Module" description="When Both of You Are Dysregulated" current="grow">
+  <GrowModule moduleId={id} client:load />
+</Base>

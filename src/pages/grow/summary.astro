@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Your Summary Card" description="Your personalised summary from When Both of You Are Dysregulated." current="grow">
+  <div id="summary-root">
+    <div class="summary-loading">Building your summary card...</div>
+  </div>
+</Base>
+<style>
+.summary-loading { font-family: var(--sans); font-size: 15px; color: var(--pewter); text-align: center; padding: var(--space-4xl); }
+.summary-wrap { max-width: 640px; margin: 0 auto; padding: var(--space-3xl) var(--page-pad) var(--space-4xl); }
+.summary-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: var(--space-md); }
+.summary-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 44px); font-weight: 300; color: var(--slate); line-height: 1.2; font-variation-settings: 'opsz' 48; margin-bottom: var(--space-3xl); }
+.summary-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--mist-border); padding: var(--space-xl) var(--space-2xl); margin-bottom: var(--space-xl); box-shadow: 0 2px 20px rgba(31,42,55,0.06); }
+.summary-field { margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--mist); }
+.summary-field:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.summary-field-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pewter); margin-bottom: 8px; }
+.summary-field-value { font-family: var(--sans); font-size: 16px; color: var(--slate); line-height: 1.6; }
+.summary-quote { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--slate); font-weight: 300; font-variation-settings: 'opsz' 20; line-height: 1.5; }
+.summary-closing { text-align: center; padding: var(--space-3xl) var(--space-xl); background: linear-gradient(135deg, rgba(74,111,165,0.05), rgba(168,195,160,0.08)); border-radius: var(--radius-lg); margin-bottom: var(--space-xl); }
+.summary-closing-text { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--slate); font-variation-settings: 'opsz' 24; }
+.summary-print { display: block; text-align: center; padding: 14px 28px; background: var(--blue); color: white; font-family: var(--sans); font-size: 15px; border: none; border-radius: var(--radius-pill); cursor: pointer; margin: 0 auto; }
+@media print {
+  nav, footer, .summary-print { display: none !important; }
+  .summary-wrap { padding: 0; }
+}
+</style>
+<script>
+async function buildSummary() {
+  const root = document.getElementById('summary-root');
+  try {
+    const res = await fetch('/api/grow/progress');
+    if (!res.ok) { window.location.href = '/grow?auth=required'; return; }
+    const data = await res.json();
+    const { pattern, progress, reflections, midCourseCheckin } = data;
+    const completedCount = Object.keys(progress || {}).length;
+    const r = reflections || {};
+    const reflection1 = r['m1'] || '';
+    const reflection20 = r['m20'] || '';
+    const otherIds = ['m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16','m17','m18','m19'];
+    const otherReflections = otherIds.map(id => ({ id, text: r[id] || '' })).filter(x => x.text.length > 0).sort((a,b) => b.text.length - a.text.length).slice(0, 3);
+    const patternNames = { reactor:'Overloaded Reactor', juggler:'Chaos Juggler', looper:'Argument Looper', spiraller:'Shame Spiraller', escaper:'Shutdown Escaper' };
+    const patternName = patternNames[pattern] || 'your pattern';
+    root.innerHTML = `
+      <div class="summary-wrap">
+        <div class="summary-label">Your summary card</div>
+        <h1 class="summary-title">You came in looking for what to do differently.</h1>
+        <div class="summary-card">
+          <div class="summary-field"><div class="summary-field-label">Your pattern</div><div class="summary-field-value">${patternName} — ${completedCount} of 20 modules completed</div></div>
+          ${reflection1 ? `<div class="summary-field"><div class="summary-field-label">Why you started</div><div class="summary-quote">"${reflection1}"</div></div>` : ''}
+          ${midCourseCheckin?.q2 ? `<div class="summary-field"><div class="summary-field-label">One thing you actually tried</div><div class="summary-quote">"${midCourseCheckin.q2}"</div></div>` : ''}
+          ${midCourseCheckin?.q1 ? `<div class="summary-field"><div class="summary-field-label">What surprised you most</div><div class="summary-quote">"${midCourseCheckin.q1}"</div></div>` : ''}
+          ${otherReflections.map(r => `<div class="summary-field"><div class="summary-field-label">From your reflections</div><div class="summary-quote">"${r.text}"</div></div>`).join('')}
+          ${reflection20 ? `<div class="summary-field"><div class="summary-field-label">What that moment looks like now</div><div class="summary-quote">"${reflection20}"</div></div>` : ''}
+        </div>
+        <div class="summary-closing"><div class="summary-closing-text">You've been doing it.</div></div>
+        <button class="summary-print" onclick="window.print()">Print or save this card</button>
+      </div>
+    `;
+  } catch(e) { root.innerHTML = '<div class="summary-loading">Could not load your summary. Try refreshing.</div>'; }
+}
+buildSummary();
+</script>
