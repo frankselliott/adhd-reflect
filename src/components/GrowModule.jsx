@@ -8,6 +8,15 @@ import {
   RepairAnimation,
   CoRegulationAnimation,
 } from './GrowAnimations.jsx';
+import {
+  AdviceGapAnimation,
+  InputCapacityAnimation,
+  InvisibleStepsAnimation,
+  OpenLoopAnimation,
+  SpiralForkAnimation,
+  TwoVersionsAnimation,
+  NotchUpstreamAnimation,
+} from './GrowAnimations2.jsx';
 import { MODULES, getNextSuggestion, MODULE_CONTENT } from '../data/growModules.js';
 
 const BRAND = {
@@ -92,6 +101,144 @@ const PROSE_STYLES = `
     padding-top: 12px;
     border-top: 1px solid rgba(31,42,55,0.06);
     font-style: italic;
+  }
+/* ─ Text breaking elements ─ */
+  
+  /* Pull quote */
+  .module-pullquote {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-variation-settings: 'opsz' 24;
+    color: #1F2A37;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 20px 24px;
+    border-left: 3px solid #4A6FA5;
+    background: rgba(74,111,165,0.04);
+    border-radius: 0 10px 10px 0;
+    margin: 28px 0;
+  }
+  .module-pullquote cite {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #56606E;
+    margin-top: 10px;
+    font-style: normal;
+  }
+  
+  /* Stat callout */
+  .module-stat {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(31,42,55,0.07);
+    margin: 24px 0;
+    box-shadow: 0 1px 8px rgba(31,42,55,0.04);
+  }
+  .module-stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 300;
+    font-variation-settings: 'opsz' 52;
+    color: #4A6FA5;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 80px;
+    text-align: center;
+  }
+  .module-stat-body { flex: 1; min-width: 0; }
+  .module-stat-label {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    color: #1F2A37;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .module-stat-sub {
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: #56606E;
+    line-height: 1.5;
+  }
+  
+  /* Key insight */
+  .module-insight {
+    padding: 18px 20px;
+    background: #1F2A37;
+    border-radius: 10px;
+    margin: 28px 0;
+  }
+  .module-insight p {
+    font-family: 'Lexend', sans-serif !important;
+    font-size: 15px !important;
+    color: rgba(247,245,240,0.92) !important;
+    line-height: 1.65 !important;
+    margin: 0 !important;
+  }
+  .module-insight p strong {
+    color: #A8C3A0 !important;
+  }
+  .module-insight-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(168,195,160,0.7);
+    margin-bottom: 10px;
+  }
+  
+  /* Section divider */
+  .module-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 24px;
+  }
+  .module-divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(31,42,55,0.07);
+  }
+  .module-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(74,111,165,0.3);
+    flex-shrink: 0;
+  }
+  
+  /* Script block — styled quote for in-text scripts */
+  .module-script {
+    padding: 14px 18px;
+    background: white;
+    border: 1.5px solid rgba(74,111,165,0.25);
+    border-radius: 8px;
+    margin: 16px 0;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #4A6FA5;
+    line-height: 1.5;
+    position: relative;
+  }
+  .module-script::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    color: rgba(74,111,165,0.3);
+    font-variation-settings: 'opsz' 36;
+    line-height: 1;
   }
   /* Interactive inputs inside boxes */
   .module-field { display: block; width: 100%; margin: 8px 0 14px; font-family: 'Lexend', sans-serif; font-size: 14px; color: #1F2A37; background: white; border: 1.5px solid rgba(74,111,165,0.25); border-radius: 8px; padding: 10px 12px; outline: none; line-height: 1.6; box-sizing: border-box; resize: vertical; transition: border-color 0.15s; }
@@ -490,6 +637,16 @@ export function GrowModule({ moduleId }) {
         {module.id === 'm12' && null}
         {module.id === 'm13' && <RepairAnimation />}
         {module.id === 'm14' && null}
+
+        {/* New animations */}
+        {module.id === 'm1' && <AdviceGapAnimation />}
+        {module.id === 'm7' && <InputCapacityAnimation />}
+        {module.id === 'm8' && <InvisibleStepsAnimation />}
+        {module.id === 'm10' && <OpenLoopAnimation />}
+        {module.id === 'm11' && <OpenLoopAnimation />}
+        {module.id === 'm12' && <SpiralForkAnimation />}
+        {module.id === 'm16' && <TwoVersionsAnimation />}
+        {module.id === 'm20' && <NotchUpstreamAnimation />}
 
         {/* Card links */}
         <CardLinks module={module} />

@@ -356,6 +356,7 @@ export const MODULE_CONTENT = {
 <p><strong>If you've spent years blaming yourself for that gap: that blame is the wrong diagnosis.</strong></p>
 
 <h3>How common this actually is</h3>
+<div class="module-stat"><div class="module-stat-number">50%</div><div class="module-stat-body"><div class="module-stat-label">of parents raising an ADHD child may have ADHD themselves</div><div class="module-stat-sub">Not a fringe case. A common family configuration the parenting industry has largely ignored.</div></div></div>
 <p>Between one quarter and one half of parents raising a child with ADHD have ADHD themselves. Not a fringe case. A common family configuration the parenting industry has largely ignored.</p>
 <p>In 2002, researchers first established that standard behavioural parent training is significantly less effective when the parent has ADHD. Not slightly less — significantly. The techniques require working memory, consistency, and the ability to execute a strategy at the exact moment your own nervous system is under maximum pressure. ADHD undermines all three simultaneously.</p>
 <p>In 2025, the first randomised controlled trial of a parenting programme designed specifically for parents with ADHD was published. Before that study, almost all parenting interventions were designed for neurotypical parents and delivered to ADHD parents anyway. <strong>That's the system you've been trying to use. It wasn't built for you.</strong></p>
@@ -375,6 +376,8 @@ export const MODULE_CONTENT = {
   <p>That gap — between knowing and doing — is what every module in this course is designed around. You've just done the first piece of work.</p>
 </div>
 
+<div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
+<div class="module-insight"><div class="module-insight-label">The core problem</div><p>The advice wasn't designed for a household where both the adult and child have ADHD. <strong>That's not a personal failing. It's a design mismatch.</strong> Structural problems have structural solutions.</p></div>
 <h3>What this course is actually asking of you</h3>
 <p>Not to become calmer. Not to achieve consistent regulation. Not to parent the way the books describe.</p>
 <p><strong>To do one thing differently. Not every time. Not perfectly. Once.</strong></p>
@@ -407,6 +410,7 @@ export const MODULE_CONTENT = {
 
 <h3>Why the buffer is smaller in ADHD brains</h3>
 <p>Between a trigger and a reaction, there's a pause. For most people, it's brief. For ADHD brains, it's shorter still — because the prefrontal cortex, which creates the space between impulse and action, is less reliably recruited under stress.</p>
+<div class="module-stat"><div class="module-stat-number">70%</div><div class="module-stat-body"><div class="module-stat-label">of adults with ADHD experience significant emotional dysregulation</div><div class="module-stat-sub">Not a separate condition. A core feature of ADHD that was edited from the diagnostic criteria in the 1970s.</div></div></div>
 <p>You're not going from zero to fury because you're impatient or lack self-control. You're going from zero to fury because the buffer between them is structurally smaller. Between 30 and 70 percent of adults with ADHD experience significant emotional dysregulation — not as a separate condition sitting on top of ADHD, but as a core feature of it.</p>
 <p><strong>The short fuse isn't a character trait stacked on top of your ADHD. It is your ADHD.</strong> This was edited out of the diagnostic criteria in the 1970s for reasons that had nothing to do with whether it was real. Researchers have been arguing to put it back ever since.</p>
 
@@ -430,6 +434,8 @@ export const MODULE_CONTENT = {
   <p>The thing that triggered you was probably not the cause. <strong>It was the cup that overflowed a container that was already full.</strong> That's the stack — and the stack is where change is actually possible.</p>
 </div>
 
+<div class="module-pullquote">If you're worse at home than at work, that's not hypocrisy. That's the math of a limited resource hitting its highest demand.</div>
+<div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
 <h3>The signal that arrives before the explosion</h3>
 <p>The moment before the reaction has a physical signature. It arrives before the words, before the decision, before you've done anything yet. Most people have never been asked to look for it.</p>
 <p>Common signals in ADHD parents:</p>
@@ -479,11 +485,13 @@ export const MODULE_CONTENT = {
 <p>This is called after-school restraint collapse. It's well-documented. It's not a sign that your home is failing. <strong>It's a sign that your child feels safe enough to stop holding it together.</strong></p>
 <p>In a dual-ADHD household, this lands differently. You've also been holding it together all day. Your own mask drops at roughly the same time. Two people hitting their regulatory limits at the same time in the same space — that's the collision, not a parenting failure.</p>
 
+<div class="module-pullquote">The teacher got the performance. You get what's left when the performance is over. That's not a failure of your household. It's evidence that your home is safe.</div>
 <h3>What's happening inside the meltdown</h3>
 <p>Two things run simultaneously.</p>
 <p><strong>Load:</strong> the cup, the sock seam, the wrong snack — these aren't the cause. They're the last straw. Something has been accumulating since morning and this is just where the container broke. The trigger is rarely the real trigger.</p>
 <p><strong>Dysregulated emotional response:</strong> ADHD brains experience emotions with higher intensity and return to baseline more slowly. The distress over a broken biscuit is genuine and intense for them. <em>"It's just a biscuit"</em> is accurate about the biscuit and completely wrong about the experience. Dismissing the trigger dismisses the experience underneath it.</p>
-<p>The most useful first response acknowledges the feeling without evaluating the trigger. <em>"You're really upset right now"</em> costs you nothing and reduces escalation. It also tells your child's nervous system that you're safe to be with rather than another source of threat or judgment.</p>
+<p>The most useful first response acknowledges the feeling without evaluating the trigger.
+<div class="module-script">That's really upsetting you.</div> costs you nothing and reduces escalation. It also tells your child's nervous system that you're safe to be with rather than another source of threat or judgment.</p>
 
 <div class="module-experiment">
   <div class="module-experiment-label">Try this now — takes 2 minutes</div>
@@ -543,11 +551,12 @@ export const MODULE_CONTENT = {
   <p>You just identified your joining point. That specific moment — the posture shift, the volume change, the thing that was said — is the intervention point. <strong>Once you can find it in retrospect, you can start finding it earlier in real time.</strong></p>
 </div>
 
+<div class="module-insight"><div class="module-insight-label">The structural reality</div><p>When you're stressed, the mechanism that would help your child regulate goes offline. <strong>Not weakened. Offline.</strong> This was measured in two brains simultaneously. It's not a theory.</p></div>
 <h3>The one move that works during the collision</h3>
 <p>You cannot regulate them while you're dysregulated. This is structural.</p>
 <p>The only useful intervention is to reduce the mutual input — yours reaching them, theirs reaching you. Physical distance is the most reliable tool. Not permanent withdrawal. Not punishment.</p>
-<p>Sixty seconds in a different room. Before you go, say one thing:</p>
-<p><em>"I need a minute. I'll be back."</em></p>
+<p>Sixty seconds in a different room. Before you go, say one thing:
+<div class="module-script">I need a minute. I'll be back.</div></p>
 <p>That sentence matters. It prevents your absence from being read as abandonment or punishment. It names what you're doing. It promises return. The 60 seconds give the neurochemical peak time to begin stepping down — yours and, without your escalation feeding it, theirs too.</p>
 <p><strong>When you return: fewer words, lower volume, no attempt to resolve anything yet.</strong> You're not back to finish the argument. You're back to restore enough regulation for a conversation to eventually be possible.</p>
 
@@ -583,7 +592,7 @@ export const MODULE_CONTENT = {
 
 <h3>What repair actually is</h3>
 <p>One sentence naming what happened. One sentence naming what you're going to try. Unconditional — meaning it doesn't wait for or require a response.</p>
-<p><em>"I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point."</em></p>
+<p><div class="module-script">I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point.</div></p>
 <p>Then stop. Don't wait for them to say it's fine. Don't add context or explanation. Don't extend it. <strong>Two sentences, then something ordinary immediately after</strong> — sit near them, get them a snack, help with something. The repair is in the return to normal. Not in the speech.</p>
 <p>Your child receives: I know what I did. I take responsibility for it. I'm still here. That's the complete message. Everything beyond that begins asking them for something — absolution, reassurance — that isn't theirs to provide.</p>
 
@@ -595,6 +604,7 @@ export const MODULE_CONTENT = {
   <p>You don't have to deliver this immediately. But having it written means you have it ready. <strong>The hardest part of repair for ADHD parents is composing it in the moment after the incident. Write it now, before you need it.</strong></p>
 </div>
 
+<div class="module-pullquote">Children repair from hard moments when the repair is consistent. What damages relationships is not the rupture. It's the absence of repair.</div>
 <h3>Why two sentences is more powerful than ten</h3>
 <p>Children repair from hard moments when the repair is consistent. What damages the relationship more than the rupture is the cycle — intensity, then withdrawal, then over-warmth, then the next intensity, with no clean acknowledgment of what happened in between.</p>
 <p>A brief, specific, unconditional repair closes the loop. No negotiation. No requirement for forgiveness. Just: I see what happened, I own my part, I'm still here.</p>
@@ -658,6 +668,7 @@ export const MODULE_CONTENT = {
 <p>This week, find yours. Not to stop the reaction yet. Just to know what it feels like. Write it down the first time you notice it. <strong>Once you know your signal, you have a 30-second window that didn't exist before.</strong></p>
 <p>My signal: _______________ (fill this in once you know it)</p>
 
+<div class="module-insight"><div class="module-insight-label">The intervention point</div><p>You cannot change whether the cup gets knocked over. <strong>You can change what's already in the container when it does.</strong> The stack is where change is possible — not the spark.</p></div>
 <h3>What to do in those 30 seconds</h3>
 <p>One thing. <strong>Create distance before you speak.</strong></p>
 <p>Say: <em>"I need one second."</em> Move to a different room. Sixty seconds. Return.</p>
@@ -707,11 +718,9 @@ export const MODULE_CONTENT = {
 
 <h3>The one-sentence stop</h3>
 <p>Pick one sentence. Have it ready before the next incident.</p>
-<ul>
-<li><em>"We're not talking about this right now."</em></li>
-<li><em>"My answer isn't changing."</em></li>
-<li><em>"I've said what I need to say."</em></li>
-</ul>
+<div class="module-script">We're not talking about this right now.</div>
+<div class="module-script">My answer isn't changing.</div>
+<div class="module-script">I've said what I need to say.</div>
 <p>Say it once. Then physically move — leave the room, turn away, pick up a glass of water. The movement is part of the stop — it signals to your own nervous system that you've actually disengaged, not just stopped speaking for a moment.</p>
 <p><strong>Do not repeat the sentence if they push back.</strong> Repeating it is re-entering the loop through a different door.</p>
 
@@ -831,6 +840,7 @@ export const MODULE_CONTENT = {
 <p>Now you're five exchanges in, both louder, and the original point has been completely lost inside the argument about the argument.</p>
 <p><strong>The loop is not a failure of willpower. Your brain is chasing something it cannot have right now: resolution. And it will keep running until it gets it or you stop it.</strong></p>
 
+<div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
 <h3>Why ADHD brains can't leave loops open</h3>
 <p>ADHD brains experience incomplete things — unresolved arguments, unexplained rules, points that weren't acknowledged — as genuinely uncomfortable. Not emotionally uncomfortable in the way anyone might feel. Neurologically uncomfortable, in the way a running background process uses processing capacity even when you're not thinking about it.</p>
 <p>The loop continues because your brain is trying to close it. The argument is a search for the resolution that will make the discomfort stop. The problem is that <strong>resolution isn't available from a dysregulated child at 5pm in this format</strong>. The thing you're trying to get from this conversation cannot be given by this conversation, in these conditions, right now.</p>
@@ -948,11 +958,13 @@ export const MODULE_CONTENT = {
   <p>You can see the split now — where accountability ended and the spiral started. <strong>The boundary between those two things is where the intervention goes.</strong></p>
 </div>
 
+<div class="module-pullquote">Accountability asks: what happened, what was my part, what do I do now? The spiral asks: what does this mean about who I am? The first has an end point. The second doesn't.</div>
 <h3>What happens to your child while the spiral runs</h3>
 <p>Your child experienced the hard moment. They've either moved on or they're waiting for something to change.</p>
 <p>What they're experiencing now is the aftermath: you withdrawn, unavailable, somewhere inside the replay. Then — for Spirallers specifically — often an over-reach of warmth. An apology that goes too long. Affection arriving in a rush, driven by the need to confirm the relationship is still intact.</p>
 <p>The child ends up managing your guilt instead of receiving a clean acknowledgment of what happened. <strong>The spiral prevents the repair. And the repair is what actually closes the thing the spiral is trying to close.</strong></p>
 
+<div class="module-insight"><div class="module-insight-label">The cost of the spiral</div><p>Every minute inside the replay is a minute not spent on the repair. <strong>The repair is the only thing that actually closes what the spiral is trying to close.</strong></p></div>
 <h3>Interrupting it physically</h3>
 <p>Cognitive interruption is less effective than physical interruption for most people. Telling yourself to stop thinking about it doesn't stop the thinking.</p>
 <p>Physical interruption works better. Stand up. Change rooms. Drink something cold. Do one small concrete task — wash a cup, fold something, make a list. The body moving differently begins to shift the internal state.</p>
@@ -1135,6 +1147,7 @@ export const MODULE_CONTENT = {
 <p><strong>They see the match. They don't see what was already burning.</strong></p>
 <p>This is not negligence on their part. The load was invisible. They weren't carrying it so they weren't tracking it. You cannot see what you're not holding.</p>
 
+<div class="module-pullquote">They see the match. They don't see what was already burning.</div>
 <h3>What you might not be seeing about your partner</h3>
 <p>Your partner's version of parenting consistency — staying regulated through sustained demands, holding a boundary calmly across multiple incidents — is not always available to you. You know this.</p>
 <p>What's harder to see: their version isn't without cost either. The household's ADHD load falls on your partner in ways that are also invisible. The logistics they track. The plans they hold. The repairs they make quietly. The unpredictability they absorb while appearing to manage it.</p>
@@ -1274,6 +1287,7 @@ export const MODULE_CONTENT = {
 <p>But there's something that doesn't quite fit. Something that sits beside the ADHD explanation or underneath it. Something you can feel but haven't fully named.</p>
 <p><strong>That feeling is worth taking seriously. It's data.</strong></p>
 
+<div class="module-stat"><div class="module-stat-number">80%</div><div class="module-stat-body"><div class="module-stat-label">of children with ADHD have at least one co-occurring condition</div><div class="module-stat-sub">This is the norm, not the exception. A single clean diagnosis is the exception.</div></div></div>
 <h3>Why ADHD rarely travels alone</h3>
 <p>Around 60 to 80 percent of children with ADHD have at least one co-occurring condition. Anxiety, depression, learning differences, autism spectrum, sensory processing differences, sleep disorders, and others. This isn't unusual — it's the norm. A single clean diagnosis is the exception.</p>
 <p>This matters for what kind of support actually helps. ADHD strategies applied to a child who also has significant anxiety may not produce expected results. Approaches for ADHD and autism overlap in some areas and diverge importantly in others. <strong>The full picture matters because the support needs to fit the actual picture.</strong></p>
@@ -1321,6 +1335,7 @@ export const MODULE_CONTENT = {
 <p>You're at the end of 20 modules.</p>
 <p><strong>What does that moment look like now?</strong></p>
 
+<div class="module-pullquote">You don't need to be consistent. You need to catch it slightly earlier.</div>
 <h3>What the course was actually asking</h3>
 <p>Not to become calmer. Not to stop dysregulating. Not to achieve the kind of consistent regulation that parenting books describe — the kind that requires a nervous system you don't have and conditions your household doesn't consistently provide.</p>
 <p><strong>To catch it slightly earlier than last time.</strong></p>
