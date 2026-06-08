@@ -248,6 +248,10 @@ const PROSE_STYLES = `
   .module-copy-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A6FA5; background: white; border: 1px solid rgba(74,111,165,0.25); border-radius: 6px; padding: 7px 12px; cursor: pointer; transition: all 0.15s; margin-top: 4px; }
   .module-copy-btn:hover { background: rgba(74,111,165,0.06); border-color: rgba(74,111,165,0.4); }
   .module-copy-btn.copied { color: #7FA88E; border-color: rgba(168,195,160,0.4); background: rgba(168,195,160,0.08); }
+  /* M1 reflection display in M20 */
+  .module-m1-reflection { background: rgba(155,139,180,0.08); border: 1px solid rgba(155,139,180,0.3); border-radius: 12px; padding: 20px; margin: 24px 0 28px; }
+  .module-m1-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #9B8BB4; margin-bottom: 12px; }
+  .module-m1-text { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 300; font-variation-settings: 'opsz' 20; color: #1F2A37; line-height: 1.55; font-style: italic; }
 `;
 
 // ─── Interactive input that replaces ___ blanks ───
@@ -478,6 +482,13 @@ export function GrowModule({ moduleId }) {
           setFieldValues(savedFields);
           setNextModule(getNextSuggestion(Object.keys(data.progress), data.pattern));
           setLoading(false);
+          // M20: surface M1 reflection
+          if (moduleId === 'm20' && data.reflections?.m1) {
+            setTimeout(() => {
+              const el = document.getElementById('m1-text');
+              if (el) el.innerHTML = `"${data.reflections.m1}"`;
+            }, 100);
+          }
         }
       })
       .catch(() => setLoading(false));

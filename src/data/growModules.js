@@ -357,7 +357,6 @@ export const MODULE_CONTENT = {
 
 <h3>How common this actually is</h3>
 <div class="module-stat"><div class="module-stat-number">50%</div><div class="module-stat-body"><div class="module-stat-label">of parents raising an ADHD child may have ADHD themselves</div><div class="module-stat-sub">Not a fringe case. A common family configuration the parenting industry has largely ignored.</div></div></div>
-<p>Between one quarter and one half of parents raising a child with ADHD have ADHD themselves. Not a fringe case. A common family configuration the parenting industry has largely ignored.</p>
 <p>In 2002, researchers first established that standard behavioural parent training is significantly less effective when the parent has ADHD. Not slightly less — significantly. The techniques require working memory, consistency, and the ability to execute a strategy at the exact moment your own nervous system is under maximum pressure. ADHD undermines all three simultaneously.</p>
 <p>In 2025, the first randomised controlled trial of a parenting programme designed specifically for parents with ADHD was published. Before that study, almost all parenting interventions were designed for neurotypical parents and delivered to ADHD parents anyway. <strong>That's the system you've been trying to use. It wasn't built for you.</strong></p>
 
@@ -377,7 +376,7 @@ export const MODULE_CONTENT = {
 </div>
 
 <div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
-<div class="module-insight"><div class="module-insight-label">The core problem</div><p>The advice wasn't designed for a household where both the adult and child have ADHD. <strong>That's not a personal failing. It's a design mismatch.</strong> Structural problems have structural solutions.</p></div>
+<div class="module-insight"><div class="module-insight-label">What this means for you</div><p>You haven't been failing at parenting. You've been applying tools that were designed for a different nervous system configuration. <strong>The gap between knowing and doing isn't a character flaw — it's what happens when the tools don't fit the conditions.</strong> That's fixable.</p></div>
 <h3>What this course is actually asking of you</h3>
 <p>Not to become calmer. Not to achieve consistent regulation. Not to parent the way the books describe.</p>
 <p><strong>To do one thing differently. Not every time. Not perfectly. Once.</strong></p>
@@ -411,8 +410,7 @@ export const MODULE_CONTENT = {
 <h3>Why the buffer is smaller in ADHD brains</h3>
 <p>Between a trigger and a reaction, there's a pause. For most people, it's brief. For ADHD brains, it's shorter still — because the prefrontal cortex, which creates the space between impulse and action, is less reliably recruited under stress.</p>
 <div class="module-stat"><div class="module-stat-number">70%</div><div class="module-stat-body"><div class="module-stat-label">of adults with ADHD experience significant emotional dysregulation</div><div class="module-stat-sub">Not a separate condition. A core feature of ADHD that was edited from the diagnostic criteria in the 1970s.</div></div></div>
-<p>You're not going from zero to fury because you're impatient or lack self-control. You're going from zero to fury because the buffer between them is structurally smaller. Between 30 and 70 percent of adults with ADHD experience significant emotional dysregulation — not as a separate condition sitting on top of ADHD, but as a core feature of it.</p>
-<p><strong>The short fuse isn't a character trait stacked on top of your ADHD. It is your ADHD.</strong> This was edited out of the diagnostic criteria in the 1970s for reasons that had nothing to do with whether it was real. Researchers have been arguing to put it back ever since.</p>
+<p><strong>The short fuse isn't a character trait stacked on top of your ADHD. It is your ADHD.</strong> This was removed from the diagnostic criteria in the 1970s for political reasons that had nothing to do with whether it was real. Researchers have been arguing to put it back ever since.</p>
 
 <h3>Why you held it together at work and fell apart at home</h3>
 <p>You managed meetings. You didn't snap at your boss. You held it together through six hours of neurotypical-coded demands. Then you walked through the door and fell apart over a sock seam.</p>
@@ -741,6 +739,8 @@ export const MODULE_CONTENT = {
 <h3>What this will feel like</h3>
 <p>Stopping will feel like surrender. Like the lesson won't land. Like they'll learn they can outlast you.</p>
 <p>The lesson lands more effectively twelve hours later than it does in the loop. <strong>Stopping is a delivery decision, not a surrender.</strong> The open loop feeling is real and uncomfortable. That discomfort is what you're learning to tolerate.</p>
+
+<div class="module-insight"><div class="module-insight-label">If the shame spiral usually follows the explosion</div><p>Most Reactors spiral after the moment — the replay, the guilt, the two hours inside it. <strong>If that's you, Module 12 covers exactly that.</strong> The explosion and the spiral are separate problems with separate tools.</p></div>
 `,
 
   'm8': `
@@ -829,6 +829,8 @@ export const MODULE_CONTENT = {
 <h3>What this will feel like</h3>
 <p>Three steps will feel insufficient. The morning has more than three things that need to happen. You'll feel like you're cutting corners.</p>
 <p>You're not cutting corners. You're designing for the actual conditions — the tired parent, the dysregulated child, the morning that doesn't go as planned. <strong>A three-step routine you actually run is infinitely more valuable than a comprehensive one you don't.</strong></p>
+
+<div class="module-insight"><div class="module-insight-label">If the collapsed routine leads to an argument</div><p>Juggler mornings often end in conflict — the repeated instruction, the escalating urgency, the loop that starts when nobody gets out the door on time. <strong>If the argument pattern is also familiar, Module 10 covers what happens next.</strong></p></div>
 `,
 
   'm10': `
@@ -880,8 +882,8 @@ export const MODULE_CONTENT = {
 </div>
 
 <h3>What this will feel like</h3>
-<p>Stopping will feel like surrender, like the injustice is being let go, like your child is learning they can outlast you.</p>
-<p>None of those things are true. The lesson is delivered more effectively in a calmer moment. <strong>Stopping is a timing decision, not a concession.</strong></p>
+<p>Stopping will feel unjust. Like the thing that was wrong is being let pass. Like you're teaching your child that persistence wins.</p>
+<p>The justice feeling is real. The injustice was real. The loop is not where justice gets served — it's where the lesson gets lost. <strong>The lesson delivered calmly twelve hours later is more just than the lesson lost inside the argument.</strong> That's the reframe for the Looper: stopping isn't letting it go, it's choosing the delivery method where it actually lands.</p>
 `,
 
   'm11': `
@@ -931,6 +933,8 @@ export const MODULE_CONTENT = {
 
 <h3>What this will feel like</h3>
 <p>The first time you use the stop-script and then successfully deliver the lesson later, something shifts. You'll have proof that stopping isn't losing. That the lesson can survive the delay. <strong>That evidence is more useful than anything this module can tell you. You have to experience it once.</strong></p>
+
+<div class="module-insight"><div class="module-insight-label">If the loop is followed by two hours of guilt</div><p>Loopers often spiral after the argument ends — replaying it, second-guessing the stop, wondering if the child felt dismissed. <strong>If that's your pattern, Module 12 addresses exactly that aftermath.</strong></p></div>
 `,
 
   'm12': `
@@ -1002,7 +1006,7 @@ export const MODULE_CONTENT = {
 <h3>What a Spiraller repair actually looks like</h3>
 <p>Shorter than you expect. Calmer than you think you can manage. Unconditional — meaning it doesn't wait for a response.</p>
 <p>Two sentences. Sentence one: what happened, stated simply, no qualifications. Sentence two: what you're going to try — not a promise, a try.</p>
-<p><em>"I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point."</em></p>
+<div class="module-script">I went quiet on you after that and I shouldn't have. I'm going to work on coming back sooner instead of waiting until I feel ready.</div>
 <p>Then stop. Don't wait for them to say it's fine. Don't add context. Don't extend it into a conversation. <strong>Two sentences. Then something ordinary immediately after — sit near them, help with something. The return to normal is the repair, not the speech.</strong></p>
 
 <div class="module-experiment">
@@ -1032,6 +1036,8 @@ export const MODULE_CONTENT = {
 <h3>What this will feel like</h3>
 <p>Two sentences will feel too small. The shame will push you toward more. More apology, more explanation, more assurance that you really mean it.</p>
 <p>The two sentences are enough. More than two asks your child to carry something they shouldn't. <strong>Stop at two. The ordinary thing that follows is the rest of the repair.</strong></p>
+
+<div class="module-insight"><div class="module-insight-label">If the explosion came first</div><p>For Spirallers, the shame spiral is usually a response to a Reactor moment — the yelling, the snap, the thing that was said. <strong>If the original explosion is the part you're still struggling with, Module 6 addresses that upstream.</strong></p></div>
 `,
 
   'm14': `
@@ -1075,13 +1081,17 @@ export const MODULE_CONTENT = {
   <div class="module-ifthen-label">Your if-then plan for this module</div>
   <p><strong>When</strong> I notice I've checked out or am about to check out,</p>
   <p><strong>I will</strong> say: <em>"I need five minutes. I'll be back."</em> And go to _______________ [specific place] for 5 minutes.</p>
-  <p><strong>When</strong> I've been gone and I'm ready to return,</p>
-  <p><strong>I will</strong> use my re-entry ritual from Module 15. (Do that module next.)</p>
+  <p><strong>When</strong> I've been gone and I'm ready to return, I will use one of these:</p>
+  <p>Option A: Sit near them for 30 seconds without speaking.</p>
+  <p>Option B: <em>"Do you want some water?"</em></p>
+  <p>Option C: <em>"I needed a minute. I'm back."</em></p>
+  <p>My re-entry option: _______________ (choose one now, before you need it)</p>
+  <p><strong>The return starts the regulation. You don't need to feel ready first.</strong></p>
 </div>
 
 <h3>What this will feel like</h3>
-<p>Naming the shutdown takes something — it requires enough presence to notice you're checking out before you're already gone. That's a skill that develops with practice.</p>
-<p>At first you'll notice it after the fact. That's fine. <strong>Noticing it retrospectively is still noticing it. The window gets earlier as the practice builds.</strong></p>
+<p>Naming the shutdown out loud will feel like an admission — like you're confirming that you're failing your child in the moment they need you. The shame of the absence can make saying anything about it feel worse than just disappearing quietly.</p>
+<p>Naming it is not an admission of failure. It's the difference between an absence your child has to interpret alone and an absence they can hold with a frame. <strong>Named shutdowns are workable. The shame of naming one out loud passes. The cost of unnamed ones accumulates.</strong></p>
 `,
 
   'm15': `
@@ -1144,7 +1154,6 @@ export const MODULE_CONTENT = {
 
 <h3>What your partner sees that you don't</h3>
 <p>They see the reaction. They don't see the 40 minutes of load that preceded it. They see you snap over something small. They don't know the noise had been too loud since 4pm, that you'd repeated the instruction four times, that you hadn't eaten, that your medication wore off an hour earlier, that something from this morning was still unresolved in the background.</p>
-<p><strong>They see the match. They don't see what was already burning.</strong></p>
 <p>This is not negligence on their part. The load was invisible. They weren't carrying it so they weren't tracking it. You cannot see what you're not holding.</p>
 
 <div class="module-pullquote">They see the match. They don't see what was already burning.</div>
@@ -1225,8 +1234,8 @@ export const MODULE_CONTENT = {
 </div>
 
 <h3>What this will feel like</h3>
-<p>It won't feel like enough. The asymmetry in attention will still be there. You'll wonder whether ten minutes is too small to matter.</p>
-<p>It matters. <strong>The child who has learned to need nothing from you needs to learn that asking is safe. Protected time — even small protected time — is the evidence that teaches them that.</strong></p>
+<p>It will feel like too little, too late. You'll be aware of all the times you weren't fully present during this time. The guilt may actually make the ten minutes harder — you're there but still half-inside the accounting of what you owe.</p>
+<p>Let the accounting go for these ten minutes. The ten minutes aren't repayment. They're a signal — a small, clear signal that this child's needs are visible and matter. <strong>Children don't need a perfect record. They need consistent evidence that they're worth turning up for.</strong> Ten minutes, fully there, is that evidence.</p>
 `,
 
   'm18': `
@@ -1309,7 +1318,8 @@ export const MODULE_CONTENT = {
 
 <h3>What to do with the feeling</h3>
 <p>You don't need to arrive at a diagnosis before raising it. You don't need to self-diagnose or lobby for a specific assessment.</p>
-<p>What's useful: describing what you observe, in specific behavioural terms, to someone who knows your child. Not <em>"I think they might also be autistic"</em> but <em>"I've noticed these specific things, and they don't feel fully explained by the ADHD diagnosis. I'd like to understand what else might be going on."</em></p>
+<p>What's useful: describing what you observe, in specific behavioural terms, to someone who knows your child. Not a diagnostic label — a description.
+<div class="module-script">There's something I've been noticing about [name] that doesn't quite fit the ADHD picture. Can I describe it and get your thoughts?</div></p>
 <p><strong>That's enough to open the conversation.</strong> The professional assessment takes it from there. Your job is to surface the observation clearly, not to already have the answer.</p>
 <p>The resources page at adhdreflect.com lists what to look for in an ADHD-literate professional and support directories by country.</p>
 
@@ -1331,8 +1341,13 @@ export const MODULE_CONTENT = {
   <strong>What this module is about:</strong> The last module. What this course was actually asking of you, what progress looks like in this household, and where to go from here. 10 minutes.
 </div>
 
-<p>Go back to what you wrote in Module 1. The moment that brought you here. The thing you said needed to change.</p>
 <p>You're at the end of 20 modules.</p>
+
+<div class="module-m1-reflection" id="m1-reflection-display">
+  <div class="module-m1-label">What you wrote in Module 1 — the moment that brought you here</div>
+  <div class="module-m1-text" id="m1-text"><em>Loading your reflection...</em></div>
+</div>
+
 <p><strong>What does that moment look like now?</strong></p>
 
 <div class="module-pullquote">You don't need to be consistent. You need to catch it slightly earlier.</div>
