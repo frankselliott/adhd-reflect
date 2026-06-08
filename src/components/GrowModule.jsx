@@ -171,6 +171,10 @@ export function GrowModule({ moduleId }) {
         setCompleted(true);
         setAnimCopy(COMPLETION_COPY[Math.floor(Math.random() * COMPLETION_COPY.length)]);
         setShowAnimation(true);
+        // Navigate to home after animation
+        setTimeout(() => {
+          window.location.href = '/grow/home';
+        }, 4200);
       }
     } catch (e) { setSubmitting(false); }
   };
