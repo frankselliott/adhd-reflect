@@ -101,8 +101,19 @@ import Base from '../layouts/Base.astro';
             <div id="code-value-wrap">
               <input id="code-value" type="number" placeholder="Discount %" min="1" max="99" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none;width:100%"/>
             </div>
+            <div id="code-access-days-wrap">
+              <select id="code-access-days" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none;width:100%">
+                <option value="">Lifetime access (no expiry)</option>
+                <option value="7">7 days access</option>
+                <option value="14">14 days access</option>
+                <option value="30">30 days access</option>
+                <option value="60">60 days access</option>
+                <option value="90">90 days access</option>
+              </select>
+              <div style="font-family:var(--sans);font-size:12px;color:var(--pewter);margin-top:6px;padding-left:2px">Time limit on the access itself — not the code expiry date below.</div>
+            </div>
             <input id="code-max-uses" type="number" placeholder="Max uses (leave blank = unlimited)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
-            <input id="code-expires" type="date" placeholder="Expires (optional)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
+            <input id="code-expires" type="date" placeholder="Code expires (optional)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
             <input id="code-notes" placeholder="Notes (internal only)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
             <button onclick="createCode()" style="font-family:var(--sans);font-size:14px;font-weight:500;padding:12px 20px;border-radius:8px;border:none;background:var(--blue);color:white;cursor:pointer;align-self:flex-start">Create code</button>
             <div id="code-feedback" style="font-family:var(--mono);font-size:11px;color:var(--sage-dark)"></div>
@@ -269,7 +280,9 @@ import Base from '../layouts/Base.astro';
 
   // ── Toggle value field for percent codes ──
   document.getElementById('code-type')?.addEventListener('change', function() {
-    document.getElementById('code-value-wrap').style.display = this.value === 'free' ? 'none' : 'block';
+    const isFree = this.value === 'free';
+    document.getElementById('code-value-wrap').style.display = isFree ? 'none' : 'block';
+    document.getElementById('code-access-days-wrap').style.display = isFree ? 'block' : 'none';
   });
   document.getElementById('code-type')?.dispatchEvent(new Event('change'));
 
@@ -434,6 +447,8 @@ import Base from '../layouts/Base.astro';
     const maxUses = document.getElementById('code-max-uses').value ? Number(document.getElementById('code-max-uses').value) : null;
     const expiresAt = document.getElementById('code-expires').value || null;
     const notes = document.getElementById('code-notes').value.trim();
+    const accessDaysRaw = document.getElementById('code-access-days').value;
+    const accessDays = accessDaysRaw ? Number(accessDaysRaw) : null;
     const fb = document.getElementById('code-feedback');
     if (!code) { fb.textContent = 'Code required.'; return; }
     fb.textContent = 'Creating...';
@@ -441,7 +456,7 @@ import Base from '../layouts/Base.astro';
       const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'create_discount', code, type, value, maxUses, expiresAt, notes }),
+        body: JSON.stringify({ action: 'create_discount', code, type, value, maxUses, expiresAt, notes, accessDays }),
       });
       const data = await res.json();
       if (data.success) {

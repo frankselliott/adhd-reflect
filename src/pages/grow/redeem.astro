@@ -1,0 +1,251 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Redeem your code" description="Enter your code to access Both of You." current="grow">
+  <div class="redeem-wrap">
+    <div class="redeem-inner">
+
+      <div class="redeem-label">Both of You</div>
+      <h1 class="redeem-title">Redeem your code</h1>
+      <p class="redeem-sub">Enter your code below to get access.</p>
+
+      <div class="redeem-form" id="redeem-form">
+        <input
+          id="code-input"
+          type="text"
+          placeholder="Your code"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          class="redeem-input"
+        />
+        <div id="redeem-error" class="redeem-error" style="display:none"></div>
+        <button id="redeem-btn" class="redeem-btn">Get access</button>
+        <p class="redeem-note">No payment needed. Your access link will open immediately.</p>
+      </div>
+
+      <div id="redeem-success" class="redeem-success" style="display:none">
+        <div class="redeem-success-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="19" stroke="#A8C3A0" stroke-width="1.5"/>
+            <path d="M12 20l6 6 10-12" stroke="#7FA88E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="redeem-success-text">Your access is ready.</p>
+        <a id="redeem-access-link" href="#" class="redeem-access-btn">Open Both of You</a>
+        <p class="redeem-success-note">Bookmark this link — it's how you get back in.</p>
+      </div>
+
+      <div class="redeem-footer">
+        <p>Already have an access link? <a href="/grow/home">Go to your program</a></p>
+        <p>Not sure if this is for you? <a href="/grow">See what's included</a></p>
+      </div>
+
+    </div>
+  </div>
+</Base>
+
+<style>
+.redeem-wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--page-pad);
+}
+.redeem-inner {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.redeem-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+}
+.redeem-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 48;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+.redeem-sub {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--pewter);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+.redeem-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+.redeem-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-family: var(--mono);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: white;
+  border: 2px solid rgba(31,42,55,0.1);
+  border-radius: var(--radius-md);
+  outline: none;
+  text-align: center;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.redeem-input:focus {
+  border-color: var(--blue);
+}
+.redeem-input.error {
+  border-color: var(--clay);
+}
+.redeem-error {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--clay);
+  padding: 10px 16px;
+  background: rgba(201,123,106,0.08);
+  border-radius: var(--radius-sm);
+}
+.redeem-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.redeem-btn:hover { background: var(--blue-deep); transform: translateY(-1px); }
+.redeem-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.redeem-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.5;
+}
+.redeem-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+.redeem-success-icon { margin-bottom: var(--space-sm); }
+.redeem-success-text {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 24;
+}
+.redeem-access-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.redeem-access-btn:hover { background: var(--blue-deep); }
+.redeem-success-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+}
+.redeem-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--mist-border);
+}
+.redeem-footer p {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+}
+.redeem-footer a { color: var(--blue); text-decoration: none; }
+.redeem-footer a:hover { text-decoration: underline; }
+</style>
+
+<script>
+  const input = document.getElementById('code-input');
+  const btn = document.getElementById('redeem-btn');
+  const errorEl = document.getElementById('redeem-error');
+  const form = document.getElementById('redeem-form');
+  const successEl = document.getElementById('redeem-success');
+  const accessLink = document.getElementById('redeem-access-link');
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.style.display = 'block';
+    input.classList.add('error');
+  }
+
+  function clearError() {
+    errorEl.style.display = 'none';
+    input.classList.remove('error');
+  }
+
+  input.addEventListener('input', clearError);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') redeem();
+  });
+
+  btn.addEventListener('click', redeem);
+
+  async function redeem() {
+    const code = input.value.trim().toUpperCase();
+    if (!code) {
+      showError('Please enter your code.');
+      return;
+    }
+    clearError();
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+
+    try {
+      const pattern = localStorage.getItem('adhd_pattern') || '';
+      const res = await fetch('/api/grow/free-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, pattern }),
+      });
+      const data = await res.json();
+
+      if (data.accessUrl) {
+        form.style.display = 'none';
+        successEl.style.display = 'flex';
+        accessLink.href = data.accessUrl;
+      } else {
+        showError(data.error || 'That code didn\'t work. Check the spelling and try again.');
+        btn.disabled = false;
+        btn.textContent = 'Get access';
+      }
+    } catch(e) {
+      showError('Something went wrong. Try again or email hello@adhdreflect.com.');
+      btn.disabled = false;
+      btn.textContent = 'Get access';
+    }
+  }
+</script>
