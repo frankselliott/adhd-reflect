@@ -64,9 +64,25 @@ export async function onRequestPost({ request, env }) {
             },
             body: JSON.stringify({
               to: email,
-              subject: 'Your access to Both of You',
-              html: '<p style="font-family:sans-serif">You\'re in.</p><p style="font-family:sans-serif"><a href="' + accessUrl + '" style="background:#4A6FA5;color:white;padding:14px 28px;border-radius:100px;text-decoration:none;display:inline-block">Open Both of You</a></p><p style="font-family:sans-serif;color:#666;font-size:13px">Bookmark this link — it\'s how you get back in. No password needed.</p><p style="font-family:sans-serif;color:#666;font-size:13px">adhdreflect.com</p>',
-              text: 'Your access link: ' + accessUrl,
+              subject: 'You\'re in — Both of You',
+              html: `
+                <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px">
+                  <p style="font-size:22px;color:#1F2A37;font-weight:300;margin-bottom:8px">You're in.</p>
+                  <p style="font-size:16px;color:#56606E;margin-bottom:28px">Both of You is ready when you are.</p>
+                  <p style="margin-bottom:28px">
+                    <a href="${accessUrl}" style="background:#4A6FA5;color:white;padding:16px 32px;border-radius:100px;text-decoration:none;display:inline-block;font-size:16px;font-weight:500">
+                      Open Both of You
+                    </a>
+                  </p>
+                  <p style="font-size:14px;color:#56606E;margin-bottom:8px"><strong>This link works on any device.</strong> Bookmark it, or come back to this email whenever you want to access the course.</p>
+                  <p style="font-size:14px;color:#56606E;margin-bottom:24px">No password needed. No account to create. Just the link.</p>
+                  <hr style="border:none;border-top:1px solid #eee;margin:24px 0" />
+                  <p style="font-size:13px;color:#999;margin-bottom:4px">Lost the link later? You can recover it at:</p>
+                  <p style="font-size:13px;color:#4A6FA5;margin-bottom:24px">adhdreflect.com/grow → "Recover access"</p>
+                  <p style="font-size:13px;color:#999">adhdreflect.com</p>
+                </div>
+              `,
+              text: 'You\'re in.\n\nYour Both of You access link: ' + accessUrl + '\n\nThis link works on any device. Bookmark it — it\'s how you get back in. No password needed.\n\nLost the link? Recover it at adhdreflect.com/grow\n\nadhdreflect.com',
             }),
           });
         }
