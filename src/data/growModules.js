@@ -317,349 +317,555 @@ export function getNextSuggestion(completedIds, pattern) {
   return household[0] || null;
 }
 
+
 export const MODULE_CONTENT = {
   'm1': `
+<div class="module-reentry">
+  <strong>What this module is about:</strong> Why standard parenting advice keeps failing you — and why that failure is structural, not personal. This is the foundation everything else builds on. 15 minutes.
+</div>
+
 <p>It's 5.47pm. The kitchen is a mess. Your kid is losing it over something small. You know exactly what you're supposed to do.</p>
 <p>You do the opposite anyway.</p>
-<p><strong>That gap between knowing and doing is not a character flaw.</strong> It's the thing this course is built around. And it has a specific explanation nobody has given you yet.</p>
+<p><strong>That gap between knowing and doing is not a character flaw.</strong> It's the most important thing this course will explain to you. And it has a specific, research-backed answer that almost nobody gives ADHD parents.</p>
 
-<h3>The advice wasn't built for this household</h3>
-<p>Every parenting book shares one assumption. Nobody states it out loud. But it's there in every chapter.</p>
-<p><strong>The assumption is: the adult in the room is the regulated one.</strong></p>
-<p>The adult might be tired or frustrated. But they're available. They can pause, think, and choose a response. The child is the dysregulated one. The adult is the anchor.</p>
-<p>When that's true, the advice works reasonably well. Stay calm. Lower your voice. Hold the boundary with warmth.</p>
-<p><strong>When that's not true, the advice doesn't just fail.</strong> It adds shame to an already impossible situation. Because you know what you're supposed to do. You can't do it. And that gap is its own kind of exhausting.</p>
-<p>If you've spent years blaming yourself for that gap, that blame is the wrong diagnosis.</p>
+<h3>The assumption that breaks all the advice</h3>
+<p>Every parenting book, course, podcast, and Instagram account shares one unspoken assumption. It's so embedded nobody states it out loud.</p>
+<p><strong>The assumption: the adult in the room is the regulated one.</strong></p>
+<p>Tired, maybe. Stressed, sure. But fundamentally available — able to pause, choose a response, implement a strategy. The child dysregulates. The adult anchors.</p>
+<p>When that's true, the advice works. Stay calm. Lower your voice. Hold the boundary with warmth. Set natural consequences. When it's not true — when the adult also has ADHD, also dysregulates, also has a shorter gap between trigger and explosion — the advice doesn't just fail. It adds shame to an already impossible situation. Because you know what you're supposed to do. You can't do it. And that gap is its own kind of exhausting.</p>
+<p><strong>If you've spent years blaming yourself for that gap: that blame is the wrong diagnosis.</strong></p>
 
-<h3>You're not the only one in this position</h3>
-<p>Between one quarter and one half of parents raising a child with ADHD <strong>have ADHD themselves.</strong> That's not a fringe case. It's a common family configuration the parenting industry has largely ignored.</p>
-<p>Researchers first showed this in 2002. When the parent has ADHD, standard parenting approaches work significantly less well. Not a little. Significantly.</p>
-<p>Why? Because the techniques assume things that ADHD specifically undermines. <strong>Consistency. Working memory. The ability to implement a strategy while your own nervous system is under pressure.</strong></p>
-<p>Asking an ADHD parent to use a five-step de-escalation method while dysregulating is like reading a map underwater. The map might be accurate. The conditions make it unusable.</p>
+<h3>How common this actually is</h3>
+<p>Between one quarter and one half of parents raising a child with ADHD have ADHD themselves. Not a fringe case. A common family configuration the parenting industry has largely ignored.</p>
+<p>In 2002, researchers first established that standard behavioural parent training is significantly less effective when the parent has ADHD. Not slightly less — significantly. The techniques require working memory, consistency, and the ability to execute a strategy at the exact moment your own nervous system is under maximum pressure. ADHD undermines all three simultaneously.</p>
+<p>In 2025, the first randomised controlled trial of a parenting programme designed specifically for parents with ADHD was published. Before that study, almost all parenting interventions were designed for neurotypical parents and delivered to ADHD parents anyway. <strong>That's the system you've been trying to use. It wasn't built for you.</strong></p>
 
-<h3>What happens when both of you go under</h3>
-<p>Here's the part nobody says plainly.</p>
-<p><strong>When both parent and child have ADHD, the household works differently.</strong> Not harder because you're bad at it. Different because the structure is different.</p>
-<p>Co-regulation is how a calm adult helps a dysregulated child settle. One nervous system signals safety to the other. Researchers have recorded two people's brain activity simultaneously and shown that <strong>parenting stress directly disrupts the synchrony</strong> that makes co-regulation possible.</p>
-<p>The standard advice assumes one regulated nervous system in the room. On a hard day, at 5.47pm, there isn't one. That's not failure. That's a structural reality.</p>
-<p>Research into families where both parent and child have high inattention found something unexpected. <strong>Similarity doesn't always produce empathy.</strong> Sometimes it produces escalation. Both people do the same thing at the same time, and neither can interrupt the pattern.</p>
-<p>If you've caught yourself mirroring your child's anger instead of containing it, that's what was happening. Your nervous systems were locked together.</p>
+<h3>What happens when both nervous systems go under at the same time</h3>
+<p>Co-regulation is how a calm adult helps a dysregulated child return to a steadier state. It works through the nervous system — one person's regulated state signals safety to the other.</p>
+<p>Researchers using simultaneous brain scanning have measured this directly. Parenting stress disrupts the neural synchrony that makes co-regulation possible. When you're dysregulated, the mechanism that would help your child regulate is offline. Not weakened. Offline.</p>
+<p>And here's what's specific to dual-ADHD households: research shows that when both parent and child have high inattention, similarity doesn't automatically produce empathy. Sometimes it produces escalation — both people doing the same thing, in the same direction, neither with the bandwidth to interrupt the pattern. If you've ever caught yourself mirroring your child's anger instead of containing it, that's what was happening. Your nervous systems were entrained together.</p>
+<p><strong>This is not a character problem. It's a structural one. Structural problems have structural solutions.</strong></p>
 
-<h3>What this course actually is</h3>
-<p>This course is not about fixing your parenting.</p>
-<p><strong>It's about understanding what's happening, so you can do one thing differently.</strong> Not every time. Not perfectly. Once.</p>
-<p>Research on ADHD habit formation is clear. It takes longer for new behaviours to become automatic — sometimes three to five months longer than for neurotypical adults. <strong>Change doesn't come from willpower.</strong> It comes from making the new thing slightly easier than the old thing, in small enough steps that the brain doesn't reject it.</p>
-<p>That's the design of what follows. Small. Specific. Built for the moments when your bandwidth is lowest.</p>
-<p>Not for the well-slept, medicated, regulated version of you. <strong>For the real one.</strong></p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 2 minutes</div>
+  <p>Think of one specific moment in the last two weeks where you knew what you were supposed to do and couldn't do it.</p>
+  <p>Don't evaluate whether your response was reasonable. Don't defend yourself or criticise yourself. Just name the gap:</p>
+  <p><em>What I knew I should do:</em> _______________</p>
+  <p><em>What I did instead:</em> _______________</p>
+  <p>That gap — between knowing and doing — is what every module in this course is designed around. You've just done the first piece of work.</p>
+</div>
 
-<h3>You haven't failed at parenting</h3>
-<p><strong>You've been applying tools designed for a different household.</strong></p>
-<p>That matters not because it removes your responsibility. You still own your reactions and their impact on your child.</p>
-<p>But it changes the nature of the problem. The problem isn't your character or your commitment. It's a mismatch between the advice that exists and the reality of the household you're actually in.</p>
-<p>This course is about that household.</p>
+<h3>What this course is actually asking of you</h3>
+<p>Not to become calmer. Not to achieve consistent regulation. Not to parent the way the books describe.</p>
+<p><strong>To do one thing differently. Not every time. Not perfectly. Once.</strong></p>
+<p>ADHD brains take longer to form new habits — sometimes three to five months longer than neurotypical adults. Change doesn't come from wanting it badly enough. It comes from making the new thing slightly easier to access than the old thing, in steps small enough that the brain doesn't reject them.</p>
+<p>Everything in this course is built for the moments when your bandwidth is lowest. Not for the well-slept, medicated, regulated version of you. <strong>For the real one, at 5.47pm on a Tuesday.</strong></p>
 
-<h3>Before you move on</h3>
-<p>In the next 24 hours, notice one moment where you know what to do and can't do it.</p>
-<p><strong>Don't try to fix it. Just notice it.</strong> That gap is what we're working with.</p>
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>Implementation intentions — "when X happens, I will do Y" — are one of the most evidence-backed tools for ADHD brains closing the gap between intention and action.</p>
+  <p>Write yours now:</p>
+  <p><strong>When</strong> I notice the gap between knowing and doing this week,</p>
+  <p><strong>I will</strong> say to myself: <em>"This is structural, not a character flaw."</em></p>
+  <p>That's it. One sentence. No action required yet — just the reframe. <strong>The reframe is the first action.</strong></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Reading this module might feel like relief — finally an explanation that doesn't blame you. It might also feel fragile, like you're not sure whether to believe it yet. Both are normal.</p>
+<p>The belief builds through the rest of the course. For now, just hold the possibility that the problem is a mismatch between the tools you've been given and the household you're actually in.</p>
+<p><strong>That possibility is where this starts.</strong></p>
 `,
+
   'm2': `
+<div class="module-reentry">
+  <strong>What this module is about:</strong> The physical signal that arrives 30 seconds before you lose it — and why finding it is more useful than trying to stay calm. 12 minutes.
+</div>
+
 <p>You didn't decide to yell. Your body made that call about half a second before you did.</p>
-<p>By the time you registered what was happening, it had already happened. <strong>That's not a character flaw.</strong> It's how emotional dysregulation works in an ADHD brain — and understanding the gap changes what you can actually do about it.</p>
+<p>By the time you registered what was happening, it had already happened. The decision — if you can call it that — was made below the level of conscious thought, in a neural pathway faster than reasoning.</p>
+<p><strong>This is not a character flaw. It's a measurable neurological gap. And understanding it is the first practical thing you can do about it.</strong></p>
 
-<h3>The gap is real and measurable</h3>
-<p>Between a trigger and your reaction, there is a window. For most people it's brief. For ADHD brains, <strong>it's shorter still</strong> — because the regulatory mechanism that creates the pause is neurologically less reliable.</p>
-<p>You're not going from zero to fury because you're impatient. You're going from zero to fury because the buffer between them is smaller.</p>
-<p>Between 30% and 70% of adults with ADHD have significant emotional dysregulation. Not as a separate problem. As part of ADHD itself. <strong>The short fuse isn't a personality trait stacked on top of your ADHD.</strong> It is your ADHD.</p>
+<h3>Why the buffer is smaller in ADHD brains</h3>
+<p>Between a trigger and a reaction, there's a pause. For most people, it's brief. For ADHD brains, it's shorter still — because the prefrontal cortex, which creates the space between impulse and action, is less reliably recruited under stress.</p>
+<p>You're not going from zero to fury because you're impatient or lack self-control. You're going from zero to fury because the buffer between them is structurally smaller. Between 30 and 70 percent of adults with ADHD experience significant emotional dysregulation — not as a separate condition sitting on top of ADHD, but as a core feature of it.</p>
+<p><strong>The short fuse isn't a character trait stacked on top of your ADHD. It is your ADHD.</strong> This was edited out of the diagnostic criteria in the 1970s for reasons that had nothing to do with whether it was real. Researchers have been arguing to put it back ever since.</p>
 
-<h3>Why home is harder than work</h3>
-<p>You held it together all day. You managed meetings. You didn't snap at your boss. You came home and fell apart over something small.</p>
-<p>This makes no sense until you understand the mask.</p>
-<p><strong>Masking is expensive.</strong> Performing competence in a world built for neurotypical executive function draws from the same resource pool as emotional regulation. By the time you walk through the door, that pool is nearly empty. The effort that held everything together at work is gone.</p>
-<p>Home is also where you let the mask drop. Which means <strong>home is where the real regulatory cost appears</strong> — at the exact moment your child needs you to have resources you've already spent.</p>
+<h3>Why you held it together at work and fell apart at home</h3>
+<p>You managed meetings. You didn't snap at your boss. You held it together through six hours of neurotypical-coded demands. Then you walked through the door and fell apart over a sock seam.</p>
+<p>This makes sense once you understand what masking costs.</p>
+<p>Performing competence in environments built for neurotypical executive function draws from the same neural resource pool as emotional regulation. Not metaphorically — the same pool. By the time you get home, it's almost empty. The effort that held everything together at work has already been spent, and there's nothing left to buffer the reaction when your child needs you to have resources you no longer have.</p>
+<p>This is also why weekends can be harder than weekdays. No external structure holding the performance in place. No clear start and end. Just sustained availability requirements on a depleted system. <strong>If you're worse at home than at work, that's not hypocrisy. That's the math of a limited resource hitting the highest demand.</strong></p>
 
-<h3>What the signal feels like</h3>
-<p>The moment before the reaction has a physical signature. It arrives before the words. Before the decision.</p>
-<p>For most ADHD parents it's one of these:</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think back to the last time you lost it. Not the worst time ever — just a recent one.</p>
+  <p>What had already happened in the two to three hours before? Not what triggered it — what was already in the container before the trigger landed?</p>
+  <p>Work through this quickly:</p>
+  <ul>
+  <li>Physical state: hungry? tired? medicated or not? body already tense?</li>
+  <li>Load: how many unresolved things were you tracking?</li>
+  <li>Social drain: had you been performing competence anywhere that day?</li>
+  <li>Sensory: had anything been too loud, too much, too long?</li>
+  </ul>
+  <p>The thing that triggered you was probably not the cause. <strong>It was the cup that overflowed a container that was already full.</strong> That's the stack — and the stack is where change is actually possible.</p>
+</div>
+
+<h3>The signal that arrives before the explosion</h3>
+<p>The moment before the reaction has a physical signature. It arrives before the words, before the decision, before you've done anything yet. Most people have never been asked to look for it.</p>
+<p>Common signals in ADHD parents:</p>
 <ul>
-<li>Heat in the chest or face</li>
-<li>Jaw tightening</li>
-<li>Shoulders coming up</li>
-<li>A sudden urge to speak that feels almost physical</li>
-<li>A narrowing of attention — suddenly only the trigger exists</li>
+<li>Heat rising in the chest or into the face</li>
+<li>The jaw tightening — not deciding to clench, it just does</li>
+<li>Shoulders rising toward the ears without deciding to</li>
+<li>Peripheral vision narrowing — suddenly only the trigger exists</li>
+<li>A pressure to speak that feels almost physical — not a thought, but an urgency</li>
 </ul>
-<p><strong>That feeling is the signal.</strong> It arrives before the explosion. Your intervention point is there, not after.</p>
-<p>Most people don't find their signal until they're looking for it. This module is asking you to start looking.</p>
+<p>Your signal will be consistent. It's the same physical sequence every time, because it's your specific nervous system reaching its specific threshold.</p>
+<p><strong>Once you know what yours feels like, you have a 30-second window that didn't exist before.</strong> You cannot interrupt a reaction you can't feel coming.</p>
 
-<h3>The 90-second window</h3>
-<p>Once a stress response fires, the neurochemical peak lasts roughly 90 seconds. After that, <strong>the body begins stepping down on its own</strong> — unless you keep feeding the reaction.</p>
-<p>You feed the reaction by staying in the situation, continuing to engage, or replaying the trigger in your head. You stop feeding it by creating physical distance and going quiet.</p>
-<p>Ninety seconds is short enough to wait out. The problem is most of us don't know we're in a 90-second window. <strong>You're not in a character crisis. You're in a window. And windows close.</strong></p>
+<h3>What 90 seconds actually means</h3>
+<p>Once a stress response fires, the neurochemical peak lasts roughly 90 seconds. After that, the body begins stepping down on its own — unless you keep the reaction alive by staying in the situation, continuing to engage, or running the incident in your head on repeat.</p>
+<p>Most people don't know they're in a 90-second window. They think they're in a character crisis. They're not. <strong>They're in a window. Windows close on their own if you stop feeding them.</strong></p>
 
-<h3>One thing to try</h3>
-<p>This week, don't try to stop the reaction. Just find the signal.</p>
-<p>Notice what your body does in the 30 seconds before you lose it. That's it. No intervention yet. <strong>Just locate the signal.</strong></p>
-<p>Once you know what yours feels like — and it will be consistent — you have something to work with. The signal is the only intervention point that reliably exists before the explosion happens.</p>
-<p>You can't interrupt a reaction you can't feel coming.</p>
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>This week's practice is finding the signal — not stopping the reaction yet.</p>
+  <p><strong>When</strong> I notice my body doing _______________ [fill in your signal — heat, jaw, shoulders, tunnel vision],</p>
+  <p><strong>I will</strong> say to myself: <em>"That's the signal. I have 30 seconds."</em></p>
+  <p>You don't have to act on it yet. Just notice it. <strong>Location before intervention.</strong></p>
+  <p>Write your signal here so you know what you're looking for: _______________</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>The first few times you notice the signal, you might notice it while you're already yelling. That's fine. Noticing it at all — even retrospectively — is the beginning. The window gets earlier as you practice.</p>
+<p>You might also feel frustrated that noticing the signal doesn't automatically stop the reaction. That's normal. <strong>Finding the signal is the first step. Using it comes in Module 6.</strong></p>
 `,
+
   'm3': `
-<p>They held it together all day. They were fine at school, fine in the car, fine until the moment they walked through the door.</p>
-<p>Then something small happened and everything came apart.</p>
-<p><strong>That's not an accident. And it's not about you.</strong></p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> What your child's nervous system is actually doing when they fall apart — and why the timing of your response matters more than its content. 12 minutes.
+</div>
 
-<h3>What the school day actually costs</h3>
-<p>Consider what a school day asks of an ADHD brain.</p>
-<p>Sustained attention in a room that's never quite quiet enough. Impulse suppression in an environment that triggers impulse constantly. Social navigation without the natural intuition their classmates seem to have. Six hours of this, without breaking.</p>
-<p><strong>The child who "was fine today" held it together through effort.</strong> Not through neurological ease. Through sheer expenditure of regulatory resource.</p>
-<p>By 3.30pm, that resource is nearly gone.</p>
+<p>They held it together all day. School, rules, social navigation, impulse suppression — six hours of it. Then they came through your door and fell apart over the wrong colour cup.</p>
+<p>Not random. Not about the cup. <strong>And not about you — even though you're the one absorbing it.</strong></p>
 
-<h3>Why they save the worst of it for you</h3>
-<p>The meltdown at the front door isn't targeting you. <strong>It's trust.</strong></p>
-<p>Children release into the safest person available. The fact that your child can fall apart with you means they know you won't leave, won't judge, won't stop loving them because of it.</p>
-<p>The teacher sees the performance. You see what's left when the performance is over. <strong>That's not a failure of your household. It's evidence that your home is safe.</strong></p>
-<p>This doesn't make it easier to absorb. But it changes what it means.</p>
+<h3>What a school day actually costs an ADHD brain</h3>
+<p>A school day asks an ADHD child to do things that are genuinely difficult for their nervous system, sustained, for six hours, without adequate recovery.</p>
+<p>Sit still in a room that's never quite quiet enough. Suppress impulses in an environment that constantly generates them. Navigate social rules that other children seem to follow instinctively. Comply with instructions that don't always make sense. Mask the fidgeting, manage the frustration, hold it together in front of peers.</p>
+<p>None of this is easy for an ADHD brain. All of it has a cost. By 3.30pm, the regulatory resource that held it all together is nearly gone. The child who "had a great day" did so through effort, not ease. <strong>You see the aftermath of that effort. The school sees the performance.</strong></p>
+
+<h3>Why home is where it breaks</h3>
+<p>Children release into the safest available person. The fact that your child falls apart with you — that they save the worst for you — means they know you won't leave, won't judge, won't withdraw love because of it. The teacher got the performance. You get what's left when the performance is over.</p>
+<p>This is called after-school restraint collapse. It's well-documented. It's not a sign that your home is failing. <strong>It's a sign that your child feels safe enough to stop holding it together.</strong></p>
+<p>In a dual-ADHD household, this lands differently. You've also been holding it together all day. Your own mask drops at roughly the same time. Two people hitting their regulatory limits at the same time in the same space — that's the collision, not a parenting failure.</p>
 
 <h3>What's happening inside the meltdown</h3>
-<p>Two things are usually running at once.</p>
-<p><strong>The first is load.</strong> The small thing — the wrong coloured cup, the food touching — isn't the real trigger. It's the last straw. Something has been building for hours and this was just where it broke.</p>
-<p><strong>The second is disproportionate emotional response.</strong> ADHD is associated with emotional responses that are larger than the situation predicts, and slower to return to baseline. The meltdown over a broken biscuit is genuinely intense for them. Dismissing the trigger dismisses the experience.</p>
-<p>The most effective first response is to acknowledge the feeling without evaluating the trigger. <em>"You're really upset"</em> lands better than <em>"it's just a biscuit."</em></p>
+<p>Two things run simultaneously.</p>
+<p><strong>Load:</strong> the cup, the sock seam, the wrong snack — these aren't the cause. They're the last straw. Something has been accumulating since morning and this is just where the container broke. The trigger is rarely the real trigger.</p>
+<p><strong>Dysregulated emotional response:</strong> ADHD brains experience emotions with higher intensity and return to baseline more slowly. The distress over a broken biscuit is genuine and intense for them. <em>"It's just a biscuit"</em> is accurate about the biscuit and completely wrong about the experience. Dismissing the trigger dismisses the experience underneath it.</p>
+<p>The most useful first response acknowledges the feeling without evaluating the trigger. <em>"You're really upset right now"</em> costs you nothing and reduces escalation. It also tells your child's nervous system that you're safe to be with rather than another source of threat or judgment.</p>
 
-<h3>What your child needs in those moments</h3>
-<p>Not analysis. Not a lesson. Not a consequence.</p>
-<p><strong>They need you nearby, quiet, and not adding more input</strong> while the peak passes.</p>
-<p>The peak always passes. It has a neurological arc — escalation, peak, descent. Trying to reason during the peak is trying to have a conversation mid-storm. Wait for the weather to change, then reconnect briefly and simply.</p>
-<p>After that: food if there's any chance hunger is involved, something ordinary together, and done. The event doesn't need extensive review.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 2 minutes</div>
+  <p>Think of a recent meltdown. Work backward from the trigger:</p>
+  <p><strong>The trigger:</strong> what broke it (the cup, the seam, the no) _______________</p>
+  <p><strong>An hour before:</strong> what had already been hard for them that day _______________</p>
+  <p><strong>Their state when they arrived:</strong> tired? hungry? already overwhelmed? _______________</p>
+  <p>Now look at what you built. That's the stack that was already loaded before the trigger landed. The trigger makes sense with the stack underneath it. <strong>Understanding the stack changes how you experience the meltdown — even when you can't change the meltdown itself.</strong></p>
+</div>
 
-<h3>One thing to try</h3>
-<p>This week, when your child falls apart, try one thing before anything else.</p>
-<p><strong>Acknowledge the feeling without evaluating the trigger.</strong></p>
-<p>Not <em>"you're being dramatic."</em> Not <em>"it's fine."</em> Just: <em>"That's really upsetting you."</em></p>
-<p>That's it. One sentence. Then wait. You're not fixing it. You're staying in contact while it passes.</p>
+<h3>What your child needs during the peak</h3>
+<p>Not analysis. Not a lesson. Not consequences. Not an explanation of why the cup being the wrong colour isn't a valid reason to melt down.</p>
+<p><strong>They need you nearby, quiet, and not adding input</strong> while the neurological arc runs its course. The peak always passes — it has a biological arc of escalation, peak, descent. Trying to reason during the peak is trying to have a conversation mid-storm. The storm has its own timeline.</p>
+<p>After the peak: food if it's late afternoon (hunger accelerates everything for ADHD brains and bodies). Something ordinary together. The event doesn't need a debrief unless something needs repairing. Most of the time it just needs to end.</p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> my child starts falling apart and I feel the urge to explain, correct, or assess whether their reaction is proportionate,</p>
+  <p><strong>I will</strong> say one sentence first: <em>"That's really upsetting you."</em> Then wait for 30 seconds before doing anything else.</p>
+  <p>One sentence. Then silence. <strong>The silence is the intervention.</strong></p>
+  <p>What might get in the way of doing this: _______________</p>
+  <p>What I'll do when that thing gets in the way: _______________</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Saying "that's really upsetting you" when you want to say "it's just a biscuit" takes something. It can feel like you're validating an unreasonable reaction.</p>
+<p>You're not validating the reaction as proportionate. You're validating that your child is having a real experience. <strong>Those are different things, and only the second one helps.</strong></p>
 `,
+
   'm4': `
-<p>It started with them. Then it was both of you. Then you can't quite remember who was who.</p>
-<p>This is the moment nobody writes about. Not the child's meltdown. Not the parent's loss of control. <strong>The collision</strong> — when two dysregulated nervous systems are in the same room and neither can regulate the other, because neither is regulated.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> The collision — when both your nervous systems go under at the same time — and the one move that actually interrupts it. 15 minutes.
+</div>
 
-<h3>Why this household is different</h3>
-<p>Standard co-regulation advice assumes one calm person in the room.</p>
-<p>Stay calm. Regulate yourself. Your calm will help them settle.</p>
-<p>This is good advice when the adult can maintain a regulated state. <strong>The advice isn't wrong. It's built for a different configuration.</strong></p>
-<p>Co-regulation works through the nervous system. One person's regulated state signals safety to the other. Research using simultaneous brain scanning found that <strong>parenting stress directly disrupts the brain-to-brain synchrony</strong> that makes co-regulation possible.</p>
-<p>When you're stressed, the mechanism that would help your child regulate stops working properly. That's not a theory. That was measured.</p>
+<p>It started with them. Within sixty seconds it was both of you. By the time it ended you couldn't quite reconstruct who had said what first or how it got to where it got.</p>
+<p>This is the moment nobody writes about. Not the child's meltdown — there's a whole industry on that. Not the parent losing control — there's plenty on that too.</p>
+<p><strong>The collision. When two dysregulated nervous systems are in the same room and neither can pull the other back up, because neither is regulated.</strong></p>
 
-<h3>The amplification problem</h3>
-<p>Emotional contagion works in both directions.</p>
-<p>Your child's dysregulation — the noise, the intensity, the urgency — is a signal your nervous system picks up. <strong>If your system is already at moderate arousal, picking up their signal can tip you over.</strong> You didn't decide to join the meltdown. You were entrained.</p>
-<p>Then your escalation reaches their nervous system. Their alarm intensifies. They become more dysregulated. Your escalation and theirs are now feeding each other.</p>
-<p><strong>Two reactive nervous systems in proximity almost always amplify each other.</strong> This is not anyone's fault. It is, however, something you can design around.</p>
+<h3>Why co-regulation fails in this household</h3>
+<p>Co-regulation is the process by which a calm adult helps a dysregulated child return to a steadier state. It's real, it's measurable, and it works — when one person in the room is regulated.</p>
+<p>Every instruction to "stay calm" during a meltdown is advice about co-regulation. It's good advice. It requires one regulated nervous system in the room to execute.</p>
+<p>Researchers using simultaneous brain scanning have measured this directly. Parenting stress disrupts the neural synchrony that makes co-regulation possible. When you're dysregulated, the mechanism that would help your child regulate is offline. This is not a theory. It was measured in two people's brains at the same time.</p>
+<p><strong>In a dual-ADHD household at 5pm, both nervous systems may be below the threshold required for co-regulation to work at all.</strong> The advice isn't wrong. The conditions for it don't exist.</p>
 
-<h3>What the research also found</h3>
-<p>Researchers studying families where both parent and child have high inattention found something worth naming directly.</p>
-<p><strong>Similarity doesn't automatically produce empathy.</strong> Sometimes it produces escalation — because both people are doing the same thing, in the same direction, and neither has the bandwidth to interrupt the pattern.</p>
-<p>If you've ever found yourself mirroring your child's anger rather than containing it — matching their volume, their intensity, their urgency — that's what was happening. Your nervous systems were locked together, running the same programme.</p>
+<h3>The amplification loop</h3>
+<p>Emotional contagion is real and bidirectional. Your child's dysregulation — the noise, the intensity, the urgency — is a signal your nervous system receives. If you're already at moderate arousal when that signal arrives, it can tip you over threshold without any deliberate decision on your part.</p>
+<p>Then your escalation reaches their nervous system. They escalate further. Their escalation feeds yours. <strong>Two reactive nervous systems in proximity amplify each other.</strong> Neither is doing it on purpose. It's a loop running on its own.</p>
+<p>And what's specific to dual-ADHD households: research shows that when both parent and child have high inattention, similarity can produce escalation rather than empathy — both people running the same pattern in the same direction, neither with enough bandwidth to interrupt it. If you've found yourself matching your child's volume and intensity rather than de-escalating them, that's what was happening.</p>
 
-<h3>The one intervention that works during the collision</h3>
-<p>You cannot regulate them while you're dysregulated. This is structural, not personal.</p>
-<p><strong>The only useful move is to reduce the input.</strong> Yours to them, and theirs to you.</p>
-<p>Physical distance is the most reliable tool. Sixty seconds in a different room. Said once before you go: <em>"I need a minute. I'll be back."</em></p>
-<p>That statement matters. It prevents your absence from being interpreted as punishment. The 60 seconds gives your nervous system a chance to step down from peak activation.</p>
-<p><strong>When you return: fewer words, lower volume, reduced demands.</strong> You're not back to resolve anything. You're back to restore some regulation.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Map the last collision you can remember. Work through it:</p>
+  <p><strong>What started it:</strong> what were they doing when it began _______________</p>
+  <p><strong>Your state before it started:</strong> what was already in your container _______________</p>
+  <p><strong>The moment you joined rather than contained:</strong> when did it stop being you managing them and become both of you inside it _______________</p>
+  <p><strong>What the joining felt like:</strong> the shift in your body or voice _______________</p>
+  <p>You just identified your joining point. That specific moment — the posture shift, the volume change, the thing that was said — is the intervention point. <strong>Once you can find it in retrospect, you can start finding it earlier in real time.</strong></p>
+</div>
 
-<h3>One thing to try</h3>
-<p>This week, notice the moment when you join the meltdown rather than containing it.</p>
-<p><strong>Don't try to stop it happening. Just notice the moment of joining.</strong> The posture change, the volume shift, the point where it stopped being you managing them and became both of you in it together.</p>
-<p>That moment is what you're learning to find. Once you can find it, you can get slightly earlier each time.</p>
+<h3>The one move that works during the collision</h3>
+<p>You cannot regulate them while you're dysregulated. This is structural.</p>
+<p>The only useful intervention is to reduce the mutual input — yours reaching them, theirs reaching you. Physical distance is the most reliable tool. Not permanent withdrawal. Not punishment.</p>
+<p>Sixty seconds in a different room. Before you go, say one thing:</p>
+<p><em>"I need a minute. I'll be back."</em></p>
+<p>That sentence matters. It prevents your absence from being read as abandonment or punishment. It names what you're doing. It promises return. The 60 seconds give the neurochemical peak time to begin stepping down — yours and, without your escalation feeding it, theirs too.</p>
+<p><strong>When you return: fewer words, lower volume, no attempt to resolve anything yet.</strong> You're not back to finish the argument. You're back to restore enough regulation for a conversation to eventually be possible.</p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I notice I've joined the meltdown — the volume change, the posture shift, the moment both of us are in it — </p>
+  <p><strong>I will</strong> say: <em>"I need a minute. I'll be back."</em> And leave the room for 60 seconds.</p>
+  <p>The specific place I'll go: _______________</p>
+  <p>What I'll do in those 60 seconds: _______________  (even just standing still counts)</p>
+  <p>What might stop me from leaving: _______________</p>
+  <p>What I'll say to myself when that happens: _______________</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Leaving mid-argument will feel like losing. Like you're letting chaos win. Like you're abandoning your child in the middle of something that needs resolving.</p>
+<p>You're not. You're stopping the amplification. The resolution becomes possible only after both systems have stepped down. <strong>Leaving is the precondition for returning in a state where anything useful can happen.</strong></p>
 `,
+
   'm5': `
-<p>The hard moment lasted four minutes. The distance it left has been there for two days.</p>
-<p><strong>Repair is not the big conversation.</strong> It's not the apology that needs their forgiveness. It's not the explanation of why it happened.</p>
-<p>It's two sentences. Delivered when both of you are calm. Then something normal immediately after.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> What repair actually is — not the big conversation, not the extended apology — and why two sentences is enough. 12 minutes.
+</div>
+
+<p>The hard moment lasted four minutes. You've been carrying the weight of it for two days. Not because anything else happened. Because nothing happened after it. No repair.</p>
+<p><strong>Repair is not the big conversation. It's not the apology that needs their forgiveness. It's not the explanation of why it happened.</strong></p>
+<p>It's two sentences, delivered when both of you are calm, followed immediately by something ordinary.</p>
 
 <h3>Why ADHD parents skip repair</h3>
-<p>There are three common reasons.</p>
-<p><strong>The shame spiral runs instead.</strong> The energy that should go into the repair goes into replaying the incident. This keeps the parent activated and makes approaching the moment harder, not easier.</p>
-<p><strong>The overreach replaces it.</strong> Extra warmth, extra affection, an apology that asks the child to reassure the parent — these feel like repair but they're something else. They ask the child to manage the parent's emotional state. That's an inversion of the caregiving relationship.</p>
-<p><strong>The incident just passes.</strong> Life continues. Nobody says anything. Except it accumulates. Each unrepaired rupture adds a small amount of unresolved weight to the relationship. Over time, that weight is felt.</p>
+<p>Three things get in the way — and ADHD makes all three worse.</p>
+<p><strong>The shame spiral consumes the energy repair needs.</strong> The replay keeps the nervous system activated. Each lap through the incident delays the approach. The gap grows. The repair feels harder to make the longer it waits.</p>
+<p><strong>The overreach replaces it.</strong> Extra warmth, extended apology, affection that arrives in a rush — these feel like repair but they're something else. They ask the child to manage the parent's emotional state. To reassure them. That's not repair. It's an inversion: the child doing emotional labour for the parent.</p>
+<p><strong>Time passes and it seems fine.</strong> The child moves on. Life continues. Except the weight of unrepaired ruptures accumulates in a relationship. Quietly. In the way children gradually learn not to expect closure, not to trust that hard moments get acknowledged.</p>
 
 <h3>What repair actually is</h3>
-<p><strong>One sentence naming what happened. One sentence naming what you're going to try.</strong></p>
-<p><em>"I yelled this morning and I shouldn't have. I'm going to work on pausing before I get to that point."</em></p>
-<p>Then stop. Don't wait for them to say it's okay. Don't explain the context. Don't extend it. <strong>Two sentences, then something ordinary together.</strong></p>
-<p>Sit with them. Get them a snack. Help with something small. The repair is in the return to normal, not in the speech.</p>
+<p>One sentence naming what happened. One sentence naming what you're going to try. Unconditional — meaning it doesn't wait for or require a response.</p>
+<p><em>"I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point."</em></p>
+<p>Then stop. Don't wait for them to say it's fine. Don't add context or explanation. Don't extend it. <strong>Two sentences, then something ordinary immediately after</strong> — sit near them, get them a snack, help with something. The repair is in the return to normal. Not in the speech.</p>
+<p>Your child receives: I know what I did. I take responsibility for it. I'm still here. That's the complete message. Everything beyond that begins asking them for something — absolution, reassurance — that isn't theirs to provide.</p>
 
-<h3>Why two sentences is enough</h3>
-<p>Children are not fragile. <strong>They repair from hard moments when the repair is consistent.</strong> What they find harder is the cycle: intensity, then withdrawal, then over-warmth, then the next intensity.</p>
-<p>A brief, specific, unconditional repair closes the loop. The child receives: I know what I did, I take responsibility for it, and here I am. That's enough.</p>
-<p>In fact, more than two sentences usually starts asking the child for something — absolution, reassurance, engagement — that isn't theirs to give.</p>
-<p>The repair is for them. Not for your guilt.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Write the repair for the last hard moment that didn't get properly repaired. Don't overthink the words. Just fill this in:</p>
+  <p><strong>Sentence 1 — what happened:</strong> <em>I _______________ and that wasn't okay.</em></p>
+  <p><strong>Sentence 2 — what you'll try:</strong> <em>I'm going to work on _______________.</em></p>
+  <p>You don't have to deliver this immediately. But having it written means you have it ready. <strong>The hardest part of repair for ADHD parents is composing it in the moment after the incident. Write it now, before you need it.</strong></p>
+</div>
+
+<h3>Why two sentences is more powerful than ten</h3>
+<p>Children repair from hard moments when the repair is consistent. What damages the relationship more than the rupture is the cycle — intensity, then withdrawal, then over-warmth, then the next intensity, with no clean acknowledgment of what happened in between.</p>
+<p>A brief, specific, unconditional repair closes the loop. No negotiation. No requirement for forgiveness. Just: I see what happened, I own my part, I'm still here.</p>
+<p>The repair is also for you. It gives the shame spiral somewhere to go. Accountability with an action satisfies the feeling the spiral was trying to process — much more effectively than more replaying.</p>
 
 <h3>When to deliver it</h3>
-<p><strong>When both of you are calm.</strong> Not immediately after. Not that evening if it was a bad one.</p>
-<p>Before bed is fine. The next morning is fine. Twelve hours is not too long. <strong>A calm two-sentence repair twelve hours later lands better than a rushed one twenty minutes after.</strong></p>
-<p>The timing matters because the child needs to be able to receive it. A dysregulated child receiving a repair is not really receiving it. Wait until the atmosphere can hold it.</p>
+<p>When both of you are calm. Not immediately after — too soon. Not that evening if it was a hard one. Before bed is fine. The next morning is fine. Twelve hours is not too long.</p>
+<p><strong>A calm two-sentence repair twelve hours later lands better than a rushed emotional one twenty minutes after.</strong> Wait for the atmosphere to settle enough that your child can actually receive it.</p>
 
-<h3>One thing to try</h3>
-<p>Write the template now. Before you need it.</p>
-<p><em>Sentence 1:</em> I [did the thing].<br/><em>Sentence 2:</em> I'm going to work on [one specific thing].</p>
-<p><strong>Have it written before the next incident happens.</strong> The moment after a hard incident is the worst time to compose a repair from scratch. Have it ready.</p>
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I have a hard moment with my child and the atmosphere has settled enough that we're both calm,</p>
+  <p><strong>I will</strong> use this repair: <em>"I _______________ and that wasn't okay. I'm going to work on _______________."</em></p>
+  <p>The specific moment I'll deliver it: _______________  (before bed / next morning / other)</p>
+  <p>What I'll do immediately after: _______________  (something ordinary — sit with them, get them a snack)</p>
+  <p><strong>This is your repair template. Keep it. Use it more than once.</strong></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Two sentences will feel insufficient. The shame will want you to say more, explain more, make sure they understand you're taking it seriously.</p>
+<p>The two sentences are taking it seriously. More than two sentences is the shame asking your child for something. <strong>Stop at two. Let the ordinary thing that follows be the rest of it.</strong></p>
 `,
+
   'm6': `
-<p>Your shoulders were already up. Your jaw was already tight. The thing that set you off wasn't the first thing. <strong>It was the fifth thing</strong> — and the first four had been stacking since 3pm.</p>
-<p>You snapped over something small because the something small landed on a full container.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Overloaded Reactors — finding the signal that arrives 30 seconds before the explosion, and using it to create distance before you speak. 12 minutes.
+</div>
 
-<h3>What the quiz result didn't tell you</h3>
-<p>Your result told you that you're an Overloaded Reactor. It told you why.</p>
-<p><strong>This module tells you what to do with the 30 seconds before it goes wrong.</strong></p>
-<p>Because the signal arrives before the reaction. Every time. The problem isn't that the signal doesn't exist. The problem is that most Reactors have never been asked to look for it.</p>
+<p>Your shoulders were already up. Your jaw was already tight. The noise had been too loud since 4pm. The instruction had been repeated three times. Your medication wore off an hour ago.</p>
+<p>Then your kid knocked over the cup.</p>
+<p>The cup wasn't the cause. <strong>The cup was the moment the container finally overflowed.</strong> What went wrong started long before the cup.</p>
 
-<h3>The stack, not the spark</h3>
-<p>Reactors almost always misattribute their explosions. The log entry reads: <em>"lost it when they knocked over the cup."</em></p>
-<p><strong>The cup wasn't the cause.</strong> The cup was the container overflowing. The cause was the noise that had been too loud since 4pm. The instruction repeated three times. The thing at work that hadn't resolved. The medication that wore off an hour ago.</p>
-<p>The stack is invisible until you start mapping it. <strong>Your intervention point is in the stack, not the spark.</strong> You cannot change that the cup gets knocked over. You can sometimes change what's already in the container when it does.</p>
+<h3>The stack that precedes the spark</h3>
+<p>Reactors almost always misattribute their explosions. The internal log reads: lost it when they knocked over the cup. But that's the spark, not the stack.</p>
+<p>The stack is everything that was already loaded before the trigger landed. The noise since 4pm. The instruction repeated three times. The unresolved thing from work. The hunger you hadn't noticed. The medication gap. The accumulated sensory input from a day of performing competence.</p>
+<p><strong>Your intervention point is in the stack, not the spark.</strong> You cannot control whether the cup gets knocked over. You can sometimes change how full the container is when it does.</p>
+<p>Mapping the stack — even in retrospect — is the beginning. Once you know what loads your container, you can start managing the load rather than waiting for the spark and trying to respond faster to it.</p>
 
-<h3>Finding the signal</h3>
-<p>Your physical signal arrives about 30 seconds before the explosion. It is consistent — the same thing each time, because it's your nervous system's specific response to threshold being reached.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Map a recent explosion. Specifically:</p>
+  <p><strong>The spark</strong> (the thing that triggered it): _______________</p>
+  <p><strong>The stack — what was already loaded before the spark:</strong></p>
+  <p>Physical: _______________ (hunger, fatigue, medication timing, sensory overload)</p>
+  <p>Cognitive: _______________ (unresolved things, decisions, worry)</p>
+  <p>Social: _______________ (masking, conflict, feeling unsupported)</p>
+  <p>Time: _______________ (how many hours since you last had quiet)</p>
+  <p>Now look at the stack. The explosion makes complete sense when you see it. <strong>The question isn't "why did I snap over the cup?" It's "what was already in the container?"</strong></p>
+</div>
+
+<h3>Finding your signal</h3>
+<p>Your physical signal arrives about 30 seconds before the explosion. It's consistent — the same sequence every time, because it's your specific nervous system hitting your specific threshold.</p>
 <p>Common Reactor signals:</p>
 <ul>
-<li>Heat moving up the chest or neck</li>
-<li>A jaw that tightens without deciding to</li>
+<li>Heat moving up the chest or into the face</li>
+<li>The jaw tightening — not deciding to clench, it just does</li>
 <li>Shoulders rising toward the ears</li>
-<li>Peripheral vision narrowing</li>
-<li>An urgency to speak that feels physical, not cognitive</li>
+<li>Peripheral vision narrowing — suddenly only the trigger exists</li>
+<li>An urgency to speak that feels physical, not cognitive — a pressure, not a thought</li>
 </ul>
-<p><strong>This week: find yours.</strong> Don't try to stop the reaction yet. Just notice what happens in your body in the 30 seconds before. Write it down the first time you notice it.</p>
-<p>Once you know the signal, you have a 30-second window you didn't have before.</p>
+<p>This week, find yours. Not to stop the reaction yet. Just to know what it feels like. Write it down the first time you notice it. <strong>Once you know your signal, you have a 30-second window that didn't exist before.</strong></p>
+<p>My signal: _______________ (fill this in once you know it)</p>
 
-<h3>What to do with 30 seconds</h3>
-<p>One thing only. <strong>Create physical distance before you speak.</strong></p>
-<p>Not because distance resolves anything. Because your nervous system cannot step down while it's still receiving the input that drove it to threshold. Removing yourself for 60 seconds is not avoidance. It's the one intervention that actually works at this stage.</p>
-<p><em>"I need one second."</em> Move to a different room. Sixty seconds. Return.</p>
-<p><strong>That's the whole practice.</strong> Not forever. Not calmly. Just one second, once, this week.</p>
+<h3>What to do in those 30 seconds</h3>
+<p>One thing. <strong>Create distance before you speak.</strong></p>
+<p>Say: <em>"I need one second."</em> Move to a different room. Sixty seconds. Return.</p>
+<p>The distance works because your nervous system cannot step down while it's still receiving the input that drove it to threshold. Removing yourself from the stimulus gives the neurochemical peak time to begin descending. Sixty seconds is not calm. It's not resolution. It's just enough for the peak to start dropping.</p>
+<p><strong>Return quieter than you left. Fewer words. Lower volume. The situation is still there — it will be more workable in two minutes than it was 30 seconds ago.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I feel _______________ [your signal],</p>
+  <p><strong>I will</strong> say: <em>"I need one second."</em> And move to _______________ [specific room] for 60 seconds.</p>
+  <p>What might stop me from leaving: _______________</p>
+  <p>What I'll say to myself when that happens: _______________</p>
+  <p><strong>One use of this plan this week. That's the whole goal.</strong></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Leaving will feel like losing control of the situation. Like the thing won't get addressed. Like you're letting chaos run.</p>
+<p>You're not. You're stopping the amplification. <strong>The situation is more addressable after 60 seconds than during the peak. Every time.</strong></p>
 `,
+
   'm7': `
-<p>The urge to explain is strong. You want them to understand why it matters. Why the rule exists. Why this is the third time you've asked.</p>
-<p><strong>That explanation is landing on a nervous system that stopped receiving it two sentences ago.</strong></p>
-<p>More words don't help. They add to what your child has to process at the exact moment they can't process anything.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Overloaded Reactors — why the explanation keeps going past the point of usefulness, and the one-sentence stop that actually works. 10 minutes.
+</div>
 
-<h3>Why Reactors over-explain</h3>
-<p>The Reactor pattern is driven by overwhelm. But the response to overwhelm is often to increase output rather than reduce it — more words, more volume, more urgency.</p>
-<p><strong>This is the opposite of what de-escalates the situation.</strong></p>
-<p>The more you escalate your input, the more your child's nervous system reads threat rather than message. The content of what you're saying becomes irrelevant. They're not hearing the lesson. They're responding to the alarm.</p>
-<p>Every additional sentence past the third one is working against you.</p>
+<p>You've explained it three times. You can see it's not landing. The explanation is getting longer and louder, which is making it land even less.</p>
+<p>Some part of you knows this. You keep going anyway.</p>
+<p><strong>The urge to explain feels like the responsible thing. It isn't working.</strong></p>
 
-<h3>The one-sentence boundary</h3>
-<p>Pick one sentence. Specific, short, calm in delivery even if not in feeling.</p>
-<p>Options:</p>
+<h3>What happens in their nervous system when you keep talking</h3>
+<p>When a child's nervous system is in high arousal — mid-argument, mid-refusal, mid-meltdown — its capacity to receive information drops significantly. Words arrive. They don't register as meaning. What the nervous system processes is tone, volume, and intensity, which it reads as threat level rather than content.</p>
+<p>The more you escalate your input, the more your child reads danger rather than lesson. The content of what you're saying has become irrelevant. They're not ignoring you. <strong>The system that would receive the lesson is offline.</strong> Every sentence past the third is working against you — not because the point isn't valid, but because the conditions required to deliver it don't exist.</p>
+
+<h3>Why Reactors over-explain specifically</h3>
+<p>The Reactor pattern responds to overwhelm by increasing output. More words. More volume. More urgency. As if enough explanation will break through the closed system.</p>
+<p>There's also a justice component — if you can make them understand, the unfairness resolves. The need to be heard and understood is real. The method isn't working.</p>
+<p>And there's the ADHD closure drive: incomplete exchanges sit in working memory as unresolved, uncomfortable. <strong>The explanation keeps going because stopping it leaves an open loop, and open loops are neurologically uncomfortable for ADHD brains.</strong> The discomfort isn't a sign you're doing something wrong. It's the normal feeling of an open loop.</p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 2 minutes</div>
+  <p>Think of the last argument loop. Answer these:</p>
+  <p><strong>At what point did you know it wasn't working?</strong> _______________</p>
+  <p><strong>How many sentences did you say after that point?</strong> _______________</p>
+  <p><strong>What kept you going?</strong> (the need to finish / the injustice of stopping / the discomfort of the open loop / something else) _______________</p>
+  <p>You just found your pattern. That "kept going" answer is what to bring awareness to. <strong>Not to judge it — to know it's coming so you can see it in real time.</strong></p>
+</div>
+
+<h3>The one-sentence stop</h3>
+<p>Pick one sentence. Have it ready before the next incident.</p>
 <ul>
 <li><em>"We're not talking about this right now."</em></li>
 <li><em>"My answer isn't changing."</em></li>
-<li><em>"I need you to stop."</em></li>
+<li><em>"I've said what I need to say."</em></li>
 </ul>
-<p><strong>Say it once.</strong> Then physically move — leave the room, turn toward something else, pick up a glass of water. The movement signals to your own nervous system that you've disengaged.</p>
-<p>The lesson can wait. <strong>Twelve hours from now, when both of you are regulated, the lesson will land in two minutes.</strong> Right now it's not landing at all.</p>
+<p>Say it once. Then physically move — leave the room, turn away, pick up a glass of water. The movement is part of the stop — it signals to your own nervous system that you've actually disengaged, not just stopped speaking for a moment.</p>
+<p><strong>Do not repeat the sentence if they push back.</strong> Repeating it is re-entering the loop through a different door.</p>
 
-<h3>The discomfort of stopping</h3>
-<p>Stopping mid-escalation feels like losing. Like you're letting them get away with it.</p>
-<p><strong>None of those things are true.</strong> But they feel true, which is enough to keep you in the loop.</p>
-<p>What you're learning to tolerate is the discomfort of an open loop. The ADHD brain finds open loops deeply uncomfortable — that discomfort is what keeps Reactors talking past the point it's working.</p>
-<p><strong>Tolerating the discomfort is the practice.</strong> Not eliminating it.</p>
+<h3>The lesson doesn't disappear when you stop</h3>
+<p>Twelve hours later, when both of you are calm, say the thing in two sentences. <em>"When I said we weren't talking about it, I wasn't dismissing you. Here's what I was actually trying to say."</em></p>
+<p>Two minutes. It lands. Because the atmosphere can hold it now. <strong>The lesson delayed is more effective than the lesson delivered into a closed system.</strong></p>
 
-<h3>One thing to try</h3>
-<p>This week, use one sentence once. Before you would normally keep going. <strong>One sentence, then move physically.</strong></p>
-<p>You don't have to stay calm. You just have to stop adding words.</p>
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>My stop sentence: _______________</p>
+  <p><strong>When</strong> I notice I'm past the point where it's working,</p>
+  <p><strong>I will</strong> say: _______________ [my stop sentence]. Once. Then move to _______________ [specific action].</p>
+  <p><strong>When</strong> I've calmed down and my child is calm,</p>
+  <p><strong>I will</strong> return to the lesson with: <em>"Here's what I was actually trying to say: _______________."</em></p>
+  <p>Two sentences. Then done.</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Stopping will feel like surrender. Like the lesson won't land. Like they'll learn they can outlast you.</p>
+<p>The lesson lands more effectively twelve hours later than it does in the loop. <strong>Stopping is a delivery decision, not a surrender.</strong> The open loop feeling is real and uncomfortable. That discomfort is what you're learning to tolerate.</p>
 `,
+
   'm8': `
-<p>It's 8.14am. You had a plan. You had a chart, actually — laminated, on the fridge, with small pictures. It worked for eleven days.</p>
-<p><strong>You're not bad at systems.</strong> You're bad at maintaining systems that live entirely inside your head.</p>
-<p>And most parenting systems live entirely inside your head.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Chaos Jugglers — why the morning keeps collapsing at the same point every time, and how to find the one invisible step that keeps dropping. 12 minutes.
+</div>
 
-<h3>What the quiz result didn't tell you</h3>
-<p>Your result told you that you're a Chaos Juggler. That working memory and executive function are the mechanism.</p>
-<p><strong>This module is about what that looks like inside a specific morning</strong> — and why the system collapses at the same predictable point each time.</p>
+<p>It's 8.14am. You had a plan. You had a chart — laminated, on the fridge, with pictures. It worked for eleven days.</p>
+<p>The chart is still there. Nobody's looked at it since.</p>
+<p><strong>You're not bad at systems. You're working with a brain that has a hard limit on how much it can track simultaneously, in a morning that consistently exceeds that limit.</strong></p>
 
-<h3>The hidden steps problem</h3>
-<p>Every routine has visible steps and invisible steps.</p>
-<p>The visible steps are on the chart. Get dressed. Eat breakfast. Brush teeth. Find bag.</p>
-<p><strong>The invisible steps are the ones that have to happen between the visible ones.</strong> Remembering that tomorrow is sports day. Noticing the permission slip still unsigned. Tracking which child is at which stage. Noticing that someone hasn't eaten while the clock moves.</p>
-<p><strong>Working memory is what holds the invisible steps.</strong> It's the mental workspace that lets you track multiple things simultaneously while executing one of them.</p>
-<p>In ADHD, working memory is unreliable. The invisible steps fall out. <strong>Not because you forgot to care. Because the system that holds them isn't reliable under load.</strong> And morning is maximum load.</p>
+<h3>Visible steps and invisible steps</h3>
+<p>Every routine has two layers. The visible layer is on the chart: get dressed, eat breakfast, brush teeth, find bag. The invisible layer is everything that has to happen between and around the visible steps.</p>
+<p>Remembering that today is sports day. Noticing the permission slip still unsigned. Tracking which child is at which stage while managing your own parallel sequence. Noticing that someone hasn't eaten yet while the clock moves. Deciding about the lunch that wasn't mentioned last night.</p>
+<p><strong>Working memory holds the invisible layer.</strong> In ADHD brains, working memory is unreliable under load — it drops things, not because you don't care about them, but because the system that holds them fails when the conditions are demanding. And morning is maximum demand.</p>
+<p>The chart shows the visible steps. The invisible steps are still in your head. That's where the collapse happens.</p>
 
-<h3>Where the collapse happens</h3>
-<p>It's almost always the same point. The transition between two steps where one invisible step was required and didn't get held.</p>
-<p><strong>This week: notice the collapse point.</strong> Not to fix it. Just to name it.</p>
-<p>Is it the transition from breakfast to getting dressed? The five minutes before departure? The moment the bag needs to be found? Somewhere in there is a consistent invisible step that keeps dropping.</p>
-<p>That's your intervention point. Not the whole morning. One step.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Map your morning. For each transition, note the invisible step that happens (or should happen) between visible steps:</p>
+  <p>Between <em>wake up</em> and <em>get dressed</em>: what invisible steps are required? _______________</p>
+  <p>Between <em>breakfast</em> and <em>leaving</em>: what invisible steps are required? _______________</p>
+  <p>Now: <strong>which transition is where the morning most often falls apart?</strong> _______________</p>
+  <p>That transition has an invisible step that keeps dropping. <strong>You've just found your intervention point. It's not the whole morning — it's that one step.</strong></p>
+</div>
 
-<h3>One thing to try</h3>
-<p><strong>Move one invisible step outside your head.</strong></p>
-<p>Write it on the chart. Add it to the visible sequence. Hang the permission slip somewhere that means "needs action today." Put the sports kit by the front door the night before.</p>
-<p><strong>Externalising one step reduces the working memory load for that step permanently.</strong> You don't have to remember it. The environment remembers it for you.</p>
-<p>One step this week. Not the whole system.</p>
+<h3>Moving one step outside your head</h3>
+<p>Externalising a step — moving it from working memory into the environment — removes it from the load permanently. You don't have to remember it. The environment holds it.</p>
+<p>The permission slip in a specific place that means "action required today." The sports kit by the door the night before. The lunch decision made and written down the previous evening. The one invisible step that keeps dropping, now written on the chart.</p>
+<p>One externalised step is worth more than ten mental reminders. Mental reminders require working memory to act on. Environmental cues don't. <strong>The goal is to move one step outside your head so you never have to remember it again.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>The invisible step I'm externalising: _______________</p>
+  <p>Where I'm putting it (the physical location or cue): _______________</p>
+  <p>When I'll set it up (tonight / tomorrow morning / other): _______________</p>
+  <p><strong>When</strong> the morning reaches the point where this step used to drop,</p>
+  <p><strong>I will</strong> look at _______________ [the physical cue] instead of trying to remember it.</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Identifying one invisible step and externalising it will feel too small. The morning has many problems. Fixing one doesn't feel like progress.</p>
+<p>The research on habit change in ADHD brains is consistent: small changes with high success rates outperform ambitious changes with low ones. <strong>One invisible step externalised this week. Next week, potentially another. That's how the morning gets less chaotic — not all at once.</strong></p>
 `,
+
   'm9': `
-<p>It's the third week of the new system. The chart is still on the fridge. You haven't looked at it in four days.</p>
-<p>This isn't failure. <strong>This is what happens when a system has too many steps</strong> for the conditions it has to survive.</p>
-<p>Most parenting systems require a version of you that doesn't exist at 7.45am on a Wednesday. This module is about building one that works for the version of you that does.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Chaos Jugglers — why good systems keep collapsing, and what a routine looks like when it's built for an ADHD brain rather than against it. 10 minutes.
+</div>
 
-<h3>Why ADHD parents abandon good systems</h3>
-<p>You build the system. It works. <strong>It works until life produces one exception</strong> — a sick day, a late morning, a disrupted week — and the system doesn't survive it.</p>
-<p>This is not lack of commitment. <strong>This is what happens when a system requires perfect conditions to function.</strong> ADHD life does not provide perfect conditions.</p>
-<p>The system that survives ADHD life is the one that can absorb one exception without collapsing. That means it has to be small enough that an exception doesn't destroy it.</p>
+<p>Third week of the new system. The chart is still on the fridge. You haven't followed it in five days.</p>
+<p>You added two steps last week to make it more complete. That was the beginning of the end.</p>
+<p><strong>This is not a commitment problem. It's a design problem. The system was built for a household that doesn't exist under actual conditions.</strong></p>
 
-<h3>The minimum viable routine</h3>
-<p>A minimum viable routine has three qualities.</p>
-<p><strong>It has fewer steps than feels right.</strong> If it feels complete, it probably has too many steps. Cut it until it feels sparse.</p>
-<p><strong>The steps are visible, not remembered.</strong> Written down, posted somewhere, or built into the environment. Not held in working memory.</p>
-<p><strong>It survives a bad day.</strong> If the whole family slept badly and you're 20 minutes behind, can one version of this routine still happen? If not, it's too complex.</p>
-<p><strong>Three steps is often enough.</strong> A three-step routine done 80% of the time produces more consistent outcomes than a ten-step routine done 30% of the time.</p>
+<h3>Why good systems collapse</h3>
+<p>You build the system. It works. Then one exception arrives — a sick day, a night with no sleep, a morning with more conflict than usual — and the system doesn't survive it. So you rebuild. Then the next exception arrives.</p>
+<p>This isn't lack of follow-through. This is what happens when a system requires conditions that ADHD life doesn't consistently provide. <strong>A system that only works under ideal conditions isn't a system. It's a plan for a different household.</strong></p>
+<p>The Juggler pattern has a specific failure mode with routines: building a working system and then improving it until it breaks. The impulse to add, refine, and complete is the Juggler expressing itself through system-building. That impulse is what turns minimum viable routines into maximum complexity ones.</p>
 
-<h3>One thing to try</h3>
-<p>Pick one part of the day — morning, after school, or bedtime. <strong>Write a three-step version</strong> of what needs to happen in that window.</p>
-<p>Three steps. Not ten. Three.</p>
-<p>Post it somewhere visible. Run it for one week. <strong>Resist the impulse to improve it.</strong> The impulse to improve is how good systems get complicated into unusable ones.</p>
+<h3>What minimum viable actually means</h3>
+<p>Three qualities. That's it.</p>
+<p><strong>Fewer steps than feels right.</strong> If it feels complete, it probably has too many steps. Cut until it feels sparse. A three-step routine done consistently is worth more than a ten-step routine done occasionally.</p>
+<p><strong>Steps are visible, not remembered.</strong> Written somewhere, built into the environment, not held in working memory — because working memory under pressure drops things.</p>
+<p><strong>It survives a bad day.</strong> If the whole family is twenty minutes late on a Tuesday with no sleep, can some version of this routine still happen? If not, it's too complex for the conditions it actually has to survive.</p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 5 minutes</div>
+  <p>Pick one part of the day — morning, after school, or bedtime.</p>
+  <p>Write down everything that needs to happen in that window. All of it. _______________</p>
+  <p>Now cut it to three steps. Not four. Three. The ones that, if they happened, would make the rest manageable.</p>
+  <p><strong>Step 1:</strong> _______________</p>
+  <p><strong>Step 2:</strong> _______________</p>
+  <p><strong>Step 3:</strong> _______________</p>
+  <p>Post that somewhere visible. <strong>Run it for one week without adding to it.</strong> Write down any additions you think of — but don't add them to the system yet. This week is for the three steps only.</p>
+</div>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I finish this module,</p>
+  <p><strong>I will</strong> write my three-step routine on a piece of paper and put it _______________ [specific visible location].</p>
+  <p><strong>When</strong> I think of something to add to it this week,</p>
+  <p><strong>I will</strong> write it on a separate "ideas" list and leave the three-step version untouched.</p>
+  <p><strong>The goal for this week: three steps, consistently. Not ten steps, occasionally.</strong></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Three steps will feel insufficient. The morning has more than three things that need to happen. You'll feel like you're cutting corners.</p>
+<p>You're not cutting corners. You're designing for the actual conditions — the tired parent, the dysregulated child, the morning that doesn't go as planned. <strong>A three-step routine you actually run is infinitely more valuable than a comprehensive one you don't.</strong></p>
 `,
+
   'm10': `
-<p>You knew it wasn't working two exchanges ago. You kept going.</p>
-<p>The pull to explain, to make them understand, to reach a resolution — <strong>it's stronger than the evidence that this particular conversation is going nowhere.</strong></p>
-<p>Your brain is chasing something it cannot have right now: closure.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Argument Loopers — why you can't stop the argument even when you can see it's going nowhere, and what your brain is actually trying to do. 12 minutes.
+</div>
 
-<h3>What the quiz result didn't tell you</h3>
-<p>Your result told you that you're an Argument Looper. That justice sensitivity and closure-drive are the mechanism.</p>
-<p><strong>This module is about why the loop keeps going even when you can see it isn't working</strong> — and what your brain is actually trying to do.</p>
+<p>You knew two exchanges ago that it wasn't going anywhere. You kept going anyway.</p>
+<p>Now you're five exchanges in, both louder, and the original point has been completely lost inside the argument about the argument.</p>
+<p><strong>The loop is not a failure of willpower. Your brain is chasing something it cannot have right now: resolution. And it will keep running until it gets it or you stop it.</strong></p>
 
-<h3>The closure drive</h3>
-<p>ADHD brains find open loops deeply uncomfortable. An unresolved argument, an unexplained rule, a point that wasn't acknowledged — <strong>these sit in working memory as active, unfinished items.</strong> The discomfort is neurological, not just emotional.</p>
-<p>The loop continues because your brain is trying to close it. The argument is a search for resolution. The problem is that <strong>resolution isn't available from a dysregulated child at 5pm.</strong> The thing you're trying to get from the conversation can't come from this conversation.</p>
-<p>You know this. You've noticed it happening. And you keep going anyway.</p>
+<h3>Why ADHD brains can't leave loops open</h3>
+<p>ADHD brains experience incomplete things — unresolved arguments, unexplained rules, points that weren't acknowledged — as genuinely uncomfortable. Not emotionally uncomfortable in the way anyone might feel. Neurologically uncomfortable, in the way a running background process uses processing capacity even when you're not thinking about it.</p>
+<p>The loop continues because your brain is trying to close it. The argument is a search for the resolution that will make the discomfort stop. The problem is that <strong>resolution isn't available from a dysregulated child at 5pm in this format</strong>. The thing you're trying to get from this conversation cannot be given by this conversation, in these conditions, right now.</p>
+<p>You know this. You've noticed it happening. And you keep going — because stopping while the loop is open feels worse than staying in it.</p>
 
-<h3>Justice sensitivity</h3>
-<p>Loopers also commonly have high justice sensitivity — a strong response to things that feel unfair, arbitrary, or unchallenged.</p>
-<p>When your child does something that feels unjust, <strong>the need to address it feels urgent and important.</strong> Which it is.</p>
-<p>The timing is wrong. The dysregulated moment is not the moment the lesson lands. <strong>The lesson you're trying to deliver exists.</strong> It just can't be delivered right now.</p>
+<h3>Why Loopers get stuck specifically</h3>
+<p>Justice sensitivity makes stopping harder. When something feels unfair, arbitrary, or unchallenged, the need to address it feels urgent and necessary — not just emotionally important but morally required.</p>
+<p>The point you're trying to make probably does matter. The rule exists for a reason. The behaviour needs addressing. <strong>The timing is wrong.</strong> A dysregulated child mid-argument cannot receive the lesson. What they receive is the dynamic — the escalation, the back-and-forth — and from that they learn how arguments with you go, not the content you were trying to deliver.</p>
 
-<h3>What you're teaching without meaning to</h3>
-<p>When the loop continues past the point of usefulness, your child stops hearing the content. They start responding to the dynamic — the back-and-forth itself, the escalation, the urgency.</p>
-<p><strong>They learn that engaging in the loop is how the interaction goes,</strong> not that the point you're making is valid. The lesson gets lost inside the pattern.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think of a recent loop. Map it honestly:</p>
+  <p><strong>The original point you were trying to make:</strong> _______________</p>
+  <p><strong>The point where you knew it wasn't working:</strong> _______________</p>
+  <p><strong>What kept you going after that:</strong> (the open loop feeling / the justice sensitivity / the need to be heard / other) _______________</p>
+  <p><strong>What your child was actually learning from the exchange:</strong> (not the lesson you were trying to teach — the pattern they were experiencing) _______________</p>
+  <p>That last answer is the cost. <strong>The pattern of the interaction is what gets learned, not the content inside it.</strong></p>
+</div>
 
-<h3>One thing to try</h3>
-<p>Notice the moment you know it's not working. <strong>That moment already exists.</strong> You can feel when the conversation has stopped being useful.</p>
-<p>This week, that moment becomes the exit point. One sentence:</p>
+<h3>The exit point</h3>
+<p>The moment you know it's not working already exists. You can feel when the conversation has passed the point of usefulness. This week, that moment becomes the exit point.</p>
+<p>One sentence:</p>
 <ul>
 <li><em>"We're not talking about this right now."</em></li>
 <li><em>"My answer isn't changing."</em></li>
 <li><em>"I've said what I needed to say."</em></li>
 </ul>
-<p>Then move physically. <strong>The discomfort of the open loop is real. You're learning to tolerate it — not eliminate it.</strong></p>
-`,
-  'm11': `
-<p>Stopping the loop feels like conceding the argument. Like you're letting them think they were right.</p>
-<p><strong>None of those things are true.</strong> But they feel true, which is enough to keep you in the loop for another twenty minutes.</p>
+<p>Then move physically. The discomfort of the open loop is real. It is also survivable. <strong>Tolerating that discomfort — not eliminating it, tolerating it — is the practice.</strong></p>
 
-<h3>The lesson is real. The timing is wrong.</h3>
-<p>What you were trying to say matters. The rule exists for a reason. <strong>You're not wrong about the content.</strong></p>
-<p>But content can only land when the atmosphere can hold it. A dysregulated child at peak escalation has essentially zero capacity to receive a lesson. The words arrive. They register as threat, not information.</p>
-<p><strong>Stopping now is not abandoning the lesson. It's moving the lesson to a time when it can actually work.</strong></p>
-<p>Twelve hours later, when both of you are calm, you say the thing in two sentences. It lands. <strong>The lesson is more effective for being delayed, not less.</strong></p>
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>My exit sentence: _______________</p>
+  <p><strong>When</strong> I reach the point where I know it's not working,</p>
+  <p><strong>I will</strong> say: _______________ [exit sentence]. Once. Then _______________ [physical action — leave / turn away / pick something up].</p>
+  <p>What the open-loop feeling will feel like when I stop: _______________</p>
+  <p>What I'll say to myself when I feel it: <em>"This is the open loop. It's uncomfortable. It's not a sign I did it wrong."</em></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Stopping will feel like surrender, like the injustice is being let go, like your child is learning they can outlast you.</p>
+<p>None of those things are true. The lesson is delivered more effectively in a calmer moment. <strong>Stopping is a timing decision, not a concession.</strong></p>
+`,
+
+  'm11': `
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Argument Loopers — how to stop the argument without feeling like you've lost it, and how to deliver the lesson when it can actually land. 10 minutes.
+</div>
+
+<p>Stopping feels like losing. Like you're letting them think they were right. Like the point evaporates.</p>
+<p><strong>None of that is what happens. But the feeling is real enough to keep you in the loop for another twenty minutes.</strong></p>
+
+<h3>The point doesn't disappear when you stop</h3>
+<p>The lesson you were trying to deliver is still real. The rule still matters. The behaviour still needs addressing.</p>
+<p>The conditions for delivering it don't currently exist. A dysregulated child mid-argument can't receive a lesson — the nervous system reads your intensity as threat, not content. The lesson gets lost in the delivery.</p>
+<p>Twelve hours later, when both of you are calm, you say the thing in two sentences. It takes two minutes. It lands. <strong>Because the atmosphere can hold it now. The lesson delayed is more effective than the lesson forced into a closed system.</strong></p>
 
 <h3>The stop-script</h3>
 <p>One sentence. Said once. Then physical movement.</p>
@@ -668,232 +874,470 @@ export const MODULE_CONTENT = {
 <li><em>"I've said what I needed to say. I'm done."</em></li>
 <li><em>"My answer isn't changing. We're done."</em></li>
 </ul>
-<p><strong>After the sentence, move.</strong> Leave the room. Turn toward something else. Pick up a glass of water. The movement is part of the script — it signals disengagement to your own nervous system, not just theirs.</p>
-<p>Don't repeat the sentence if they push back. <strong>One time.</strong> Repeating it is re-entering the loop through a different door.</p>
+<p>After the sentence, move. Leave the room, turn toward something else, pick up a glass of water. The movement signals to your own nervous system that you've actually disengaged — not just stopped speaking temporarily.</p>
+<p><strong>If they push back, do not repeat the sentence.</strong> Repeating it is re-entering the loop through a different door. The sentence was said. It doesn't need saying again.</p>
 
-<h3>Later, when it's calm</h3>
-<p>Twelve hours. Not immediately. Not that evening if it was a hard one.</p>
-<p>When both of you are calm, say the thing you were trying to say during the loop. Two sentences. Without relitigating what happened.</p>
-<p><em>"When I said we weren't talking about it, I wasn't dismissing you. Here's what I was actually trying to say."</em></p>
-<p><strong>Two minutes. Clean. The lesson you couldn't deliver at 5pm, delivered at breakfast.</strong></p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 2 minutes</div>
+  <p>Write the lesson you keep trying to deliver in the loop — the actual content, in two sentences:</p>
+  <p><em>The lesson:</em> _______________</p>
+  <p>Now write how you'd deliver it calmly, twelve hours later:</p>
+  <p><em>"When I said we weren't talking about it, I wasn't dismissing you. What I was actually trying to say was: _______________."</em></p>
+  <p>That second version — the twelve-hour version — is the lesson delivered. <strong>Write it now so you have it ready. The loop is the wrong delivery method. This is the right one.</strong></p>
+</div>
 
-<h3>One thing to try</h3>
-<p>Use the stop-script once this week. Once — not every time.</p>
-<p>Then notice what the open loop feels like. That discomfort is what you're learning to sit with. <strong>It doesn't mean you did it wrong. It means the loop didn't close, which is exactly what needed to happen.</strong></p>
+<h3>What happens in the discomfort</h3>
+<p>The open loop feeling is real. It doesn't go away the moment you stop. Your brain registers the thing as unresolved, incomplete, uncomfortable.</p>
+<p>That feeling is what you're learning to tolerate — not eliminate, tolerate. Each time you stop and let the discomfort run without feeding it, it decreases a little faster next time.</p>
+<p>And the lesson lands twelve hours later intact, in a form your child could actually receive. <strong>That's the payoff. The discomfort is the price of the better outcome.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I use the stop-script and feel the open loop discomfort,</p>
+  <p><strong>I will</strong> say to myself: <em>"The lesson is still real. I'm delivering it at a better time."</em></p>
+  <p><strong>When</strong> we are both calm,</p>
+  <p><strong>I will</strong> say: <em>"Here's what I was actually trying to say: _______________."</em> Two sentences. Then done.</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>The first time you use the stop-script and then successfully deliver the lesson later, something shifts. You'll have proof that stopping isn't losing. That the lesson can survive the delay. <strong>That evidence is more useful than anything this module can tell you. You have to experience it once.</strong></p>
 `,
+
   'm12': `
-<p>The hard moment lasted four minutes. You've been inside it for two hours.</p>
-<p>The replay isn't self-indulgence. <strong>It's your nervous system staying activated</strong> long after the trigger is gone.</p>
-<p>And part of you believes that feeling bad enough for long enough is the appropriate response. Like the suffering is proportional to the wrongdoing. Like if you think about it hard enough, you'll have paid for it.</p>
-<p><strong>That's not how behaviour change works. That's not how repair works.</strong> And the energy going into the spiral is energy not going into the repair.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Shame Spirallers — what the spiral is actually doing, why it feels like accountability but isn't, and how to interrupt it physically. 12 minutes.
+</div>
 
-<h3>What the quiz result didn't tell you</h3>
-<p>Your result told you that you're a Shame Spiraller. That the emotional hangover runs long.</p>
-<p><strong>This module is about what the spiral is actually doing</strong> — and why it feels like accountability without being it.</p>
+<p>The hard moment lasted four minutes. You've spent the last two hours inside it.</p>
+<p>The replay isn't self-indulgence. Your nervous system is staying activated long after the external trigger has gone. The stress response doesn't know the incident is over — it keeps running because some part of the system is still looking for resolution.</p>
+<p><strong>But here's what the spiral is costing you that you may not have named: every minute inside it is a minute not spent on the repair. And the repair is the only thing that actually closes what the spiral is trying to close.</strong></p>
 
-<h3>Rumination vs accountability</h3>
-<p>They look similar from the inside. Both involve replaying the incident.</p>
-<p><strong>Accountability asks:</strong> what happened, what was my part, what do I need to do differently?</p>
-<p><strong>The spiral asks:</strong> what does this mean about who I am?</p>
-<p>The first is useful. It has an end point — a repair, a change, a decision. <strong>The second has no end point.</strong> It circles back on itself because the question it's asking can't be answered by thinking harder.</p>
-<p>You can feel the difference if you look for it. Accountability feels like it's going somewhere. The spiral feels like it's going deeper.</p>
+<h3>Why the spiral feels like accountability but isn't</h3>
+<p>Both feel similar from the inside. Both involve replaying what happened.</p>
+<p><strong>Accountability is a process.</strong> It asks: what happened, what was my part, what would I do differently. It has an end point — a repair, a decision, a change. It moves toward something.</p>
+<p><strong>The spiral is not a process.</strong> It asks: what does this mean about who I am. It has no end point because no amount of feeling bad adequately answers that question. It goes deeper instead of forward.</p>
+<p>You can feel the difference if you pay attention. Accountability has a direction. The spiral has gravity — it pulls inward and gains weight with each lap.</p>
 
-<h3>What the spiral costs</h3>
-<p>While the spiral runs, the repair doesn't happen.</p>
-<p><strong>Your child experienced the blow-up.</strong> Then they experienced you going quiet and withdrawn. Then possibly an over-reach of warmth — an apology that went on too long — driven by the need to confirm the relationship is intact.</p>
-<p>What they're less likely to have experienced: a clean, brief, specific repair. Two sentences. Then something normal.</p>
-<p><strong>The spiral makes the repair harder to approach</strong> because the shame makes the moment feel too big to touch simply.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think of the last spiral. Map where it went:</p>
+  <p><strong>Where it started:</strong> what happened _______________</p>
+  <p><strong>The accountability piece</strong> (the useful part): what happened, what was your part _______________</p>
+  <p><strong>Where the spiral took it</strong> (the part with no end): what it means about who you are _______________</p>
+  <p><strong>How long it ran:</strong> _______________</p>
+  <p>You can see the split now — where accountability ended and the spiral started. <strong>The boundary between those two things is where the intervention goes.</strong></p>
+</div>
 
-<h3>Interrupting the spiral</h3>
-<p>A sentence some people find useful: <em>"I've already counted that. I don't need to count it again."</em></p>
-<p>Say it to yourself. <strong>It doesn't stop the spiral immediately.</strong> It gives you something to step on when you notice you're three laps in.</p>
-<p>Physical interruption is often more effective than cognitive. Stand up. Move to a different room. Drink something cold. Do one small practical task. <strong>The body moving differently changes the internal state</strong> more reliably than trying to think differently.</p>
+<h3>What happens to your child while the spiral runs</h3>
+<p>Your child experienced the hard moment. They've either moved on or they're waiting for something to change.</p>
+<p>What they're experiencing now is the aftermath: you withdrawn, unavailable, somewhere inside the replay. Then — for Spirallers specifically — often an over-reach of warmth. An apology that goes too long. Affection arriving in a rush, driven by the need to confirm the relationship is still intact.</p>
+<p>The child ends up managing your guilt instead of receiving a clean acknowledgment of what happened. <strong>The spiral prevents the repair. And the repair is what actually closes the thing the spiral is trying to close.</strong></p>
+
+<h3>Interrupting it physically</h3>
+<p>Cognitive interruption is less effective than physical interruption for most people. Telling yourself to stop thinking about it doesn't stop the thinking.</p>
+<p>Physical interruption works better. Stand up. Change rooms. Drink something cold. Do one small concrete task — wash a cup, fold something, make a list. The body moving differently begins to shift the internal state.</p>
+<p>A sentence that some people find useful: <em>"I've already counted that. I don't need to count it again."</em> It doesn't stop the spiral immediately. It gives you a foothold when you notice you're three laps in.</p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>My physical interruption: _______________ (stand up and go to / drink something cold / do one small task — choose one)</p>
+  <p><strong>When</strong> I notice I'm in the spiral — going from what happened to what it means about me,</p>
+  <p><strong>I will</strong> say: <em>"I've already counted that."</em> And then _______________ [physical interruption].</p>
+  <p><strong>When</strong> I've interrupted the spiral,</p>
+  <p><strong>I will</strong> move toward the repair instead: _______________ [the two-sentence repair — see Module 5].</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Interrupting the spiral will feel like you're not taking what happened seriously enough. Like you're letting yourself off the hook.</p>
+<p>You're not. The repair is more serious than the spiral. The repair does something. The spiral only feels like accountability. <strong>Spending less time in the spiral and more time in the repair is taking it more seriously, not less.</strong></p>
 `,
+
   'm13': `
-<p>You know what you'd say. <strong>You just can't get past the part where you hate yourself for a while first.</strong></p>
-<p>The repair the Shame Spiraller tends to make is too large. Too much apology. Too much explanation. Too much need for a response that confirms the relationship is intact.</p>
-<p>That kind of repair puts the emotional work on your child. <strong>They end up managing your guilt</strong> rather than receiving an acknowledgment of what happened.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Shame Spirallers — why the repair keeps being too large, and how to make one that works without asking your child for anything in return. 10 minutes.
+</div>
 
-<h3>What the repair is not</h3>
-<p>Not a speech. Not an apology that needs their forgiveness. Not a conversation that requires their engagement.</p>
-<p><strong>Not something that asks them to make you feel better.</strong></p>
-<p>The repair is for them. Not for your guilt. The moment it becomes about your guilt, it stops being a repair.</p>
+<p>You know exactly what you'd say. You've composed it in your head several times.</p>
+<p>You just can't get past the part where you need to hate yourself for a while first.</p>
+<p><strong>The repair the Shame Spiraller makes is almost always too large. Too much apology. Too much need for a response that confirms the relationship survived.</strong> That repair asks your child to manage your emotional state. That's not repair. It's a request.</p>
 
-<h3>What the repair is</h3>
-<p><strong>Two sentences. Unconditional. Then done.</strong></p>
-<p>Sentence one: what happened, stated simply.<br/>Sentence two: what you're going to try. Not a promise. A try.</p>
-<p><em>"I yelled this morning and I shouldn't have. I'm going to work on pausing before I get to that point."</em></p>
-<p>Then stop. <strong>Don't wait for their response.</strong> Don't ask if they're okay with it. Don't extend it.</p>
-<p>Two sentences, then something ordinary together. The repair is in the return to normal, not in the speech.</p>
+<h3>The repair is for them, not your guilt</h3>
+<p>This is the most important thing to hold — and the hardest for Spirallers.</p>
+<p>The repair is not the thing that makes you feel better about what happened. It's not the apology that earns forgiveness. It's not the conversation that reassures you that you're still a good parent.</p>
+<p><strong>The moment the repair becomes about your feelings, it stops being a repair and becomes a request.</strong> A request for your child to reassure you. They already absorbed the hard moment. They shouldn't have to absorb the aftermath of your feelings about it too.</p>
+<p>Your guilt is real and deserves attention. But it deserves your own attention — not your child's.</p>
 
-<h3>Why simpler is better</h3>
-<p>The spiral wants you to do more. <strong>The repair needs less than you think.</strong></p>
-<p>A simple, specific, unconditional repair closes the loop that the spiral has been trying to close through rumination. The child receives: I know what I did, I take responsibility, and here I am.</p>
-<p>That's enough. More than that starts asking the child to give something back — absolution, reassurance, forgiveness — that isn't theirs to give.</p>
+<h3>What a Spiraller repair actually looks like</h3>
+<p>Shorter than you expect. Calmer than you think you can manage. Unconditional — meaning it doesn't wait for a response.</p>
+<p>Two sentences. Sentence one: what happened, stated simply, no qualifications. Sentence two: what you're going to try — not a promise, a try.</p>
+<p><em>"I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point."</em></p>
+<p>Then stop. Don't wait for them to say it's fine. Don't add context. Don't extend it into a conversation. <strong>Two sentences. Then something ordinary immediately after — sit near them, help with something. The return to normal is the repair, not the speech.</strong></p>
 
-<h3>Tracking repair, not just rupture</h3>
-<p>Spirallers tend to track every rupture and no repairs. The mental ledger fills up with incidents and nothing on the other side.</p>
-<p><strong>Start tracking the repairs.</strong> After each repair: notice it happened. Notice the relationship continued. Notice that your child responded to a simple repair — that the return to normal was enough.</p>
-<p><strong>The evidence builds. The spiral needs countering with data. The data is the repairs.</strong></p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Write the repair for the last hard moment. Specifically:</p>
+  <p><strong>Sentence 1:</strong> <em>I _______________ and that wasn't okay.</em></p>
+  <p><strong>Sentence 2:</strong> <em>I'm going to work on _______________.</em></p>
+  <p>Now: does it ask your child for anything? Does it wait for forgiveness? Does it need their response to feel complete?</p>
+  <p>If yes — cut anything that does. What remains is the repair. <strong>Two sentences that need nothing back is the repair. Two sentences that need a response is a request.</strong></p>
+</div>
+
+<h3>Tracking repairs instead of just ruptures</h3>
+<p>Spirallers carry a detailed internal ledger of every incident. Almost nothing on the other side.</p>
+<p>Start adding the repairs. Not because it cancels the incidents out — but because your nervous system needs evidence that you're actually working on this, and the evidence is in the repairs, not in how thoroughly you replayed what happened.</p>
+<p><strong>After each repair: notice it happened. Notice the relationship continued. Notice that two sentences were enough — that your child didn't need the extended apology.</strong> That evidence is yours. It belongs on the ledger.</p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>My repair template:
+  <em>I _______________ and that wasn't okay. I'm going to work on _______________.</em></p>
+  <p><strong>When</strong> both of us are calm after a hard moment,</p>
+  <p><strong>I will</strong> deliver the two sentences. Stop after the second sentence. Then do _______________ [something ordinary — sit with them / get them a drink].</p>
+  <p><strong>When</strong> I feel the urge to extend the repair or wait for their response,</p>
+  <p><strong>I will</strong> say to myself: <em>"Two sentences is enough. The ordinary thing is the rest."</em></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Two sentences will feel too small. The shame will push you toward more. More apology, more explanation, more assurance that you really mean it.</p>
+<p>The two sentences are enough. More than two asks your child to carry something they shouldn't. <strong>Stop at two. The ordinary thing that follows is the rest of the repair.</strong></p>
 `,
-  'm14': `
-<p>You didn't go anywhere. You were in the room the whole time. <strong>But you weren't there.</strong></p>
-<p>The phone, the task you started in another room, the way your attention went somewhere else entirely while the situation continued around you — this wasn't a decision. <strong>You didn't choose to leave.</strong> Your nervous system made that call because it had nothing left to give and no safe way to exit.</p>
 
-<h3>What the quiz result didn't tell you</h3>
-<p>Your result told you that you're a Shutdown Escaper. That withdrawal is a protection mechanism.</p>
-<p><strong>This module is about what that protection is protecting you from</strong> — and what your child experiences in the gap it creates.</p>
+  'm14': `
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Shutdown Escapers — what emotional withdrawal actually is, why it's not indifference, and what your child experiences when you disappear while staying. 12 minutes.
+</div>
+
+<p>You didn't go anywhere. You were in the room the whole time.</p>
+<p>But the phone was in your hand and your attention was somewhere else entirely and if pressed you couldn't account for the last twenty minutes.</p>
+<p><strong>Your body stayed. Everything else left. And your child felt the difference.</strong></p>
 
 <h3>What shutdown actually is</h3>
-<p>When sensory and emotional load exceeds a threshold, some ADHD nervous systems reduce engagement rather than escalate. <strong>The opposite of the Reactor pattern, but driven by the same core mechanism:</strong> the regulatory system is overwhelmed.</p>
-<p>The phone isn't the cause of the pattern. It's what you reach for because it provides something the family environment doesn't in that moment: <strong>predictable, controlled, exit-able input.</strong> The stakes are low. Nothing will escalate. You can stop whenever you want.</p>
-<p>Home, mid-crisis, provides the opposite of all of those things.</p>
-<p><strong>Shutdown prevents escalation.</strong> It also prevents connection, repair, and the co-regulation your child may need from you in that moment.</p>
+<p>When sensory and emotional load exceeds what a nervous system can manage, there are two main responses. Escalation — what the Reactor pattern does — or reduction. Shutdown is the reduction response: engagement drops, availability drops, the system goes into low-power mode to prevent full collapse.</p>
+<p>The phone, the task in another room, the sudden interest in something that isn't the hard thing — these aren't the cause of the pattern. They're what you reach for because they provide something the family environment doesn't in that moment: low stakes, predictable input, the option to stop whenever you want.</p>
+<p>Home, mid-crisis, provides none of those three things. High stakes. Unpredictable. No exit.</p>
+<p><strong>Shutdown prevents escalation. That's genuinely useful. It also prevents connection, repair, and the co-regulation your child needs from you precisely when they need it most.</strong></p>
 
-<h3>What your child experiences in the gap</h3>
-<p>Your child — especially if they also have ADHD — has a nervous system highly attuned to parental availability. <strong>When you're physically present but emotionally gone, they feel the absence.</strong></p>
-<p>Some children escalate to pull you back. The behaviour that looks like acting out is often an attempt to re-establish contact — even negative contact, because negative contact is still contact.</p>
-<p>Other children go quiet in a way that looks cooperative but is closer to shutdown themselves. <strong>They've learned that you're unavailable and they stop reaching.</strong> Over time, that pattern has its own cost.</p>
+<h3>What your child experiences when you disappear while staying</h3>
+<p>Children — particularly ADHD children — are highly attuned to parental emotional availability. Not just physical presence. Actual attention. When you're physically in the room but emotionally absent, they feel the gap.</p>
+<p>Some children escalate to pull you back. The behaviour that looks like acting out is often an attempt to re-establish contact — even negative contact, because negative contact is contact.</p>
+<p>Other children go quiet. They've learned that you're currently unavailable and they stop reaching. That looks cooperative. It costs something.</p>
+<p><strong>In a dual-ADHD household, a parent who shuts down is often shutting down at the exact moment the child's own system is overwhelmed and needs co-regulation.</strong> Both systems offline at the same time, neither able to resource the other.</p>
 
-<h3>The difference between distance and shutdown</h3>
-<p>Distance is a tool. Leaving the room for 60 seconds, intentionally, is the intervention that prevents the Reactor pattern. <strong>That's not shutdown. That's a deliberate reset.</strong></p>
-<p>Shutdown is involuntary. It happens before you've decided. The difference is whether you named it and returned from it.</p>
-<p><strong>Named shutdowns are workable.</strong> Unnamed ones leave gaps that fill with the child's interpretation.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think of the last time you shut down while still in the room:</p>
+  <p><strong>What the situation felt like before the shutdown:</strong> _______________</p>
+  <p><strong>What you reached for:</strong> _______________</p>
+  <p><strong>What your child did while you were gone:</strong> _______________</p>
+  <p><strong>What the room felt like when you came back:</strong> _______________</p>
+  <p>That last answer is what your child was holding while you were gone. <strong>Not to induce guilt — to make the pattern visible. You can't change what you can't see.</strong></p>
+</div>
+
+<h3>Named versus unnamed shutdowns</h3>
+<p>The difference between a useful temporary withdrawal and a damaging shutdown is whether it's named and whether there's a return.</p>
+<p><em>"I need five minutes. I'll be back."</em> said out loud — that's a named withdrawal. It has a frame. It promises return. Your child's nervous system can hold a named absence differently from an unnamed one.</p>
+<p>Unnamed shutdowns leave a gap that fills with the child's interpretation — usually something about themselves or the relationship.</p>
+<p><strong>Named shutdowns are workable. The naming is the first intervention.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> I notice I've checked out or am about to check out,</p>
+  <p><strong>I will</strong> say: <em>"I need five minutes. I'll be back."</em> And go to _______________ [specific place] for 5 minutes.</p>
+  <p><strong>When</strong> I've been gone and I'm ready to return,</p>
+  <p><strong>I will</strong> use my re-entry ritual from Module 15. (Do that module next.)</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Naming the shutdown takes something — it requires enough presence to notice you're checking out before you're already gone. That's a skill that develops with practice.</p>
+<p>At first you'll notice it after the fact. That's fine. <strong>Noticing it retrospectively is still noticing it. The window gets earlier as the practice builds.</strong></p>
 `,
+
   'm15': `
-<p>You don't have to come back fully. <strong>You just have to come back a little.</strong></p>
-<p>The re-entry doesn't need to be an explanation or an apology. It doesn't need to be a feeling you don't currently have. It needs to be a physical return — a sentence, a glass of water, sitting near them.</p>
-<p><strong>That's the whole thing.</strong> Small enough to do when you have nothing left.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> For Shutdown Escapers — how to come back when you have nothing left, and why the return doesn't require warmth you don't currently have. 10 minutes.
+</div>
+
+<p>You've been gone for twenty minutes. Or an hour. Or just somewhere else inside your own head.</p>
+<p>Coming back feels enormous. Like it requires an explanation, a performance of presence, warmth you don't currently have.</p>
+<p><strong>It requires none of those things. It requires you to cross the room.</strong></p>
 
 <h3>Why re-entry feels bigger than it is</h3>
-<p>After a shutdown, re-entry feels like it requires something. An account of where you went. A performance of availability. Warmth that you don't currently have.</p>
-<p><strong>None of that is required.</strong> In fact, the pressure to return with something is what keeps Escapers out longest — they're waiting until they have enough to give.</p>
-<p>You don't need to have enough. <strong>You need to be present.</strong> Those are different things.</p>
+<p>The Escaper pattern has a specific re-entry problem: the longer you've been gone, the more it feels like returning requires something proportional. An accounting. Warmth to compensate for the withdrawal. A performance of availability.</p>
+<p>This keeps Escapers out longer than necessary. They're waiting until they have enough to give. Until they feel ready to be present. Until the gap feels small enough to bridge.</p>
+<p><strong>You don't need to feel ready. You need to be physically present. Those are different requirements, and only one is needed right now.</strong></p>
 
-<h3>What re-entry actually does</h3>
-<p>Your child's nervous system registers re-entry faster than it registers explanation.</p>
-<p><strong>"I'm back"</strong> — said simply, once — does more than a two-minute explanation of where you went. The return itself is the regulating event, not the words around it.</p>
-<p>One small gesture of ordinary: <em>"Do you want some water?"</em> Sitting near them without speaking. Helping with something physical. <strong>The return to proximity is the co-regulation.</strong> You don't regulate first and then return. You return, and that starts the regulation.</p>
+<h3>What the return actually does</h3>
+<p>Your child's nervous system registers physical return faster than it registers explanation. The fact that you're back — present, nearby — is itself regulating. Before any words. Before warmth you may or may not have.</p>
+<p><em>"I'm back"</em> said simply, once, does more than two minutes of explanation about where you went and why. The words aren't the regulating event. <strong>Your presence is the regulating event.</strong></p>
+<p>One small ordinary gesture — <em>"Do you want some water?"</em>, sitting near them without speaking, picking up something to help with — re-establishes contact without requiring emotional availability you don't have.</p>
 
-<h3>One re-entry ritual</h3>
-<p>Choose one. Small enough to do when you have nothing left.</p>
-<ul>
-<li>Sit near them for 30 seconds without speaking or doing anything</li>
-<li><em>"Do you want some water?"</em> — a small offer that re-establishes contact without requiring emotional availability</li>
-<li><em>"I needed a minute. I'm back."</em> — said simply, once, then stay</li>
-</ul>
-<p><strong>This week, use your ritual once</strong> after a shutdown. Not when you feel ready — you probably won't feel ready. Do the small thing anyway.</p>
-<p>The ritual works because the return starts the regulation. Not the other way around.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 2 minutes</div>
+  <p>Think of the last shutdown and return. What made the return hard?</p>
+  <p><strong>What you felt you needed to have before returning:</strong> _______________</p>
+  <p><strong>What you actually needed:</strong> (physical presence / just being there) _______________</p>
+  <p>Now write your re-entry ritual — one small thing small enough to do when you have nothing left:</p>
+  <p>Option 1: Sit near them for 30 seconds without speaking.</p>
+  <p>Option 2: <em>"Do you want some water?"</em></p>
+  <p>Option 3: <em>"I needed a minute. I'm back."</em></p>
+  <p><strong>My ritual:</strong> _______________ Choose one. Write it here. This is the thing you'll do when you come back.</p>
+</div>
+
+<h3>The principle that changes everything</h3>
+<p>You don't regulate first and then return. You return, and that's what starts the regulation — yours and theirs.</p>
+<p>The return is the regulating event, not the warmth or readiness preceding it. <strong>Small enough to do when you have nothing left is the only design specification that matters.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>My re-entry ritual: _______________</p>
+  <p><strong>When</strong> I've been gone — physically or emotionally — and I'm ready to come back,</p>
+  <p><strong>I will</strong> do _______________ [my ritual]. Not when I feel ready. Just when the acute shutdown has passed.</p>
+  <p>What will make this hard: _______________</p>
+  <p>What I'll say to myself when it feels like I need more before I can return: <em>"Small is enough. The return starts it."</em></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>The small return will feel insufficient. You'll feel like you owed something bigger and delivered something tiny.</p>
+<p>Watch what happens. In most cases: less drama than the gap had been building toward, faster return to normal than you expected. <strong>The smallness is the point. Small enough to actually do is more valuable than large enough to feel adequate.</strong></p>
 `,
+
   'm16': `
-<p>They watched the same moment you did. <strong>Their version has different details, a different cause, and a different person who made it worse.</strong></p>
-<p>This isn't bad faith. It's two different nervous systems in the same room, with different baselines, different thresholds, and different things they were managing while it was happening.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> You and your partner were in the same room, watching the same moment — and have completely different versions of what happened. Why that's true, and how to use it. 12 minutes.
+</div>
 
-<h3>What the non-ADHD partner sees</h3>
-<p>They see the reaction. They don't see the 40 minutes of load that preceded it.</p>
-<p>They see you snap over something small. They don't know the noise had been too loud since 4pm, that you repeated the instruction four times, that you hadn't eaten, that your medication had worn off an hour before.</p>
+<p>You were both there. You both watched it happen.</p>
+<p>Their version has a different cause, a different person who made it worse, and a different point where it went wrong.</p>
+<p><strong>Neither of you is making it up. You genuinely saw something different. Two different nervous systems in the same room are different instruments measuring the same event.</strong></p>
+
+<h3>What your partner sees that you don't</h3>
+<p>They see the reaction. They don't see the 40 minutes of load that preceded it. They see you snap over something small. They don't know the noise had been too loud since 4pm, that you'd repeated the instruction four times, that you hadn't eaten, that your medication wore off an hour earlier, that something from this morning was still unresolved in the background.</p>
 <p><strong>They see the match. They don't see what was already burning.</strong></p>
-<p>This is not their fault. The load was invisible. They weren't tracking it because they weren't carrying it.</p>
+<p>This is not negligence on their part. The load was invisible. They weren't carrying it so they weren't tracking it. You cannot see what you're not holding.</p>
 
-<h3>What the ADHD parent misses about their partner</h3>
-<p>Your partner's version of consistency — the ability to hold a rule calmly across multiple incidents — <strong>is not always available to you.</strong> You know this.</p>
-<p>What's harder to see: your partner's consistency isn't effortless either. <strong>They're managing something different, not something easier.</strong> The household's ADHD load falls on them in ways that are also invisible — the plans they track, the logistics they hold, the repairs they make quietly.</p>
-<p>The gap between your approaches isn't always ADHD versus neurotypical. <strong>Sometimes it's two people who are both exhausted</strong> and both believe their version is the accurate one.</p>
+<h3>What you might not be seeing about your partner</h3>
+<p>Your partner's version of parenting consistency — staying regulated through sustained demands, holding a boundary calmly across multiple incidents — is not always available to you. You know this.</p>
+<p>What's harder to see: their version isn't without cost either. The household's ADHD load falls on your partner in ways that are also invisible. The logistics they track. The plans they hold. The repairs they make quietly. The unpredictability they absorb while appearing to manage it.</p>
+<p>The gap between your approaches isn't always ADHD versus neurotypical. <strong>Sometimes it's two people who are both exhausted and both believe their version is the accurate one. Both are. They're describing different aspects of the same event from different positions.</strong></p>
 
-<h3>How to talk about it without it becoming a case for the prosecution</h3>
-<p>The conversation that starts with <em>"you always"</em> or <em>"you never"</em> is not a conversation. <strong>It's an argument that ends where it started.</strong></p>
-<p>The conversation that starts with <em>"I don't think you saw what I was managing"</em> is different. It's descriptive, not accusatory. <strong>It invites comparison of versions rather than adjudication of blame.</strong></p>
-<p>One question that opens rather than closes: <em>"What did you see happening just before it went wrong?"</em></p>
-<p>Their answer will be different from yours. <strong>Both answers contain real information.</strong> The goal isn't to agree on one version. It's to understand that there were two.</p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 5 minutes</div>
+  <p>Take a recent moment where you and your partner had different versions. Write both:</p>
+  <p><strong>Your version:</strong> what happened, what caused it, who was managing what _______________</p>
+  <p><strong>Your best guess at their version:</strong> what they saw, what they thought was happening _______________</p>
+  <p>Now: <strong>what was true in their version that you hadn't fully credited?</strong> _______________</p>
+  <p>And: <strong>what was true in your version that they couldn't see?</strong> _______________</p>
+  <p>You now have two partially accurate accounts of one event. <strong>The conversation you need to have is about the gap between them, not about which version is right.</strong></p>
+</div>
+
+<h3>A conversation that doesn't become a prosecution</h3>
+<p>Conversations about parenting disagreements almost always start with evidence — what the other person did wrong, failed to do, should have done differently. Evidence-based conversations about parenting go one direction: toward defence, then counter-evidence, then the argument you've already had.</p>
+<p>A different starting point: <em>"I don't think you saw what I was managing before that happened."</em> Descriptive, not accusatory. An invitation to compare versions, not establish the correct one.</p>
+<p>Then the question that genuinely opens things: <em>"What did you see happening just before it went wrong?"</em></p>
+<p><strong>Their answer will be different from yours. Both contain real information. The goal isn't to agree — it's to understand that there were two valid accounts of one event.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> my partner and I have different versions of what happened,</p>
+  <p><strong>I will</strong> ask: <em>"What did you see happening just before it went wrong?"</em> And actually listen to the answer before responding.</p>
+  <p>What I want them to understand about my version: _______________</p>
+  <p>How I'll share that without making it an accusation: _______________</p>
+  <p><strong>Two valid versions. Neither cancels the other. That's the starting point.</strong></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>It will feel like you're giving ground you shouldn't have to give. Like your version is the accurate one and you're being asked to validate something that missed the point.</p>
+<p>Your version is accurate. So is theirs. <strong>Both can be true. Holding that simultaneously is what makes the conversation possible.</strong></p>
 `,
+
   'm17': `
-<p>You were in the middle of the meltdown. Your other child disappeared into their room. You didn't notice until it was over.</p>
-<p><strong>They've learned not to make it worse.</strong> That skill cost them something.</p>
-<p><em>If your child doesn't have a sibling, this module still applies — to a partner, a grandparent, or anyone who lives beside the intensity without being the focus of it.</em></p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> The child who isn't struggling out loud — what living beside the storm costs them, and the one thing that makes a real difference. 12 minutes.
+</div>
 
-<h3>What living beside the storm costs</h3>
-<p>The quieter child has developed a set of skills for surviving a high-intensity household. They know when to disappear. They know not to add to the load. They've learned that the loudest need gets the most response.</p>
-<p><strong>These are adaptive skills.</strong> They're also a form of self-suppression that accumulates its own cost.</p>
-<p>What they're learning, without anyone intending to teach it: <strong>that their needs are less urgent, their distress is less visible, and making noise about it makes things harder for everyone.</strong></p>
-<p>That's not a lesson you chose to give them. But it may be one they're receiving.</p>
+<p>You were in the middle of the meltdown. At some point your other child disappeared into their room. You didn't notice until much later.</p>
+<p>They didn't make a fuss. They just handled themselves.</p>
+<p><strong>That skill — knowing when to disappear, knowing not to add to the load — cost something to develop. It costs something to use every day.</strong></p>
 
-<h3>The attention imbalance is real</h3>
-<p>It's hard to give equal attention when one child's needs are consistently louder and more immediate. <strong>You know this. You feel guilty about it.</strong> And the guilt sometimes produces more imbalance — you're in your head about the first child while managing the second, which means the second gets less of you even when you're with them.</p>
-<p>The quieter child doesn't need equal time. <strong>They need time that is fully present</strong> — no ADHD management happening in the background, no split attention, no half-conversations.</p>
-<p>Ten minutes of genuine presence is worth more than two hours of distracted proximity.</p>
+<p><em>If your child doesn't have a sibling, this module still applies — to a partner, a grandparent, or anyone who lives beside the intensity without being its centre.</em></p>
 
-<h3>One thing to try</h3>
-<p><strong>One piece of time this week with your other child that is just about them.</strong></p>
-<p>No crisis management. No ADHD household logistics. <strong>Whatever they want to do,</strong> for however long you can genuinely give.</p>
-<p>You don't have to manufacture it. You have to protect it — from the pull to manage the other thing, from the interruption that will try to happen.</p>
-<p><strong>It won't feel like enough.</strong> Do it anyway.</p>
+<h3>What the household is teaching without meaning to</h3>
+<p>Living beside a high-intensity household delivers lessons without anyone intending to teach them. The loudest need gets the most attention. Making noise about your own needs makes things harder for everyone. Being easy is what the household needs right now. Your distress is less urgent.</p>
+<p><strong>These lessons get absorbed without anyone noticing they're being absorbed.</strong> The quieter child appears cooperative, low-maintenance, fine. They've learned to appear fine because appearing fine is what the household requires.</p>
+<p>That adaptation is intelligent. It's also costly. The child who consistently manages their own experience so it doesn't add to the load is doing emotional work that children shouldn't have to do. The evidence shows up later — in how they handle conflict, in what they feel entitled to ask for, in whether they believe their own needs warrant attention.</p>
+
+<h3>Why the attention imbalance persists</h3>
+<p>It's structurally harder to give equal attention when one child's needs are louder, more urgent, more immediate. You know this. The guilt is real.</p>
+<p>Here's what the guilt adds: you're often mentally in the ADHD management space even when you're physically with the quieter child. The body is there. Half the attention is elsewhere. The quieter child receives your presence and a fraction of your actual attention.</p>
+<p><strong>Ten minutes of full presence — no background management, no split attention — is more valuable than two hours of distracted proximity.</strong> The research on attunement is consistent on this. It's quality, not quantity, that registers.</p>
+<p>In a dual-ADHD household this is harder than it sounds. Your own ADHD makes sustained singular focus difficult. Which means the protected time needs protecting from your own internal drift as much as from external interruption.</p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think about your quieter child (or person). Answer honestly:</p>
+  <p><strong>The last time you gave them your full undivided attention:</strong> _______________ (when was it)</p>
+  <p><strong>What "full attention" would look like with them specifically:</strong> _______________ (what would you be doing)</p>
+  <p><strong>What usually interrupts that attention:</strong> _______________ (the pull to check on the other thing, your own thoughts, external demands)</p>
+  <p><strong>One thing you could do this week:</strong> _______________ (time, activity, specific)</p>
+  <p>That last answer is your practice. <strong>Not a grand gesture. One protected piece of time this week.</strong></p>
+</div>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p><strong>When</strong> _______________ [specific time this week],</p>
+  <p><strong>I will</strong> spend _______________ minutes with _______________ [the quieter person] doing _______________ [what they choose].</p>
+  <p>What will try to interrupt: _______________</p>
+  <p>What I'll do when that happens: _______________</p>
+  <p>What I'll say to myself if it doesn't feel like enough: <em>"Ten minutes fully present is more than two hours half-here."</em></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>It won't feel like enough. The asymmetry in attention will still be there. You'll wonder whether ten minutes is too small to matter.</p>
+<p>It matters. <strong>The child who has learned to need nothing from you needs to learn that asking is safe. Protected time — even small protected time — is the evidence that teaches them that.</strong></p>
 `,
+
   'm18': `
-<p>Their name on your phone screen makes your stomach drop before you've read the message.</p>
-<p><strong>You already know it's not good news.</strong> What you don't know is how to bridge the gap between what the school observes — behaviour, disruption, non-compliance — and what you know is underneath it: a child who is overwhelmed, not difficult.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> The school relationship — why the gap between what the school sees and what you know keeps existing, and how to advocate for your child without burning the relationship. 12 minutes.
+</div>
 
-<h3>Why the gap exists</h3>
-<p>The school sees your child for six hours a day, in a structured environment, managing a class of thirty. <strong>They're observing behaviour. They're not observing the internal experience that produces it.</strong></p>
-<p>What looks like defiance from a teacher's position often looks like overwhelm from yours. <strong>Both observations are accurate.</strong> They're just describing different things — the output and the cause.</p>
-<p>The gap isn't usually bad faith. <strong>It's limited information,</strong> filtered through a professional context that needs to manage behaviour at scale rather than understand it individually.</p>
+<p>Their name on your phone makes your stomach drop before you've read the message.</p>
+<p>You already know the shape of it. Another call, another email, another meeting request. Another version of your child that doesn't match the one you know.</p>
+<p><strong>Advocating for your ADHD child at school is one of the most draining ongoing tasks in this household. And it's made harder by the fact that you have ADHD too.</strong></p>
 
-<h3>What makes advocacy hard</h3>
-<p>You know your child. <strong>You also know what the school needs from you</strong> — a cooperative parent, not a combative one. The relationship matters. One hostile meeting can make the next two years harder.</p>
-<p>So you soften what you know. You accept the school's framing. <strong>You go home and carry the translation work yourself</strong> — explaining to your child why the school sees it differently, absorbing the school's version, managing both perspectives at once.</p>
-<p>That's exhausting. And it often leaves your child without a clear advocate in the room where the decisions are being made.</p>
+<h3>Why the gap keeps existing</h3>
+<p>The school observes behaviour. You observe the internal experience that produces it.</p>
+<p>What the teacher sees: non-compliance, disruption, emotional outbursts, inability to focus. What you know: a child who holds it together all day through effort, whose regulatory resources are depleted by lunchtime, whose behaviour is communication rather than defiance.</p>
+<p>Both observations are real. They're describing different parts of the same thing — the output and the cause. <strong>The gap isn't usually bad faith. It's limited information, filtered through a context that manages behaviour at scale rather than understanding it individually.</strong></p>
+
+<h3>The bind you're in as an ADHD parent advocating for an ADHD child</h3>
+<p>You know your child. You also know that being seen as a difficult parent makes everything harder for them over the next two years. The relationship with the school matters. You need them on your child's side. That requires you to be cooperative.</p>
+<p>So you soften what you know. You absorb the school's framing. You go home and do the translation work yourself — holding both versions simultaneously, managing the emotional weight of each, explaining to your child why the school sees it differently.</p>
+<p>Meanwhile, your own ADHD makes the advocacy harder. The preparation required for meetings. The working memory load of tracking what was agreed. The emotional regulation required to stay calm when your child is described in terms that feel wrong. <strong>You're being asked to do sophisticated advocacy work under the exact conditions your neurology makes hardest.</strong></p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 5 minutes</div>
+  <p>Think of the one thing you most want the school to understand about your child that they currently don't.</p>
+  <p><strong>The thing:</strong> _______________</p>
+  <p><strong>Why it's hard to say:</strong> _______________ (fear of seeming difficult / not having the right words / not sure they'll believe it)</p>
+  <p><strong>How you'd say it as a piece of information, not a defence:</strong> _______________</p>
+  <p>That last answer is the thing worth saying in the next meeting. <strong>Not a confrontation. One piece of context, delivered as an addition to their picture of your child.</strong></p>
+</div>
 
 <h3>The thing worth saying</h3>
-<p>Not everything. <strong>One thing, stated clearly, without making it an argument.</strong></p>
+<p>Not everything. One thing, stated clearly, without making it an argument.</p>
 <p><em>"I understand what you observed. I want to give you some context about what was happening for them before that moment."</em></p>
-<p>Then one piece of context. Specific. Recent. <strong>Not a defence of the behaviour — an explanation of the cause.</strong></p>
-<p>The school doesn't have to agree. <strong>You're adding information to their picture,</strong> not asking them to change their version. That's a different conversation, and it lands differently.</p>
+<p>Then one piece of specific, recent context. Not a defence of the behaviour. An explanation of the cause. Something the school can actually use.</p>
+<p>The school doesn't have to agree. You're adding a layer of information to their picture of your child — not asking them to change their version. <strong>Over time, that layer accumulates. The school builds a more complete picture. Your child gets advocated for, incrementally, without the relationship breaking.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>The one piece of context I want the school to have: _______________</p>
+  <p>How I'll phrase it: <em>"I understand what you observed. I want to give you some context: _______________."</em></p>
+  <p><strong>When</strong> I have the next contact with the school,</p>
+  <p><strong>I will</strong> say that one thing before the meeting ends, framed as information not as an argument.</p>
+  <p>What might stop me: _______________</p>
+  <p>What I'll remind myself: <em>"I'm adding to their picture. I'm not asking them to agree."</em></p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>One piece of context will feel insufficient. There's so much more you want them to understand. The urge to cover everything in one meeting is real.</p>
+<p>One piece of context, consistently delivered over multiple contacts, builds a picture more effectively than trying to reframe everything in one conversation. <strong>Incrementally is how the relationship changes. One meeting at a time.</strong></p>
 `,
+
   'm19': `
-<p>You've read everything. You understand the ADHD piece. <strong>Something still doesn't quite add up.</strong></p>
-<p>The anxiety is bigger than ADHD anxiety. The mood sits lower than it should. The rigidity goes beyond preference. The social differences are more than impulsivity.</p>
-<p>You have a feeling that there's more going on. <strong>You're not sure what to do with that feeling.</strong></p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> When something about your child doesn't quite fit the ADHD explanation — how to know when something else may also be present, and what to do with that feeling. 12 minutes.
+</div>
 
-<h3>The feeling is probably right</h3>
-<p>ADHD rarely travels alone. <strong>Around 60-80% of children with ADHD have at least one co-occurring condition</strong> — anxiety, depression, learning differences, autism, or others. This is the norm, not the exception.</p>
-<p>The fact that something doesn't fully fit the ADHD explanation isn't cause for alarm. <strong>It's information.</strong> It means the picture is more complex than one diagnosis, which means the support needs to reflect that complexity.</p>
+<p>You've done the reading. You understand the ADHD piece. You have a working framework for why your household is the way it is.</p>
+<p>But there's something that doesn't quite fit. Something that sits beside the ADHD explanation or underneath it. Something you can feel but haven't fully named.</p>
+<p><strong>That feeling is worth taking seriously. It's data.</strong></p>
 
-<h3>What to notice</h3>
-<p>Three signs that something else may also be present.</p>
-<p><strong>Anxiety beyond the expected.</strong> ADHD produces anxiety — the experience of constantly underperforming, of things going wrong. But anxiety that is constant, that produces physical symptoms, that prevents your child from engaging with things they want to do — <strong>that's worth looking at separately.</strong></p>
-<p><strong>Mood that doesn't lift.</strong> All children have hard days. <strong>Mood that is consistently low, flat, or irritable beyond the ADHD pattern</strong> — not reactive to events, but sitting underneath everything — is worth noting.</p>
-<p><strong>Social differences that go beyond impulsivity.</strong> ADHD affects social relationships. But <strong>difficulty reading social context, strong preference for sameness, or sensory sensitivities that affect daily functioning</strong> can point toward something sitting alongside the ADHD rather than within it.</p>
+<h3>Why ADHD rarely travels alone</h3>
+<p>Around 60 to 80 percent of children with ADHD have at least one co-occurring condition. Anxiety, depression, learning differences, autism spectrum, sensory processing differences, sleep disorders, and others. This isn't unusual — it's the norm. A single clean diagnosis is the exception.</p>
+<p>This matters for what kind of support actually helps. ADHD strategies applied to a child who also has significant anxiety may not produce expected results. Approaches for ADHD and autism overlap in some areas and diverge importantly in others. <strong>The full picture matters because the support needs to fit the actual picture.</strong></p>
 
-<h3>What to do with it</h3>
-<p><strong>You don't have to name it.</strong> You don't need to self-diagnose or lobby for a specific assessment.</p>
-<p>What's useful: describe what you're observing in specific, behavioural terms to a professional who knows your child. Not <em>"I think they might be autistic"</em> but <em>"I've noticed these specific things, and they don't feel fully explained by the ADHD."</em></p>
-<p><strong>That's enough to open the conversation.</strong> From there, a professional assessment can do what it needs to do.</p>
-<p>The resources page at adhdreflect.com lists what to look for in an ADHD-literate professional, and support directories by country.</p>
+<h3>Three things worth noticing</h3>
+<p><strong>Anxiety that goes beyond ADHD-related anxiety.</strong> ADHD produces anxiety — the constant experience of underperforming, of things going wrong, of social missteps. But anxiety that is constant regardless of circumstances, that produces physical symptoms, that prevents engagement with wanted activities — that's worth looking at separately.</p>
+<p><strong>Mood that doesn't lift.</strong> All children have hard days. Mood that is consistently low, flat, or irritable in a way that doesn't track with events — that feels like it sits underneath everything rather than responding to it — is worth noting.</p>
+<p><strong>Social differences beyond impulsivity.</strong> ADHD affects social relationships through impulsivity and poor timing. But difficulty understanding social context at a more fundamental level, strong preference for sameness, sensory sensitivities that significantly affect daily functioning — these can point to something sitting alongside ADHD.</p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 5 minutes</div>
+  <p>Spend a few minutes with these questions:</p>
+  <p><strong>What doesn't fully fit the ADHD explanation for your child:</strong> _______________</p>
+  <p><strong>How long you've noticed it:</strong> _______________</p>
+  <p><strong>Whether you've mentioned it to anyone, and their response:</strong> _______________</p>
+  <p><strong>In specific, behavioural terms — not a diagnostic label — what you'd want a professional to know:</strong> _______________</p>
+  <p>That last answer is what to bring to the next professional conversation. <strong>Not a conclusion. An observation. In specific terms. That's all that's needed to open the door.</strong></p>
+</div>
+
+<h3>What to do with the feeling</h3>
+<p>You don't need to arrive at a diagnosis before raising it. You don't need to self-diagnose or lobby for a specific assessment.</p>
+<p>What's useful: describing what you observe, in specific behavioural terms, to someone who knows your child. Not <em>"I think they might also be autistic"</em> but <em>"I've noticed these specific things, and they don't feel fully explained by the ADHD diagnosis. I'd like to understand what else might be going on."</em></p>
+<p><strong>That's enough to open the conversation.</strong> The professional assessment takes it from there. Your job is to surface the observation clearly, not to already have the answer.</p>
+<p>The resources page at adhdreflect.com lists what to look for in an ADHD-literate professional and support directories by country.</p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your if-then plan for this module</div>
+  <p>The observation I want to raise: _______________</p>
+  <p>How I'll phrase it: <em>"I've noticed _______________, and it doesn't feel fully explained by the ADHD. I'd like to understand what else might be going on."</em></p>
+  <p><strong>When</strong> I next speak to _______________ [GP / paediatrician / school counsellor],</p>
+  <p><strong>I will</strong> raise this observation before the end of the appointment.</p>
+</div>
+
+<h3>What this will feel like</h3>
+<p>Raising it might feel like you're making things more complicated, or like you're catastrophising, or like you might be wrong.</p>
+<p>You might be wrong about what it is. You're not wrong to raise it. <strong>The observation exists. It deserves a proper look. That's not catastrophising — that's advocacy.</strong></p>
 `,
+
   'm20': `
-<p>Think back to why you started. The moment you wrote about in Module 1.</p>
+<div class="module-reentry">
+  <strong>What this module is about:</strong> The last module. What this course was actually asking of you, what progress looks like in this household, and where to go from here. 10 minutes.
+</div>
+
+<p>Go back to what you wrote in Module 1. The moment that brought you here. The thing you said needed to change.</p>
+<p>You're at the end of 20 modules.</p>
 <p><strong>What does that moment look like now?</strong></p>
-<p>Not because it doesn't happen anymore. It probably still does. But something about the way you see it has shifted — even slightly. <strong>That shift is the work.</strong></p>
 
-<h3>What this course was actually asking you to do</h3>
-<p>Not to become a different person. Not to achieve a standard of parenting that requires consistent regulation you don't have.</p>
-<p><strong>To catch the pattern slightly earlier than last time.</strong></p>
-<p>Notice the stack before the explosion. See the signal before the reaction. Get to the repair faster. Recognise the moment of joining and name it. Find the stop-script before the loop has been running for twenty minutes.</p>
-<p><strong>Slightly earlier. Not perfectly. Not always.</strong> Just one notch upstream of where you were before.</p>
+<h3>What the course was actually asking</h3>
+<p>Not to become calmer. Not to stop dysregulating. Not to achieve the kind of consistent regulation that parenting books describe — the kind that requires a nervous system you don't have and conditions your household doesn't consistently provide.</p>
+<p><strong>To catch it slightly earlier than last time.</strong></p>
+<p>Notice the stack before the spark. Feel the signal before the explosion. Get to the repair before two days have passed. Recognise the moment of joining the meltdown and name it. Find the stop-script before the loop has been running for twenty minutes.</p>
+<p>Slightly earlier. Once. Not every time. <strong>One notch upstream of where you were before.</strong></p>
 
-<h3>What good enough looks like here</h3>
-<p>Good enough for this household is not what good enough looks like in a parenting book.</p>
-<p><strong>Good enough here is:</strong> you noticed the signal more often this month than last month. You made one repair that you wouldn't have made six months ago. You found the stop-script once when you would have kept going. You caught the shutdown and named it to yourself, even if you didn't name it out loud.</p>
-<p><strong>Those things are real.</strong> They compound. A parent who catches it one notch earlier this month and one notch earlier next month has, over a year, moved the pattern significantly.</p>
-<p>That's not visible in any single incident. <strong>It's visible in the relationship over time.</strong></p>
+<div class="module-experiment">
+  <div class="module-experiment-label">Before you finish — takes 5 minutes</div>
+  <p>Look back through your if-then plans from the modules you completed. For each one:</p>
+  <p><strong>Which ones did you actually use?</strong> _______________</p>
+  <p><strong>Which one made the most difference?</strong> _______________</p>
+  <p><strong>Which one did you skip entirely?</strong> _______________</p>
+  <p>Now: <strong>what would the one-notch-earlier version of yourself look like in the next month?</strong> _______________</p>
+  <p>That last answer is your ongoing goal. Not the parenting books version of good. <strong>One notch earlier than you were when you started this course.</strong></p>
+</div>
 
-<h3>The card library is still here</h3>
-<p>This course ends. <strong>The moments don't.</strong></p>
-<p>The card library, the guides, the quiz — these are still there for the 5pm collision, the morning that collapses, the repair that didn't happen last night.</p>
-<p><strong>You don't have to hold what you've learned in your head.</strong> The course gave you the frame. The library is where you live in the frame.</p>
+<h3>What progress looks like here</h3>
+<p>It doesn't look like the parenting books. It doesn't look like the calm parent online. It doesn't show up in individual incidents.</p>
+<p>It looks like: you noticed the signal more often this month than last month. You made one repair that you would have skipped six months ago. You used the stop-script once when you would have kept going. You named a shutdown to yourself, even if you didn't name it out loud. You mapped the stack after an explosion and understood it better than you would have before.</p>
+<p><strong>Those things are real. They compound.</strong> A parent who catches it one notch earlier this month and one notch earlier next month has, over a year, moved the pattern significantly. Not visibly in any single incident. Visibly in the relationship — in what incidents cost, how quickly they resolve, how repair becomes part of the rhythm.</p>
+
+<h3>Where to go from here</h3>
+<p>This course ends. The moments don't.</p>
+<p>The card library is there for the 5pm collision. The guides are there when you want to understand a pattern more deeply. The quiz is there on the days you want to return to the framework.</p>
+<p><strong>The course gave you the structure. The library is where you live in the structure. Use it when the moments happen — not as a course to complete, but as a tool for the specific thing that's happening right now.</strong></p>
+
+<div class="module-ifthen">
+  <div class="module-ifthen-label">Your going-forward plan</div>
+  <p>The if-then plan I'll keep using: _______________</p>
+  <p>The card I'll bookmark for the hardest regular moment: _______________</p>
+  <p>The guide I want to read next: _______________</p>
+  <p>What I'll tell myself on the days nothing from this course seems to be working: <em>"One notch earlier. Not perfect. Once."</em></p>
+</div>
 
 <h3>One last thing</h3>
-<p><strong>You came in looking for what to do differently.</strong> You've been doing it.</p>
-<p>Not perfectly. Not consistently. Not in a way that would satisfy the parenting books.</p>
-<p>But you've been doing it. <strong>That's not nothing. For a brain like yours, it's a lot.</strong></p>
+<p>You came in looking for what to do differently. You did the work of 20 modules — not because you were supposed to, but because you wanted to get better at this. That's not nothing.</p>
+<p>For a brain that struggles to complete things, for a parent who is managing more than most people can see, for someone who showed up for this even on the days it would have been easier not to:</p>
+<p><strong>That's a lot. For a brain like yours, it's actually a lot.</strong></p>
 `,
 };

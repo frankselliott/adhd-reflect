@@ -194,6 +194,47 @@ export function GrowModule({ moduleId }) {
         .module-prose ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
         .module-prose ul li { font-family: 'Lexend', sans-serif; font-size: 15px; color: #56606E; line-height: 1.6; padding-left: 20px; position: relative; }
         .module-prose ul li::before { content: '—'; position: absolute; left: 0; color: rgba(31,42,55,0.3); }
+
+        /* Re-entry summary */
+        .module-reentry {
+          font-family: 'Lexend', sans-serif; font-size: 13px; color: #56606E;
+          background: rgba(31,42,55,0.04); border-radius: 8px;
+          padding: 14px 16px; margin-bottom: 24px; line-height: 1.6;
+        }
+        .module-reentry strong { color: #1F2A37; font-weight: 500; }
+
+        /* Try this now experiment boxes */
+        .module-experiment {
+          background: rgba(74,111,165,0.06); border: 1px solid rgba(74,111,165,0.2);
+          border-radius: 12px; padding: 20px; margin: 28px 0;
+        }
+        .module-experiment-label {
+          font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+          letter-spacing: 0.2em; text-transform: uppercase;
+          color: #4A6FA5; margin-bottom: 14px; font-weight: 500;
+        }
+        .module-experiment p { font-family: 'Lexend', sans-serif; font-size: 15px; color: #1F2A37; line-height: 1.7; margin-bottom: 10px; }
+        .module-experiment p:last-child { margin-bottom: 0; }
+        .module-experiment ul { list-style: none; padding: 0; margin: 8px 0 10px; display: flex; flex-direction: column; gap: 6px; }
+        .module-experiment ul li { font-family: 'Lexend', sans-serif; font-size: 14px; color: #1F2A37; line-height: 1.6; padding-left: 18px; position: relative; }
+        .module-experiment ul li::before { content: '·'; position: absolute; left: 4px; color: #4A6FA5; font-weight: bold; }
+        .module-experiment strong { color: #1F2A37; font-weight: 500; }
+        .module-experiment em { font-style: italic; }
+
+        /* If-then plan boxes */
+        .module-ifthen {
+          background: rgba(168,195,160,0.1); border: 1px solid rgba(168,195,160,0.35);
+          border-radius: 12px; padding: 20px; margin: 28px 0;
+        }
+        .module-ifthen-label {
+          font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+          letter-spacing: 0.2em; text-transform: uppercase;
+          color: #7FA88E; margin-bottom: 14px; font-weight: 500;
+        }
+        .module-ifthen p { font-family: 'Lexend', sans-serif; font-size: 15px; color: #1F2A37; line-height: 1.7; margin-bottom: 10px; }
+        .module-ifthen p:last-child { margin-bottom: 0; }
+        .module-ifthen strong { color: #1F2A37; font-weight: 500; }
+        .module-ifthen em { font-style: italic; color: #4A6FA5; }
       `;
       document.head.appendChild(style);
     }
