@@ -1,4 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import {
+  ContainerAnimation,
+  NinetySecondAnimation,
+  MaskingCostAnimation,
+  AmplificationAnimation,
+  SignalAnimation,
+  RepairAnimation,
+  CoRegulationAnimation,
+} from './GrowAnimations.jsx';
 import { MODULES, getNextSuggestion, MODULE_CONTENT } from '../data/growModules.js';
 
 const BRAND = {
@@ -54,6 +63,36 @@ const PROSE_STYLES = `
   .module-ifthen em { font-style: italic; color: #4A6FA5; }
   .module-reentry { font-family: 'Lexend', sans-serif; font-size: 13px; color: #56606E; background: rgba(31,42,55,0.04); border-radius: 8px; padding: 14px 16px; margin-bottom: 24px; line-height: 1.6; }
   .module-reentry strong { color: #1F2A37; font-weight: 500; }
+/* Animation component styles */
+  .anim-wrap {
+    margin: 32px 0;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid rgba(31,42,55,0.07);
+    padding: 20px 16px 16px;
+    box-shadow: 0 2px 12px rgba(31,42,55,0.05);
+    overflow: hidden;
+  }
+  .anim-label-top {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #56606E;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(31,42,55,0.06);
+  }
+  .anim-caption {
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: #56606E;
+    line-height: 1.6;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(31,42,55,0.06);
+    font-style: italic;
+  }
   /* Interactive inputs inside boxes */
   .module-field { display: block; width: 100%; margin: 8px 0 14px; font-family: 'Lexend', sans-serif; font-size: 14px; color: #1F2A37; background: white; border: 1.5px solid rgba(74,111,165,0.25); border-radius: 8px; padding: 10px 12px; outline: none; line-height: 1.6; box-sizing: border-box; resize: vertical; transition: border-color 0.15s; }
   .module-field:focus { border-color: #4A6FA5; }
@@ -440,6 +479,17 @@ export function GrowModule({ moduleId }) {
           className="module-prose"
           dangerouslySetInnerHTML={{ __html: processedContent }}
         />
+
+        {/* Module-specific animations */}
+        {module.id === 'm2' && <><NinetySecondAnimation /><MaskingCostAnimation /></>}
+        {module.id === 'm3' && <ContainerAnimation />}
+        {module.id === 'm4' && <><AmplificationAnimation /><CoRegulationAnimation /></>}
+        {module.id === 'm5' && <RepairAnimation />}
+        {module.id === 'm6' && <><ContainerAnimation /><SignalAnimation /></>}
+        {module.id === 'm7' && null}
+        {module.id === 'm12' && null}
+        {module.id === 'm13' && <RepairAnimation />}
+        {module.id === 'm14' && null}
 
         {/* Card links */}
         <CardLinks module={module} />
