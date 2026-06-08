@@ -1,9 +1,9 @@
 export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
-  const path = url.pathname;
+  const path = url.pathname.replace(/\/$/, '') || '/grow';
 
   // Public grow pages — no auth needed
-  const publicPaths = ['/grow', '/grow/', '/grow/access', '/grow/welcome', '/grow/redeem', '/grow/free-access'];
+  const publicPaths = ['/grow', '/grow/access', '/grow/welcome', '/grow/redeem', '/grow/free-access'];
   if (publicPaths.includes(path)) {
     return next();
   }
