@@ -3,55 +3,144 @@ import Base from '../../layouts/Base.astro';
 const authRequired = Astro.url.searchParams.get('auth');
 const invalid = Astro.url.searchParams.get('invalid');
 ---
-<Base title="When Both of You Are Dysregulated" description="A self-guided program for parents with ADHD raising children with ADHD. 20 modules. Works on a phone." current="grow">
-  <div class="grow-sales">
+<Base title="Both of You — A self-guided program" description="For parents with ADHD raising children with ADHD. 20 modules. Works on a phone. No live sessions." current="grow">
 
-    {authRequired && (
-      <div class="grow-notice">
-        <p>Use the access link from your confirmation email to get back in.</p>
-        <p class="grow-notice-sub">Can't find it? Email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+  {authRequired && (
+    <div class="grow-banner">
+      <p>Use the access link from your confirmation email to get back in. Can't find it? <a href="mailto:hello@adhdreflect.com">Email us.</a></p>
+    </div>
+  )}
+  {invalid && (
+    <div class="grow-banner grow-banner-warn">
+      <p>That link isn't valid. Try copying the full link from your email. Still stuck? <a href="mailto:hello@adhdreflect.com">Email us.</a></p>
+    </div>
+  )}
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">A self-guided program from ADHD Reflect</div>
+      <h1 class="hero-title">Both of You</h1>
+      <p class="hero-sub">Every parenting course assumes the adult in the room is the calm one.<br/>This one doesn't.</p>
+      <a href="#buy" class="hero-cta">Start for $49</a>
+      <p class="hero-cta-note">One payment. Works on any device. No live sessions.</p>
+    </div>
+  </section>
+
+  <!-- THE MOMENT -->
+  <section class="section-moment">
+    <div class="container">
+      <p class="moment-scene">It's 5.47pm. Your kid is losing it. You know exactly what you're supposed to do.</p>
+      <p class="moment-scene">You do the opposite anyway.</p>
+      <p class="moment-body">That gap — between knowing and doing — is not a character flaw. It has a specific explanation. And it's the thing every other parenting course ignores.</p>
+      <p class="moment-body">Every book, every article, every calm parent on Instagram shares one assumption: <strong>the adult in the room is the regulated one.</strong></p>
+      <p class="moment-body">When you also have ADHD, that assumption is wrong. And when it's wrong, the advice doesn't just fail. It makes you feel worse for not being able to follow it.</p>
+      <p class="moment-callout">Both of You is built for the household where two ADHD nervous systems are in the same four walls at the same time.</p>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="section-diff">
+    <div class="container">
+      <div class="diff-label">What makes this different</div>
+      <div class="diff-grid">
+        <div class="diff-card">
+          <div class="diff-card-head">Every other course</div>
+          <ul class="diff-list">
+            <li>Assumes the parent is the regulated adult</li>
+            <li>Teaches strategies that require working memory under pressure</li>
+            <li>Treats consistency as a realistic goal</li>
+            <li>Was written for a different household</li>
+          </ul>
+        </div>
+        <div class="diff-card diff-card-highlight">
+          <div class="diff-card-head">Both of You</div>
+          <ul class="diff-list">
+            <li>Starts from the correct premise — both of you have ADHD</li>
+            <li>Teaches what to do in the 30 seconds you actually have</li>
+            <li>Built for the days when you have nothing left</li>
+            <li>Written by a parent with ADHD raising a child with ADHD</li>
+          </ul>
+        </div>
       </div>
-    )}
+    </div>
+  </section>
 
-    {invalid && (
-      <div class="grow-notice grow-notice-warn">
-        <p>That access link isn't valid. Try copying the full link from your email.</p>
-        <p class="grow-notice-sub">Still stuck? Email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+  <!-- MOMENTS -->
+  <section class="section-moments">
+    <div class="container">
+      <div class="moments-label">What you'll understand differently</div>
+      <div class="moments-grid">
+        <div class="moment-item">
+          <div class="moment-item-title">Why you lose it at 5pm</div>
+          <div class="moment-item-body">The mask you hold at work comes off the moment you walk in the door. That's not weakness. That's the cost of masking all day.</div>
+        </div>
+        <div class="moment-item">
+          <div class="moment-item-title">Why they save the worst for you</div>
+          <div class="moment-item-body">The meltdown at the front door isn't targeting you. It's trust. You're the safe person. That doesn't make it easier to absorb.</div>
+        </div>
+        <div class="moment-item">
+          <div class="moment-item-title">Why you can't stop the argument</div>
+          <div class="moment-item-body">Your brain is chasing closure it can't have right now. Knowing that is the first step to getting out earlier next time.</div>
+        </div>
+        <div class="moment-item">
+          <div class="moment-item-title">Why the repair matters more than the moment</div>
+          <div class="moment-item-body">Two sentences. Delivered when you're both calm. That's the whole repair. Most ADHD parents skip it. This course is built around doing it.</div>
+        </div>
+        <div class="moment-item">
+          <div class="moment-item-title">Why the morning keeps collapsing</div>
+          <div class="moment-item-body">The laminated chart lasted eleven days. Not because you gave up. Because the system had too many invisible steps for one ADHD brain to hold.</div>
+        </div>
+        <div class="moment-item">
+          <div class="moment-item-title">Why you leave even when you stay</div>
+          <div class="moment-item-body">Emotional withdrawal isn't indifference. It's what happens when your system runs out and has no safe exit. There's a name for it. And a way back.</div>
+        </div>
       </div>
-    )}
-
-    <div class="grow-hero">
-      <div class="grow-label">A self-guided program</div>
-      <h1 class="grow-title">When Both of<br/>You Are<br/>Dysregulated</h1>
-      <p class="grow-sub">For parents with ADHD raising children with ADHD.</p>
     </div>
+  </section>
 
-    <div class="grow-premise">
-      <p>Every parenting course assumes the adult in the room is the regulated one.</p>
-      <p><strong>This one doesn't.</strong></p>
-      <p>It's written for the household where both of you have ADHD. Where the advice keeps failing not because you're failing at it — but because it was built for a different family.</p>
+  <!-- WHAT'S INCLUDED -->
+  <section class="section-includes">
+    <div class="container">
+      <div class="includes-label">What's included</div>
+      <div class="includes-grid">
+        <div class="include-item">
+          <div class="include-num">20</div>
+          <div class="include-text">text-based modules, each 10-15 minutes. Readable on a phone. No video. No live sessions.</div>
+        </div>
+        <div class="include-item">
+          <div class="include-num">5</div>
+          <div class="include-text">modules suggested first based on your quiz pattern — Reactor, Juggler, Looper, Spiraller, or Escaper.</div>
+        </div>
+        <div class="include-item">
+          <div class="include-num">20</div>
+          <div class="include-text">right now cards — one per module. Print them. Put them on your fridge. They're the tool for the moment, not just the module.</div>
+        </div>
+        <div class="include-item">
+          <div class="include-num">1</div>
+          <div class="include-text">script library with every script from all 20 modules, organised by situation. For the 5pm collision, not the calm morning.</div>
+        </div>
+        <div class="include-item">
+          <div class="include-num">1</div>
+          <div class="include-text">household map you build across three modules — your recurring moment, mapped from three angles.</div>
+        </div>
+        <div class="include-item">
+          <div class="include-num">1</div>
+          <div class="include-text">personalised summary card at the end, built from your own reflections. Something worth keeping.</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="grow-includes">
-      <div class="grow-includes-label">What's included</div>
-      <ul class="grow-includes-list">
-        <li><span class="grow-check">✓</span> 20 text-based modules — readable on a phone in 10-15 minutes each</li>
-        <li><span class="grow-check">✓</span> Your first 5 modules suggested by your quiz pattern</li>
-        <li><span class="grow-check">✓</span> A right now card per module — print it, put it on your fridge</li>
-        <li><span class="grow-check">✓</span> A practice tracker per module — no dates, no streaks, no shame</li>
-        <li><span class="grow-check">✓</span> A complete script library — every script organised by situation</li>
-        <li><span class="grow-check">✓</span> A household map built across three modules</li>
-        <li><span class="grow-check">✓</span> A personalised summary card at the end — built from your own words</li>
-        <li><span class="grow-check">✓</span> Progress saved so you can come back and pick up where you left off</li>
-      </ul>
-    </div>
+  <!-- THE MODULES -->
+  <section class="section-modules">
+    <div class="container">
+      <div class="modules-label">The 20 modules</div>
+      <div class="modules-layers">
 
-    <div class="grow-modules-preview">
-      <div class="grow-includes-label">The 20 modules</div>
-      <div class="grow-module-layers">
-        <div class="grow-layer">
-          <div class="grow-layer-label">Foundation — start here</div>
-          <ol class="grow-module-list">
+        <div class="module-layer">
+          <div class="layer-name">Foundation — everyone starts here</div>
+          <ol class="module-ol">
             <li>Why nothing you've tried has actually fixed it</li>
             <li>What your body does before your brain catches up</li>
             <li>What's happening inside your child when they fall apart</li>
@@ -59,24 +148,26 @@ const invalid = Astro.url.searchParams.get('invalid');
             <li>The repair. It matters more than the moment.</li>
           </ol>
         </div>
-        <div class="grow-layer">
-          <div class="grow-layer-label">Your pattern — suggested from your quiz result</div>
-          <ol class="grow-module-list" start="6">
-            <li>There's a moment before you snap — how to find it <span class="grow-tag">Reactor</span></li>
-            <li>Fewer words. Lower temperature. <span class="grow-tag">Reactor</span></li>
-            <li>Why the morning keeps collapsing <span class="grow-tag">Juggler</span></li>
-            <li>One routine you can actually keep <span class="grow-tag">Juggler</span></li>
-            <li>Why you can't stop once it starts <span class="grow-tag">Looper</span></li>
-            <li>How to stop without feeling like you lost <span class="grow-tag">Looper</span></li>
-            <li>The two hours after you lost it <span class="grow-tag">Spiraller</span></li>
-            <li>Getting from the spiral to the repair <span class="grow-tag">Spiraller</span></li>
-            <li>Why you leave even when you stay <span class="grow-tag">Escaper</span></li>
-            <li>The small return <span class="grow-tag">Escaper</span></li>
+
+        <div class="module-layer">
+          <div class="layer-name">Your pattern — suggested from your quiz result</div>
+          <ol class="module-ol" start="6">
+            <li>There's a moment before you snap — how to find it <span class="pattern-tag">Reactor</span></li>
+            <li>Fewer words. Lower temperature. <span class="pattern-tag">Reactor</span></li>
+            <li>Why the morning keeps collapsing <span class="pattern-tag">Juggler</span></li>
+            <li>One routine you can actually keep <span class="pattern-tag">Juggler</span></li>
+            <li>Why you can't stop once it starts <span class="pattern-tag">Looper</span></li>
+            <li>How to stop without feeling like you lost <span class="pattern-tag">Looper</span></li>
+            <li>The two hours after you lost it <span class="pattern-tag">Spiraller</span></li>
+            <li>Getting from the spiral to the repair <span class="pattern-tag">Spiraller</span></li>
+            <li>Why you leave even when you stay <span class="pattern-tag">Escaper</span></li>
+            <li>The small return <span class="pattern-tag">Escaper</span></li>
           </ol>
         </div>
-        <div class="grow-layer">
-          <div class="grow-layer-label">The wider household</div>
-          <ol class="grow-module-list" start="16">
+
+        <div class="module-layer">
+          <div class="layer-name">The wider household</div>
+          <ol class="module-ol" start="16">
             <li>You were in the same room. You have completely different versions.</li>
             <li>The child who isn't struggling out loud</li>
             <li>The school sees the behaviour. You see the child underneath it.</li>
@@ -84,123 +175,332 @@ const invalid = Astro.url.searchParams.get('invalid');
             <li>You don't need to be consistent. You need to catch it slightly earlier.</li>
           </ol>
         </div>
+
       </div>
     </div>
+  </section>
 
-    <div class="grow-disclaimer">
-      <p>This program is not therapy and not a clinical intervention. It's structured practical content grounded in published ADHD research, written by a parent with ADHD raising a child with ADHD. If you need professional support, the <a href="/resources">resources page</a> can help you find it.</p>
-    </div>
-
-    <div class="grow-buy" id="buy">
-      <div class="grow-price-block">
-        <div class="grow-price">$49 <span class="grow-price-currency">USD</span></div>
-        <div class="grow-price-note">One payment. Lifetime access. Works on any device.</div>
+  <!-- HOW IT WORKS -->
+  <section class="section-how">
+    <div class="container">
+      <div class="how-label">How it works</div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-num">1</div>
+          <div class="how-step-body"><strong>Take the quiz</strong> — if you haven't already. It identifies your parenting pattern and your first five modules are suggested from that.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">2</div>
+          <div class="how-step-body"><strong>Read in fragments</strong> — each module is 10-15 minutes on a phone. You don't need to sit down. You don't need to be in a good headspace.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">3</div>
+          <div class="how-step-body"><strong>Write one reflection</strong> — a single sentence that completes the module. Not graded. Not shared. Saved privately.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">4</div>
+          <div class="how-step-body"><strong>Print the card</strong> — each module has a right now card with one script and one action. It belongs on your fridge, not in an app.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">5</div>
+          <div class="how-step-body"><strong>Come back when you're ready</strong> — no streaks. No you're-behind states. The module map remembers where you left off.</div>
+        </div>
       </div>
-      <button class="grow-cta" id="grow-checkout-btn">
-        Start the program
-      </button>
-      <p class="grow-cta-sub">You'll get an access link by email immediately after payment.<br/>No account needed. No password to remember.</p>
     </div>
+  </section>
 
-  </div>
+  <!-- DISCLAIMER -->
+  <section class="section-disclaimer">
+    <div class="container">
+      <p class="disclaimer-text">Both of You is not therapy and not a clinical intervention. It's structured practical content grounded in published ADHD research, written by a parent with ADHD raising a child with ADHD. If you need professional support, the <a href="/resources">resources page</a> can help you find it.</p>
+    </div>
+  </section>
+
+  <!-- BUY -->
+  <section class="section-buy" id="buy">
+    <div class="container">
+      <div class="buy-card">
+        <div class="buy-product-name">Both of You</div>
+        <div class="buy-price">$49 <span class="buy-currency">USD</span></div>
+        <div class="buy-price-note">One payment. Lifetime access. All 20 modules.</div>
+        <button class="buy-cta" id="grow-checkout-btn">Start the program</button>
+        <p class="buy-small">You'll get an access link by email straight after payment.<br/>No account needed. No password to remember. Works on any device.</p>
+        <div class="buy-guarantee">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10.5 6H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6H5.5L8 1Z" stroke="#7FA88E" stroke-width="1.2" fill="none"/></svg>
+          If it's not what you expected, email us within 14 days for a full refund.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ CTA -->
+  <section class="section-quiz-cta">
+    <div class="container">
+      <p class="quiz-cta-text">Not sure if this is for you?</p>
+      <a href="/quiz" class="quiz-cta-link">Take the free parenting pattern quiz first →</a>
+      <p class="quiz-cta-sub">It takes 3 minutes. It's free. And it tells you which pattern modules are most relevant for your household.</p>
+    </div>
+  </section>
+
 </Base>
 
 <style>
-.grow-sales {
-  max-width: 680px;
+/* ─── Shared ─── */
+.container {
+  max-width: 720px;
   margin: 0 auto;
-  padding: var(--space-3xl) var(--page-pad) var(--space-4xl);
+  padding: 0 var(--page-pad);
 }
-.grow-notice {
+
+/* ─── Banner ─── */
+.grow-banner {
   background: var(--blue-light);
-  border: 1px solid var(--blue);
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid rgba(74,111,165,0.2);
+  padding: 14px var(--page-pad);
+  text-align: center;
+}
+.grow-banner p { font-family: var(--sans); font-size: 14px; color: var(--slate); }
+.grow-banner a { color: var(--blue); }
+.grow-banner-warn { background: rgba(201,123,106,0.08); border-color: rgba(201,123,106,0.2); }
+
+/* ─── Hero ─── */
+.hero {
+  background: var(--slate);
+  padding: var(--space-4xl) var(--page-pad) var(--space-3xl);
+  text-align: center;
+}
+.hero-inner { max-width: 640px; margin: 0 auto; }
+.hero-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(168,195,160,0.8);
+  margin-bottom: var(--space-lg);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(56px, 14vw, 96px);
+  font-weight: 300;
+  color: var(--cloud);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 96;
   margin-bottom: var(--space-xl);
 }
-.grow-notice p { font-family: var(--sans); font-size: 15px; color: var(--slate); margin-bottom: 4px; }
-.grow-notice-sub { color: var(--pewter) !important; font-size: 13px !important; }
-.grow-notice-sub a { color: var(--blue); }
-.grow-notice-warn { background: rgba(201,123,106,0.08); border-color: var(--clay); }
-.grow-hero { margin-bottom: var(--space-3xl); }
-.grow-label {
+.hero-sub {
+  font-family: var(--sans);
+  font-size: clamp(16px, 3vw, 20px);
+  color: rgba(247,245,240,0.7);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+.hero-cta {
+  display: inline-block;
+  padding: 18px 40px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background var(--duration-fast) ease, transform var(--duration-fast) ease;
+  margin-bottom: var(--space-md);
+}
+.hero-cta:hover { background: #5580b5; transform: translateY(-1px); }
+.hero-cta-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: rgba(247,245,240,0.45);
+}
+
+/* ─── The moment ─── */
+.section-moment {
+  padding: var(--space-4xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.moment-scene {
+  font-family: var(--serif);
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 300;
+  color: var(--slate);
+  line-height: 1.4;
+  font-variation-settings: 'opsz' 32;
+  margin-bottom: var(--space-sm);
+}
+.moment-body {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--pewter);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+.moment-callout {
+  font-family: var(--serif);
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 300;
+  color: var(--blue);
+  line-height: 1.5;
+  font-variation-settings: 'opsz' 24;
+  padding: var(--space-xl);
+  background: rgba(74,111,165,0.05);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-top: var(--space-xl);
+  font-style: italic;
+}
+
+/* ─── Diff ─── */
+.section-diff {
+  padding: var(--space-4xl) 0;
+  background: var(--mist);
+  border-bottom: 1px solid var(--mist-border);
+}
+.diff-label {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: var(--space-md);
-}
-.grow-title {
-  font-family: var(--serif);
-  font-size: clamp(40px, 10vw, 64px);
-  font-weight: 300;
-  color: var(--slate);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  font-variation-settings: 'opsz' 72;
-  margin-bottom: var(--space-lg);
-}
-.grow-sub {
-  font-family: var(--sans);
-  font-size: 18px;
   color: var(--pewter);
-  line-height: 1.5;
+  margin-bottom: var(--space-xl);
 }
-.grow-premise {
-  margin-bottom: var(--space-3xl);
-  padding: var(--space-xl) var(--space-xl);
-  background: rgba(74,111,165,0.05);
-  border-left: 3px solid var(--blue);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
 }
-.grow-premise p {
-  font-family: var(--sans);
-  font-size: 17px;
-  color: var(--slate);
-  line-height: 1.7;
-  margin-bottom: var(--space-sm);
+@media (max-width: 600px) { .diff-grid { grid-template-columns: 1fr; } }
+.diff-card {
+  padding: var(--space-xl);
+  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mist-border);
 }
-.grow-premise p:last-child { margin-bottom: 0; }
-.grow-includes { margin-bottom: var(--space-3xl); }
-.grow-includes-label {
+.diff-card-highlight {
+  border-color: rgba(74,111,165,0.3);
+  background: rgba(74,111,165,0.03);
+}
+.diff-card-head {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pewter);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
-.grow-includes-list {
+.diff-card-highlight .diff-card-head { color: var(--blue); }
+.diff-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
-.grow-includes-list li {
+.diff-list li {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+  line-height: 1.5;
+  padding-left: var(--space-md);
+  position: relative;
+}
+.diff-list li::before { content: '—'; position: absolute; left: 0; color: var(--mist-border); }
+.diff-card-highlight .diff-list li { color: var(--slate); }
+.diff-card-highlight .diff-list li::before { color: var(--sage-dark); content: '✓'; }
+
+/* ─── Moments grid ─── */
+.section-moments {
+  padding: var(--space-4xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.moments-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: var(--space-2xl);
+}
+.moments-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+@media (max-width: 600px) { .moments-grid { grid-template-columns: 1fr; } }
+.moment-item { }
+.moment-item-title {
   font-family: var(--sans);
   font-size: 15px;
+  font-weight: 500;
   color: var(--slate);
-  line-height: 1.5;
-  display: flex;
-  gap: var(--space-sm);
-  align-items: flex-start;
+  margin-bottom: 6px;
 }
-.grow-check {
-  color: var(--sage-dark);
-  font-weight: 600;
-  flex-shrink: 0;
-  margin-top: 1px;
+.moment-item-body {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+  line-height: 1.6;
 }
-.grow-modules-preview { margin-bottom: var(--space-3xl); }
-.grow-module-layers { display: flex; flex-direction: column; gap: var(--space-xl); }
-.grow-layer {
-  padding: var(--space-lg);
+
+/* ─── Includes ─── */
+.section-includes {
+  padding: var(--space-4xl) 0;
+  background: var(--mist);
+  border-bottom: 1px solid var(--mist-border);
+}
+.includes-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: var(--space-2xl);
+}
+.includes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-xl);
+}
+@media (max-width: 700px) { .includes-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 440px) { .includes-grid { grid-template-columns: 1fr; } }
+.include-item { }
+.include-num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--blue);
+  font-variation-settings: 'opsz' 48;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.include-text {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+}
+
+/* ─── Modules ─── */
+.section-modules {
+  padding: var(--space-4xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.modules-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: var(--space-2xl);
+}
+.modules-layers { display: flex; flex-direction: column; gap: var(--space-xl); }
+.module-layer {
+  padding: var(--space-lg) var(--space-xl);
   background: white;
   border-radius: var(--radius-md);
   border: 1px solid var(--mist-border);
 }
-.grow-layer-label {
+.layer-name {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -208,19 +508,19 @@ const invalid = Astro.url.searchParams.get('invalid');
   color: var(--blue);
   margin-bottom: var(--space-md);
 }
-.grow-module-list {
-  padding-left: var(--space-lg);
+.module-ol {
+  padding-left: var(--space-xl);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.grow-module-list li {
+.module-ol li {
   font-family: var(--sans);
   font-size: 14px;
   color: var(--pewter);
   line-height: 1.5;
 }
-.grow-tag {
+.pattern-tag {
   display: inline-block;
   font-family: var(--mono);
   font-size: 9px;
@@ -233,53 +533,108 @@ const invalid = Astro.url.searchParams.get('invalid');
   margin-left: 6px;
   vertical-align: middle;
 }
-.grow-disclaimer {
-  margin-bottom: var(--space-3xl);
-  padding: var(--space-lg);
+
+/* ─── How it works ─── */
+.section-how {
+  padding: var(--space-4xl) 0;
   background: var(--mist);
-  border-radius: var(--radius-md);
+  border-bottom: 1px solid var(--mist-border);
 }
-.grow-disclaimer p {
+.how-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: var(--space-2xl);
+}
+.how-steps { display: flex; flex-direction: column; gap: var(--space-lg); }
+.how-step {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+.how-step-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--blue);
+  font-variation-settings: 'opsz' 36;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 32px;
+  margin-top: -2px;
+}
+.how-step-body {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--pewter);
+  line-height: 1.65;
+  padding-top: 4px;
+}
+.how-step-body strong { color: var(--slate); font-weight: 500; }
+
+/* ─── Disclaimer ─── */
+.section-disclaimer {
+  padding: var(--space-xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.disclaimer-text {
   font-family: var(--sans);
   font-size: 13px;
   color: var(--pewter);
-  line-height: 1.6;
-}
-.grow-disclaimer a { color: var(--blue); }
-.grow-buy {
+  line-height: 1.7;
   text-align: center;
-  padding: var(--space-3xl) var(--space-xl);
+}
+.disclaimer-text a { color: var(--blue); }
+
+/* ─── Buy ─── */
+.section-buy {
+  padding: var(--space-4xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.buy-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-2xl);
   background: white;
   border-radius: var(--radius-lg);
   border: 1px solid var(--mist-border);
-  box-shadow: 0 2px 16px rgba(31,42,55,0.06);
+  box-shadow: 0 4px 24px rgba(31,42,55,0.08);
+  text-align: center;
 }
-.grow-price-block { margin-bottom: var(--space-xl); }
-.grow-price {
+.buy-product-name {
   font-family: var(--serif);
-  font-size: 52px;
+  font-size: 28px;
   font-weight: 300;
   color: var(--slate);
-  font-variation-settings: 'opsz' 60;
+  font-variation-settings: 'opsz' 32;
+  margin-bottom: var(--space-md);
+}
+.buy-price {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 64;
   line-height: 1;
   margin-bottom: var(--space-sm);
 }
-.grow-price-currency {
-  font-size: 24px;
+.buy-currency {
+  font-size: 28px;
   color: var(--pewter);
   vertical-align: super;
 }
-.grow-price-note {
+.buy-price-note {
   font-family: var(--sans);
   font-size: 14px;
   color: var(--pewter);
+  margin-bottom: var(--space-xl);
 }
-.grow-cta {
+.buy-cta {
   display: block;
   width: 100%;
-  max-width: 320px;
-  margin: 0 auto var(--space-md);
-  padding: 18px 32px;
+  padding: 18px;
   background: var(--blue);
   color: white;
   font-family: var(--sans);
@@ -289,11 +644,50 @@ const invalid = Astro.url.searchParams.get('invalid');
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: background var(--duration-fast) ease, transform var(--duration-fast) ease;
+  margin-bottom: var(--space-md);
 }
-.grow-cta:hover { background: var(--blue-deep); transform: translateY(-1px); }
-.grow-cta:active { transform: translateY(0); }
-.grow-cta:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-.grow-cta-sub {
+.buy-cta:hover { background: var(--blue-deep); transform: translateY(-1px); }
+.buy-cta:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.buy-small {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+.buy-guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--sage-dark);
+  line-height: 1.5;
+}
+
+/* ─── Quiz CTA ─── */
+.section-quiz-cta {
+  padding: var(--space-3xl) 0 var(--space-4xl);
+  text-align: center;
+}
+.quiz-cta-text {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--pewter);
+  margin-bottom: var(--space-sm);
+}
+.quiz-cta-link {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+.quiz-cta-link:hover { text-decoration: underline; }
+.quiz-cta-sub {
   font-family: var(--sans);
   font-size: 13px;
   color: var(--pewter);
@@ -308,7 +702,6 @@ const invalid = Astro.url.searchParams.get('invalid');
       btn.disabled = true;
       btn.textContent = 'Opening checkout...';
       try {
-        // Try to get pattern from localStorage (set by quiz)
         const pattern = localStorage.getItem('adhd_pattern') || '';
         const res = await fetch('/api/grow/checkout', {
           method: 'POST',

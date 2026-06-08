@@ -269,7 +269,7 @@ export function GrowHome() {
           color: BRAND.blue,
           marginBottom: '8px',
         }}>
-          When Both of You Are Dysregulated
+          Both of You
         </div>
         <h1 style={{
           fontFamily: "'Fraunces', serif",
