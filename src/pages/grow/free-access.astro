@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Setting up your access" description="Both of You — free access" current="grow">
+  <div style="max-width:480px;margin:0 auto;padding:80px 24px;text-align:center">
+    <div id="status" style="font-family:var(--sans);font-size:16px;color:var(--pewter)">Setting up your access...</div>
+  </div>
+</Base>
+<script>
+  (async () => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const pattern = params.get('pattern') || '';
+    const el = document.getElementById('status');
+    try {
+      const res = await fetch('/api/grow/free-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, pattern }),
+      });
+      const data = await res.json();
+      if (data.accessUrl) {
+        window.location.href = data.accessUrl;
+      } else {
+        el.textContent = 'Something went wrong. Email hello@adhdreflect.com with your code.';
+      }
+    } catch(e) {
+      el.textContent = 'Something went wrong. Email hello@adhdreflect.com with your code.';
+    }
+  })();
+</script>

@@ -1,136 +1,523 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Admin" robots="noindex" description="Search analytics">
+<Base title="Admin" description="ADHD Reflect admin dashboard">
   <meta name="robots" content="noindex, nofollow" />
-  <div id="admin-root" style="max-width:800px;margin:0 auto;padding:40px 24px 80px">
-    <h1 style="font-family:var(--serif);font-size:28px;font-weight:300;margin-bottom:24px">Search Analytics</h1>
 
+  <div id="admin-root" style="max-width:960px;margin:0 auto;padding:40px 24px 120px">
+
+    <!-- Auth -->
     <div id="auth-form">
-      <input type="password" id="admin-key" placeholder="Admin key" style="
-        font-family:var(--sans);font-size:15px;padding:12px 16px;
-        border:1.5px solid rgba(31,42,55,0.1);border-radius:10px;
-        background:white;width:100%;max-width:320px;margin-right:8px;
-      "/>
-      <button onclick="loadData()" style="
-        font-family:var(--sans);font-size:15px;font-weight:600;
-        padding:12px 24px;border-radius:10px;border:none;
-        background:var(--blue);color:white;cursor:pointer;
-      ">Load</button>
+      <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--slate);margin-bottom:24px">Admin</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="password" id="admin-key" placeholder="Password" style="
+          font-family:var(--sans);font-size:15px;padding:12px 16px;
+          border:1.5px solid rgba(31,42,55,0.1);border-radius:10px;
+          background:white;width:280px;outline:none;
+        "/>
+        <button onclick="loadAll()" style="
+          font-family:var(--sans);font-size:15px;font-weight:500;
+          padding:12px 24px;border-radius:10px;border:none;
+          background:var(--blue);color:white;cursor:pointer;
+        ">Sign in</button>
+      </div>
     </div>
 
+    <!-- Dashboard -->
     <div id="dashboard" style="display:none">
-      <!-- Summary -->
-      <div id="summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0"></div>
 
-      <!-- Unmatched queries - THE KEY SECTION -->
-      <div style="margin:32px 0">
-        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:4px">
-          Unmatched queries
-        </h2>
-        <p style="font-size:14px;color:var(--pewter);margin-bottom:16px">
-          What people searched for that did not match a card. These are your gaps.
-        </p>
+      <!-- Tab nav -->
+      <div style="display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid rgba(31,42,55,0.08);padding-bottom:0">
+        <button class="tab-btn active" onclick="showTab('site')" id="tab-site">Site</button>
+        <button class="tab-btn" onclick="showTab('course')" id="tab-course">Course</button>
+        <button class="tab-btn" onclick="showTab('codes')" id="tab-codes">Codes</button>
+        <button class="tab-btn" onclick="showTab('cards')" id="tab-cards">Missing cards</button>
+      </div>
+
+      <!-- ── SITE TAB ── -->
+      <div id="pane-site" class="tab-pane">
+        <div id="search-summary" class="stat-grid"></div>
+
+        <div class="section-head">
+          <h2>Search trend — daily</h2>
+        </div>
+        <div id="search-chart" style="margin-bottom:40px"></div>
+
+        <div class="section-head">
+          <h2>Unmatched queries</h2>
+          <p>What people searched for and didn't find. These are your content gaps.</p>
+        </div>
         <div id="unmatched-list"></div>
-      </div>
 
-      <!-- Top cards -->
-      <div style="margin:32px 0">
-        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:16px">
-          Most matched cards
-        </h2>
+        <div class="section-head" style="margin-top:40px">
+          <h2>Top matched cards</h2>
+        </div>
         <div id="top-cards"></div>
-      </div>
 
-      <!-- Recent searches -->
-      <div style="margin:32px 0">
-        <h2 style="font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:16px">
-          Recent searches
-        </h2>
+        <div class="section-head" style="margin-top:40px">
+          <h2>Recent searches</h2>
+        </div>
         <div id="recent-list"></div>
       </div>
+
+      <!-- ── COURSE TAB ── -->
+      <div id="pane-course" class="tab-pane" style="display:none">
+        <div id="course-summary" class="stat-grid"></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0">
+          <div class="card-panel">
+            <div class="panel-label">Pattern distribution</div>
+            <div id="pattern-dist"></div>
+          </div>
+          <div class="card-panel">
+            <div class="panel-label">Purchase source</div>
+            <div id="source-dist"></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Module completion rates</h2>
+          <p>How many buyers have completed each module.</p>
+        </div>
+        <div id="module-rates"></div>
+
+        <div class="section-head" style="margin-top:40px">
+          <h2>Recent purchasers</h2>
+          <p>Anonymised. No emails, no identifying information.</p>
+        </div>
+        <div id="purchaser-list"></div>
+      </div>
+
+      <!-- ── CODES TAB ── -->
+      <div id="pane-codes" class="tab-pane" style="display:none">
+        <div class="card-panel" style="margin-bottom:32px">
+          <div class="panel-label">Create a code</div>
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:480px">
+            <input id="code-input" placeholder="Code (e.g. FRIEND2024)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
+            <select id="code-type" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none">
+              <option value="free">Free (100% off)</option>
+              <option value="percent">Percentage off</option>
+            </select>
+            <div id="code-value-wrap">
+              <input id="code-value" type="number" placeholder="Discount %" min="1" max="99" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none;width:100%"/>
+            </div>
+            <input id="code-max-uses" type="number" placeholder="Max uses (leave blank = unlimited)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
+            <input id="code-expires" type="date" placeholder="Expires (optional)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
+            <input id="code-notes" placeholder="Notes (internal only)" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none"/>
+            <button onclick="createCode()" style="font-family:var(--sans);font-size:14px;font-weight:500;padding:12px 20px;border-radius:8px;border:none;background:var(--blue);color:white;cursor:pointer;align-self:flex-start">Create code</button>
+            <div id="code-feedback" style="font-family:var(--mono);font-size:11px;color:var(--sage-dark)"></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Active codes</h2>
+        </div>
+        <div id="codes-list"></div>
+      </div>
+
+      <!-- ── MISSING CARDS TAB ── -->
+      <div id="pane-cards" class="tab-pane" style="display:none">
+        <div class="section-head">
+          <h2>Unmatched queries — anonymised</h2>
+          <p>Things people searched for and couldn't find. Each one is a potential card gap. No user data attached.</p>
+        </div>
+        <div style="margin-bottom:16px;display:flex;gap:8px">
+          <input id="card-filter" placeholder="Filter..." oninput="filterCards()" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none;flex:1"/>
+          <button onclick="exportCards()" style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;padding:10px 16px;border-radius:8px;border:1px solid rgba(31,42,55,0.1);background:white;cursor:pointer;color:var(--pewter)">Export CSV</button>
+        </div>
+        <div id="cards-gap-list"></div>
+      </div>
+
     </div>
   </div>
-
-  <script>
-    async function loadData() {
-      const key = document.getElementById('admin-key').value;
-      if (!key) return;
-
-      try {
-        const res = await fetch('/api/admin?key=' + encodeURIComponent(key));
-        const data = await res.json();
-
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-
-        document.getElementById('auth-form').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-
-        // Summary cards
-        const s = data.summary;
-        document.getElementById('summary').innerHTML = [
-          { label: 'Total searches', value: s.total, color: '#4A6FA5' },
-          { label: 'Matched', value: s.matched, color: '#4B6B4E' },
-          { label: 'Unmatched', value: s.unmatched, color: '#B85038' },
-          { label: 'Crisis detected', value: s.crisisDetected, color: '#C97B6A' },
-          { label: 'Unique queries', value: s.uniqueQueries, color: '#9B8BB4' },
-        ].map(c => `
-          <div style="background:white;border-radius:14px;padding:18px 20px;border:1px solid rgba(31,42,55,0.06)">
-            <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:${c.color};text-transform:uppercase;margin-bottom:6px">${c.label}</div>
-            <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:#191714">${c.value}</div>
-          </div>
-        `).join('');
-
-        // Unmatched queries
-        if (data.unmatchedQueries.length === 0) {
-          document.getElementById('unmatched-list').innerHTML = '<p style="color:var(--pewter);font-size:14px">No unmatched queries yet. Every search found a card.</p>';
-        } else {
-          document.getElementById('unmatched-list').innerHTML = data.unmatchedQueries.map(q => `
-            <div style="background:rgba(184,80,56,0.04);border:1px solid rgba(184,80,56,0.1);border-radius:10px;padding:12px 16px;margin-bottom:8px">
-              <div style="font-family:var(--serif);font-size:15px;color:#191714;margin-bottom:4px">"${q.query}"</div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--pewter)">${new Date(q.timestamp).toLocaleDateString()} ${new Date(q.timestamp).toLocaleTimeString()}</div>
-            </div>
-          `).join('');
-        }
-
-        // Top cards
-        document.getElementById('top-cards').innerHTML = data.topCards.map((c, i) => `
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
-            <span style="font-family:var(--mono);font-size:12px;color:var(--pewter);width:28px">${c.count}x</span>
-            <span style="font-family:var(--mono);font-size:11px;color:var(--blue);width:36px">${c.id}</span>
-            <span style="font-family:var(--serif);font-size:15px;color:#191714">${c.title}</span>
-          </div>
-        `).join('');
-
-        // Recent searches
-        document.getElementById('recent-list').innerHTML = data.recentSearches.map(s => `
-          <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
-            <span style="
-              font-family:var(--mono);font-size:9px;padding:3px 6px;border-radius:4px;flex-shrink:0;margin-top:2px;
-              ${s.matched ? 'background:rgba(75,107,78,0.1);color:#4B6B4E' : s.crisis ? 'background:rgba(201,123,106,0.1);color:#C97B6A' : 'background:rgba(184,80,56,0.1);color:#B85038'}
-            ">${s.matched ? 'MATCH' : s.crisis ? 'CRISIS' : 'MISS'}</span>
-            <div style="flex:1;min-width:0">
-              <div style="font-family:var(--serif);font-size:14px;color:#191714;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"${s.query}"</div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:2px">
-                ${s.topMatch ? s.topMatch + ' · ' + (s.topMatchTitle || '') : 'no match'}
-                · ${new Date(s.timestamp).toLocaleString()}
-              </div>
-            </div>
-          </div>
-        `).join('');
-
-      } catch (e) {
-        alert('Error: ' + e.message);
-      }
-    }
-
-    // Enter key to submit
-    document.getElementById('admin-key')?.addEventListener('keydown', e => {
-      if (e.key === 'Enter') loadData();
-    });
-  </script>
 </Base>
 
+<style>
+  .tab-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 18px 12px;
+    border: none;
+    background: none;
+    color: var(--pewter);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s;
+  }
+  .tab-btn.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .card-panel {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(31,42,55,0.06);
+    padding: 20px 24px;
+  }
+  .panel-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pewter);
+    margin-bottom: 16px;
+  }
+  .section-head { margin-bottom: 16px; }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .section-head p {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--pewter);
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(31,42,55,0.06);
+    padding: 16px 18px;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--slate);
+  }
+  .row-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(31,42,55,0.04);
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--slate);
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .badge-match { background: rgba(75,107,78,0.1); color: #4B6B4E; }
+  .badge-miss { background: rgba(184,80,56,0.1); color: #B85038; }
+  .badge-crisis { background: rgba(201,123,106,0.1); color: #C97B6A; }
+  .badge-free { background: rgba(168,195,160,0.2); color: #4B6B4E; }
+  .badge-pct { background: rgba(74,111,165,0.1); color: #4A6FA5; }
+  .badge-off { background: rgba(31,42,55,0.06); color: var(--pewter); }
+  .module-bar-wrap { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid rgba(31,42,55,0.04); }
+  .module-bar-label { font-family: var(--mono); font-size: 10px; color: var(--pewter); width: 28px; flex-shrink: 0; }
+  .module-bar-track { flex: 1; height: 6px; background: var(--mist); border-radius: 3px; overflow: hidden; }
+  .module-bar-fill { height: 100%; background: var(--blue); border-radius: 3px; }
+  .module-bar-count { font-family: var(--mono); font-size: 10px; color: var(--pewter); width: 28px; text-align: right; flex-shrink: 0; }
+</style>
+
+<script>
+  let adminKey = '';
+  let allData = {};
+  let unmatchedRaw = [];
+
+  function showTab(name) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('pane-' + name).style.display = 'block';
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+
+  async function loadAll() {
+    adminKey = document.getElementById('admin-key').value;
+    if (!adminKey) return;
+    try {
+      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=all');
+      const data = await res.json();
+      if (data.error) { alert(data.error); return; }
+      allData = data;
+      document.getElementById('auth-form').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      renderSite(data.search);
+      renderCourse(data.course);
+      renderCodes(data.discounts);
+      renderCardGaps(data.search);
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  document.getElementById('admin-key')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') loadAll();
+  });
+
+  // ── Toggle value field for percent codes ──
+  document.getElementById('code-type')?.addEventListener('change', function() {
+    document.getElementById('code-value-wrap').style.display = this.value === 'free' ? 'none' : 'block';
+  });
+  document.getElementById('code-type')?.dispatchEvent(new Event('change'));
+
+  // ── SITE ──
+  function renderSite(search) {
+    if (!search) return;
+    const s = search.summary;
+    document.getElementById('search-summary').innerHTML = [
+      { label: 'Total searches', value: s.total, color: '#4A6FA5' },
+      { label: 'Matched', value: s.matched, color: '#4B6B4E' },
+      { label: 'Unmatched', value: s.unmatched, color: '#B85038' },
+      { label: 'Crisis', value: s.crisis, color: '#C97B6A' },
+      { label: 'Unique queries', value: s.uniqueQueries, color: '#9B8BB4' },
+      { label: 'Match rate', value: s.total > 0 ? Math.round(s.matched / s.total * 100) + '%' : '—', color: '#4B6B4E' },
+    ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+
+    // Mini chart
+    const days = Object.entries(search.dailyCounts || {}).sort((a, b) => a[0].localeCompare(b[0])).slice(-30);
+    const max = Math.max(...days.map(d => d[1]), 1);
+    document.getElementById('search-chart').innerHTML = `
+      <div style="display:flex;align-items:flex-end;gap:3px;height:60px;background:white;border-radius:10px;padding:12px 16px;border:1px solid rgba(31,42,55,0.06)">
+        ${days.map(([day, count]) => `<div title="${day}: ${count}" style="flex:1;height:${Math.max(4, count/max*100)}%;background:rgba(74,111,165,0.4);border-radius:2px 2px 0 0;min-width:4px"></div>`).join('')}
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:6px">Last 30 days · ${days.length} days with searches</div>
+    `;
+
+    unmatchedRaw = search.unmatchedQueries || [];
+    renderUnmatched(unmatchedRaw);
+
+    document.getElementById('top-cards').innerHTML = (search.topCards || []).map((c, i) => `
+      <div class="row-item">
+        <span style="font-family:var(--mono);font-size:12px;color:var(--pewter);width:32px">${c.count}×</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--blue);width:36px">${c.id}</span>
+        <span>${c.title || ''}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('recent-list').innerHTML = (search.recentSearches || []).map(s => `
+      <div class="row-item">
+        <span class="badge ${s.matched ? 'badge-match' : s.crisis ? 'badge-crisis' : 'badge-miss'}">${s.matched ? 'MATCH' : s.crisis ? 'CRISIS' : 'MISS'}</span>
+        <div style="flex:1;min-width:0">
+          <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"${s.query}"</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:2px">${s.topMatch ? s.topMatch + ' · ' + (s.topMatchTitle || '') + ' · ' : ''}${new Date(s.timestamp).toLocaleString()}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderUnmatched(list) {
+    document.getElementById('unmatched-list').innerHTML = list.length === 0
+      ? '<p style="color:var(--pewter);font-size:14px;font-family:var(--sans)">No unmatched queries yet.</p>'
+      : list.map(q => `
+        <div style="background:rgba(184,80,56,0.04);border:1px solid rgba(184,80,56,0.1);border-radius:10px;padding:12px 16px;margin-bottom:8px">
+          <div style="font-family:var(--serif);font-size:15px;color:var(--slate)">"${q.query}"</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:4px">${new Date(q.timestamp).toLocaleDateString()}</div>
+        </div>
+      `).join('');
+  }
+
+  // ── COURSE ──
+  function renderCourse(course) {
+    if (!course) return;
+    const s = course.summary;
+    document.getElementById('course-summary').innerHTML = [
+      { label: 'Total buyers', value: s.totalPurchasers, color: '#4A6FA5' },
+      { label: 'Completed all 20', value: s.completedCourse, color: '#4B6B4E' },
+      { label: 'Reached halfway', value: s.reachedHalfway, color: '#9B8BB4' },
+      { label: 'Started only', value: s.startedOnly, color: '#C97B6A' },
+      { label: 'Avg modules done', value: s.avgCompletion, color: '#56606E' },
+    ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+
+    // Pattern distribution
+    document.getElementById('pattern-dist').innerHTML = Object.entries(course.patternDistribution || {})
+      .sort((a, b) => b[1] - a[1])
+      .map(([p, count]) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+          <span style="font-family:var(--sans);font-size:13px;color:var(--slate);text-transform:capitalize">${p}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${count}</span>
+        </div>
+      `).join('') || '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No data yet.</p>';
+
+    // Source distribution
+    document.getElementById('source-dist').innerHTML = Object.entries(course.sourceDistribution || {})
+      .sort((a, b) => b[1] - a[1])
+      .map(([s, count]) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+          <span style="font-family:var(--sans);font-size:13px;color:var(--slate)">${s}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${count}</span>
+        </div>
+      `).join('') || '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No data yet.</p>';
+
+    // Module completion rates
+    const maxModCount = Math.max(...Object.values(course.moduleCompletionCounts || {}), 1);
+    const modules = ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16','m17','m18','m19','m20'];
+    document.getElementById('module-rates').innerHTML = modules.map(mid => {
+      const count = (course.moduleCompletionCounts || {})[mid] || 0;
+      const pct = Math.round(count / maxModCount * 100);
+      return `
+        <div class="module-bar-wrap">
+          <span class="module-bar-label">${mid}</span>
+          <div class="module-bar-track"><div class="module-bar-fill" style="width:${pct}%"></div></div>
+          <span class="module-bar-count">${count}</span>
+        </div>
+      `;
+    }).join('');
+
+    // Recent purchasers (anonymised)
+    document.getElementById('purchaser-list').innerHTML = (course.recentPurchasers || []).map(u => `
+      <div class="row-item">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--pewter);width:80px;flex-shrink:0">${u.purchasedAt ? new Date(u.purchasedAt).toLocaleDateString() : '—'}</span>
+        <span style="font-family:var(--sans);font-size:13px;color:var(--slate);text-transform:capitalize;width:100px;flex-shrink:0">${u.pattern || '—'}</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--blue);width:60px;flex-shrink:0">${u.completedCount}/20</span>
+        <span style="font-family:var(--sans);font-size:12px;color:var(--pewter)">${u.source || 'direct'}</span>
+      </div>
+    `).join('') || '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No purchases yet.</p>';
+  }
+
+  // ── CODES ──
+  function renderCodes(discounts) {
+    const codes = (discounts?.codes || []).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+    document.getElementById('codes-list').innerHTML = codes.length === 0
+      ? '<p style="font-family:var(--sans);font-size:14px;color:var(--pewter)">No codes created yet.</p>'
+      : `
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--pewter)">
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Code</th>
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Type</th>
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Uses</th>
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Expires</th>
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Status</th>
+              <th style="text-align:left;padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)">Notes</th>
+              <th style="padding:8px 0;border-bottom:1px solid rgba(31,42,55,0.08)"></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${codes.map(c => `
+              <tr style="border-bottom:1px solid rgba(31,42,55,0.04)">
+                <td style="padding:10px 0;font-family:var(--mono);font-size:12px;color:var(--slate);font-weight:500">${c.code}</td>
+                <td style="padding:10px 0">
+                  <span class="badge ${c.type === 'free' ? 'badge-free' : 'badge-pct'}">${c.type === 'free' ? 'FREE' : c.value + '%'}</span>
+                </td>
+                <td style="padding:10px 0;font-family:var(--mono);font-size:11px;color:var(--pewter)">${c.usedCount}${c.maxUses ? '/' + c.maxUses : ''}</td>
+                <td style="padding:10px 0;font-family:var(--mono);font-size:11px;color:var(--pewter)">${c.expiresAt ? new Date(c.expiresAt).toLocaleDateString() : '—'}</td>
+                <td style="padding:10px 0"><span class="badge ${c.active ? 'badge-match' : 'badge-off'}">${c.active ? 'ACTIVE' : 'OFF'}</span></td>
+                <td style="padding:10px 0;font-family:var(--sans);font-size:12px;color:var(--pewter)">${c.notes || ''}</td>
+                <td style="padding:10px 0;text-align:right;display:flex;gap:8px;justify-content:flex-end">
+                  <button onclick="toggleCode('${c.code}')" style="font-family:var(--mono);font-size:9px;letter-spacing:0.08em;padding:5px 10px;border-radius:6px;border:1px solid rgba(31,42,55,0.1);background:white;cursor:pointer;color:var(--pewter)">${c.active ? 'Pause' : 'Resume'}</button>
+                  <button onclick="deleteCode('${c.code}')" style="font-family:var(--mono);font-size:9px;letter-spacing:0.08em;padding:5px 10px;border-radius:6px;border:1px solid rgba(184,80,56,0.2);background:white;cursor:pointer;color:#B85038">Delete</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+  }
+
+  async function createCode() {
+    const code = document.getElementById('code-input').value.trim();
+    const type = document.getElementById('code-type').value;
+    const value = type === 'free' ? 100 : Number(document.getElementById('code-value').value);
+    const maxUses = document.getElementById('code-max-uses').value ? Number(document.getElementById('code-max-uses').value) : null;
+    const expiresAt = document.getElementById('code-expires').value || null;
+    const notes = document.getElementById('code-notes').value.trim();
+    const fb = document.getElementById('code-feedback');
+    if (!code) { fb.textContent = 'Code required.'; return; }
+    fb.textContent = 'Creating...';
+    try {
+      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create_discount', code, type, value, maxUses, expiresAt, notes }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        fb.textContent = 'Created: ' + data.code.code;
+        document.getElementById('code-input').value = '';
+        document.getElementById('code-notes').value = '';
+        // Reload discounts
+        const res2 = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
+        const d2 = await res2.json();
+        renderCodes(d2.discounts);
+      } else {
+        fb.textContent = data.error || 'Error';
+      }
+    } catch(e) { fb.textContent = e.message; }
+  }
+
+  async function toggleCode(code) {
+    await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'toggle_discount', code }),
+    });
+    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
+    const data = await res.json();
+    renderCodes(data.discounts);
+  }
+
+  async function deleteCode(code) {
+    if (!confirm('Delete code ' + code + '?')) return;
+    await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'delete_discount', code }),
+    });
+    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
+    const data = await res.json();
+    renderCodes(data.discounts);
+  }
+
+  // ── CARD GAPS ──
+  function renderCardGaps(search) {
+    const items = (search?.unmatchedQueries || []);
+    const counts = {};
+    items.forEach(q => {
+      const k = q.query?.toLowerCase().trim();
+      if (k) counts[k] = (counts[k] || 0) + 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    window._cardGaps = sorted;
+    renderFilteredCards(sorted);
+  }
+
+  function renderFilteredCards(sorted) {
+    document.getElementById('cards-gap-list').innerHTML = sorted.length === 0
+      ? '<p style="font-family:var(--sans);font-size:14px;color:var(--pewter)">No unmatched queries yet.</p>'
+      : sorted.map(([query, count]) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-radius:8px;background:rgba(184,80,56,0.03);border:1px solid rgba(184,80,56,0.08);margin-bottom:6px">
+            <span style="font-family:var(--serif);font-size:15px;color:var(--slate)">"${query}"</span>
+            <span style="font-family:var(--mono);font-size:11px;color:var(--pewter);flex-shrink:0;margin-left:16px">${count}×</span>
+          </div>
+        `).join('');
+  }
+
+  function filterCards() {
+    const q = document.getElementById('card-filter').value.toLowerCase();
+    const filtered = (window._cardGaps || []).filter(([query]) => query.includes(q));
+    renderFilteredCards(filtered);
+  }
+
+  function exportCards() {
+    const gaps = window._cardGaps || [];
+    const csv = 'query,count\n' + gaps.map(([q, c]) => `"${q.replace(/"/g,'""')}",${c}`).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'missing-cards-' + new Date().toISOString().substring(0,10) + '.csv';
+    a.click();
+  }
+</script>

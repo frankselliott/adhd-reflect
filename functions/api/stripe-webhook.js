@@ -23,44 +23,37 @@ export async function onRequestPost({ request, env }) {
     const body = await request.text();
     const signature = request.headers.get('stripe-signature');
     const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
-
     if (!webhookSecret || !signature) {
       return new Response('Webhook secret not configured', { status: 400 });
     }
-
     const valid = await verifyStripeSignature(body, signature, webhookSecret);
     if (!valid) {
       return new Response('Invalid signature', { status: 400 });
     }
-
     const event = JSON.parse(body);
-
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
       const email = session.customer_details?.email;
       const pattern = session.metadata?.pattern || '';
-
+      const source = session.metadata?.source || 'direct';
       if (email && env.GROW_DATA) {
         const token = generateToken();
         const userData = {
           email,
           pattern,
           token,
+          source,
           purchasedAt: new Date().toISOString(),
           progress: {},
           reflections: {},
           midCourseCheckin: null,
         };
-        // Store by token (for access validation)
         await env.GROW_DATA.put('token:' + token, JSON.stringify(userData), {
           expirationTtl: 60 * 60 * 24 * 365 * 2,
         });
-        // Store by email (for lookup)
         await env.GROW_DATA.put('email:' + email.toLowerCase().trim(), token, {
           expirationTtl: 60 * 60 * 24 * 365 * 2,
         });
-
-        // Send access email via Sender
         if (env.SENDER_API_KEY) {
           const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
           await fetch('https://api.sender.net/v2/transactional/send', {
@@ -71,15 +64,14 @@ export async function onRequestPost({ request, env }) {
             },
             body: JSON.stringify({
               to: email,
-              subject: 'Your access to When Both of You Are Dysregulated',
-              html: '<p>You\'re in.</p><p><a href="' + accessUrl + '">Click here to start your course</a></p><p>Bookmark this link or save this email — it\'s how you get back in.</p><p>No password needed. Just the link.</p><p>adhdreflect.com</p>',
-              text: 'Your course access link: ' + accessUrl + '\n\nBookmark it or save this email.',
+              subject: 'Your access to Both of You',
+              html: '<p style="font-family:sans-serif">You\'re in.</p><p style="font-family:sans-serif"><a href="' + accessUrl + '" style="background:#4A6FA5;color:white;padding:14px 28px;border-radius:100px;text-decoration:none;display:inline-block">Open Both of You</a></p><p style="font-family:sans-serif;color:#666;font-size:13px">Bookmark this link — it\'s how you get back in. No password needed.</p><p style="font-family:sans-serif;color:#666;font-size:13px">adhdreflect.com</p>',
+              text: 'Your access link: ' + accessUrl,
             }),
           });
         }
       }
     }
-
     return new Response('OK', { status: 200 });
   } catch (e) {
     return new Response('Error: ' + e.message, { status: 500 });
