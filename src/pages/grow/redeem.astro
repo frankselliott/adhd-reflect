@@ -234,9 +234,8 @@ import Base from '../../layouts/Base.astro';
       const data = await res.json();
 
       if (data.accessUrl) {
-        form.style.display = 'none';
-        successEl.style.display = 'flex';
-        accessLink.href = data.accessUrl;
+        btn.textContent = 'Opening your program...';
+        window.location.href = data.accessUrl;
       } else {
         showError(data.error || 'That code didn\'t work. Check the spelling and try again.');
         btn.disabled = false;
