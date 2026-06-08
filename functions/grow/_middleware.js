@@ -3,7 +3,7 @@ export async function onRequest({ request, env, next }) {
   const path = url.pathname;
 
   // Public grow pages — no auth needed
-  const publicPaths = ['/grow', '/grow/', '/grow/access', '/grow/welcome'];
+  const publicPaths = ['/grow', '/grow/', '/grow/access', '/grow/welcome', '/grow/redeem', '/grow/free-access'];
   if (publicPaths.includes(path)) {
     return next();
   }
