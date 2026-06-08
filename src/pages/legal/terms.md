@@ -156,7 +156,7 @@ We do our best to check the resources we recommend, but we cannot promise that:
 - the linked site is suitable for you;
 - the linked service is right for your situation.
 
-Going to a third-party site means you are now under their terms and privacy policy, not ours. See the [Affiliate and referral disclosure](/affiliate-and-referral-disclosure) for how we handle paid links.
+Going to a third-party site means you are now under their terms and privacy policy, not ours.
 
 ---
 
