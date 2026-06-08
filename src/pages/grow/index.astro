@@ -2,6 +2,23 @@
 import Base from '../../layouts/Base.astro';
 const authRequired = Astro.url.searchParams.get('auth');
 const invalid = Astro.url.searchParams.get('invalid');
+
+// Detect country from Cloudflare header
+const country = Astro.request.headers.get('cf-ipcountry') || 'US';
+
+const EU_COUNTRIES = ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE','IT','LT','LU','LV','MT','NL','PL','PT','RO','SE','SI','SK'];
+
+const PRICES: Record<string, { symbol: string; amount: string; note: string }> = {
+  AU: { symbol: 'A$', amount: '75',  note: 'AUD' },
+  GB: { symbol: '£',  amount: '39',  note: 'GBP' },
+  CA: { symbol: 'C$', amount: '67',  note: 'CAD' },
+  NZ: { symbol: 'NZ$',amount: '82',  note: 'NZD' },
+  EU: { symbol: '€',  amount: '45',  note: 'EUR' },
+  US: { symbol: '$',  amount: '49',  note: 'USD' },
+};
+
+const priceKey = EU_COUNTRIES.includes(country) ? 'EU' : (PRICES[country] ? country : 'US');
+const price = PRICES[priceKey];
 ---
 <Base title="Both of You — A self-guided program" description="For parents with ADHD raising children with ADHD. 20 modules. Works on a phone. No live sessions." current="grow">
 
@@ -22,7 +39,7 @@ const invalid = Astro.url.searchParams.get('invalid');
       <div class="hero-label">A self-guided program from ADHD Reflect</div>
       <h1 class="hero-title">Both of You</h1>
       <p class="hero-sub">Every parenting course assumes the adult in the room is the calm one.<br/>This one doesn't.</p>
-      <a href="#buy" class="hero-cta">Start for $49</a>
+      <a href="#buy" class="hero-cta">Start for {price.symbol}{price.amount}</a>
       <p class="hero-cta-note">One payment. Works on any device. No live sessions.</p>
     </div>
   </section>
@@ -221,7 +238,7 @@ const invalid = Astro.url.searchParams.get('invalid');
     <div class="container">
       <div class="buy-card">
         <div class="buy-product-name">Both of You</div>
-        <div class="buy-price">$49 <span class="buy-currency">USD</span></div>
+        <div class="buy-price">{price.symbol}{price.amount} <span class="buy-currency">{price.note}</span></div>
         <div class="buy-price-note">One payment. Lifetime access. All 20 modules.</div>
         <button class="buy-cta" id="grow-checkout-btn">Start the program</button>
         <p class="buy-small">You'll get an access link by email straight after payment.<br/>No account needed. No password to remember. Works on any device.</p>
