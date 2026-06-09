@@ -562,6 +562,18 @@ export function GrowModule({ moduleId }) {
     return () => document.removeEventListener('input', handleInput);
   }, [handleFieldChange]);
 
+  // Split content into html/animation segments — must be before early returns (hooks rules)
+  const contentSegments = useMemo(() => {
+    if (!module) return [];
+    const html = processContent(MODULE_CONTENT[module.id] || '');
+    const parts = html.split(/(<div data-animation="[^"]+"><\/div>)/g);
+    return parts.map(part => {
+      const match = part.match(/^<div data-animation="([^"]+)"><\/div>$/);
+      if (match) return { type: 'animation', name: match[1] };
+      return { type: 'html', content: part };
+    }).filter(s => s.type === 'animation' || s.content?.trim());
+  }, [module?.id, processContent]);
+
   const handleSubmit = async () => {
     if (!reflection.trim() || submitting) return;
     setSubmitting(true);
@@ -604,17 +616,6 @@ export function GrowModule({ moduleId }) {
       Loading...
     </div>
   );
-
-  // Split content into html/animation segments for inline rendering
-  const contentSegments = useMemo(() => {
-    const html = processContent(MODULE_CONTENT[module.id] || '');
-    const parts = html.split(/(<div data-animation="[^"]+"><\/div>)/g);
-    return parts.map(part => {
-      const match = part.match(/^<div data-animation="([^"]+)"><\/div>$/);
-      if (match) return { type: 'animation', name: match[1] };
-      return { type: 'html', content: part };
-    }).filter(s => s.type === 'animation' || s.content?.trim());
-  }, [module.id, processContent]);
 
   return (
     <>
