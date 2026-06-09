@@ -41,7 +41,7 @@ export const MODULES = [
     suggestedFor: ['reactor','juggler','looper','spiraller','escaper'],
     cardLink: { id: 'fine-at-school-falling-apart-at-home', label: 'Fine at school, falling apart at home' },
     extraCards: [{id: 'fine-at-school-falling-apart-at-home', label: 'Fine at school, falling apart at home', note: 'Start here.'}, {id: 'the-after-school-collision', label: 'The after-school collision', note: 'The collision of two mask drops.'}, {id: 'they-came-home-from-school-and-emotionally-dumped-everything-on-me', label: 'They came home and emotionally dumped everything on me', note: 'When the dumping is verbal.'}],
-    reflectionPrompt: "Think of one moment this week when your child fell apart. What do you think was underneath it — what had been building before the thing that broke it? One sentence.",
+    reflectionPrompt: "Think of one moment this week when your child fell apart. What had been building before the thing that broke it — the invisible load underneath the trigger?",
     practicePrompt: "When your child falls apart, say 'That's really upsetting you' before anything else. Then wait.",
     rightNowTitle: "They saved the worst of it for you. That's trust.",
     rightNowScript: "That's really upsetting you.",
@@ -57,7 +57,7 @@ export const MODULES = [
     suggestedFor: ['reactor','juggler','looper','spiraller','escaper'],
     cardLink: { id: 'when-the-escalation-wont-stop-and-neither-of-you-can', label: 'When the escalation won\'t stop and neither of you can' },
     extraCards: [{"id": "when-the-escalation-wont-stop-and-neither-of-you-can", "label": "When the escalation won't stop and neither of you can", "note": "The collision in real time."}, {"id": "when-their-meltdown-triggers-yours", "label": "When their meltdown triggers yours", "note": "The moment of joining."}, {"id": "one-of-us-stays-calm-and-the-other-one-escalates", "label": "One of us stays calm and the other escalates", "note": "When the dynamic is asymmetric."}],
-    reflectionPrompt: "Think of the last time both of you went under at the same time. What was the first signal — in your body — that you'd joined rather than contained? One sentence.",
+    reflectionPrompt: "Think of the last time both of you went under at the same time. What was the first signal — in your body — that you'd joined the meltdown rather than contained it?",
     practicePrompt: "Notice the moment you join the meltdown rather than contain it. Don't try to stop it. Just notice the moment of joining.",
     rightNowTitle: "You can't regulate them while you're dysregulated.",
     rightNowScript: "I need a minute. I'll be back.",
@@ -217,7 +217,7 @@ export const MODULES = [
     suggestedFor: ['escaper'],
     cardLink: { id: 'shutting-down-and-going-cold', label: 'Shutting down and going cold' },
     extraCards: [{"id": "shutting-down-and-going-cold", "label": "Shutting down and going cold", "note": "Start here."}, {"id": "leaving-when-you-should-have-stayed", "label": "Leaving when you should have stayed", "note": "The exit when you shouldn't."}],
-    reflectionPrompt: "When you shut down, where do you usually go — what are you doing, or not doing? What does the room feel like when you come back? One sentence.",
+    reflectionPrompt: "When you shut down, what does your child do — what do you notice when you come back to the room?",
     practicePrompt: "Notice a shutdown and name it to yourself this week. 'I've shut down. I need to come back.'",
     rightNowTitle: "Shutdown is protection, not indifference.",
     rightNowScript: "I've shut down. I need to come back.",
@@ -322,11 +322,13 @@ export const MODULES = [
 ];
 
 export const PATTERN_SUGGESTIONS = {
-  reactor:   ['m1','m2','m3','m4','m5','m6','m7'],
-  juggler:   ['m1','m2','m3','m4','m5','m8','m9'],
-  looper:    ['m1','m2','m3','m4','m5','m10','m11'],
-  spiraller: ['m1','m2','m3','m4','m5','m12','m13'],
-  escaper:   ['m1','m2','m3','m4','m5','m14','m15'],
+  // Foundation (M1-M5) + 3 pattern-specific modules with cross-pattern routing
+  // Based on most common co-occurring patterns from research
+  reactor:   ['m1','m2','m3','m4','m5','m6','m7','m12'],  // Reactors commonly spiral after explosion
+  juggler:   ['m1','m2','m3','m4','m5','m8','m9','m10'],  // Juggler mornings often end in argument loops
+  looper:    ['m1','m2','m3','m4','m5','m10','m11','m12'], // Loopers commonly spiral after the loop
+  spiraller: ['m1','m2','m3','m4','m5','m12','m13','m6'],  // Spiraller shame often follows a Reactor moment
+  escaper:   ['m1','m2','m3','m4','m5','m14','m15','m17'], // Escaper pattern most affects household relationships
 };
 
 export function getNextSuggestion(completedIds, pattern) {
@@ -341,7 +343,7 @@ export function getNextSuggestion(completedIds, pattern) {
 export const MODULE_CONTENT = {
   'm1': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> Why standard parenting advice keeps failing you — and why that failure is structural, not personal. This is the foundation everything else builds on. 15 minutes.
+  <strong>What this module is about:</strong> Why standard parenting advice keeps failing you — and why that failure is structural, not personal. This is the foundation everything else builds on. 18 minutes.
 </div>
 
 <p>It's 5.47pm. The kitchen is a mess. Your kid is losing it over something small. You know exactly what you're supposed to do.</p>
@@ -472,7 +474,7 @@ export const MODULE_CONTENT = {
 
   'm3': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> What your child's nervous system is actually doing when they fall apart — and why the timing of your response matters more than its content. 12 minutes.
+  <strong>What this module is about:</strong> What your child's nervous system is actually doing when they fall apart — and why the timing of your response matters more than its content. 15 minutes.
 </div>
 
 <p>They held it together all day. School, rules, social navigation, impulse suppression — six hours of it. Then they came through your door and fell apart over the wrong colour cup.</p>
@@ -596,7 +598,7 @@ export const MODULE_CONTENT = {
 
   'm5': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> What repair actually is — not the big conversation, not the extended apology — and why two sentences is enough. 12 minutes.
+  <strong>What this module is about:</strong> What repair actually is — not the big conversation, not the extended apology — and why two sentences is enough. 14 minutes.
 </div>
 
 <p>The hard moment lasted four minutes. You've been carrying the weight of it for two days. Not because anything else happened. Because nothing happened after it. No repair.</p>
@@ -931,7 +933,7 @@ export const MODULE_CONTENT = {
 
   'm11': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> For Argument Loopers — how to stop the argument without feeling like you've lost it, and how to deliver the lesson when it can actually land. 10 minutes.
+  <strong>What this module is about:</strong> For Argument Loopers — how to stop the argument without feeling like you've lost it, and how to deliver the lesson when it can actually land. 13 minutes.
 </div>
 
 <p>Stopping feels like losing. Like you're letting them think they were right. Like the point evaporates.</p>
@@ -1189,7 +1191,8 @@ export const MODULE_CONTENT = {
 
   'm16': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> You and your partner were in the same room, watching the same moment — and have completely different versions of what happened. Why that's true, and how to use it. 12 minutes.
+  <strong>What this module is about:</strong> You and your partner were in the same room, watching the same moment — and have completely different versions of what happened. Why that's true, and how to use it. 15 minutes.
+  <strong>Layer change:</strong> The foundation and pattern modules were about your own nervous system. The next five modules are about the systems your household runs on — your partner, your other child, the school, and what happens when the ADHD picture is more complex than one diagnosis.
 </div>
 
 <p>You were both there. You both watched it happen.</p>
@@ -1288,7 +1291,7 @@ export const MODULE_CONTENT = {
 
   'm18': `
 <div class="module-reentry">
-  <strong>What this module is about:</strong> The school relationship — why the gap between what the school sees and what you know keeps existing, and how to advocate for your child without burning the relationship. 12 minutes.
+  <strong>What this module is about:</strong> The school relationship — why the gap between what the school sees and what you know keeps existing, and how to advocate for your child without burning the relationship. 15 minutes.
 </div>
 
 <p>Their name on your phone makes your stomach drop before you've read the message.</p>
@@ -1340,6 +1343,7 @@ export const MODULE_CONTENT = {
   'm19': `
 <div class="module-reentry">
   <strong>What this module is about:</strong> When something about your child doesn't quite fit the ADHD explanation — how to know when something else may also be present, and what to do with that feeling. 12 minutes.
+  <strong>Note:</strong> This module applies most directly if you've been sensing that the ADHD picture doesn't fully explain your child. If your child's presentation feels straightforward, read through the first section and move on — you can return to this if things change.
 </div>
 
 <p>You've done the reading. You understand the ADHD piece. You have a working framework for why your household is the way it is.</p>
@@ -1441,8 +1445,8 @@ export const MODULE_CONTENT = {
 </div>
 
 <h3>One last thing</h3>
-<p>You came in looking for what to do differently. You did the work of 20 modules — not because you were supposed to, but because you wanted to get better at this. That's not nothing.</p>
-<p>For a brain that struggles to complete things, for a parent who is managing more than most people can see, for someone who showed up for this even on the days it would have been easier not to:</p>
+<p>You came in looking for what to do differently. Whether you did 7 modules or 20, you did the work — not because you were supposed to, but because you wanted to get better at this for your child and for yourself. That's not nothing.</p>
+<p>For a brain that struggles to complete things. For a parent who is managing more than most people can see. For someone who showed up for this even on the days it would have been easier not to.</p>
 <p><strong>That's a lot. For a brain like yours, it's actually a lot.</strong></p>
 `,
 };
