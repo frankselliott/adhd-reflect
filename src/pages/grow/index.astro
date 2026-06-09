@@ -6,13 +6,71 @@ const invalid = Astro.url.searchParams.get('invalid');
 <Base title="Both of You — A self-guided program" description="For parents with ADHD raising children with ADHD. 20 modules. Works on a phone. No live sessions." current="grow">
 
   {authRequired && (
-    <div class="grow-banner">
-      <p>Use the access link from your confirmation email to get back in. Can't find it? <a href="mailto:hello@adhdreflect.com">Email us.</a></p>
+    <div class="grow-access-gate">
+      <div class="grow-access-inner">
+        <div class="grow-access-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="15" stroke="#4A6FA5" stroke-width="1.5"/>
+            <circle cx="16" cy="13" r="4" stroke="#4A6FA5" stroke-width="1.5"/>
+            <path d="M8 26c0-4 3.6-7 8-7s8 3 8 7" stroke="#4A6FA5" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 class="grow-access-title">Get your access link</h2>
+        <p class="grow-access-body">Enter the email you used when you purchased Both of You. We'll send your access link — works on any device.</p>
+        <div class="grow-access-form" id="gate-form">
+          <input
+            id="gate-email"
+            type="email"
+            placeholder="your@email.com"
+            class="grow-access-input"
+            autocomplete="email"
+            autofocus
+          />
+          <button id="gate-btn" class="grow-access-btn">Send my link</button>
+        </div>
+        <div id="gate-success" style="display:none" class="grow-access-success">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="8" stroke="#7FA88E" stroke-width="1.2"/>
+            <path d="M5 9l3 3 5-6" stroke="#7FA88E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Check your inbox — your link is on its way. Check spam if it doesn't arrive in a minute.
+        </div>
+        <div id="gate-error" style="display:none" class="grow-access-error"></div>
+        <p class="grow-access-footer">New here? <a href="#buy">See what's included</a> · Haven't purchased? <a href="#buy">Get Both of You</a></p>
+      </div>
     </div>
   )}
   {invalid && (
-    <div class="grow-banner grow-banner-warn">
-      <p>That link isn't valid. Try copying the full link from your email. Still stuck? <a href="mailto:hello@adhdreflect.com">Email us.</a></p>
+    <div class="grow-access-gate">
+      <div class="grow-access-inner">
+        <div class="grow-access-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="15" stroke="#C97B6A" stroke-width="1.5"/>
+            <path d="M16 9v8M16 20v2" stroke="#C97B6A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 class="grow-access-title">That link didn't work</h2>
+        <p class="grow-access-body">Links expire or get clipped by email clients. Enter your email and we'll send a fresh one.</p>
+        <div class="grow-access-form" id="gate-form">
+          <input
+            id="gate-email"
+            type="email"
+            placeholder="your@email.com"
+            class="grow-access-input"
+            autocomplete="email"
+            autofocus
+          />
+          <button id="gate-btn" class="grow-access-btn">Send a new link</button>
+        </div>
+        <div id="gate-success" style="display:none" class="grow-access-success">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="8" stroke="#7FA88E" stroke-width="1.2"/>
+            <path d="M5 9l3 3 5-6" stroke="#7FA88E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Check your inbox — a fresh link is on its way.
+        </div>
+        <div id="gate-error" style="display:none" class="grow-access-error"></div>
+      </div>
     </div>
   )}
 
@@ -722,7 +780,101 @@ const invalid = Astro.url.searchParams.get('invalid');
   line-height: 1.6;
 }
 
-/* ─── Recover access ─── */
+/* ─── Access gate ─── */
+.grow-access-gate {
+  padding: 60px var(--page-pad) 40px;
+  background: var(--mist);
+  border-bottom: 1px solid var(--mist-border);
+}
+.grow-access-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+.grow-access-icon {
+  margin-bottom: 20px;
+}
+.grow-access-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 36;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.grow-access-body {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--pewter);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.grow-access-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.grow-access-input {
+  flex: 1;
+  padding: 14px 18px;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--slate);
+  background: white;
+  border: 2px solid rgba(31,42,55,0.12);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.grow-access-input:focus { border-color: var(--blue); }
+.grow-access-btn {
+  padding: 14px 24px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.grow-access-btn:hover { background: var(--blue-deep); }
+.grow-access-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.grow-access-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--sage-dark);
+  background: rgba(168,195,160,0.12);
+  border: 1px solid rgba(168,195,160,0.35);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  text-align: left;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.grow-access-error {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--clay);
+  margin-bottom: 12px;
+}
+.grow-access-footer {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+}
+.grow-access-footer a { color: var(--blue); text-decoration: none; }
+.grow-access-footer a:hover { text-decoration: underline; }
+@media (max-width: 480px) {
+  .grow-access-form { flex-direction: column; }
+}
+
 .section-recover {
   padding: var(--space-3xl) 0;
   background: var(--mist);
@@ -882,7 +1034,43 @@ const invalid = Astro.url.searchParams.get('invalid');
     });
   }
 
-  // Recovery form
+  // Access gate form (shown when redirected with ?auth=required or ?auth=invalid)
+  const gateBtn = document.getElementById('gate-btn');
+  const gateEmail = document.getElementById('gate-email');
+  const gateSuccess = document.getElementById('gate-success');
+  const gateError = document.getElementById('gate-error');
+  const gateForm = document.getElementById('gate-form');
+
+  if (gateBtn && gateEmail) {
+    gateEmail.addEventListener('keydown', e => {
+      if (e.key === 'Enter') gateBtn.click();
+    });
+    gateBtn.addEventListener('click', async () => {
+      const email = gateEmail.value.trim();
+      if (!email) { gateEmail.focus(); return; }
+      gateBtn.disabled = true;
+      gateBtn.textContent = 'Sending...';
+      if (gateError) gateError.style.display = 'none';
+      try {
+        await fetch('/api/grow/recover', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (gateForm) gateForm.style.display = 'none';
+        if (gateSuccess) gateSuccess.style.display = 'flex';
+      } catch(e) {
+        gateBtn.disabled = false;
+        gateBtn.textContent = 'Send my link';
+        if (gateError) {
+          gateError.textContent = 'Something went wrong. Try again or email hello@adhdreflect.com.';
+          gateError.style.display = 'block';
+        }
+      }
+    });
+  }
+
+
   const recoverBtn = document.getElementById('recover-btn');
   const recoverEmail = document.getElementById('recover-email');
   const recoverSuccess = document.getElementById('recover-success');
