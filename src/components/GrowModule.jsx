@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
   ContainerAnimation,
+  ContainerAnimationParent,
+  ContainerAnimationChild,
   NinetySecondAnimation,
   MaskingCostAnimation,
   AmplificationAnimation,
@@ -13,7 +15,9 @@ import {
   InputCapacityAnimation,
   InvisibleStepsAnimation,
   OpenLoopAnimation,
+  LoopExitAnimation,
   SpiralForkAnimation,
+  RepairSpirallerAnimation,
   TwoVersionsAnimation,
   NotchUpstreamAnimation,
 } from './GrowAnimations2.jsx';
