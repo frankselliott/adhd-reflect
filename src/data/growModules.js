@@ -355,6 +355,7 @@ export const MODULE_CONTENT = {
 <p>When that's true, the advice works. Stay calm. Lower your voice. Hold the boundary with warmth. Set natural consequences. When it's not true — when the adult also has ADHD, also dysregulates, also has a shorter gap between trigger and explosion — the advice doesn't just fail. It adds shame to an already impossible situation. Because you know what you're supposed to do. You can't do it. And that gap is its own kind of exhausting.</p>
 <p><strong>If you've spent years blaming yourself for that gap: that blame is the wrong diagnosis.</strong></p>
 
+<div data-animation="AdviceGapAnimation"></div>
 <h3>How common this actually is</h3>
 <div class="module-stat"><div class="module-stat-number">50%</div><div class="module-stat-body"><div class="module-stat-label">of parents raising an ADHD child may have ADHD themselves</div><div class="module-stat-sub">Not a fringe case. A common family configuration the parenting industry has largely ignored.</div></div></div>
 <p>In 2002, researchers first established that standard behavioural parent training is significantly less effective when the parent has ADHD. Not slightly less — significantly. The techniques require working memory, consistency, and the ability to execute a strategy at the exact moment your own nervous system is under maximum pressure. ADHD undermines all three simultaneously.</p>
@@ -432,8 +433,10 @@ export const MODULE_CONTENT = {
   <p>The thing that triggered you was probably not the cause. <strong>It was the cup that overflowed a container that was already full.</strong> That's the stack — and the stack is where change is actually possible.</p>
 </div>
 
+<div data-animation="MaskingCostAnimation"></div>
 <div class="module-pullquote">If you're worse at home than at work, that's not hypocrisy. That's the math of a limited resource hitting its highest demand.</div>
 <div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
+<div data-animation="NinetySecondAnimation"></div>
 <h3>The signal that arrives before the explosion</h3>
 <p>The moment before the reaction has a physical signature. It arrives before the words, before the decision, before you've done anything yet. Most people have never been asked to look for it.</p>
 <p>Common signals in ADHD parents:</p>
@@ -483,6 +486,7 @@ export const MODULE_CONTENT = {
 <p>This is called after-school restraint collapse. It's well-documented. It's not a sign that your home is failing. <strong>It's a sign that your child feels safe enough to stop holding it together.</strong></p>
 <p>In a dual-ADHD household, this lands differently. You've also been holding it together all day. Your own mask drops at roughly the same time. Two people hitting their regulatory limits at the same time in the same space — that's the collision, not a parenting failure.</p>
 
+<div data-animation="ContainerAnimationChild"></div>
 <div class="module-pullquote">The teacher got the performance. You get what's left when the performance is over. That's not a failure of your household. It's evidence that your home is safe.</div>
 <h3>What's happening inside the meltdown</h3>
 <p>Two things run simultaneously.</p>
@@ -549,12 +553,14 @@ export const MODULE_CONTENT = {
   <p>You just identified your joining point. That specific moment — the posture shift, the volume change, the thing that was said — is the intervention point. <strong>Once you can find it in retrospect, you can start finding it earlier in real time.</strong></p>
 </div>
 
+<div data-animation="AmplificationAnimation"></div>
+<div data-animation="CoRegulationAnimation"></div>
 <div class="module-insight"><div class="module-insight-label">The structural reality</div><p>When you're stressed, the mechanism that would help your child regulate goes offline. <strong>Not weakened. Offline.</strong> This was measured in two brains simultaneously. It's not a theory.</p></div>
 <h3>The one move that works during the collision</h3>
 <p>You cannot regulate them while you're dysregulated. This is structural.</p>
 <p>The only useful intervention is to reduce the mutual input — yours reaching them, theirs reaching you. Physical distance is the most reliable tool. Not permanent withdrawal. Not punishment.</p>
-<p>Sixty seconds in a different room. Before you go, say one thing:
-<div class="module-script">I need a minute. I'll be back.</div></p>
+<p>Sixty seconds in a different room. Before you go, say one thing:</p>
+<div class="module-script">I need a minute. I'll be back.</div>
 <p>That sentence matters. It prevents your absence from being read as abandonment or punishment. It names what you're doing. It promises return. The 60 seconds give the neurochemical peak time to begin stepping down — yours and, without your escalation feeding it, theirs too.</p>
 <p><strong>When you return: fewer words, lower volume, no attempt to resolve anything yet.</strong> You're not back to finish the argument. You're back to restore enough regulation for a conversation to eventually be possible.</p>
 
@@ -602,7 +608,8 @@ export const MODULE_CONTENT = {
   <p>You don't have to deliver this immediately. But having it written means you have it ready. <strong>The hardest part of repair for ADHD parents is composing it in the moment after the incident. Write it now, before you need it.</strong></p>
 </div>
 
-<div class="module-pullquote">Children repair from hard moments when the repair is consistent. What damages relationships is not the rupture. It's the absence of repair.</div>
+<div data-animation="RepairAnimation"></div>
+<div class="module-pullquote">The repair is not the big conversation. It's not the apology that needs their forgiveness. It's two sentences, followed by something ordinary.</div>
 <h3>Why two sentences is more powerful than ten</h3>
 <p>Children repair from hard moments when the repair is consistent. What damages the relationship more than the rupture is the cycle — intensity, then withdrawal, then over-warmth, then the next intensity, with no clean acknowledgment of what happened in between.</p>
 <p>A brief, specific, unconditional repair closes the loop. No negotiation. No requirement for forgiveness. Just: I see what happened, I own my part, I'm still here.</p>
@@ -653,6 +660,7 @@ export const MODULE_CONTENT = {
   <p>Now look at the stack. The explosion makes complete sense when you see it. <strong>The question isn't "why did I snap over the cup?" It's "what was already in the container?"</strong></p>
 </div>
 
+<div data-animation="ContainerAnimationParent"></div>
 <h3>Finding your signal</h3>
 <p>Your physical signal arrives about 30 seconds before the explosion. It's consistent — the same sequence every time, because it's your specific nervous system hitting your specific threshold.</p>
 <p>Common Reactor signals:</p>
@@ -666,6 +674,7 @@ export const MODULE_CONTENT = {
 <p>This week, find yours. Not to stop the reaction yet. Just to know what it feels like. Write it down the first time you notice it. <strong>Once you know your signal, you have a 30-second window that didn't exist before.</strong></p>
 <p>My signal: _______________ (fill this in once you know it)</p>
 
+<div data-animation="SignalAnimation"></div>
 <div class="module-insight"><div class="module-insight-label">The intervention point</div><p>You cannot change whether the cup gets knocked over. <strong>You can change what's already in the container when it does.</strong> The stack is where change is possible — not the spark.</p></div>
 <h3>What to do in those 30 seconds</h3>
 <p>One thing. <strong>Create distance before you speak.</strong></p>
@@ -700,6 +709,7 @@ export const MODULE_CONTENT = {
 <p>When a child's nervous system is in high arousal — mid-argument, mid-refusal, mid-meltdown — its capacity to receive information drops significantly. Words arrive. They don't register as meaning. What the nervous system processes is tone, volume, and intensity, which it reads as threat level rather than content.</p>
 <p>The more you escalate your input, the more your child reads danger rather than lesson. The content of what you're saying has become irrelevant. They're not ignoring you. <strong>The system that would receive the lesson is offline.</strong> Every sentence past the third is working against you — not because the point isn't valid, but because the conditions required to deliver it don't exist.</p>
 
+<div data-animation="InputCapacityAnimation"></div>
 <h3>Why Reactors over-explain specifically</h3>
 <p>The Reactor pattern responds to overwhelm by increasing output. More words. More volume. More urgency. As if enough explanation will break through the closed system.</p>
 <p>There's also a justice component — if you can make them understand, the unfairness resolves. The need to be heard and understood is real. The method isn't working.</p>
@@ -758,6 +768,7 @@ export const MODULE_CONTENT = {
 <p><strong>Working memory holds the invisible layer.</strong> In ADHD brains, working memory is unreliable under load — it drops things, not because you don't care about them, but because the system that holds them fails when the conditions are demanding. And morning is maximum demand.</p>
 <p>The chart shows the visible steps. The invisible steps are still in your head. That's where the collapse happens.</p>
 
+<div data-animation="InvisibleStepsAnimation"></div>
 <div class="module-experiment">
   <div class="module-experiment-label">Try this now — takes 3 minutes</div>
   <p>Map your morning. For each transition, note the invisible step that happens (or should happen) between visible steps:</p>
@@ -842,6 +853,7 @@ export const MODULE_CONTENT = {
 <p>Now you're five exchanges in, both louder, and the original point has been completely lost inside the argument about the argument.</p>
 <p><strong>The loop is not a failure of willpower. Your brain is chasing something it cannot have right now: resolution. And it will keep running until it gets it or you stop it.</strong></p>
 
+<div data-animation="OpenLoopAnimation"></div>
 <div class="module-divider"><div class="module-divider-line"></div><div class="module-divider-dot"></div><div class="module-divider-line"></div></div>
 <h3>Why ADHD brains can't leave loops open</h3>
 <p>ADHD brains experience incomplete things — unresolved arguments, unexplained rules, points that weren't acknowledged — as genuinely uncomfortable. Not emotionally uncomfortable in the way anyone might feel. Neurologically uncomfortable, in the way a running background process uses processing capacity even when you're not thinking about it.</p>
@@ -864,12 +876,9 @@ export const MODULE_CONTENT = {
 
 <h3>The exit point</h3>
 <p>The moment you know it's not working already exists. You can feel when the conversation has passed the point of usefulness. This week, that moment becomes the exit point.</p>
-<p>One sentence:</p>
-<ul>
-<li><em>"We're not talking about this right now."</em></li>
-<li><em>"My answer isn't changing."</em></li>
-<li><em>"I've said what I needed to say."</em></li>
-</ul>
+<div class="module-script">We're not talking about this right now.</div>
+<div class="module-script">My answer isn't changing.</div>
+<div class="module-script">I've said what I needed to say.</div>
 <p>Then move physically. The discomfort of the open loop is real. It is also survivable. <strong>Tolerating that discomfort — not eliminating it, tolerating it — is the practice.</strong></p>
 
 <div class="module-ifthen">
@@ -899,13 +908,11 @@ export const MODULE_CONTENT = {
 <p>The conditions for delivering it don't currently exist. A dysregulated child mid-argument can't receive a lesson — the nervous system reads your intensity as threat, not content. The lesson gets lost in the delivery.</p>
 <p>Twelve hours later, when both of you are calm, you say the thing in two sentences. It takes two minutes. It lands. <strong>Because the atmosphere can hold it now. The lesson delayed is more effective than the lesson forced into a closed system.</strong></p>
 
+<div data-animation="LoopExitAnimation"></div>
 <h3>The stop-script</h3>
-<p>One sentence. Said once. Then physical movement.</p>
-<ul>
-<li><em>"We're not talking about this right now."</em></li>
-<li><em>"I've said what I needed to say. I'm done."</em></li>
-<li><em>"My answer isn't changing. We're done."</em></li>
-</ul>
+<div class="module-script">We're not talking about this right now.</div>
+<div class="module-script">I've said what I needed to say. I'm done.</div>
+<div class="module-script">My answer isn't changing. We're done.</div>
 <p>After the sentence, move. Leave the room, turn toward something else, pick up a glass of water. The movement signals to your own nervous system that you've actually disengaged — not just stopped speaking temporarily.</p>
 <p><strong>If they push back, do not repeat the sentence.</strong> Repeating it is re-entering the loop through a different door. The sentence was said. It doesn't need saying again.</p>
 
@@ -962,6 +969,7 @@ export const MODULE_CONTENT = {
   <p>You can see the split now — where accountability ended and the spiral started. <strong>The boundary between those two things is where the intervention goes.</strong></p>
 </div>
 
+<div data-animation="SpiralForkAnimation"></div>
 <div class="module-pullquote">Accountability asks: what happened, what was my part, what do I do now? The spiral asks: what does this mean about who I am? The first has an end point. The second doesn't.</div>
 <h3>What happens to your child while the spiral runs</h3>
 <p>Your child experienced the hard moment. They've either moved on or they're waiting for something to change.</p>
@@ -1003,6 +1011,7 @@ export const MODULE_CONTENT = {
 <p><strong>The moment the repair becomes about your feelings, it stops being a repair and becomes a request.</strong> A request for your child to reassure you. They already absorbed the hard moment. They shouldn't have to absorb the aftermath of your feelings about it too.</p>
 <p>Your guilt is real and deserves attention. But it deserves your own attention — not your child's.</p>
 
+<div data-animation="RepairSpirallerAnimation"></div>
 <h3>What a Spiraller repair actually looks like</h3>
 <p>Shorter than you expect. Calmer than you think you can manage. Unconditional — meaning it doesn't wait for a response.</p>
 <p>Two sentences. Sentence one: what happened, stated simply, no qualifications. Sentence two: what you're going to try — not a promise, a try.</p>
@@ -1156,6 +1165,7 @@ export const MODULE_CONTENT = {
 <p>They see the reaction. They don't see the 40 minutes of load that preceded it. They see you snap over something small. They don't know the noise had been too loud since 4pm, that you'd repeated the instruction four times, that you hadn't eaten, that your medication wore off an hour earlier, that something from this morning was still unresolved in the background.</p>
 <p>This is not negligence on their part. The load was invisible. They weren't carrying it so they weren't tracking it. You cannot see what you're not holding.</p>
 
+<div data-animation="TwoVersionsAnimation"></div>
 <div class="module-pullquote">They see the match. They don't see what was already burning.</div>
 <h3>What you might not be seeing about your partner</h3>
 <p>Your partner's version of parenting consistency — staying regulated through sustained demands, holding a boundary calmly across multiple incidents — is not always available to you. You know this.</p>
@@ -1367,6 +1377,7 @@ export const MODULE_CONTENT = {
   <p>That last answer is your ongoing goal. Not the parenting books version of good. <strong>One notch earlier than you were when you started this course.</strong></p>
 </div>
 
+<div data-animation="NotchUpstreamAnimation"></div>
 <h3>What progress looks like here</h3>
 <p>It doesn't look like the parenting books. It doesn't look like the calm parent online. It doesn't show up in individual incidents.</p>
 <p>It looks like: you noticed the signal more often this month than last month. You made one repair that you would have skipped six months ago. You used the stop-script once when you would have kept going. You named a shutdown to yourself, even if you didn't name it out loud. You mapped the stack after an explosion and understood it better than you would have before.</p>

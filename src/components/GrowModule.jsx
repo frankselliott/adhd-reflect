@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
   ContainerAnimation,
   NinetySecondAnimation,
@@ -605,7 +605,16 @@ export function GrowModule({ moduleId }) {
     </div>
   );
 
-  const processedContent = processContent(MODULE_CONTENT[module.id] || '');
+  // Split content into html/animation segments for inline rendering
+  const contentSegments = useMemo(() => {
+    const html = processContent(MODULE_CONTENT[module.id] || '');
+    const parts = html.split(/(<div data-animation="[^"]+"><\/div>)/g);
+    return parts.map(part => {
+      const match = part.match(/^<div data-animation="([^"]+)"><\/div>$/);
+      if (match) return { type: 'animation', name: match[1] };
+      return { type: 'html', content: part };
+    }).filter(s => s.type === 'animation' || s.content?.trim());
+  }, [module.id, processContent]);
 
   return (
     <>
@@ -621,8 +630,23 @@ export function GrowModule({ moduleId }) {
 
         {/* Header */}
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: '12px' }}>
-            Module {module.rank} · {module.layer.charAt(0).toUpperCase() + module.layer.slice(1)}{completed ? ' · Complete ✓' : ''}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: BRAND.blue }}>
+              Module {module.rank} · {module.layer.charAt(0).toUpperCase() + module.layer.slice(1)}{completed ? ' · Complete ✓' : ''}
+            </div>
+            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', color: BRAND.pewter, letterSpacing: '0.08em' }}>
+              {userData ? Object.keys(userData.progress || {}).length : 0} / 20
+            </div>
+          </div>
+          {/* Progress bar */}
+          <div style={{ height: '3px', background: 'rgba(31,42,55,0.07)', borderRadius: '2px', marginBottom: '20px', overflow: 'hidden' }}>
+            <div style={{
+              height: '100%',
+              background: BRAND.blue,
+              borderRadius: '2px',
+              width: `${Math.round(((userData ? Object.keys(userData.progress || {}).length : 0) / 20) * 100)}%`,
+              transition: 'width 0.6s ease',
+            }} />
           </div>
           <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 300, color: BRAND.slate, lineHeight: 1.2, fontVariationSettings: "'opsz' 36", marginBottom: '8px' }}>
             {module.title}
@@ -632,32 +656,34 @@ export function GrowModule({ moduleId }) {
           </p>
         </div>
 
-        {/* Module content with interactive inputs */}
-        <div
-          className="module-prose"
-          dangerouslySetInnerHTML={{ __html: processedContent }}
-        />
-
-        {/* Module-specific animations */}
-        {module.id === 'm2' && <><NinetySecondAnimation /><MaskingCostAnimation /></>}
-        {module.id === 'm3' && <ContainerAnimation />}
-        {module.id === 'm4' && <><AmplificationAnimation /><CoRegulationAnimation /></>}
-        {module.id === 'm5' && <RepairAnimation />}
-        {module.id === 'm6' && <><ContainerAnimation /><SignalAnimation /></>}
-        {module.id === 'm7' && null}
-        {module.id === 'm12' && null}
-        {module.id === 'm13' && <RepairAnimation />}
-        {module.id === 'm14' && null}
-
-        {/* New animations */}
-        {module.id === 'm1' && <AdviceGapAnimation />}
-        {module.id === 'm7' && <InputCapacityAnimation />}
-        {module.id === 'm8' && <InvisibleStepsAnimation />}
-        {module.id === 'm10' && <OpenLoopAnimation />}
-        {module.id === 'm11' && <OpenLoopAnimation />}
-        {module.id === 'm12' && <SpiralForkAnimation />}
-        {module.id === 'm16' && <TwoVersionsAnimation />}
-        {module.id === 'm20' && <NotchUpstreamAnimation />}
+        {/* Module content — inline animations via segment renderer */}
+        <div className="module-prose">
+          {contentSegments.map((seg, i) => {
+            if (seg.type === 'html') {
+              return <div key={i} dangerouslySetInnerHTML={{ __html: seg.content }} />;
+            }
+            const AnimComponent = {
+              ContainerAnimationParent: ContainerAnimationParent,
+              ContainerAnimationChild: ContainerAnimationChild,
+              NinetySecondAnimation: NinetySecondAnimation,
+              MaskingCostAnimation: MaskingCostAnimation,
+              AmplificationAnimation: AmplificationAnimation,
+              CoRegulationAnimation: CoRegulationAnimation,
+              RepairAnimation: RepairAnimation,
+              RepairSpirallerAnimation: RepairSpirallerAnimation,
+              SignalAnimation: SignalAnimation,
+              AdviceGapAnimation: AdviceGapAnimation,
+              InputCapacityAnimation: InputCapacityAnimation,
+              InvisibleStepsAnimation: InvisibleStepsAnimation,
+              OpenLoopAnimation: OpenLoopAnimation,
+              LoopExitAnimation: LoopExitAnimation,
+              SpiralForkAnimation: SpiralForkAnimation,
+              TwoVersionsAnimation: TwoVersionsAnimation,
+              NotchUpstreamAnimation: NotchUpstreamAnimation,
+            }[seg.name];
+            return AnimComponent ? <AnimComponent key={i} /> : null;
+          })}
+        </div>
 
         {/* Card links */}
         <CardLinks module={module} />

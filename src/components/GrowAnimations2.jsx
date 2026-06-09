@@ -26,6 +26,7 @@ const B = {
 function useScrollTrigger(threshold = 0.35) {
   const ref = useRef(null);
   const [triggered, setTriggered] = useState(false);
+  const [replayKey, setReplayKey] = useState(0);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -36,7 +37,30 @@ function useScrollTrigger(threshold = 0.35) {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-  return [ref, triggered];
+  const replay = () => { setTriggered(false); setReplayKey(k => k + 1); setTimeout(() => setTriggered(true), 50); };
+  return [ref, triggered, replay, replayKey];
+}
+
+
+function ReplayButton2({ onClick }) {
+  const [clicked, setClicked] = useState(false);
+  return (
+    <button
+      onClick={() => { setClicked(true); onClick(); setTimeout(() => setClicked(false), 600); }}
+      title="Replay animation"
+      style={{
+        position: 'absolute', top: '12px', right: '12px',
+        width: '28px', height: '28px', borderRadius: '50%',
+        background: 'rgba(31,42,55,0.05)',
+        border: '1px solid rgba(31,42,55,0.1)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'pointer', padding: 0,
+        transform: clicked ? 'rotate(360deg)' : 'rotate(0deg)',
+        transition: 'transform 0.5s ease',
+        color: '#56606E', fontSize: '12px',
+      }}
+    >↺</button>
+  );
 }
 
 // ─────────────────────────────────────────
@@ -44,9 +68,10 @@ function useScrollTrigger(threshold = 0.35) {
 // Two columns: what the advice assumes vs what this household is
 // ─────────────────────────────────────────
 export function AdviceGapAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   return (
-    <div ref={ref} className="anim-wrap" aria-label="What parenting advice assumes vs your household">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="What parenting advice assumes vs your household">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">What the advice was built for — and what it missed</div>
       <svg viewBox="0 0 320 170" style={{ width: '100%', display: 'block' }}>
 
@@ -54,7 +79,7 @@ export function AdviceGapAnimation() {
         <g style={{ opacity: go ? 1 : 0, transform: go ? 'translateX(0)' : 'translateX(-16px)', transition: 'opacity 0.5s 0.3s, transform 0.5s 0.3s' }}>
           <rect x="20" y="30" width="120" height="120" rx="10"
             fill="white" stroke={B.pewterL} strokeWidth="1"/>
-          <text x="80" y="22" textAnchor="middle" fontSize="8" fill={B.pewter}
+          <text x="80" y="22" textAnchor="middle" fontSize="11" fill={B.pewter}
             fontFamily="IBM Plex Mono, monospace" letterSpacing="0.1em">THE ADVICE ASSUMES</text>
           {[
             { y: 55, icon: '😌', text: 'Regulated adult' },
@@ -74,7 +99,7 @@ export function AdviceGapAnimation() {
         <g style={{ opacity: go ? 1 : 0, transform: go ? 'translateX(0)' : 'translateX(16px)', transition: 'opacity 0.5s 0.5s, transform 0.5s 0.5s' }}>
           <rect x="180" y="30" width="120" height="120" rx="10"
             fill={B.blueL} stroke={B.blue} strokeWidth="1" strokeOpacity="0.5"/>
-          <text x="240" y="22" textAnchor="middle" fontSize="8" fill={B.blue}
+          <text x="240" y="22" textAnchor="middle" fontSize="11" fill={B.blue}
             fontFamily="IBM Plex Mono, monospace" letterSpacing="0.1em">YOUR HOUSEHOLD</text>
           {[
             { y: 55, icon: '⚡', text: 'Both dysregulate' },
@@ -95,7 +120,7 @@ export function AdviceGapAnimation() {
           <line x1="143" y1="90" x2="177" y2="90"
             stroke={B.red} strokeWidth="1.5" strokeLinecap="round"/>
           <polygon points="174,86 180,90 174,94" fill={B.red}/>
-          <text x="160" y="83" textAnchor="middle" fontSize="7.5"
+          <text x="160" y="83" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace">gap</text>
         </g>
       </svg>
@@ -109,9 +134,10 @@ export function AdviceGapAnimation() {
 // As input increases, capacity to receive drops to zero
 // ─────────────────────────────────────────
 export function InputCapacityAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   return (
-    <div ref={ref} className="anim-wrap" aria-label="More words, less received">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="More words, less received">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">More input — less received</div>
       <svg viewBox="0 0 320 160" style={{ width: '100%', display: 'block' }}>
 
@@ -120,12 +146,12 @@ export function InputCapacityAnimation() {
         <line x1="40" y1="130" x2="290" y2="130" stroke={B.pewterL} strokeWidth="1.5"/>
 
         {/* Y-axis label */}
-        <text x="12" y="75" fontSize="8" fill={B.pewter}
+        <text x="12" y="75" fontSize="11" fill={B.pewter}
           fontFamily="IBM Plex Mono, monospace"
           transform="rotate(-90, 12, 75)">capacity</text>
 
         {/* X-axis label */}
-        <text x="165" y="148" textAnchor="middle" fontSize="8" fill={B.pewter}
+        <text x="165" y="148" textAnchor="middle" fontSize="11" fill={B.pewter}
           fontFamily="IBM Plex Mono, monospace">sentences past the point</text>
 
         {/* Capacity curve — drops to zero */}
@@ -155,9 +181,9 @@ export function InputCapacityAnimation() {
           <circle cx="100" cy="38" r="4" fill={B.sageD} fillOpacity="0.6"/>
           <line x1="100" y1="42" x2="100" y2="55"
             stroke={B.sageD} strokeWidth="1" strokeDasharray="3 2"/>
-          <text x="100" y="64" textAnchor="middle" fontSize="7.5"
+          <text x="100" y="64" textAnchor="middle" fontSize="11"
             fill={B.sageD} fontFamily="IBM Plex Mono, monospace">sentence 1</text>
-          <text x="100" y="73" textAnchor="middle" fontSize="7"
+          <text x="100" y="73" textAnchor="middle" fontSize="11"
             fill={B.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.7">still landing</text>
         </g>
 
@@ -165,22 +191,22 @@ export function InputCapacityAnimation() {
           <circle cx="175" cy="85" r="4" fill={B.apricot} fillOpacity="0.7"/>
           <line x1="175" y1="89" x2="175" y2="100"
             stroke={B.apricot} strokeWidth="1" strokeDasharray="3 2"/>
-          <text x="175" y="109" textAnchor="middle" fontSize="7.5"
+          <text x="175" y="109" textAnchor="middle" fontSize="11"
             fill={B.apricot} fontFamily="IBM Plex Mono, monospace">sentence 3</text>
-          <text x="175" y="118" textAnchor="middle" fontSize="7"
+          <text x="175" y="118" textAnchor="middle" fontSize="11"
             fill={B.apricot} fontFamily="IBM Plex Mono, monospace" opacity="0.7">mostly noise</text>
         </g>
 
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.3s' }}>
           <circle cx="255" cy="129" r="4" fill={B.red}/>
-          <text x="255" y="120" textAnchor="middle" fontSize="7.5"
+          <text x="255" y="120" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace">sentence 7+</text>
-          <text x="255" y="110" textAnchor="middle" fontSize="7"
+          <text x="255" y="110" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">zero received</text>
         </g>
 
         {/* Input label */}
-        <text x="168" y="126" textAnchor="middle" fontSize="7.5"
+        <text x="168" y="126" textAnchor="middle" fontSize="11"
           fill={B.red} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.1s' }}>
           ← input volume growing →
@@ -196,7 +222,7 @@ export function InputCapacityAnimation() {
 // The chart (visible) vs the invisible steps above it dropping
 // ─────────────────────────────────────────
 export function InvisibleStepsAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   const visibleSteps = ['Get dressed', 'Eat breakfast', 'Brush teeth', 'Find bag'];
   const invisibleSteps = [
     { text: 'sports day reminder', x: 65, y: 45, dropTo: 175 },
@@ -205,7 +231,8 @@ export function InvisibleStepsAnimation() {
     { text: 'lunch decision', x: 248, y: 42, dropTo: 175 },
   ];
   return (
-    <div ref={ref} className="anim-wrap" aria-label="Visible vs invisible steps in a routine">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Visible vs invisible steps in a routine">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">The chart shows the visible steps. The invisible ones are in your head.</div>
       <svg viewBox="0 0 320 210" style={{ width: '100%', display: 'block' }}>
 
@@ -214,7 +241,7 @@ export function InvisibleStepsAnimation() {
           fill={B.lavL} stroke={B.lavender} strokeWidth="0.8" strokeDasharray="5 3"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}
         />
-        <text x="30" y="36" fontSize="8" fill={B.lavender}
+        <text x="30" y="36" fontSize="11" fill={B.lavender}
           fontFamily="IBM Plex Mono, monospace" letterSpacing="0.1em"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}>
           WORKING MEMORY (invisible steps)
@@ -229,7 +256,7 @@ export function InvisibleStepsAnimation() {
           }}>
             <rect x={step.x - 30} y={step.y} width="62" height="18" rx="4"
               fill={B.lavL} stroke={B.lavender} strokeWidth="0.8"/>
-            <text x={step.x + 1} y={step.y + 12} textAnchor="middle" fontSize="7.5"
+            <text x={step.x + 1} y={step.y + 12} textAnchor="middle" fontSize="11"
               fill={B.lavender} fontFamily="IBM Plex Mono, monospace">{step.text}</text>
           </g>
         ))}
@@ -251,7 +278,7 @@ export function InvisibleStepsAnimation() {
             <text x={invisibleSteps[i].x + 1} y={158} textAnchor="middle"
               fontSize="10" fill={B.red} opacity="0.5">✕</text>
             <text x={invisibleSteps[i].x + 1} y={168} textAnchor="middle"
-              fontSize="7" fill={B.red} opacity="0.5"
+              fontSize="11" fill={B.red} opacity="0.5"
               fontFamily="IBM Plex Mono, monospace">dropped</text>
           </g>
         ))}
@@ -261,7 +288,7 @@ export function InvisibleStepsAnimation() {
           fill="white" stroke={B.pewterL} strokeWidth="1"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}
         />
-        <text x="30" y="131" fontSize="8" fill={B.pewter}
+        <text x="30" y="131" fontSize="11" fill={B.pewter}
           fontFamily="IBM Plex Mono, monospace" letterSpacing="0.1em"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}>
           THE CHART (visible steps)
@@ -270,7 +297,7 @@ export function InvisibleStepsAnimation() {
           <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${0.5 + i * 0.15}s` }}>
             <rect x={30 + i * 66} y="140" width="58" height="20" rx="4"
               fill={B.blueL} stroke={B.blue} strokeWidth="0.6" strokeOpacity="0.5"/>
-            <text x={30 + i * 66 + 29} y="153" textAnchor="middle" fontSize="8"
+            <text x={30 + i * 66 + 29} y="153" textAnchor="middle" fontSize="11"
               fill={B.blue} fontFamily="Lexend, sans-serif">{step}</text>
           </g>
         ))}
@@ -281,7 +308,7 @@ export function InvisibleStepsAnimation() {
             stroke={B.sageD} strokeWidth="1.5" strokeLinecap="round"/>
           <polygon points="61,135 65,141 69,135" fill={B.sageD}/>
           <rect x="3" y="88" width="55" height="20" rx="4" fill={B.sageL} stroke={B.sageD} strokeWidth="0.8"/>
-          <text x="30" y="101" textAnchor="middle" fontSize="7.5"
+          <text x="30" y="101" textAnchor="middle" fontSize="11"
             fill={B.sageD} fontFamily="IBM Plex Mono, monospace">externalise</text>
         </g>
       </svg>
@@ -295,10 +322,11 @@ export function InvisibleStepsAnimation() {
 // Loop cycling, discomfort, clean exit, lesson delivered later
 // ─────────────────────────────────────────
 export function OpenLoopAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   const [phase, setPhase] = useState(0);
   useEffect(() => {
     if (!go) return;
+    setPhase(0);
     const timers = [
       setTimeout(() => setPhase(1), 700),
       setTimeout(() => setPhase(2), 1600),
@@ -309,7 +337,8 @@ export function OpenLoopAnimation() {
   }, [go]);
 
   return (
-    <div ref={ref} className="anim-wrap" aria-label="The argument loop and the clean exit">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The argument loop and the clean exit">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">The loop — and the exit that delivers the lesson</div>
       <svg viewBox="0 0 320 170" style={{ width: '100%', display: 'block' }}>
 
@@ -335,9 +364,9 @@ export function OpenLoopAnimation() {
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.5s' }}>
           <text x="120" y="80" textAnchor="middle" fontSize="9"
             fill={B.slate} fontFamily="Lexend, sans-serif" fontWeight="500">argument</text>
-          <text x="120" y="94" textAnchor="middle" fontSize="8"
+          <text x="120" y="94" textAnchor="middle" fontSize="11"
             fill={B.pewter} fontFamily="IBM Plex Mono, monospace">keeps cycling</text>
-          <text x="120" y="108" textAnchor="middle" fontSize="8"
+          <text x="120" y="108" textAnchor="middle" fontSize="11"
             fill={phase >= 2 ? B.apricot : B.pewter}
             fontFamily="IBM Plex Mono, monospace"
             style={{ transition: 'fill 0.3s' }}>
@@ -351,9 +380,9 @@ export function OpenLoopAnimation() {
             <line x1="170" y1="90" x2="210" y2="90"
               stroke={B.sageD} strokeWidth="2" strokeLinecap="round"/>
             <polygon points="207,86 214,90 207,94" fill={B.sageD}/>
-            <text x="192" y="83" textAnchor="middle" fontSize="8"
+            <text x="192" y="83" textAnchor="middle" fontSize="11"
               fill={B.sageD} fontFamily="IBM Plex Mono, monospace">one sentence</text>
-            <text x="192" y="79" textAnchor="middle" fontSize="7"
+            <text x="192" y="79" textAnchor="middle" fontSize="11"
               fill={B.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.7">then move</text>
           </g>
         )}
@@ -363,22 +392,22 @@ export function OpenLoopAnimation() {
           <g style={{ opacity: 1, transition: 'opacity 0.5s' }}>
             <rect x="218" y="58" width="88" height="64" rx="8"
               fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
-            <text x="262" y="76" textAnchor="middle" fontSize="7.5"
+            <text x="262" y="76" textAnchor="middle" fontSize="11"
               fill={B.blue} fontFamily="IBM Plex Mono, monospace">12 hours later</text>
             <line x1="235" y1="82" x2="289" y2="82"
               stroke={B.blueM} strokeWidth="0.8"/>
-            <text x="262" y="94" textAnchor="middle" fontSize="8"
+            <text x="262" y="94" textAnchor="middle" fontSize="11"
               fill={B.slate} fontFamily="Lexend, sans-serif">lesson</text>
-            <text x="262" y="106" textAnchor="middle" fontSize="8"
+            <text x="262" y="106" textAnchor="middle" fontSize="11"
               fill={B.slate} fontFamily="Lexend, sans-serif">delivered</text>
-            <text x="262" y="115" textAnchor="middle" fontSize="7.5"
+            <text x="262" y="115" textAnchor="middle" fontSize="11"
               fill={B.sageD} fontFamily="IBM Plex Mono, monospace">✓ lands</text>
           </g>
         )}
 
         {/* Discomfort label */}
         {phase >= 3 && (
-          <text x="120" y="155" textAnchor="middle" fontSize="8"
+          <text x="120" y="155" textAnchor="middle" fontSize="11"
             fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
             style={{ opacity: 1, transition: 'opacity 0.4s' }}>
             open loop discomfort is real — it's also survivable
@@ -395,18 +424,19 @@ export function OpenLoopAnimation() {
 // Same incident, two paths: accountability (forward) vs spiral (deeper)
 // ─────────────────────────────────────────
 export function SpiralForkAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   return (
-    <div ref={ref} className="anim-wrap" aria-label="Rumination vs accountability — two paths from the same moment">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Rumination vs accountability — two paths from the same moment">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">Same incident. Two completely different directions.</div>
       <svg viewBox="0 0 320 190" style={{ width: '100%', display: 'block' }}>
 
         {/* Incident point */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}>
           <circle cx="160" cy="30" r="14" fill={B.redL} stroke={B.red} strokeWidth="1.5"/>
-          <text x="160" y="27" textAnchor="middle" fontSize="8"
+          <text x="160" y="27" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace">hard</text>
-          <text x="160" y="38" textAnchor="middle" fontSize="8"
+          <text x="160" y="38" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace">moment</text>
         </g>
 
@@ -442,7 +472,7 @@ export function SpiralForkAnimation() {
         ].map((q, i) => (
           <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${1.3 + i * 0.2}s` }}>
             <circle cx="30" cy={q.y - 4} r="3" fill={B.sageD} fillOpacity="0.6"/>
-            <text x="40" y={q.y} fontSize="8.5" fill={B.pewter}
+            <text x="40" y={q.y} fontSize="12" fill={B.pewter}
               fontFamily="Lexend, sans-serif">{q.text}</text>
           </g>
         ))}
@@ -453,7 +483,7 @@ export function SpiralForkAnimation() {
             stroke={B.sageD} strokeWidth="1.5" strokeLinecap="round"/>
           <rect x="30" y="127" width="98" height="18" rx="5"
             fill={B.sageD} fillOpacity="0.15" stroke={B.sageD} strokeWidth="0.8"/>
-          <text x="79" y="139" textAnchor="middle" fontSize="8"
+          <text x="79" y="139" textAnchor="middle" fontSize="11"
             fill={B.sageD} fontFamily="IBM Plex Mono, monospace">→ repair → move forward</text>
         </g>
 
@@ -481,17 +511,17 @@ export function SpiralForkAnimation() {
             <path d="M 239 117 C 239 130 255 135 255 148 C 255 161 239 165 239 158 C 239 151 249 149 249 141 C 249 133 239 131 239 138"
               fill="none" stroke={B.red} strokeWidth="1.5" strokeLinecap="round"
               strokeOpacity="0.6"/>
-            <text x="239" y="132" textAnchor="middle" fontSize="8"
+            <text x="239" y="132" textAnchor="middle" fontSize="11"
               fill={B.red} fontFamily="IBM Plex Mono, monospace">what does this</text>
-            <text x="239" y="142" textAnchor="middle" fontSize="8"
+            <text x="239" y="142" textAnchor="middle" fontSize="11"
               fill={B.red} fontFamily="IBM Plex Mono, monospace">mean about me?</text>
-            <text x="239" y="155" textAnchor="middle" fontSize="7.5"
+            <text x="239" y="155" textAnchor="middle" fontSize="11"
               fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.6">no end point</text>
           </g>
         )}
 
         {/* Fork label */}
-        <text x="160" y="80" textAnchor="middle" fontSize="8"
+        <text x="160" y="80" textAnchor="middle" fontSize="11"
           fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.6s' }}>
           ↙ moves forward · circles inward ↘
@@ -507,11 +537,12 @@ export function SpiralForkAnimation() {
 // Split screen: parent sees / partner sees
 // ─────────────────────────────────────────
 export function TwoVersionsAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   const partnerSees = ['the reaction', 'the snap', 'the small thing', 'the pattern'];
   const parentManaged = ['noise 4hrs', 'instruction ×3', 'no food', 'meds worn off', 'work unresolved'];
   return (
-    <div ref={ref} className="anim-wrap" aria-label="Two versions of the same moment">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Two versions of the same moment">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">Same moment — two completely different views</div>
       <svg viewBox="0 0 320 185" style={{ width: '100%', display: 'block' }}>
 
@@ -519,15 +550,15 @@ export function TwoVersionsAnimation() {
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}>
           <rect x="128" y="78" width="64" height="32" rx="6"
             fill={B.redL} stroke={B.red} strokeWidth="1"/>
-          <text x="160" y="92" textAnchor="middle" fontSize="8.5"
+          <text x="160" y="92" textAnchor="middle" fontSize="12"
             fill={B.red} fontFamily="IBM Plex Mono, monospace">the snap</text>
-          <text x="160" y="103" textAnchor="middle" fontSize="7.5"
+          <text x="160" y="103" textAnchor="middle" fontSize="11"
             fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">one moment</text>
         </g>
 
         {/* Left — what partner sees */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}>
-          <text x="58" y="22" textAnchor="middle" fontSize="8"
+          <text x="58" y="22" textAnchor="middle" fontSize="11"
             fill={B.pewter} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.08em">PARTNER SEES</text>
           <rect x="10" y="30" width="96" height="130" rx="8"
             fill="white" stroke={B.pewterL} strokeWidth="1"/>
@@ -536,14 +567,14 @@ export function TwoVersionsAnimation() {
           <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${0.5 + i * 0.2}s` }}>
             <rect x="20" y={42 + i * 27} width="76" height="20" rx="4"
               fill={B.mist} stroke={B.pewterL} strokeWidth="0.6"/>
-            <text x="58" y={55 + i * 27} textAnchor="middle" fontSize="8.5"
+            <text x="58" y={55 + i * 27} textAnchor="middle" fontSize="12"
               fill={B.pewter} fontFamily="Lexend, sans-serif">{item}</text>
           </g>
         ))}
 
         {/* Right — what parent was managing */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.4s' }}>
-          <text x="262" y="22" textAnchor="middle" fontSize="8"
+          <text x="262" y="22" textAnchor="middle" fontSize="11"
             fill={B.blue} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.08em">PARENT HELD</text>
           <rect x="214" y="30" width="96" height="130" rx="8"
             fill={B.blueL} stroke={B.blue} strokeWidth="0.8" strokeOpacity="0.5"/>
@@ -552,7 +583,7 @@ export function TwoVersionsAnimation() {
           <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${0.6 + i * 0.18}s` }}>
             <rect x="222" y={38 + i * 24} width="80" height="18" rx="4"
               fill={B.blueL} stroke={B.blue} strokeWidth="0.6" strokeOpacity="0.6"/>
-            <text x="262" y={50 + i * 24} textAnchor="middle" fontSize="8"
+            <text x="262" y={50 + i * 24} textAnchor="middle" fontSize="11"
               fill={B.blue} fontFamily="Lexend, sans-serif">{item}</text>
           </g>
         ))}
@@ -566,7 +597,7 @@ export function TwoVersionsAnimation() {
         </g>
 
         {/* Both valid label */}
-        <text x="160" y="175" textAnchor="middle" fontSize="8"
+        <text x="160" y="175" textAnchor="middle" fontSize="11"
           fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.8s' }}>
           both accounts are real · they describe different things
@@ -582,7 +613,7 @@ export function TwoVersionsAnimation() {
 // Same moment on timeline, intervention moving earlier each time
 // ─────────────────────────────────────────
 export function NotchUpstreamAnimation() {
-  const [ref, go] = useScrollTrigger(0.35);
+  const [ref, go, replay] = useScrollTrigger(0.35);
   const iterations = [
     { label: 'before this course', interventionAt: 0.92, color: B.red },
     { label: 'month 1', interventionAt: 0.70, color: B.apricot },
@@ -590,7 +621,8 @@ export function NotchUpstreamAnimation() {
     { label: 'month 6', interventionAt: 0.28, color: B.sageD },
   ];
   return (
-    <div ref={ref} className="anim-wrap" aria-label="Catching it slightly earlier over time">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Catching it slightly earlier over time">
+      <ReplayButton2 onClick={replay} />
       <div className="anim-label-top">The goal — one notch earlier each time</div>
       <svg viewBox="0 0 320 185" style={{ width: '100%', display: 'block' }}>
 
@@ -627,17 +659,17 @@ export function NotchUpstreamAnimation() {
               />
 
               {/* Labels */}
-              <text x={startX - 8} y={y + 16} textAnchor="end" fontSize="8"
+              <text x={startX - 8} y={y + 16} textAnchor="end" fontSize="11"
                 fill={B.pewter} fontFamily="IBM Plex Mono, monospace">{iter.label}</text>
               {i === 0 && (
-                <text x={endX + 6} y={y + 16} fontSize="8"
+                <text x={endX + 6} y={y + 16} fontSize="11"
                   fill={B.red} fontFamily="IBM Plex Mono, monospace"
                   style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 1.0s' }}>
                   explosion
                 </text>
               )}
               {i === iterations.length - 1 && (
-                <text x={interventionX - 2} y={y - 2} textAnchor="middle" fontSize="7.5"
+                <text x={interventionX - 2} y={y - 2} textAnchor="middle" fontSize="11"
                   fill={iter.color} fontFamily="IBM Plex Mono, monospace"
                   style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.1s' }}>
                   ↑ caught here
@@ -652,13 +684,13 @@ export function NotchUpstreamAnimation() {
           <line x1="30" y1="35" x2="30" y2="155"
             stroke={B.pewterL} strokeWidth="1"/>
           <polygon points="26,152 30,158 34,152" fill={B.pewterL}/>
-          <text x="16" y="98" textAnchor="middle" fontSize="7.5"
+          <text x="16" y="98" textAnchor="middle" fontSize="11"
             fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
             transform="rotate(-90, 16, 98)">upstream</text>
         </g>
 
         {/* Bottom note */}
-        <text x="160" y="178" textAnchor="middle" fontSize="8"
+        <text x="160" y="178" textAnchor="middle" fontSize="11"
           fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.2s' }}>
           not visible in any single moment · visible in the relationship over time
@@ -668,3 +700,125 @@ export function NotchUpstreamAnimation() {
     </div>
   );
 }
+
+// ─────────────────────────────────────────
+// M11 — LOOP EXIT
+// The stop-script landing, discomfort, then lesson delivered
+// ─────────────────────────────────────────
+export function LoopExitAnimation() {
+  const [ref, go, replay] = useScrollTrigger(0.35);
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    if (!go) return;
+    setPhase(0);
+    const timers = [
+      setTimeout(() => setPhase(1), 500),
+      setTimeout(() => setPhase(2), 1600),
+      setTimeout(() => setPhase(3), 2800),
+      setTimeout(() => setPhase(4), 4200),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [go, replay]);
+  const B3 = { blue: '#4A6FA5', blueL: 'rgba(74,111,165,0.1)', sageD: '#7FA88E', sageL: 'rgba(168,195,160,0.15)', slate: '#1F2A37', pewter: '#56606E', pewterL: 'rgba(86,96,110,0.25)', apricot: '#E8A87C', red: '#C97B6A', redL: 'rgba(201,123,106,0.12)', mist: '#EDEFEE' };
+  return (
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The stop-script and lesson delivered later">
+      <ReplayButton2 onClick={replay} />
+      <ReplayButton2 onClick={() => { replay(); setPhase(0); }} />
+      <div className="anim-label-top">The stop — and where the lesson actually lands</div>
+      <svg viewBox="0 0 320 180" style={{ width: '100%', display: 'block' }}>
+
+        {/* Step 1: The loop */}
+        <g style={{ opacity: phase >= 1 && phase < 3 ? 1 : 0, transition: 'opacity 0.4s' }}>
+          <circle cx="80" cy="75" r="40" fill="none" stroke={B3.apricot} strokeWidth="2" strokeDasharray="6 3"/>
+          <text x="80" y="72" textAnchor="middle" fontSize="12" fill={B3.slate} fontFamily="Lexend, sans-serif" fontWeight="500">argument</text>
+          <text x="80" y="85" textAnchor="middle" fontSize="11" fill={B3.pewter} fontFamily="IBM Plex Mono, monospace">running</text>
+        </g>
+
+        {/* Step 2: Stop script */}
+        <g style={{ opacity: phase >= 2 ? 1 : 0, transition: 'opacity 0.5s' }}>
+          <line x1="123" y1="75" x2="148" y2="75" stroke={B3.sageD} strokeWidth="2" strokeLinecap="round"/>
+          <polygon points="145,71 152,75 145,79" fill={B3.sageD}/>
+          <rect x="153" y="56" width="142" height="38" rx="8" fill={B3.sageL} stroke={B3.sageD} strokeWidth="1"/>
+          <text x="224" y="71" textAnchor="middle" fontSize="12" fill={B3.sageD} fontFamily="Lexend, sans-serif" fontWeight="500">stop-script</text>
+          <text x="224" y="85" textAnchor="middle" fontSize="11" fill={B3.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.8">said once, then moved</text>
+        </g>
+
+        {/* Step 3: Open loop discomfort */}
+        <g style={{ opacity: phase >= 3 ? 1 : 0, transition: 'opacity 0.4s' }}>
+          <rect x="60" y="128" width="195" height="30" rx="6" fill={B3.redL} stroke={B3.red} strokeWidth="0.8" strokeDasharray="4 3"/>
+          <text x="157" y="147" textAnchor="middle" fontSize="12" fill={B3.red} fontFamily="Lexend, sans-serif">open loop discomfort — real, survivable</text>
+        </g>
+
+        {/* Step 4: 12hrs later */}
+        <g style={{ opacity: phase >= 4 ? 1 : 0, transition: 'opacity 0.5s' }}>
+          <text x="224" y="120" textAnchor="middle" fontSize="11" fill={B3.pewter} fontFamily="IBM Plex Mono, monospace">12 hours later</text>
+          <rect x="155" y="125" width="138" height="38" rx="8" fill={B3.blueL || 'rgba(74,111,165,0.1)'} stroke={B3.blue} strokeWidth="1"/>
+          <text x="224" y="141" textAnchor="middle" fontSize="12" fill={B3.blue} fontFamily="Lexend, sans-serif" fontWeight="500">lesson delivered</text>
+          <text x="224" y="155" textAnchor="middle" fontSize="11" fill={B3.sageD} fontFamily="IBM Plex Mono, monospace">✓ received</text>
+        </g>
+
+      </svg>
+      <div className="anim-caption">Stopping isn't losing. It's choosing the moment where the lesson can actually land.</div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// M13 — REPAIR: SPIRALLER VERSION
+// Two-sentence repair vs extended overreach that becomes a request
+// ─────────────────────────────────────────
+export function RepairSpirallerAnimation() {
+  const [ref, go, replay] = useScrollTrigger(0.35);
+  const B4 = { blue: '#4A6FA5', blueL: 'rgba(74,111,165,0.1)', sageD: '#7FA88E', sageL: 'rgba(168,195,160,0.15)', slate: '#1F2A37', pewter: '#56606E', pewterL: 'rgba(86,96,110,0.25)', red: '#C97B6A', redL: 'rgba(201,123,106,0.12)', lavender: '#9B8BB4', lavL: 'rgba(155,139,180,0.12)' };
+  return (
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Two-sentence repair vs extended overreach">
+      <ReplayButton2 onClick={replay} />
+      <ReplayButton2 onClick={replay} />
+      <div className="anim-label-top">Two sentences vs the extended version that asks for something back</div>
+      <svg viewBox="0 0 320 195" style={{ width: '100%', display: 'block' }}>
+
+        {/* Left: two-sentence repair */}
+        <g style={{ opacity: go ? 1 : 0, transform: go ? 'translateX(0)' : 'translateX(-12px)', transition: 'opacity 0.5s 0.3s, transform 0.5s 0.3s' }}>
+          <text x="78" y="22" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.08em">REPAIR</text>
+          <rect x="10" y="30" width="136" height="140" rx="10" fill={B4.sageL} stroke={B4.sageD} strokeWidth="1"/>
+          <rect x="20" y="44" width="116" height="22" rx="5" fill="white" stroke={B4.sageD} strokeWidth="0.7"/>
+          <text x="78" y="57" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="IBM Plex Mono, monospace">Sentence 1: names it</text>
+          <rect x="20" y="72" width="116" height="22" rx="5" fill="white" stroke={B4.sageD} strokeWidth="0.7"/>
+          <text x="78" y="85" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="IBM Plex Mono, monospace">Sentence 2: next step</text>
+          <line x1="78" y1="98" x2="78" y2="112" stroke={B4.sageD} strokeWidth="1.5" strokeLinecap="round"/>
+          <rect x="20" y="112" width="116" height="26" rx="6" fill={B4.sageD} fillOpacity="0.2" stroke={B4.sageD} strokeWidth="0.8"/>
+          <text x="78" y="125" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="Lexend, sans-serif" fontWeight="500">then something</text>
+          <text x="78" y="138" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="Lexend, sans-serif">ordinary</text>
+          <rect x="26" y="152" width="104" height="12" rx="4" fill={B4.sageD} fillOpacity="0.15"/>
+          <text x="78" y="161" textAnchor="middle" fontSize="11" fill={B4.sageD} fontFamily="IBM Plex Mono, monospace">child receives → closes</text>
+        </g>
+
+        {/* Right: extended overreach */}
+        <g style={{ opacity: go ? 1 : 0, transform: go ? 'translateX(0)' : 'translateX(12px)', transition: 'opacity 0.5s 0.6s, transform 0.5s 0.6s' }}>
+          <text x="242" y="22" textAnchor="middle" fontSize="11" fill={B4.red} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.08em">OVERREACH</text>
+          <rect x="174" y="30" width="136" height="140" rx="10" fill={B4.redL} stroke={B4.red} strokeWidth="1" strokeOpacity="0.6"/>
+          {['sentence 1', 'sentence 2', 'sentence 3', 'sentence 4...', '"are we okay?"'].map((s, i) => (
+            <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${0.8 + i * 0.25}s` }}>
+              <rect x="184" y={44 + i * 24} width="116" height="18" rx="4"
+                fill="white" stroke={B4.red} strokeWidth="0.6"
+                strokeOpacity={i < 3 ? 0.4 : 0.8}
+                fillOpacity={i < 3 ? 1 : 0.9}/>
+              <text x="242" y={56 + i * 24} textAnchor="middle" fontSize="11"
+                fill={i < 4 ? B4.pewter : B4.red}
+                fontFamily={i === 4 ? 'Lexend, sans-serif' : 'IBM Plex Mono, monospace'}
+                fontWeight={i === 4 ? '500' : '400'}>{s}</text>
+            </g>
+          ))}
+          <text x="242" y="180" textAnchor="middle" fontSize="11" fill={B4.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">child manages parent's guilt</text>
+        </g>
+
+        {/* Divider */}
+        <line x1="155" y1="22" x2="155" y2="175" stroke={B4.pewterL} strokeWidth="1" strokeDasharray="4 4"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.5s' }}/>
+
+      </svg>
+      <div className="anim-caption">The repair ends at two sentences. More than that stops being a repair and becomes a request — asking your child to manage your guilt.</div>
+    </div>
+  );
+}
+
