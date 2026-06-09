@@ -1,9 +1,4 @@
-// GrowAnimations.jsx
-// Six animated SVG components for Both of You course modules
-// All use IntersectionObserver for scroll-trigger
-// Brand palette: blue #4A6FA5, sage #A8C3A0, slate #1F2A37, pewter #56606E,
-//               apricot #E8A87C, lavender #9B8BB4, cloud #F7F5F0
-
+// GrowAnimations.jsx — v2 with corrected layout
 import { useState, useEffect, useRef } from 'react';
 
 const B = {
@@ -41,389 +36,254 @@ function useScrollTrigger(threshold = 0.3) {
   return [ref, triggered, replay, replayKey];
 }
 
-
 function ReplayButton({ onClick }) {
   const [clicked, setClicked] = useState(false);
   return (
     <button
       onClick={() => { setClicked(true); onClick(); setTimeout(() => setClicked(false), 600); }}
-      title="Replay animation"
+      title="Replay"
       style={{
         position: 'absolute', top: '12px', right: '12px',
         width: '28px', height: '28px', borderRadius: '50%',
-        background: 'rgba(31,42,55,0.05)',
-        border: '1px solid rgba(31,42,55,0.1)',
+        background: 'rgba(31,42,55,0.05)', border: '1px solid rgba(31,42,55,0.1)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         cursor: 'pointer', padding: 0,
         transform: clicked ? 'rotate(360deg)' : 'rotate(0deg)',
-        transition: 'transform 0.5s ease',
-        color: '#56606E', fontSize: '12px',
+        transition: 'transform 0.5s ease', color: '#56606E', fontSize: '12px',
       }}
     >↺</button>
   );
 }
 
-// ─────────────────────────────────────────
-// 1. THE CONTAINER — M2, M6
-// A container fills with load items, then a spark lands and overflows
-// ─────────────────────────────────────────
+// ─── CONTAINER PARENT (M6) ───
+// Items centred in a wide container, shortened labels
 export function ContainerAnimationParent() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   const items = [
-    { label: 'noise since 4pm', delay: 0 },
-    { label: 'instruction × 3', delay: 0.6 },
-    { label: 'work unresolved', delay: 1.2 },
-    { label: 'medication worn off', delay: 1.8 },
-    { label: 'haven\'t eaten', delay: 2.4 },
+    { label: 'noise since 4pm',   delay: 0,   warm: false },
+    { label: 'told them 3× already', delay: 0.6, warm: false },
+    { label: 'work still unresolved', delay: 1.2, warm: false },
+    { label: 'meds worn off',     delay: 1.8, warm: true },
+    { label: "haven't eaten",     delay: 2.4, warm: true },
   ];
   return (
-    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The stack that fills before the spark">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The stack fills before the spark">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">The stack fills before the spark lands</div>
-      <svg viewBox="0 0 320 220" style={{ width: '100%', display: 'block' }}>
-        {/* Container outline */}
-        <rect x="80" y="60" width="160" height="130" rx="8"
-          fill="white" stroke={B.pewterL} strokeWidth="1.5"/>
-        {/* Fill level — animates up */}
-        <rect x="81" y="61" width="158" height="128" rx="7" fill={B.cloud}/>
-
-        {/* Load items filling from bottom */}
+      <svg viewBox="0 0 360 240" style={{ width: '100%', display: 'block' }}>
+        {/* Container */}
+        <rect x="80" y="55" width="200" height="145" rx="10" fill="white" stroke={B.pewterL} strokeWidth="1.5"/>
+        <rect x="81" y="56" width="198" height="143" rx="9" fill={B.cloud}/>
+        {/* Items stacking from bottom */}
         {items.map((item, i) => (
-          <g key={i} style={{
-            opacity: go ? 1 : 0,
-            transform: go ? 'translateY(0)' : 'translateY(12px)',
-            transition: `opacity 0.4s ${item.delay + 0.3}s, transform 0.4s ${item.delay + 0.3}s`,
-          }}>
-            <rect
-              x="90" y={155 - i * 20} width="140" height="16" rx="4"
-              fill={i < 3 ? B.blueL : B.apricotL}
-              stroke={i < 3 ? B.blue : B.apricot}
-              strokeWidth="0.8"
-              strokeOpacity="0.5"
-            />
-            <text x="160" y={166 - i * 20}
-              textAnchor="middle" fontSize="12"
-              fill={i < 3 ? B.blue : B.apricot}
-              fontFamily="IBM Plex Mono, monospace"
-              letterSpacing="0.04em">
+          <g key={i} style={{ opacity: go ? 1 : 0, transform: go ? 'translateY(0)' : 'translateY(10px)', transition: `opacity 0.4s ${item.delay + 0.3}s, transform 0.4s ${item.delay + 0.3}s` }}>
+            <rect x="90" y={170 - i * 22} width="180" height="18" rx="4"
+              fill={item.warm ? B.apricotL : B.blueL}
+              stroke={item.warm ? B.apricot : B.blue}
+              strokeWidth="0.8" strokeOpacity="0.6"/>
+            <text x="180" y={182 - i * 22} textAnchor="middle" fontSize="11"
+              fill={item.warm ? B.apricot : B.blue} fontFamily="IBM Plex Mono, monospace">
               {item.label}
             </text>
           </g>
         ))}
-
-        {/* Overflow flash */}
-        <g style={{
-          opacity: go ? 1 : 0,
-          transition: `opacity 0.3s ${3.4}s`,
-        }}>
-          {/* Overflow ripples */}
-          {[0, 1, 2].map(i => (
-            <ellipse key={i} cx="160" cy="62" rx={20 + i * 18} ry={6 + i * 3}
-              fill="none"
-              stroke={B.apricot}
-              strokeWidth="1.2"
-              strokeOpacity={go ? 0 : 0}
-              style={{
-                opacity: go ? 0.6 - i * 0.18 : 0,
-                transition: `opacity 0.4s ${3.5 + i * 0.2}s`,
-              }}
-            />
-          ))}
+        {/* Overflow ripples */}
+        {[0,1,2].map(i => (
+          <ellipse key={i} cx="180" cy="57" rx={18 + i * 16} ry={5 + i * 2}
+            fill="none" stroke={B.apricot} strokeWidth="1.2"
+            style={{ opacity: go ? 0.6 - i * 0.18 : 0, transition: `opacity 0.4s ${3.5 + i * 0.2}s` }}/>
+        ))}
+        {/* Spark */}
+        <g style={{ opacity: go ? 1 : 0, transform: go ? 'translate(0,0)' : 'translate(0,-16px)', transition: `opacity 0.2s 2.9s, transform 0.3s 2.9s` }}>
+          <circle cx="180" cy="42" r="11" fill={B.red} opacity="0.12"/>
+          <text x="180" y="46" textAnchor="middle" fontSize="14">☕</text>
         </g>
-
-        {/* Spark — the trigger */}
-        <g style={{
-          opacity: go ? 1 : 0,
-          transform: go ? 'translate(0,0)' : 'translate(0,-20px)',
-          transition: `opacity 0.2s ${2.9}s, transform 0.3s ${2.9}s`,
-        }}>
-          <circle cx="160" cy="50" r="10" fill={B.red} opacity="0.15"/>
-          <text x="160" y="54" textAnchor="middle" fontSize="12">☕</text>
-          <text x="160" y="45" textAnchor="middle" fontSize="11"
-            fill={B.red} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.06em">
-            the cup
-          </text>
-        </g>
-
-        {/* Arrow down */}
-        <line x1="160" y1="58" x2="160" y2="65"
-          stroke={B.red} strokeWidth="1.5" strokeLinecap="round"
-          style={{ opacity: go ? 1 : 0, transition: `opacity 0.2s ${3.0}s` }}
-        />
-
-        {/* Labels */}
-        <text x="70" y="200" textAnchor="middle" fontSize="9"
-          fill={B.pewter} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.06em">
-          LOAD
+        <text x="180" y="35" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: `opacity 0.2s 2.9s` }}>
+          the cup
         </text>
-        <text x="250" y="200" textAnchor="middle" fontSize="9"
-          fill={B.red} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.06em">
-          SPARK
+        <line x1="180" y1="53" x2="180" y2="57" stroke={B.red} strokeWidth="1.5" strokeLinecap="round"
+          style={{ opacity: go ? 1 : 0, transition: `opacity 0.2s 3.0s` }}/>
+        {/* Footer labels */}
+        <text x="180" y="220" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s 1.0s` }}>
+          load accumulates → spark overflows the container
         </text>
-        <line x1="80" y1="193" x2="80" y2="185"
-          stroke={B.pewterL} strokeWidth="1" strokeLinecap="round"/>
-        <line x1="240" y1="193" x2="240" y2="185"
-          stroke={B.pewterL} strokeWidth="1" strokeLinecap="round"/>
       </svg>
       <div className="anim-caption">The spark didn't cause it. The full container caused it. The spark just broke the seal.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 2. THE 90-SECOND WINDOW — M2
-// Timeline showing stress peak, natural descent, feeding vs not feeding
-// ─────────────────────────────────────────
 export const ContainerAnimation = ContainerAnimationParent;
 
-// ─────────────────────────────────────────
-// CONTAINER — CHILD VERSION (M3)
-// What fills the child's container at school
-// ─────────────────────────────────────────
+// ─── CONTAINER CHILD (M3) ───
 export function ContainerAnimationChild() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   const items = [
-    { label: 'sitting still for 6 hrs', delay: 0 },
-    { label: 'impulse suppression', delay: 0.6 },
-    { label: 'social navigation', delay: 1.2 },
-    { label: 'masking the fidgeting', delay: 1.8 },
-    { label: 'following all the rules', delay: 2.4 },
+    { label: 'sitting still',     delay: 0,   warm: false },
+    { label: 'impulse control',   delay: 0.6, warm: false },
+    { label: 'social navigation', delay: 1.2, warm: false },
+    { label: 'masking fidgets',   delay: 1.8, warm: true },
+    { label: 'following rules',   delay: 2.4, warm: true },
   ];
-  const B2 = { blue: '#4A6FA5', blueL: 'rgba(74,111,165,0.12)', apricot: '#E8A87C', apricotL: 'rgba(232,168,124,0.2)', red: '#C97B6A', sageD: '#7FA88E', pewterL: 'rgba(86,96,110,0.3)', slate: '#1F2A37', mist: '#EDEFEE', cloud: '#F7F5F0' };
   return (
-    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="What fills a child with ADHD at school">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="What fills a child's container at school">
       <ReplayButton onClick={replay} />
-      <div className="anim-label-top">What fills their container at school</div>
-      <svg viewBox="0 0 320 220" style={{ width: '100%', display: 'block' }}>
-        <rect x="80" y="60" width="160" height="130" rx="8" fill="white" stroke={B2.pewterL} strokeWidth="1.5"/>
-        <rect x="81" y="61" width="158" height="128" rx="7" fill={B2.cloud}/>
+      <div className="anim-label-top">What fills their container during a school day</div>
+      <svg viewBox="0 0 360 240" style={{ width: '100%', display: 'block' }}>
+        <rect x="80" y="55" width="200" height="145" rx="10" fill="white" stroke={B.pewterL} strokeWidth="1.5"/>
+        <rect x="81" y="56" width="198" height="143" rx="9" fill={B.cloud}/>
         {items.map((item, i) => (
-          <g key={i} style={{ opacity: go ? 1 : 0, transform: go ? 'translateY(0)' : 'translateY(12px)', transition: `opacity 0.4s ${item.delay + 0.3}s, transform 0.4s ${item.delay + 0.3}s` }}>
-            <rect x="90" y={155 - i * 20} width="140" height="16" rx="4"
-              fill={i < 3 ? B2.blueL : B2.apricotL}
-              stroke={i < 3 ? B2.blue : B2.apricot}
-              strokeWidth="0.8" strokeOpacity="0.5"/>
-            <text x="160" y={166 - i * 20} textAnchor="middle" fontSize="11"
-              fill={i < 3 ? B2.blue : B2.apricot}
-              fontFamily="IBM Plex Mono, monospace" letterSpacing="0.03em">
+          <g key={i} style={{ opacity: go ? 1 : 0, transform: go ? 'translateY(0)' : 'translateY(10px)', transition: `opacity 0.4s ${item.delay + 0.3}s, transform 0.4s ${item.delay + 0.3}s` }}>
+            <rect x="90" y={170 - i * 22} width="180" height="18" rx="4"
+              fill={item.warm ? B.apricotL : B.blueL}
+              stroke={item.warm ? B.apricot : B.blue}
+              strokeWidth="0.8" strokeOpacity="0.6"/>
+            <text x="180" y={182 - i * 22} textAnchor="middle" fontSize="11"
+              fill={item.warm ? B.apricot : B.blue} fontFamily="IBM Plex Mono, monospace">
               {item.label}
             </text>
           </g>
         ))}
-        {/* Home arrival */}
-        <g style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s 2.9s` }}>
-          {[0,1,2].map(i => (
-            <ellipse key={i} cx="160" cy="62" rx={20 + i * 18} ry={6 + i * 3}
-              fill="none" stroke={B2.apricot} strokeWidth="1.2"
-              style={{ opacity: go ? 0.6 - i * 0.18 : 0, transition: `opacity 0.4s ${3.1 + i * 0.2}s` }}/>
-          ))}
+        {[0,1,2].map(i => (
+          <ellipse key={i} cx="180" cy="57" rx={18 + i * 16} ry={5 + i * 2}
+            fill="none" stroke={B.apricot} strokeWidth="1.2"
+            style={{ opacity: go ? 0.6 - i * 0.18 : 0, transition: `opacity 0.4s ${3.5 + i * 0.2}s` }}/>
+        ))}
+        <g style={{ opacity: go ? 1 : 0, transform: go ? 'translate(0,0)' : 'translate(0,-16px)', transition: `opacity 0.2s 2.9s, transform 0.3s 2.9s` }}>
+          <text x="180" y="46" textAnchor="middle" fontSize="16">🏠</text>
         </g>
-        <g style={{ opacity: go ? 1 : 0, transform: go ? 'translate(0,0)' : 'translate(0,-20px)', transition: `opacity 0.2s 2.9s, transform 0.3s 2.9s` }}>
-          <circle cx="160" cy="50" r="10" fill={B2.red} opacity="0.15"/>
-          <text x="160" y="54" textAnchor="middle" fontSize="13">🏠</text>
-          <text x="160" y="44" textAnchor="middle" fontSize="11" fill={B2.red} fontFamily="IBM Plex Mono, monospace" letterSpacing="0.06em">home</text>
-        </g>
-        <line x1="160" y1="58" x2="160" y2="65" stroke={B2.red} strokeWidth="1.5" strokeLinecap="round"
-          style={{ opacity: go ? 1 : 0, transition: `opacity 0.2s 3.0s` }}/>
-        <text x="70" y="200" textAnchor="middle" fontSize="11" fill={B2.pewterL} fontFamily="IBM Plex Mono, monospace">SCHOOL DAY LOAD</text>
-        <text x="250" y="200" textAnchor="middle" fontSize="11" fill={B2.red} fontFamily="IBM Plex Mono, monospace">ARRIVAL</text>
+        <text x="180" y="35" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: `opacity 0.2s 2.9s` }}>
+          home
+        </text>
+        <text x="180" y="220" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s 1.0s` }}>
+          6 hours of effort → arrives home already full
+        </text>
       </svg>
       <div className="anim-caption">They didn't decide to fall apart. Their container was already full. Home is where it was safe to overflow.</div>
     </div>
   );
 }
 
+// ─── 90-SECOND WINDOW (M2) ───
 export function NinetySecondAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The 90-second neurochemical window">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">The 90-second window</div>
-      <svg viewBox="0 0 320 160" style={{ width: '100%', display: 'block' }}>
-
-        {/* Baseline */}
-        <line x1="30" y1="130" x2="290" y2="130"
-          stroke={B.mist} strokeWidth="1"/>
-
-        {/* Peak curve — stress response */}
-        <path d="M 30 130 C 60 130 70 30 110 25 C 140 22 155 22 175 35 C 200 55 220 100 290 125"
-          fill="none" stroke={B.red} strokeWidth="2.5" strokeLinecap="round"
-          style={{
-            strokeDasharray: 400,
-            strokeDashoffset: go ? 0 : 400,
-            transition: `stroke-dashoffset 2.5s 0.3s ease-out`,
-          }}
-        />
-
-        {/* Fill under curve */}
-        <path d="M 30 130 C 60 130 70 30 110 25 C 140 22 155 22 175 35 C 200 55 220 100 290 125 L 290 130 Z"
-          fill={B.red} fillOpacity={go ? 0.08 : 0}
-          style={{ transition: `fill-opacity 0.5s 2.5s` }}
-        />
-
-        {/* 90 second marker */}
-        <line x1="175" y1="30" x2="175" y2="130"
-          stroke={B.sageD} strokeWidth="1.2" strokeDasharray="4 3"
-          style={{ opacity: go ? 1 : 0, transition: `opacity 0.4s 2.0s` }}
-        />
-        <text x="178" y="50" fontSize="12" fill={B.sageD}
-          fontFamily="IBM Plex Mono, monospace">
-          ~90 sec
-        </text>
-        <text x="178" y="60" fontSize="11" fill={B.sageD}
-          fontFamily="IBM Plex Mono, monospace" opacity="0.7">
-          peak
-        </text>
-
-        {/* "Keep feeding it" arrow — stay in it */}
-        <g style={{ opacity: go ? 1 : 0, transition: `opacity 0.4s 2.8s` }}>
-          <path d="M 175 35 C 200 20 240 15 270 40"
-            fill="none" stroke={B.red} strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round"/>
-          <text x="218" y="20" fontSize="11" fill={B.red}
-            fontFamily="IBM Plex Mono, monospace">
-            keep going
-          </text>
-          <text x="225" y="29" fontSize="11" fill={B.red}
-            fontFamily="IBM Plex Mono, monospace" opacity="0.7">
-            stays high
-          </text>
-        </g>
-
-        {/* "Stop feeding it" — natural descent */}
-        <g style={{ opacity: go ? 1 : 0, transition: `opacity 0.4s 3.2s` }}>
-          <text x="200" y="105" fontSize="11" fill={B.sageD}
-            fontFamily="IBM Plex Mono, monospace">
-            step away
-          </text>
-          <text x="200" y="114" fontSize="11" fill={B.sageD}
-            fontFamily="IBM Plex Mono, monospace" opacity="0.7">
-            descends
-          </text>
-        </g>
-
+      <svg viewBox="0 0 360 185" style={{ width: '100%', display: 'block' }}>
+        {/* Axes */}
+        <line x1="40" y1="20" x2="40" y2="148" stroke={B.pewterL} strokeWidth="1.5"/>
+        <line x1="40" y1="148" x2="320" y2="148" stroke={B.pewterL} strokeWidth="1.5"/>
         {/* Axis labels */}
-        <text x="30" y="145" fontSize="11" fill={B.pewter}
-          fontFamily="IBM Plex Mono, monospace">trigger</text>
-        <text x="265" y="145" fontSize="11" fill={B.pewter}
-          fontFamily="IBM Plex Mono, monospace">time</text>
-
-        {/* Y axis label */}
-        <text x="15" y="80" fontSize="11" fill={B.pewter}
-          fontFamily="IBM Plex Mono, monospace"
-          transform="rotate(-90, 15, 80)">intensity</text>
+        <text x="180" y="165" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace">time →</text>
+        <text x="25" y="85" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          transform="rotate(-90,25,85)">intensity</text>
+        {/* Peak curve */}
+        <path d="M 50 148 C 70 148 80 35 115 28 C 140 23 160 23 185 38 C 210 60 230 110 310 143"
+          fill="none" stroke={B.red} strokeWidth="2.5" strokeLinecap="round"
+          style={{ strokeDasharray: 420, strokeDashoffset: go ? 0 : 420, transition: 'stroke-dashoffset 2.2s 0.3s ease-out' }}/>
+        {/* Fill */}
+        <path d="M 50 148 C 70 148 80 35 115 28 C 140 23 160 23 185 38 C 210 60 230 110 310 143 L 310 148 Z"
+          fill={B.red} fillOpacity={go ? 0.07 : 0} style={{ transition: 'fill-opacity 0.5s 2.3s' }}/>
+        {/* 90s marker */}
+        <line x1="185" y1="30" x2="185" y2="148" stroke={B.sageD} strokeWidth="1.2" strokeDasharray="5 3"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.8s' }}/>
+        <text x="185" y="22" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.8s' }}>~90 sec peak</text>
+        {/* Keep feeding */}
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.5s' }}>
+          <path d="M 185 38 C 215 20 260 18 290 42" fill="none" stroke={B.red} strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round"/>
+          <text x="260" y="15" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace">stay in it</text>
+          <text x="260" y="27" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">stays high</text>
+        </g>
+        {/* Step away */}
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.8s' }}>
+          <text x="250" y="118" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">step away</text>
+          <text x="250" y="130" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.7">descends</text>
+        </g>
+        {/* Start label */}
+        <text x="50" y="163" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.5s' }}>trigger</text>
       </svg>
       <div className="anim-caption">You're not in a character crisis. You're in a window. Windows close on their own if you stop feeding them.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 3. THE MASKING COST — M2
-// Resource bar depletes through the day, empty at home
-// ─────────────────────────────────────────
+// ─── MASKING COST (M2) ───
 export function MaskingCostAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   const moments = [
-    { time: 'Morning', label: 'getting ready', cost: 12, icon: '🌅' },
-    { time: 'Commute', label: 'performing normal', cost: 18, icon: '🚌' },
-    { time: 'Work', label: 'masking all day', cost: 45, icon: '💼' },
-    { time: 'Meeting', label: 'focus & filter', cost: 15, icon: '📋' },
-    { time: 'Home', label: 'child needs co-regulation', cost: 0, icon: '🏠' },
+    { time: 'Morning', icon: '🌅', cost: 10 },
+    { time: 'Commute', icon: '🚌', cost: 18 },
+    { time: 'Work',    icon: '💼', cost: 45 },
+    { time: 'Meeting', icon: '📋', cost: 17 },
+    { time: 'Home',    icon: '🏠', cost: 0  },
   ];
-  let cumulative = 100;
+  const colors = ['#7FA88E','#7FA88E','#4A6FA5','#E8A87C'];
+  let cumX = 50;
+  const total = 260;
   return (
-    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The masking cost across a day">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Where regulation resource goes across the day">
       <ReplayButton onClick={replay} />
-      <div className="anim-label-top">Where the resource goes</div>
-      <svg viewBox="0 0 320 200" style={{ width: '100%', display: 'block' }}>
-
+      <div className="anim-label-top">Where the regulation resource goes</div>
+      <svg viewBox="0 0 360 175" style={{ width: '100%', display: 'block' }}>
         {/* Track */}
-        <rect x="30" y="90" width="260" height="16" rx="8"
-          fill={B.mist} stroke={B.pewterL} strokeWidth="0.8"/>
-
-        {/* Full bar label */}
-        <text x="30" y="84" fontSize="11" fill={B.pewter}
-          fontFamily="IBM Plex Mono, monospace">
+        <text x="180" y="24" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.2s' }}>
           REGULATION RESOURCE
         </text>
-
-        {/* Animated depletion */}
-        {(() => {
-          const segments = [];
-          let x = 30;
-          const colors = [B.sageD, B.sageD, B.blue, B.apricot];
-          moments.slice(0, -1).forEach((m, i) => {
-            const w = (m.cost / 100) * 260;
-            const prevX = x;
-            segments.push(
-              <g key={i}>
-                <rect x={prevX} y="90" width={w} height="16" rx={i === 0 ? 8 : 0}
-                  fill={colors[i % colors.length]}
-                  fillOpacity={go ? 0.7 : 0}
-                  style={{ transition: `fill-opacity 0.5s ${i * 0.4 + 0.5}s` }}
-                />
-              </g>
-            );
-            x += w;
-          });
-          return segments;
-        })()}
-
-        {/* Home marker — the point of emptiness */}
-        <line x1="290" y1="82" x2="290" y2="112"
-          stroke={B.red} strokeWidth="1.5"
-          style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s 2.5s` }}
-        />
-        <text x="293" y="92" fontSize="11" fill={B.red}
-          fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s 2.8s` }}>
-          home
-        </text>
-        <text x="293" y="102" fontSize="11" fill={B.red}
-          fontFamily="IBM Plex Mono, monospace" opacity="0.7"
-          style={{ opacity: go ? 0.7 : 0, transition: `opacity 0.3s 3.0s` }}>
-          empty
-        </text>
-
-        {/* Icons along the bottom */}
+        <rect x="50" y="32" width={total} height="20" rx="10" fill={B.mist} stroke={B.pewterL} strokeWidth="0.8"/>
+        {/* Segments */}
+        {moments.slice(0,-1).map((m, i) => {
+          const w = Math.round((m.cost / 90) * total);
+          const x = cumX;
+          cumX += w;
+          return (
+            <rect key={i} x={x} y="32" width={w} height="20"
+              rx={i === 0 ? 10 : 0}
+              fill={colors[i % colors.length]} fillOpacity={go ? 0.7 : 0}
+              style={{ transition: `fill-opacity 0.5s ${i * 0.4 + 0.5}s` }}/>
+          );
+        })}
+        {/* Empty marker */}
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.3s' }}>
+          <line x1="310" y1="28" x2="310" y2="56" stroke={B.red} strokeWidth="1.5"/>
+          <text x="310" y="20" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace">empty</text>
+        </g>
+        {/* Icons + labels */}
         {moments.map((m, i) => {
-          const xPos = 30 + (i / (moments.length - 1)) * 248;
+          const xPos = 50 + Math.round((i / (moments.length - 1)) * total);
           return (
             <g key={i} style={{ opacity: go ? 1 : 0, transition: `opacity 0.3s ${i * 0.35 + 0.4}s` }}>
-              <text x={xPos} y="135" textAnchor="middle" fontSize="14">{m.icon}</text>
-              <text x={xPos} y="148" textAnchor="middle" fontSize="11"
-                fill={B.pewter} fontFamily="IBM Plex Mono, monospace">{m.time}</text>
-              <text x={xPos} y="158" textAnchor="middle" fontSize="10"
-                fill={B.pewter} fontFamily="IBM Plex Mono, monospace" opacity="0.6">
-                {m.label}
-              </text>
+              <text x={xPos} y="80" textAnchor="middle" fontSize="16">{m.icon}</text>
+              <text x={xPos} y="96" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace">{m.time}</text>
             </g>
           );
         })}
-
-        {/* Empty label */}
-        <g style={{ opacity: go ? 1 : 0, transition: `opacity 0.4s 2.5s` }}>
-          <rect x="255" y="90" width="35" height="16" rx="0 8 8 0"
-            fill={B.mist} stroke={B.pewterL} strokeWidth="0.5"
-          />
-          <text x="272" y="101" textAnchor="middle" fontSize="11"
-            fill={B.pewter} fontFamily="IBM Plex Mono, monospace">empty</text>
-        </g>
+        {/* Bottom note */}
+        <text x="180" y="125" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.5s' }}>
+          mask drops at home — exactly when they need you most
+        </text>
       </svg>
-      <div className="anim-caption">Home is where the mask drops — exactly when your child needs the resource you just spent all day.</div>
+      <div className="anim-caption">Home is where the mask drops — exactly when your child needs the resource you spent all day.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 4. THE AMPLIFICATION LOOP — M4
-// Two nervous systems feeding each other, then breaking with distance
-// ─────────────────────────────────────────
+// ─── AMPLIFICATION LOOP (M4) ───
 export function AmplificationAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   const [phase, setPhase] = useState(0);
   useEffect(() => {
     if (!go) return;
+    setPhase(0);
     const timers = [
       setTimeout(() => setPhase(1), 800),
       setTimeout(() => setPhase(2), 1800),
@@ -431,376 +291,200 @@ export function AmplificationAnimation() {
       setTimeout(() => setPhase(4), 4000),
     ];
     return () => timers.forEach(clearTimeout);
-  }, [go]);
-
+  }, [go, replay]);
   return (
-    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The amplification loop between two nervous systems">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The amplification loop">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">The amplification loop</div>
-      <svg viewBox="0 0 320 180" style={{ width: '100%', display: 'block' }}>
-
-        {/* Parent circle */}
-        <circle cx="90" cy="90" r={phase >= 2 ? 38 : 28}
+      <svg viewBox="0 0 360 190" style={{ width: '100%', display: 'block' }}>
+        {/* Phase label */}
+        <text x="180" y="22" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace">
+          {phase === 0 ? 'starting state' : phase === 1 ? 'contagion begins' : phase === 2 ? 'both dysregulated' : phase === 3 ? 'amplification loop' : '60 seconds apart'}
+        </text>
+        {/* Parent */}
+        <circle cx="95" cy="100" r={phase >= 2 ? 42 : 30}
           fill={phase >= 1 ? B.apricotL : B.blueL}
-          stroke={phase >= 2 ? B.red : B.blue}
-          strokeWidth={phase >= 2 ? 2 : 1.5}
-          style={{ transition: 'all 0.6s ease' }}
-        />
-        <text x="90" y="87" textAnchor="middle" fontSize="9"
-          fill={B.slate} fontFamily="Lexend, sans-serif" fontWeight="500">
-          Parent
+          stroke={phase >= 2 ? B.red : B.blue} strokeWidth={phase >= 2 ? 2 : 1.5}
+          style={{ transition: 'all 0.6s ease' }}/>
+        <text x="95" y="96" textAnchor="middle" fontSize="12" fill={B.slate} fontFamily="Lexend, sans-serif" fontWeight="500">Parent</text>
+        <text x="95" y="111" textAnchor="middle" fontSize="11" fill={phase >= 2 ? B.red : B.pewter} fontFamily="IBM Plex Mono, monospace" style={{ transition: 'fill 0.3s' }}>
+          {phase === 0 ? 'calm' : phase === 1 ? 'rising' : phase < 4 ? 'dysreg.' : 'settling'}
         </text>
-        <text x="90" y="99" textAnchor="middle" fontSize="11"
-          fill={phase >= 2 ? B.red : B.pewter}
-          fontFamily="IBM Plex Mono, monospace"
-          style={{ transition: 'color 0.3s' }}>
-          {phase === 0 ? 'calm' : phase === 1 ? 'rising' : phase < 4 ? 'dysreg.' : 'stepping down'}
-        </text>
-
-        {/* Child circle */}
-        <circle cx="230" cy="90" r={phase >= 1 ? 38 : 28}
+        {/* Child */}
+        <circle cx="265" cy="100" r={phase >= 1 ? 42 : 30}
           fill={phase >= 1 ? B.apricotL : B.sageL}
-          stroke={phase >= 1 ? B.red : B.sageD}
-          strokeWidth={phase >= 1 ? 2 : 1.5}
-          style={{ transition: 'all 0.6s ease' }}
-        />
-        <text x="230" y="87" textAnchor="middle" fontSize="9"
-          fill={B.slate} fontFamily="Lexend, sans-serif" fontWeight="500">
-          Child
-        </text>
-        <text x="230" y="99" textAnchor="middle" fontSize="11"
-          fill={phase >= 1 ? B.red : B.sageD}
-          fontFamily="IBM Plex Mono, monospace"
-          style={{ transition: 'color 0.3s' }}>
+          stroke={phase >= 1 ? B.red : B.sageD} strokeWidth={phase >= 1 ? 2 : 1.5}
+          style={{ transition: 'all 0.6s ease' }}/>
+        <text x="265" y="96" textAnchor="middle" fontSize="12" fill={B.slate} fontFamily="Lexend, sans-serif" fontWeight="500">Child</text>
+        <text x="265" y="111" textAnchor="middle" fontSize="11" fill={phase >= 1 ? B.red : B.sageD} fontFamily="IBM Plex Mono, monospace" style={{ transition: 'fill 0.3s' }}>
           {phase === 0 ? 'meltdown' : phase < 4 ? 'escalating' : 'settling'}
         </text>
-
-        {/* Arrows between — feeding each other */}
+        {/* Arrows */}
         {phase >= 1 && phase < 4 && (
           <>
-            <path d="M 125 80 C 155 65 165 65 195 80"
-              fill="none" stroke={B.red} strokeWidth="1.5"
-              strokeDasharray={phase >= 2 ? '0' : '4 3'}
-              style={{ opacity: 0.7 }}
-            >
+            <path d="M 138 88 C 168 72 192 72 222 88" fill="none" stroke={B.red} strokeWidth="1.5" strokeDasharray="4 3" style={{ opacity: 0.7 }}>
               <animate attributeName="stroke-dashoffset" values="20;0" dur="1s" repeatCount="indefinite"/>
             </path>
-            <path d="M 195 100 C 165 115 155 115 125 100"
-              fill="none" stroke={B.red} strokeWidth="1.5"
-              strokeDasharray="4 3"
-              style={{ opacity: 0.7 }}
-            >
+            <path d="M 222 112 C 192 128 168 128 138 112" fill="none" stroke={B.red} strokeWidth="1.5" strokeDasharray="4 3" style={{ opacity: 0.7 }}>
               <animate attributeName="stroke-dashoffset" values="0;20" dur="1s" repeatCount="indefinite"/>
             </path>
-            <text x="160" y="60" textAnchor="middle" fontSize="11"
-              fill={B.red} fontFamily="IBM Plex Mono, monospace">amplifying</text>
+            <text x="180" y="68" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace">amplifying</text>
           </>
         )}
-
-        {/* Break — distance */}
+        {/* Distance */}
         {phase >= 4 && (
           <>
-            <line x1="160" y1="50" x2="160" y2="130"
-              stroke={B.sageD} strokeWidth="1.5" strokeDasharray="5 3"
-              style={{ opacity: 0.7 }}
-            />
-            <text x="160" y="145" textAnchor="middle" fontSize="11"
-              fill={B.sageD} fontFamily="IBM Plex Mono, monospace">distance</text>
-            <text x="160" y="155" textAnchor="middle" fontSize="11"
-              fill={B.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.7">breaks the loop</text>
+            <line x1="180" y1="52" x2="180" y2="148" stroke={B.sageD} strokeWidth="1.5" strokeDasharray="5 3" opacity="0.7"/>
+            <text x="180" y="162" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">distance breaks the loop</text>
           </>
         )}
-
-        {/* Phase label */}
-        <text x="160" y="20" textAnchor="middle" fontSize="11"
-          fill={B.pewter} fontFamily="IBM Plex Mono, monospace">
-          {phase === 0 ? 'starting state' :
-           phase === 1 ? 'contagion begins' :
-           phase === 2 ? 'both dysregulated' :
-           phase === 3 ? 'amplification loop' :
-           '60 seconds apart'}
-        </text>
       </svg>
       <div className="anim-caption">Two reactive nervous systems in proximity amplify each other. Distance is not abandonment — it breaks the loop.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 5. THE SIGNAL — M6
-// Body silhouette, heat rising from chest before explosion
-// ─────────────────────────────────────────
+// ─── SIGNAL (M6) ───
 export function SignalAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The physical signal before the explosion">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">The signal arrives before the reaction</div>
-      <svg viewBox="0 0 320 200" style={{ width: '100%', display: 'block' }}>
-
-        {/* Body silhouette */}
-        <g transform="translate(130, 20)">
-          {/* Head */}
-          <ellipse cx="30" cy="18" rx="14" ry="16"
-            fill={B.slate} fillOpacity="0.12" stroke={B.pewterL} strokeWidth="1"/>
-          {/* Torso */}
-          <rect x="14" y="34" width="32" height="52" rx="8"
-            fill={B.slate} fillOpacity="0.1" stroke={B.pewterL} strokeWidth="1"/>
-          {/* Arms */}
-          <rect x="1" y="36" width="12" height="36" rx="6"
-            fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
-          <rect x="47" y="36" width="12" height="36" rx="6"
-            fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
-          {/* Legs */}
-          <rect x="14" y="85" width="12" height="40" rx="6"
-            fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
-          <rect x="34" y="85" width="12" height="40" rx="6"
-            fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
-
-          {/* Chest heat — the signal */}
-          {[0, 1, 2, 3].map(i => (
-            <ellipse key={i}
-              cx="30" cy={58 - i * 8}
-              rx={8 + i * 4} ry={5 + i * 3}
-              fill={B.apricot}
-              fillOpacity={go ? Math.max(0, 0.5 - i * 0.1) : 0}
-              style={{ transition: `fill-opacity 0.4s ${i * 0.25 + 0.5}s ease` }}
-            />
+      <svg viewBox="0 0 360 220" style={{ width: '100%', display: 'block' }}>
+        {/* Body — centred at 180 */}
+        <g transform="translate(152, 20)">
+          <ellipse cx="28" cy="18" rx="14" ry="16" fill={B.slate} fillOpacity="0.12" stroke={B.pewterL} strokeWidth="1"/>
+          <rect x="14" y="34" width="28" height="50" rx="8" fill={B.slate} fillOpacity="0.1" stroke={B.pewterL} strokeWidth="1"/>
+          <rect x="1" y="36" width="12" height="34" rx="6" fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
+          <rect x="43" y="36" width="12" height="34" rx="6" fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
+          <rect x="14" y="83" width="11" height="38" rx="6" fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
+          <rect x="31" y="83" width="11" height="38" rx="6" fill={B.slate} fillOpacity="0.08" stroke={B.pewterL} strokeWidth="0.8"/>
+          {/* Chest heat */}
+          {[0,1,2,3].map(i => (
+            <ellipse key={i} cx="28" cy={56 - i * 8} rx={7 + i * 4} ry={4 + i * 2}
+              fill={B.apricot} fillOpacity={go ? Math.max(0, 0.5 - i * 0.1) : 0}
+              style={{ transition: `fill-opacity 0.4s ${i * 0.25 + 0.5}s` }}/>
           ))}
-
-          {/* Jaw tighten indicator */}
-          <path d="M 20 28 Q 30 33 40 28"
-            fill="none"
-            stroke={go ? B.red : B.pewterL}
-            strokeWidth={go ? 2 : 1}
-            style={{ transition: 'stroke 0.3s 1.5s, stroke-width 0.3s 1.5s' }}
-          />
-
-          {/* Shoulder rise */}
-          <path d="M 8 36 Q 30 28 52 36"
-            fill="none"
-            stroke={go ? B.apricot : B.pewterL}
-            strokeWidth={go ? 2 : 1}
-            style={{ transition: 'stroke 0.3s 1.8s, stroke-width 0.3s 1.8s' }}
-          />
+          {/* Jaw */}
+          <path d="M 18 27 Q 28 32 38 27" fill="none"
+            stroke={go ? B.red : B.pewterL} strokeWidth={go ? 2 : 1}
+            style={{ transition: 'stroke 0.3s 1.5s, stroke-width 0.3s 1.5s' }}/>
+          {/* Shoulders */}
+          <path d="M 6 36 Q 28 27 50 36" fill="none"
+            stroke={go ? B.apricot : B.pewterL} strokeWidth={go ? 2 : 1}
+            style={{ transition: 'stroke 0.3s 1.8s, stroke-width 0.3s 1.8s' }}/>
         </g>
-
-        {/* Labels with arrows */}
+        {/* Left labels — heat */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.0s' }}>
-          <line x1="110" y1="78" x2="136" y2="75"
-            stroke={B.apricot} strokeWidth="1" strokeLinecap="round"/>
-          <text x="60" y="80" textAnchor="middle" fontSize="9"
-            fill={B.apricot} fontFamily="IBM Plex Mono, monospace">heat rising</text>
-          <text x="60" y="90" textAnchor="middle" fontSize="11"
-            fill={B.apricot} fontFamily="IBM Plex Mono, monospace" opacity="0.7">in chest</text>
+          <line x1="140" y1="88" x2="158" y2="82" stroke={B.apricot} strokeWidth="1" strokeLinecap="round"/>
+          <text x="90" y="84" textAnchor="middle" fontSize="12" fill={B.apricot} fontFamily="IBM Plex Mono, monospace">heat rising</text>
         </g>
-
+        {/* Left — jaw */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.5s' }}>
-          <line x1="120" y1="56" x2="142" y2="52"
-            stroke={B.red} strokeWidth="1" strokeLinecap="round"/>
-          <text x="70" y="56" textAnchor="middle" fontSize="9"
-            fill={B.red} fontFamily="IBM Plex Mono, monospace">jaw tightens</text>
+          <line x1="140" y1="62" x2="158" y2="58" stroke={B.red} strokeWidth="1" strokeLinecap="round"/>
+          <text x="88" y="58" textAnchor="middle" fontSize="12" fill={B.red} fontFamily="IBM Plex Mono, monospace">jaw tightens</text>
         </g>
-
+        {/* Right — shoulders */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 1.8s' }}>
-          <line x1="210" y1="56" x2="190" y2="52"
-            stroke={B.red} strokeWidth="1" strokeLinecap="round"/>
-          <text x="255" y="56" textAnchor="middle" fontSize="9"
-            fill={B.red} fontFamily="IBM Plex Mono, monospace">shoulders up</text>
+          <line x1="220" y1="58" x2="202" y2="54" stroke={B.red} strokeWidth="1" strokeLinecap="round"/>
+          <text x="272" y="58" textAnchor="middle" fontSize="12" fill={B.red} fontFamily="IBM Plex Mono, monospace">shoulders up</text>
         </g>
-
+        {/* Window callout */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.5s' }}>
-          <rect x="95" y="145" width="130" height="26" rx="6"
-            fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
-          <text x="160" y="156" textAnchor="middle" fontSize="9"
-            fill={B.blue} fontFamily="IBM Plex Mono, monospace">
-            30 seconds before the explosion
-          </text>
-          <text x="160" y="167" textAnchor="middle" fontSize="12"
-            fill={B.blue} fontFamily="Lexend, sans-serif">
-            This is your intervention window
-          </text>
+          <rect x="80" y="158" width="200" height="36" rx="8" fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
+          <text x="180" y="173" textAnchor="middle" fontSize="12" fill={B.blue} fontFamily="IBM Plex Mono, monospace">30 seconds before the explosion</text>
+          <text x="180" y="186" textAnchor="middle" fontSize="12" fill={B.slate} fontFamily="Lexend, sans-serif">This is your intervention window</text>
         </g>
-
       </svg>
       <div className="anim-caption">The signal is consistent. Once you know what yours feels like, you have a window that didn't exist before.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 6. THE REPAIR — M5, M13
-// A crack in a line, then two sentences closing it, return to normal
-// ─────────────────────────────────────────
+// ─── REPAIR (M5) ───
 export function RepairAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="What repair looks like">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">What repair actually is</div>
-      <svg viewBox="0 0 320 140" style={{ width: '100%', display: 'block' }}>
-
-        {/* Timeline line — before rupture */}
-        <line x1="20" y1="70" x2="110" y2="70"
-          stroke={B.sageD} strokeWidth="2.5" strokeLinecap="round"
-          style={{
-            strokeDasharray: 90,
-            strokeDashoffset: go ? 0 : 90,
-            transition: 'stroke-dashoffset 0.6s 0.2s ease-out',
-          }}
-        />
-
-        {/* Rupture — jagged break */}
-        <polyline points="110,70 122,45 135,95 148,45 160,70"
+      <svg viewBox="0 0 360 155" style={{ width: '100%', display: 'block' }}>
+        {/* Before line */}
+        <line x1="25" y1="75" x2="110" y2="75" stroke={B.sageD} strokeWidth="2.5" strokeLinecap="round"
+          style={{ strokeDasharray: 90, strokeDashoffset: go ? 0 : 90, transition: 'stroke-dashoffset 0.6s 0.2s ease-out' }}/>
+        {/* Rupture */}
+        <polyline points="110,75 122,48 136,102 150,48 162,75"
           fill="none" stroke={B.red} strokeWidth="2.5" strokeLinejoin="round"
-          style={{
-            strokeDasharray: 120,
-            strokeDashoffset: go ? 0 : 120,
-            transition: 'stroke-dashoffset 0.6s 0.7s ease-out',
-          }}
-        />
-
+          style={{ strokeDasharray: 130, strokeDashoffset: go ? 0 : 130, transition: 'stroke-dashoffset 0.7s 0.7s ease-out' }}/>
         {/* Gap */}
-        <line x1="160" y1="70" x2="200" y2="70"
-          stroke={B.pewterL} strokeWidth="2" strokeLinecap="round" strokeDasharray="4 3"
-          style={{
-            opacity: go ? 1 : 0,
-            transition: 'opacity 0.3s 1.2s',
-          }}
-        />
-
-        {/* Two repair sentences */}
+        <line x1="162" y1="75" x2="198" y2="75" stroke={B.pewterL} strokeWidth="2" strokeDasharray="4 3"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 1.3s' }}/>
+        {/* Two sentences */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.5s 1.8s' }}>
-          <rect x="162" y="48" width="115" height="16" rx="4"
-            fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
-          <text x="220" y="59" textAnchor="middle" fontSize="11"
-            fill={B.blue} fontFamily="IBM Plex Mono, monospace">
-            "I [did the thing]."
-          </text>
+          <rect x="198" y="52" width="132" height="18" rx="4" fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
+          <text x="264" y="64" textAnchor="middle" fontSize="11" fill={B.blue} fontFamily="IBM Plex Mono, monospace">sentence 1 — names it</text>
         </g>
-
-        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.5s 2.4s' }}>
-          <rect x="162" y="68" width="115" height="16" rx="4"
-            fill={B.sageL} stroke={B.sageD} strokeWidth="0.8"/>
-          <text x="220" y="79" textAnchor="middle" fontSize="11"
-            fill={B.sageD} fontFamily="IBM Plex Mono, monospace">
-            "I'm going to work on ___."
-          </text>
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.5s 2.3s' }}>
+          <rect x="198" y="74" width="132" height="18" rx="4" fill={B.sageL} stroke={B.sageD} strokeWidth="0.8"/>
+          <text x="264" y="86" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">sentence 2 — next step</text>
         </g>
-
-        {/* Reconnection line after repair */}
-        <line x1="278" y1="70" x2="305" y2="70"
-          stroke={B.sageD} strokeWidth="2.5" strokeLinecap="round"
-          style={{
-            strokeDasharray: 30,
-            strokeDashoffset: go ? 0 : 30,
-            transition: 'stroke-dashoffset 0.4s 3.2s ease-out',
-          }}
-        />
-
-        {/* Labels below timeline */}
-        <text x="65" y="95" textAnchor="middle" fontSize="11"
-          fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.5s' }}>
-          before
-        </text>
-        <text x="135" y="115" textAnchor="middle" fontSize="11"
-          fill={B.red} fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 1.0s' }}>
-          rupture
-        </text>
-        <text x="292" y="95" textAnchor="middle" fontSize="11"
-          fill={B.sageD} fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 3.5s' }}>
-          after
-        </text>
-
-        {/* Two sentences label */}
-        <text x="220" y="100" textAnchor="middle" fontSize="11"
-          fill={B.blue} fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.0s' }}>
-          two sentences
-        </text>
-        <text x="220" y="110" textAnchor="middle" fontSize="11"
-          fill={B.blue} fontFamily="IBM Plex Mono, monospace" opacity="0.6"
-          style={{ opacity: go ? 0.6 : 0, transition: 'opacity 0.3s 2.2s' }}>
-          when both of you are calm
-        </text>
+        {/* After line */}
+        <line x1="330" y1="75" x2="350" y2="75" stroke={B.sageD} strokeWidth="2.5" strokeLinecap="round"
+          style={{ strokeDasharray: 22, strokeDashoffset: go ? 0 : 22, transition: 'stroke-dashoffset 0.4s 3.0s ease-out' }}/>
+        {/* Labels */}
+        <text x="68" y="100" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.5s' }}>before</text>
+        <text x="136" y="120" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 1.0s' }}>rupture</text>
+        <text x="264" y="110" textAnchor="middle" fontSize="11" fill={B.blue} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.0s' }}>two sentences · when calm</text>
+        <text x="344" y="100" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 3.2s' }}>after</text>
       </svg>
-      <div className="anim-caption">The repair doesn't need to be large. Two sentences, unconditional, when both of you are calm. Then something ordinary.</div>
+      <div className="anim-caption">Two sentences, unconditional, when both of you are calm. Then something ordinary.</div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// 7. CO-REGULATION SYNC — M4, M1
-// Brain waves syncing and desyncing
-// ─────────────────────────────────────────
+// ─── CO-REGULATION (M4) ───
 export function CoRegulationAnimation() {
   const [ref, go, replay] = useScrollTrigger(0.4);
   return (
-    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="How co-regulation works — and why it breaks">
+    <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Co-regulation breaking under stress">
       <ReplayButton onClick={replay} />
       <div className="anim-label-top">Why co-regulation breaks under stress</div>
-      <svg viewBox="0 0 320 160" style={{ width: '100%', display: 'block' }}>
-
+      <svg viewBox="0 0 360 170" style={{ width: '100%', display: 'block' }}>
+        {/* Parent label */}
+        <text x="60" y="28" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.3s' }}>Parent</text>
         {/* Parent wave — calm */}
-        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.3s' }}>
-          <text x="32" y="55" fontSize="11" fill={B.pewter}
-            fontFamily="IBM Plex Mono, monospace">Parent</text>
-          <path d="M 30 70 Q 52 50 74 70 Q 96 90 118 70 Q 140 50 162 70 Q 184 90 206 70 Q 228 50 250 70 Q 272 90 294 70"
-            fill="none" stroke={B.blue} strokeWidth="2"
-            style={{
-              strokeDasharray: 320,
-              strokeDashoffset: go ? 0 : 320,
-              transition: 'stroke-dashoffset 1.5s 0.5s ease-out',
-            }}
-          />
+        <path d="M 30 72 Q 50 52 70 72 Q 90 92 110 72 Q 130 52 150 72 Q 170 92 190 72 Q 210 52 230 72 Q 250 92 270 72 Q 290 52 310 72 Q 330 92 345 72"
+          fill="none" stroke={B.blue} strokeWidth="2"
+          style={{ strokeDasharray: 370, strokeDashoffset: go ? 0 : 370, transition: 'stroke-dashoffset 1.5s 0.4s ease-out' }}/>
+        {/* Child label */}
+        <text x="60" y="118" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.8s' }}>Child</text>
+        {/* Child wave — bigger amplitude */}
+        <path d="M 30 118 Q 50 82 70 118 Q 90 154 110 118 Q 130 82 150 118 Q 170 154 190 118 Q 210 82 230 118 Q 250 154 270 118 Q 290 82 310 118 Q 330 154 345 118"
+          fill="none" stroke={B.apricot} strokeWidth="2"
+          style={{ strokeDasharray: 430, strokeDashoffset: go ? 0 : 430, transition: 'stroke-dashoffset 1.5s 0.9s ease-out' }}/>
+        {/* Sync zone */}
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.3s' }}>
+          <rect x="30" y="46" width="90" height="96" rx="4" fill={B.sageD} fillOpacity="0.06" stroke={B.sageD} strokeWidth="0.8" strokeDasharray="4 3"/>
+          <text x="75" y="152" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">calm → can sync</text>
         </g>
-
-        {/* Child wave — dysregulated, larger amplitude */}
-        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 0.8s' }}>
-          <text x="32" y="115" fontSize="11" fill={B.pewter}
-            fontFamily="IBM Plex Mono, monospace">Child</text>
-          <path d="M 30 120 Q 52 80 74 120 Q 96 160 118 120 Q 140 80 162 120 Q 184 160 206 120 Q 228 80 250 120 Q 272 160 294 120"
-            fill="none" stroke={B.apricot} strokeWidth="2"
-            style={{
-              strokeDasharray: 400,
-              strokeDashoffset: go ? 0 : 400,
-              transition: 'stroke-dashoffset 1.5s 1.0s ease-out',
-            }}
-          />
+        {/* No sync zone */}
+        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.8s' }}>
+          <rect x="200" y="46" width="145" height="96" rx="4" fill={B.red} fillOpacity="0.04" stroke={B.red} strokeWidth="0.8" strokeDasharray="4 3"/>
+          <text x="272" y="152" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace">stressed → sync breaks</text>
         </g>
-
-        {/* Sync zone overlay */}
-        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 2.5s' }}>
-          <rect x="30" y="48" width="80" height="82" rx="4"
-            fill={B.sageD} fillOpacity="0.06"
-            stroke={B.sageD} strokeWidth="0.8" strokeDasharray="4 3"/>
-          <text x="70" y="140" textAnchor="middle" fontSize="11"
-            fill={B.sageD} fontFamily="IBM Plex Mono, monospace">calm parent</text>
-          <text x="70" y="150" textAnchor="middle" fontSize="11"
-            fill={B.sageD} fontFamily="IBM Plex Mono, monospace" opacity="0.7">can sync</text>
-        </g>
-
-        <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 3.0s' }}>
-          <rect x="180" y="48" width="130" height="100" rx="4"
-            fill={B.red} fillOpacity="0.04"
-            stroke={B.red} strokeWidth="0.8" strokeDasharray="4 3"/>
-          <text x="245" y="155" textAnchor="middle" fontSize="11"
-            fill={B.red} fontFamily="IBM Plex Mono, monospace">stressed parent</text>
-          <text x="245" y="165" textAnchor="middle" fontSize="11"
-            fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">sync breaks</text>
-        </g>
-
-        {/* Research note */}
-        <text x="160" y="20" textAnchor="middle" fontSize="11"
-          fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
-          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 3.5s' }}>
-          Azhari et al. — measured simultaneously in two brains
+        <text x="180" y="20" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
+          style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 3.2s' }}>
+          measured simultaneously in two brains (Azhari et al.)
         </text>
       </svg>
-      <div className="anim-caption">When you're stressed, the mechanism that would help your child regulate goes offline. Measured in two brains at the same time.</div>
+      <div className="anim-caption">When you're stressed, the mechanism that would help your child regulate goes offline. Not weakened. Offline.</div>
     </div>
   );
 }
