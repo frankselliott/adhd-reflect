@@ -387,10 +387,12 @@ export const MODULE_CONTENT = {
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
   <p>Implementation intentions — "when X happens, I will do Y" — are one of the most evidence-backed tools for ADHD brains closing the gap between intention and action.</p>
-  <p>Write yours now:</p>
+  <p>Write yours now. The sentence starter is there — finish it in your own words:</p>
   <p><strong>When</strong> I notice the gap between knowing and doing this week,</p>
-  <p><strong>I will</strong> say to myself: <em>"This is structural, not a character flaw."</em></p>
-  <p>That's it. One sentence. No action required yet — just the reframe. <strong>The reframe is the first action.</strong></p>
+  <p><strong>I will</strong> remind myself: <em>"This isn't a character problem. It's _______________."</em></p>
+  <p>Some people write "a design mismatch." Some write "a nervous system issue." Some write "structural, not personal." Use the words that actually land for you.</p>
+  <p><strong>Your version:</strong> _______________</p>
+  <p>One sentence. No action required yet — just the reframe in your own words. <strong>That reframe is the first action.</strong></p>
 </div>
 
 <h3>What this will feel like</h3>
@@ -509,13 +511,24 @@ export const MODULE_CONTENT = {
 <p><strong>They need you nearby, quiet, and not adding input</strong> while the neurological arc runs its course. The peak always passes — it has a biological arc of escalation, peak, descent. Trying to reason during the peak is trying to have a conversation mid-storm. The storm has its own timeline.</p>
 <p>After the peak: food if it's late afternoon (hunger accelerates everything for ADHD brains and bodies). Something ordinary together. The event doesn't need a debrief unless something needs repairing. Most of the time it just needs to end.</p>
 
+<div class="module-experiment">
+  <div class="module-experiment-label">Try this now — takes 3 minutes</div>
+  <p>Think of the last time your child fell apart after school or after a hard day. Work through it:</p>
+  <p><strong>What triggered it on the surface:</strong> _______________</p>
+  <p><strong>What had been building since morning:</strong> _______________</p>
+  <p><strong>What you said or did first:</strong> _______________</p>
+  <p><strong>What you wish you'd said instead:</strong> _______________</p>
+  <p>That last answer — the thing you wish you'd said — is almost always some version of: "You're really upset right now." Short. No evaluation. Just acknowledgment.</p>
+  <p><strong>Write your version of that one sentence for the next time:</strong> _______________</p>
+</div>
+
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
-  <p><strong>When</strong> my child starts falling apart and I feel the urge to explain, correct, or assess whether their reaction is proportionate,</p>
-  <p><strong>I will</strong> say one sentence first: <em>"That's really upsetting you."</em> Then wait for 30 seconds before doing anything else.</p>
-  <p>One sentence. Then silence. <strong>The silence is the intervention.</strong></p>
-  <p>What might get in the way of doing this: _______________</p>
-  <p>What I'll do when that thing gets in the way: _______________</p>
+  <p><strong>When</strong> my child starts falling apart and I feel the urge to explain, correct, or point out that the thing isn't worth this reaction,</p>
+  <p><strong>I will</strong> say this first: _______________  (write your version of the acknowledgment sentence above)</p>
+  <p>Then wait 30 seconds before doing anything else. That silence is the intervention.</p>
+  <p><strong>What usually gets in the way of staying quiet:</strong> _______________</p>
+  <p><strong>What I'll tell myself when it does:</strong> _______________</p>
 </div>
 
 <h3>What this will feel like</h3>
@@ -566,10 +579,12 @@ export const MODULE_CONTENT = {
 
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
-  <p><strong>When</strong> I notice I've joined the meltdown — the volume change, the posture shift, the moment both of us are in it — </p>
+  <p>From the experiment above, your joining moment was: _______________</p>
+  <p>(If you didn't fill that in yet, go back and do it. This plan only works if it's specific to your pattern.)</p>
+  <p><strong>When</strong> I notice _______________ [your joining moment — the exact posture shift, volume change, or feeling],</p>
   <p><strong>I will</strong> say: <em>"I need a minute. I'll be back."</em> And leave the room for 60 seconds.</p>
   <p>The specific place I'll go: _______________</p>
-  <p>What I'll do in those 60 seconds: _______________  (even just standing still counts)</p>
+  <p>What I'll do in those 60 seconds: _______________</p>
   <p>What might stop me from leaving: _______________</p>
   <p>What I'll say to myself when that happens: _______________</p>
 </div>
@@ -596,7 +611,11 @@ export const MODULE_CONTENT = {
 
 <h3>What repair actually is</h3>
 <p>One sentence naming what happened. One sentence naming what you're going to try. Unconditional — meaning it doesn't wait for or require a response.</p>
-<p><div class="module-script">I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get to that point.</div></p>
+<p>Examples — each shows a different kind of hard moment, because the repair fits the actual thing that happened:</p>
+<div class="module-script">I yelled at you this morning and that wasn't okay. I'm going to work on leaving the room before I get that loud.</div>
+<div class="module-script">I went quiet and disappeared and that wasn't fair. I'm going to work on coming back sooner instead of waiting until I feel ready.</div>
+<div class="module-script">I said something sharp and I shouldn't have. I'm going to work on stopping before I say the thing I don't mean.</div>
+<p>Pick the one closest to what happened. Or write your own. The words don't need to be these words — they need to be true.</p>
 <p>Then stop. Don't wait for them to say it's fine. Don't add context or explanation. Don't extend it. <strong>Two sentences, then something ordinary immediately after</strong> — sit near them, get them a snack, help with something. The repair is in the return to normal. Not in the speech.</p>
 <p>Your child receives: I know what I did. I take responsibility for it. I'm still here. That's the complete message. Everything beyond that begins asking them for something — absolution, reassurance — that isn't theirs to provide.</p>
 
@@ -671,8 +690,20 @@ export const MODULE_CONTENT = {
 <li>Peripheral vision narrowing — suddenly only the trigger exists</li>
 <li>An urgency to speak that feels physical, not cognitive — a pressure, not a thought</li>
 </ul>
-<p>This week, find yours. Not to stop the reaction yet. Just to know what it feels like. Write it down the first time you notice it. <strong>Once you know your signal, you have a 30-second window that didn't exist before.</strong></p>
-<p>My signal: _______________ (fill this in once you know it)</p>
+<p>This week, find yours. Not to stop the reaction yet. Just to know what it feels like.</p>
+
+<div class="module-experiment">
+  <div class="module-experiment-label">Find your signal — the most important thing in this module</div>
+  <p>Think back to the last time you lost it. In the 30 seconds before it happened, what did your body do? Work through each:</p>
+  <p><strong>Heat:</strong> where did it arrive first? (chest / face / nowhere) _______________</p>
+  <p><strong>Jaw:</strong> did it tighten? _______________</p>
+  <p><strong>Shoulders:</strong> did they rise? _______________</p>
+  <p><strong>Vision:</strong> did it narrow — suddenly only the trigger existed? _______________</p>
+  <p><strong>The urge to speak:</strong> did it feel physical — a pressure rather than a thought? _______________</p>
+  <p>Now write the sequence in order. What happens first, second, third?</p>
+  <p><strong>My signal sequence:</strong> _______________</p>
+  <p>That sequence is yours. It will be the same next time. <strong>Once you know it, you have a 30-second window that didn't exist before.</strong></p>
+</div>
 
 <div data-animation="SignalAnimation"></div>
 <div class="module-insight"><div class="module-insight-label">The intervention point</div><p>You cannot change whether the cup gets knocked over. <strong>You can change what's already in the container when it does.</strong> The stack is where change is possible — not the spark.</p></div>
@@ -710,10 +741,10 @@ export const MODULE_CONTENT = {
 <p>The more you escalate your input, the more your child reads danger rather than lesson. The content of what you're saying has become irrelevant. They're not ignoring you. <strong>The system that would receive the lesson is offline.</strong> Every sentence past the third is working against you — not because the point isn't valid, but because the conditions required to deliver it don't exist.</p>
 
 <div data-animation="InputCapacityAnimation"></div>
-<h3>Why Reactors over-explain specifically</h3>
-<p>The Reactor pattern responds to overwhelm by increasing output. More words. More volume. More urgency. As if enough explanation will break through the closed system.</p>
-<p>There's also a justice component — if you can make them understand, the unfairness resolves. The need to be heard and understood is real. The method isn't working.</p>
-<p>And there's the ADHD closure drive: incomplete exchanges sit in working memory as unresolved, uncomfortable. <strong>The explanation keeps going because stopping it leaves an open loop, and open loops are neurologically uncomfortable for ADHD brains.</strong> The discomfort isn't a sign you're doing something wrong. It's the normal feeling of an open loop.</p>
+<h3>Why the explanation keeps going</h3>
+<p>For Reactors, the explanation escalates because overwhelm increases output — more words, more volume, more urgency, as if intensity will break through a closed system.</p>
+<p>For Loopers, the explanation continues because stopping feels unjust — the point wasn't acknowledged, the unfairness wasn't resolved, the loop is still open.</p>
+<p>Both patterns share one thing: <strong>the explanation keeps going because stopping leaves an open loop, and open loops are neurologically uncomfortable for ADHD brains.</strong> Incomplete exchanges sit in working memory as unresolved, a background process running continuously. The discomfort isn't a sign something's wrong. It's a brain trying to close something it can't close right now, in these conditions.</p>
 
 <div class="module-experiment">
   <div class="module-experiment-label">Try this now — takes 2 minutes</div>
@@ -793,8 +824,9 @@ export const MODULE_CONTENT = {
 </div>
 
 <h3>What this will feel like</h3>
-<p>Identifying one invisible step and externalising it will feel too small. The morning has many problems. Fixing one doesn't feel like progress.</p>
-<p>The research on habit change in ADHD brains is consistent: small changes with high success rates outperform ambitious changes with low ones. <strong>One invisible step externalised this week. Next week, potentially another. That's how the morning gets less chaotic — not all at once.</strong></p>
+<p>Identifying one invisible step and externalising it will feel too small. The morning has many more problems than one invisible step. Fixing one thing doesn't feel like progress when ten things are still broken.</p>
+<p>On the days it doesn't work — and there will be days it doesn't work, because one externalised step doesn't fix a school that sent a last-minute email, a child who refused to get up, or a morning that went wrong from the start — the temptation is to abandon the system entirely and rebuild from scratch.</p>
+<p>Don't. The system didn't fail. The conditions failed. <strong>One step externalised is one fewer thing in working memory on the next morning. That's real, even when Tuesday was a disaster.</strong></p>
 `,
 
   'm9': `
@@ -816,6 +848,8 @@ export const MODULE_CONTENT = {
 <p><strong>Fewer steps than feels right.</strong> If it feels complete, it probably has too many steps. Cut until it feels sparse. A three-step routine done consistently is worth more than a ten-step routine done occasionally.</p>
 <p><strong>Steps are visible, not remembered.</strong> Written somewhere, built into the environment, not held in working memory — because working memory under pressure drops things.</p>
 <p><strong>It survives a bad day.</strong> If the whole family is twenty minutes late on a Tuesday with no sleep, can some version of this routine still happen? If not, it's too complex for the conditions it actually has to survive.</p>
+
+<div class="module-insight"><div class="module-insight-label">What this looks like in practice</div><p>One family's bedtime routine became: pyjamas, brush teeth, one story. That's it. Nothing about homework, water bottles, or tomorrow's bag. Those moved to a separate after-school checklist. The bedtime routine survived three sick days, two late pickups, and one night when nobody had any patience left. <strong>Three steps. Consistently. That's the version that worked.</strong></p></div>
 
 <div class="module-experiment">
   <div class="module-experiment-label">Try this now — takes 5 minutes</div>
@@ -902,11 +936,11 @@ export const MODULE_CONTENT = {
 
 <p>Stopping feels like losing. Like you're letting them think they were right. Like the point evaporates.</p>
 <p><strong>None of that is what happens. But the feeling is real enough to keep you in the loop for another twenty minutes.</strong></p>
+<p>The harder question isn't whether the lesson can survive the delay. It can — and it lands better when delivered later, into an atmosphere that can hold it. The harder question is what to do with the feeling of the open loop in the meantime. That's what this module is actually about.</p>
 
-<h3>The point doesn't disappear when you stop</h3>
-<p>The lesson you were trying to deliver is still real. The rule still matters. The behaviour still needs addressing.</p>
-<p>The conditions for delivering it don't currently exist. A dysregulated child mid-argument can't receive a lesson — the nervous system reads your intensity as threat, not content. The lesson gets lost in the delivery.</p>
-<p>Twelve hours later, when both of you are calm, you say the thing in two sentences. It takes two minutes. It lands. <strong>Because the atmosphere can hold it now. The lesson delayed is more effective than the lesson forced into a closed system.</strong></p>
+<h3>The specific discomfort of stopping</h3>
+<p>The open loop feeling is neurological, not emotional. ADHD brains register incomplete things — unacknowledged points, unresolved arguments, unexplained rules — as background load. It's not just that you feel bad about stopping. Your brain is literally keeping the loop running as an active process.</p>
+<p>What this means: the discomfort of stopping doesn't signal that you did something wrong. It signals that your brain is doing what ADHD brains do with incomplete things. <strong>The discomfort is not information about the situation. It's information about your nervous system.</strong> You can feel it and not act on it. That's the practice.</p>
 
 <div data-animation="LoopExitAnimation"></div>
 <h3>The stop-script</h3>
@@ -970,7 +1004,6 @@ export const MODULE_CONTENT = {
 </div>
 
 <div data-animation="SpiralForkAnimation"></div>
-<div class="module-pullquote">Accountability asks: what happened, what was my part, what do I do now? The spiral asks: what does this mean about who I am? The first has an end point. The second doesn't.</div>
 <h3>What happens to your child while the spiral runs</h3>
 <p>Your child experienced the hard moment. They've either moved on or they're waiting for something to change.</p>
 <p>What they're experiencing now is the aftermath: you withdrawn, unavailable, somewhere inside the replay. Then — for Spirallers specifically — often an over-reach of warmth. An apology that goes too long. Affection arriving in a rush, driven by the need to confirm the relationship is still intact.</p>
@@ -1023,8 +1056,10 @@ export const MODULE_CONTENT = {
   <p>Write the repair for the last hard moment. Specifically:</p>
   <p><strong>Sentence 1:</strong> <em>I _______________ and that wasn't okay.</em></p>
   <p><strong>Sentence 2:</strong> <em>I'm going to work on _______________.</em></p>
-  <p>Now: does it ask your child for anything? Does it wait for forgiveness? Does it need their response to feel complete?</p>
-  <p>If yes — cut anything that does. What remains is the repair. <strong>Two sentences that need nothing back is the repair. Two sentences that need a response is a request.</strong></p>
+  <p>Now check it against your specific overreach pattern:</p>
+  <p><strong>My overreach usually looks like:</strong> (going on too long / waiting for them to say it's okay / adding context that becomes explanation / over-warmth that arrives in a rush) _______________</p>
+  <p>If your repair contains that thing — cut it. What remains when you've cut everything that asks for something back is the actual repair.</p>
+  <p><strong>Two sentences that need nothing back is the repair. Two sentences that need a response is a request.</strong></p>
 </div>
 
 <h3>Tracking repairs instead of just ruptures</h3>
@@ -1127,11 +1162,12 @@ export const MODULE_CONTENT = {
   <p>Think of the last shutdown and return. What made the return hard?</p>
   <p><strong>What you felt you needed to have before returning:</strong> _______________</p>
   <p><strong>What you actually needed:</strong> (physical presence / just being there) _______________</p>
-  <p>Now write your re-entry ritual — one small thing small enough to do when you have nothing left:</p>
-  <p>Option 1: Sit near them for 30 seconds without speaking.</p>
-  <p>Option 2: <em>"Do you want some water?"</em></p>
-  <p>Option 3: <em>"I needed a minute. I'm back."</em></p>
-  <p><strong>My ritual:</strong> _______________ Choose one. Write it here. This is the thing you'll do when you come back.</p>
+  <p>Now choose your re-entry ritual. One thing small enough to do when you have nothing left:</p>
+  <p>☐ Sit near them for 30 seconds without speaking.</p>
+  <p>☐ <em>"Do you want some water?"</em></p>
+  <p>☐ <em>"I needed a minute. I'm back."</em></p>
+  <p>☐ Something else: _______________</p>
+  <p><strong>My ritual:</strong> _______________ (write it here — this is the thing you'll use in the if-then plan below)</p>
 </div>
 
 <h3>The principle that changes everything</h3>
@@ -1140,11 +1176,10 @@ export const MODULE_CONTENT = {
 
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
-  <p>My re-entry ritual: _______________</p>
-  <p><strong>When</strong> I've been gone — physically or emotionally — and I'm ready to come back,</p>
-  <p><strong>I will</strong> do _______________ [my ritual]. Not when I feel ready. Just when the acute shutdown has passed.</p>
+  <p><strong>When</strong> I've been gone — physically or emotionally — and the acute part has passed,</p>
+  <p><strong>I will</strong> do _______________ [the ritual you chose above]. Not when I feel ready. When the peak has passed.</p>
   <p>What will make this hard: _______________</p>
-  <p>What I'll say to myself when it feels like I need more before I can return: <em>"Small is enough. The return starts it."</em></p>
+  <p>What I'll say to myself when it feels like I need to feel ready first: <em>"Small is enough. The return starts it."</em></p>
 </div>
 
 <h3>What this will feel like</h3>
@@ -1191,9 +1226,11 @@ export const MODULE_CONTENT = {
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
   <p><strong>When</strong> my partner and I have different versions of what happened,</p>
-  <p><strong>I will</strong> ask: <em>"What did you see happening just before it went wrong?"</em> And actually listen to the answer before responding.</p>
+  <p><strong>I will</strong> ask: <em>"What did you see happening just before it went wrong?"</em> Then listen to the full answer before responding.</p>
   <p>What I want them to understand about my version: _______________</p>
-  <p>How I'll share that without making it an accusation: _______________</p>
+  <p>How I'll say that as an addition to their version rather than a correction of it:</p>
+  <p><em>"I hear what you saw. What I was managing before that moment was _______________."</em></p>
+  <p>Write your version of that sentence now so you have it: _______________</p>
   <p><strong>Two valid versions. Neither cancels the other. That's the starting point.</strong></p>
 </div>
 
@@ -1245,7 +1282,8 @@ export const MODULE_CONTENT = {
 
 <h3>What this will feel like</h3>
 <p>It will feel like too little, too late. You'll be aware of all the times you weren't fully present during this time. The guilt may actually make the ten minutes harder — you're there but still half-inside the accounting of what you owe.</p>
-<p>Let the accounting go for these ten minutes. The ten minutes aren't repayment. They're a signal — a small, clear signal that this child's needs are visible and matter. <strong>Children don't need a perfect record. They need consistent evidence that they're worth turning up for.</strong> Ten minutes, fully there, is that evidence.</p>
+<p>Let the accounting go for these ten minutes. The ten minutes aren't repayment. They're a signal — a small, clear signal that this child's needs are visible and matter.</p>
+<div class="module-pullquote">Children don't need a perfect record. They need consistent evidence that they're worth turning up for. Ten minutes, fully there, is that evidence.</div>
 `,
 
   'm18': `
@@ -1278,9 +1316,11 @@ export const MODULE_CONTENT = {
 
 <h3>The thing worth saying</h3>
 <p>Not everything. One thing, stated clearly, without making it an argument.</p>
-<p><em>"I understand what you observed. I want to give you some context about what was happening for them before that moment."</em></p>
+<div class="module-script">I understand what you observed. I want to give you some context about what was happening for them before that moment.</div>
 <p>Then one piece of specific, recent context. Not a defence of the behaviour. An explanation of the cause. Something the school can actually use.</p>
 <p>The school doesn't have to agree. You're adding a layer of information to their picture of your child — not asking them to change their version. <strong>Over time, that layer accumulates. The school builds a more complete picture. Your child gets advocated for, incrementally, without the relationship breaking.</strong></p>
+
+<div class="module-insight"><div class="module-insight-label">Before the next meeting — three things to write down</div><p>Working memory under stress drops things. Before any school meeting, write down: <strong>(1) the one thing you most want them to understand, (2) one specific recent example that supports it, (3) one thing you want to agree on or ask about before you leave.</strong> Three things. On paper or in your phone. Read it in the car park before you go in.</p></div>
 
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your if-then plan for this module</div>
@@ -1328,8 +1368,8 @@ export const MODULE_CONTENT = {
 
 <h3>What to do with the feeling</h3>
 <p>You don't need to arrive at a diagnosis before raising it. You don't need to self-diagnose or lobby for a specific assessment.</p>
-<p>What's useful: describing what you observe, in specific behavioural terms, to someone who knows your child. Not a diagnostic label — a description.
-<div class="module-script">There's something I've been noticing about [name] that doesn't quite fit the ADHD picture. Can I describe it and get your thoughts?</div></p>
+<p>What's useful: describing what you observe, in specific behavioural terms, to someone who knows your child. Not a diagnostic label — a description.</p>
+<div class="module-script">There's something I've been noticing about [my child] that doesn't quite fit the ADHD picture. Can I describe it and get your thoughts?</div>
 <p><strong>That's enough to open the conversation.</strong> The professional assessment takes it from there. Your job is to surface the observation clearly, not to already have the answer.</p>
 <p>The resources page at adhdreflect.com lists what to look for in an ADHD-literate professional and support directories by country.</p>
 
@@ -1391,8 +1431,12 @@ export const MODULE_CONTENT = {
 <div class="module-ifthen">
   <div class="module-ifthen-label">Your going-forward plan</div>
   <p>The if-then plan I'll keep using: _______________</p>
-  <p>The card I'll bookmark for the hardest regular moment: _______________</p>
-  <p>The guide I want to read next: _______________</p>
+  <p><strong>For the hardest regular moment, bookmark one of these cards:</strong></p>
+  <p>If it's the 5pm explosion: <a href="/cards/when-their-meltdown-triggers-yours" style="color:#4A6FA5">When their meltdown triggers yours</a></p>
+  <p>If it's the argument that won't stop: <a href="/cards/the-argument-loop" style="color:#4A6FA5">The argument loop</a></p>
+  <p>If it's the shame spiral after: <a href="/cards/the-shame-spiral-after-losing-it" style="color:#4A6FA5">The shame spiral after losing it</a></p>
+  <p>If it's the morning: <a href="/cards/i-built-a-perfect-system-and-abandoned-it-after-three-days" style="color:#4A6FA5">I built a perfect system and abandoned it after three days</a></p>
+  <p>Or search for your specific moment at <a href="/" style="color:#4A6FA5">adhdreflect.com</a></p>
   <p>What I'll tell myself on the days nothing from this course seems to be working: <em>"One notch earlier. Not perfect. Once."</em></p>
 </div>
 
