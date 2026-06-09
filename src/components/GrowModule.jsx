@@ -530,27 +530,49 @@ export function GrowModule({ moduleId }) {
     if (!html) return '';
     let fieldCount = 0;
 
-    // Replace experiment box blanks
-    html = html.replace(/<div class="module-experiment">([\s\S]*?)<\/div>/g, (match, inner) => {
-      inner = inner.replace(/_______________/g, () => {
-        fieldCount++;
-        const fieldId = `exp_${moduleId}_${fieldCount}`;
-        const val = (fieldValues[fieldId] || '').replace(/"/g, '&quot;');
-        return `<input type="text" class="module-field${val ? ' module-field-saved' : ''}" data-field-id="${fieldId}" placeholder="Write here..." value="${val}" />`;
-      });
-      return `<div class="module-experiment">${inner}</div>`;
-    });
+    // Extract outerHTML of a div with a given class, handling nested divs
+    function replaceBoxes(src, className, prefix) {
+      const openTag = `<div class="${className}">`;
+      let result = '';
+      let i = 0;
+      while (i < src.length) {
+        const start = src.indexOf(openTag, i);
+        if (start === -1) { result += src.slice(i); break; }
+        result += src.slice(i, start);
+        // Walk forward counting div depth to find the matching close
+        let depth = 0;
+        let j = start;
+        while (j < src.length) {
+          const nextOpen = src.indexOf('<div', j + 1);
+          const nextClose = src.indexOf('</div>', j);
+          if (nextClose === -1) { j = src.length; break; }
+          if (nextOpen !== -1 && nextOpen < nextClose) {
+            depth++;
+            j = nextOpen;
+          } else {
+            if (depth === 0) {
+              j = nextClose + 6; // past </div>
+              break;
+            }
+            depth--;
+            j = nextClose + 6;
+          }
+        }
+        let inner = src.slice(start + openTag.length, j - 6);
+        inner = inner.replace(/_______________/g, () => {
+          fieldCount++;
+          const fieldId = `${prefix}_${moduleId}_${fieldCount}`;
+          const val = (fieldValues[fieldId] || '').replace(/"/g, '&quot;');
+          return `<input type="text" class="module-field${val ? ' module-field-saved' : ''}" data-field-id="${fieldId}" placeholder="Write here..." value="${val}" />`;
+        });
+        result += `<div class="${className}">${inner}</div>`;
+        i = j;
+      }
+      return result;
+    }
 
-    // Replace ifthen box blanks
-    html = html.replace(/<div class="module-ifthen">([\s\S]*?)<\/div>/g, (match, inner) => {
-      inner = inner.replace(/_______________/g, () => {
-        fieldCount++;
-        const fieldId = `ift_${moduleId}_${fieldCount}`;
-        const val = (fieldValues[fieldId] || '').replace(/"/g, '&quot;');
-        return `<input type="text" class="module-field${val ? ' module-field-saved' : ''}" data-field-id="${fieldId}" placeholder="Write here..." value="${val}" />`;
-      });
-      return `<div class="module-ifthen">${inner}</div>`;
-    });
+    html = replaceBoxes(html, 'module-experiment', 'exp');
+    html = replaceBoxes(html, 'module-ifthen', 'ift');
 
     return html;
   }, [moduleId, fieldValues]);
