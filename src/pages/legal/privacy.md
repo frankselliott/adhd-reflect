@@ -3,12 +3,12 @@ layout: ../../layouts/Legal.astro
 title: Privacy Policy
 label: Legal
 description: How ADHD Reflect handles your data.
-updated: 31 May 2026
+updated: 9 June 2026
 ---
 
 # Privacy Policy
 
-**Last updated: 31 May 2026**
+**Last updated: 9 June 2026**
 
 ## The short version
 
@@ -105,6 +105,21 @@ We treat all of this as sensitive by default:
 We do not share what you type into the search with any service other than Anthropic. We do not share your quiz result with anyone other than our email provider.
 
 We will only share your data outside this list if you ask us to, we are required to by law, we need to protect someone's safety, or we transfer the business (in which case we will tell you first).
+
+---
+
+
+## Affiliate links and partnerships
+
+Some links on ADHD Reflect are affiliate links. This means if you click through and make a purchase, we may earn a commission — at no extra cost to you.
+
+Currently, our only affiliate partnership is with **Online-therapy.com**, whose services are featured on our Resources page.
+
+We only enter affiliate arrangements with services we would consider recommending regardless of commercial relationship. Affiliate links are clearly labelled "Affiliate partner" or "Sponsored" where they appear.
+
+Clicking an affiliate link does not share any personal data you have provided to ADHD Reflect with the partner. Standard information passed through the link includes a click reference used to attribute the commission. The partner's own privacy policy governs what they collect when you visit their site or sign up.
+
+If you have questions about a specific affiliate arrangement, email **privacy@adhdreflect.com**.
 
 ---
 

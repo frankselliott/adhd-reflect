@@ -551,6 +551,85 @@ import Base from '../layouts/Base.astro';
 
 </div>
 
+
+<!-- ONLINE THERAPY AFFILIATE SECTION -->
+<div class="therapy-section">
+  <div class="therapy-inner">
+
+    <div class="therapy-header">
+      <div class="therapy-label">Sponsored · Affiliate partner</div>
+      <h2 class="therapy-title">Online therapy, built around CBT</h2>
+      <p class="therapy-subtitle">ADHD families often need support that's flexible, accessible, and doesn't require a six-month waitlist. Online-therapy.com is one option worth knowing about.</p>
+    </div>
+
+    <div class="therapy-grid">
+
+      <div class="therapy-card therapy-card-main">
+        <div class="therapy-card-label">What's included</div>
+        <ul class="therapy-list">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Weekly 45-minute live sessions — video, voice, or text
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Unlimited messaging with your therapist
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            8-section CBT program with 25 worksheets
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Daily worksheet replies Monday to Friday
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Individual and couples therapy available
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#7FA88E" stroke-width="1.2"/><path d="M4.5 7l2 2 3-3.5" stroke="#7FA88E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Instant therapist match, flexible to change anytime
+          </li>
+        </ul>
+        <div class="therapy-cbt-note">
+          <strong>Rooted in CBT.</strong> Cognitive Behavioural Therapy is one of the most evidence-backed approaches for anxiety, mood, and the kind of shame spirals and emotional dysregulation that ADHD families deal with daily.
+        </div>
+      </div>
+
+      <div class="therapy-card therapy-card-cta">
+        <div class="therapy-price-block">
+          <div class="therapy-price-from">From</div>
+          <div class="therapy-price">$40<span>/week</span></div>
+          <div class="therapy-price-note">20% off your first month</div>
+        </div>
+
+        <div class="therapy-discount-block">
+          <div class="therapy-discount-label">Discount code</div>
+          <div class="therapy-discount-code" id="therapy-code">THERAPY20</div>
+          <button class="therapy-copy-btn" onclick="copyCode()">Copy code</button>
+        </div>
+
+        <a
+          href="https://go.online-therapy.com/aff_c?offer_id=2&aff_id=6176"
+          target="_blank"
+          rel="noopener sponsored"
+          class="therapy-cta-btn"
+        >
+          See plans and pricing
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+
+        <p class="therapy-disclaimer">
+          ADHD Reflect earns a commission if you sign up via this link, at no extra cost to you. We only partner with services we'd consider recommending regardless.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
 <!-- COMING SOON: THERAPIST MATCHING -->
 <div class="coming-soon">
   <div class="coming-soon-inner">
@@ -575,7 +654,7 @@ import Base from '../layouts/Base.astro';
 
 <!-- FOOTER NOTE -->
 <footer class="footer-note" style="margin-top:40px;">
-  <p>ADHD Reflect does not endorse or formally review every resource listed here. These are curated based on reputation, relevance and usefulness to ADHD families — not paid placement. Where a resource costs money, it is labelled.</p>
+  <p>ADHD Reflect does not endorse or formally review every resource listed here. These are curated based on reputation, relevance and usefulness to ADHD families. Where a resource costs money, it is labelled. The Online-therapy.com section above is a paid affiliate partnership — we earn a commission if you sign up. We only partner with services we'd consider recommending regardless.</p>
   <p>Resources are not a substitute for professional assessment, diagnosis or treatment. If you are in crisis or concerned about your safety or your child's safety, <a href="/support" style="color:var(--blue);">see our support page</a> for crisis lines in your country.</p>
 </footer>
 
@@ -640,6 +719,26 @@ filterBtns.forEach(btn => {
 
 // Init
 updateCount('all', cards.length);
+
+
+
+function copyCode() {
+  navigator.clipboard.writeText('THERAPY20').then(() => {
+    const btn = document.querySelector('.therapy-copy-btn');
+    if (btn) {
+      btn.textContent = '✓ Copied';
+      setTimeout(() => btn.textContent = 'Copy code', 2000);
+    }
+  }).catch(() => {
+    const code = document.getElementById('therapy-code');
+    if (code) {
+      const range = document.createRange();
+      range.selectNode(code);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+    }
+  });
+}
 
 </script>
 
@@ -1047,6 +1146,202 @@ body {
   .coming-soon { padding: 0 20px; }
   .coming-soon-inner { flex-direction: column; }
   .footer-note { padding: 0 20px 48px; }
+}
+
+
+/* ─── Online Therapy Section ─── */
+.therapy-section {
+  padding: var(--space-3xl) var(--page-pad);
+  background: linear-gradient(to bottom, white, var(--mist));
+  border-top: 1px solid var(--mist-border);
+  border-bottom: 1px solid var(--mist-border);
+  margin: 40px 0;
+}
+.therapy-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+.therapy-header {
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.therapy-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+.therapy-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 36;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.therapy-subtitle {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--pewter);
+  line-height: 1.65;
+}
+.therapy-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 20px;
+  align-items: start;
+}
+.therapy-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid rgba(31,42,55,0.08);
+  padding: 24px;
+}
+.therapy-card-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: 16px;
+}
+.therapy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.therapy-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+.therapy-list svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.therapy-cbt-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.6;
+  padding: 14px 16px;
+  background: var(--mist);
+  border-radius: 8px;
+}
+.therapy-cbt-note strong {
+  color: var(--slate);
+}
+.therapy-card-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.therapy-price-block {
+  text-align: center;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid rgba(31,42,55,0.07);
+}
+.therapy-price-from {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pewter);
+  margin-bottom: 4px;
+}
+.therapy-price {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 52;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.therapy-price span {
+  font-size: 18px;
+  color: var(--pewter);
+}
+.therapy-price-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--sage-dark);
+}
+.therapy-discount-block {
+  text-align: center;
+  padding: 16px;
+  background: rgba(168,195,160,0.1);
+  border: 1px solid rgba(168,195,160,0.35);
+  border-radius: 10px;
+}
+.therapy-discount-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 8px;
+}
+.therapy-discount-code {
+  font-family: var(--mono);
+  font-size: 20px;
+  letter-spacing: 0.14em;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.therapy-copy-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  background: white;
+  border: 1px solid rgba(168,195,160,0.5);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.therapy-copy-btn:hover { background: rgba(168,195,160,0.15); }
+.therapy-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+}
+.therapy-cta-btn:hover { background: var(--blue-deep); transform: translateY(-1px); }
+.therapy-disclaimer {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--pewter);
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0.7;
+}
+@media (max-width: 640px) {
+  .therapy-grid { grid-template-columns: 1fr; }
+  .therapy-card-cta { order: -1; }
 }
 
 </style>
