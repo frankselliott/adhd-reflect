@@ -470,10 +470,25 @@ export function GrowModule({ moduleId }) {
     }
   }, []);
 
-  // Load progress
+  // Load progress — with localStorage token fallback for cookie loss (Safari ITP etc.)
   useEffect(() => {
     fetch('/api/grow/progress')
-      .then(r => { if (!r.ok) { window.location.href = '/grow?auth=required'; return null; } return r.json(); })
+      .then(r => {
+        if (r.status === 401) {
+          // Cookie may have been cleared — try localStorage token
+          let stored = null;
+          try { stored = localStorage.getItem('grow_token'); } catch(e) {}
+          if (stored) {
+            // Re-set the cookie by hitting access endpoint, then reload
+            window.location.href = '/grow/access?token=' + stored + '&next=' + encodeURIComponent(window.location.pathname);
+            return null;
+          }
+          window.location.href = '/grow?auth=required';
+          return null;
+        }
+        if (!r.ok) { window.location.href = '/grow?auth=required'; return null; }
+        return r.json();
+      })
       .then(data => {
         if (data) {
           setUserData(data);

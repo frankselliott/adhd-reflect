@@ -210,10 +210,17 @@ export function GrowHome() {
   useEffect(() => {
     fetch('/api/grow/progress')
       .then(r => {
-        if (!r.ok) {
+        if (r.status === 401) {
+          let stored = null;
+          try { stored = localStorage.getItem('grow_token'); } catch(e) {}
+          if (stored) {
+            window.location.href = '/grow/access?token=' + stored + '&next=/grow/home';
+            return null;
+          }
           window.location.href = '/grow?auth=required';
           return null;
         }
+        if (!r.ok) { window.location.href = '/grow?auth=required'; return null; }
         return r.json();
       })
       .then(data => {
