@@ -395,6 +395,19 @@ export function GrowHome() {
           </div>
         </a>
       )}
+
+      {/* Script Library link */}
+      <div style={{ marginTop: '16px', paddingTop: '20px', borderTop: '1px solid rgba(31,42,55,0.07)', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <a href="/grow/scripts" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4A6FA5', textDecoration: 'none' }}>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="2" stroke="#4A6FA5" strokeWidth="1.2"/><path d="M3.5 4.5h6M3.5 6.5h4" stroke="#4A6FA5" strokeWidth="1.2" strokeLinecap="round"/></svg>
+          Script library
+        </a>
+        <span style={{ color: 'rgba(86,96,110,0.3)', fontSize: '10px' }}>·</span>
+        <a href="/both-of-you-script-library.pdf" download style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7FA88E', textDecoration: 'none' }}>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 2v6M6.5 8l-2-2M6.5 8l2-2" stroke="#7FA88E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M1.5 10h10" stroke="#7FA88E" strokeWidth="1.2" strokeLinecap="round"/></svg>
+          Download PDF
+        </a>
+      </div>
     </div>
   );
 }
