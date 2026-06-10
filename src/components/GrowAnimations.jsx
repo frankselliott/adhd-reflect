@@ -269,10 +269,10 @@ export function MaskingCostAnimation() {
         {/* Bottom note */}
         <text x="180" y="125" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.3s 2.5s' }}>
-          mask drops at home — exactly when they need you most
+          mask drops at home, exactly when they need you most
         </text>
       </svg>
-      <div className="anim-caption">Home is where the mask drops — exactly when your child needs the resource you spent all day.</div>
+      <div className="anim-caption">Home is where the mask drops, exactly when your child needs the resource you spent all day.</div>
     </div>
   );
 }
@@ -339,7 +339,7 @@ export function AmplificationAnimation() {
           </>
         )}
       </svg>
-      <div className="anim-caption">Two reactive nervous systems in proximity amplify each other. Distance is not abandonment — it breaks the loop.</div>
+      <div className="anim-caption">Two reactive nervous systems in proximity amplify each other. Distance is not abandonment. It breaks the loop.</div>
     </div>
   );
 }
@@ -423,11 +423,11 @@ export function RepairAnimation() {
         {/* Two sentences */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.5s 1.8s' }}>
           <rect x="198" y="52" width="132" height="18" rx="4" fill={B.blueL} stroke={B.blue} strokeWidth="0.8"/>
-          <text x="264" y="64" textAnchor="middle" fontSize="11" fill={B.blue} fontFamily="IBM Plex Mono, monospace">sentence 1 — names it</text>
+          <text x="264" y="64" textAnchor="middle" fontSize="11" fill={B.blue} fontFamily="IBM Plex Mono, monospace">sentence 1: names it</text>
         </g>
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.5s 2.3s' }}>
           <rect x="198" y="74" width="132" height="18" rx="4" fill={B.sageL} stroke={B.sageD} strokeWidth="0.8"/>
-          <text x="264" y="86" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">sentence 2 — next step</text>
+          <text x="264" y="86" textAnchor="middle" fontSize="11" fill={B.sageD} fontFamily="IBM Plex Mono, monospace">sentence 2: next step</text>
         </g>
         {/* After line */}
         <line x1="330" y1="75" x2="350" y2="75" stroke={B.sageD} strokeWidth="2.5" strokeLinecap="round"

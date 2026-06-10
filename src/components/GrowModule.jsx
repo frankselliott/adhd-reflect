@@ -311,7 +311,7 @@ function ReminderButton({ moduleTitle }) {
         // Set reminder for 4 hours from now
         const delay = 4 * 60 * 60 * 1000;
         setTimeout(() => {
-          new Notification('Both of You — reminder', {
+          new Notification('Both of You reminder', {
             body: `Time to try the practice from: ${moduleTitle}`,
             icon: '/icon-192.png',
           });
@@ -747,7 +747,7 @@ export function GrowModule({ moduleId }) {
         {/* Reflection */}
         <div style={{ marginBottom: '40px' }}>
           <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '9px', letterSpacing: '0.16em', textTransform: 'uppercase', color: BRAND.lavender, marginBottom: '12px' }}>
-            Your reflection — completes this module
+            Your reflection. Completes this module
           </div>
           <p style={{ fontFamily: "'Fraunces', serif", fontSize: '18px', color: BRAND.slate, fontWeight: 300, fontVariationSettings: "'opsz' 20", lineHeight: 1.5, marginBottom: '16px', fontStyle: 'italic' }}>
             {module.reflectionPrompt}

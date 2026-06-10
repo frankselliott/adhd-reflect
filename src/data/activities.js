@@ -1,4 +1,4 @@
-// ADHD Reflect — Activity Mappings
+// ADHD Reflect. Activity Mappings
 // Which activities match which cards
 
 // Activity types: breathing, grounding, scale, perspective, repair, room-reset, name-pattern

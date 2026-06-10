@@ -1,4 +1,4 @@
-// ADHD Reflect — Kid Brain Process
+// ADHD Reflect. Kid Brain Process
 // What's happening in your ADHD child's nervous system
 // For the "Your Kid" tab on moment cards + kid-only cards
 

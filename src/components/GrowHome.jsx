@@ -13,7 +13,7 @@ const BRAND = {
 };
 
 const LAYER_LABELS = {
-  foundation: 'Foundation — start here',
+  foundation: 'Foundation · start here',
   pattern: 'Your pattern',
   household: 'The wider household',
 };

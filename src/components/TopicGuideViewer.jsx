@@ -27,7 +27,7 @@ function GuideShareButton({ title, guideId }) {
 
   function handleShare() {
     navigator.share({
-      title: title + ' — ADHD Reflect',
+      title: title + ' · ADHD Reflect',
       text: title,
       url: 'https://adhdreflect.com/guides/' + guideId,
     }).catch(() => {});

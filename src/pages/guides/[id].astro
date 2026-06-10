@@ -16,7 +16,7 @@ const relatedCardTitles = (guide.relatedCards || [])
   .filter(id => cardsMap[id])
   .map(id => ({ id, title: cardsMap[id].title }));
 ---
-<Base title={`${guide.title} — Guide`} description={guide.recognize}>
+<Base title={`${guide.title} · Guide`} description={guide.recognize}>
 
   <div id="guide-root"></div>
 

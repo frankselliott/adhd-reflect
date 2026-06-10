@@ -10,9 +10,27 @@ import AIRouter from '../components/AIRouter.jsx';
       <p class="hero-label">For ADHD parents raising ADHD kids</p>
       <h1 class="hero-title">What just <em>happened?</em></h1>
       <p class="hero-body">
-        Describe a hard moment. The tool finds what's actually happening — not generic parenting advice, but the specific ADHD dynamic underneath it.
+        Describe a hard moment. The tool finds what's actually happening. Not generic parenting advice, but the specific ADHD dynamic underneath it.
       </p>
       <AIRouter client:load />
+    </div>
+  </section>
+
+  <!-- ─── Browse strip ─── -->
+  <section class="browse">
+    <div class="browse-inner">
+      <p class="browse-label">Or start with one that sounds like your house</p>
+      <div class="browse-chips">
+        <a href="/cards/p01" class="browse-chip">The shame spiral after losing it</a>
+        <a href="/cards/m01" class="browse-chip">The morning getting ready battle</a>
+        <a href="/cards/m07" class="browse-chip">When their meltdown triggers yours</a>
+        <a href="/cards/m04" class="browse-chip">The bedtime battle</a>
+        <a href="/cards/p43" class="browse-chip">I lost it over something tiny</a>
+        <a href="/cards/m12" class="browse-chip">When sibling conflict explodes</a>
+        <a href="/cards/m53" class="browse-chip">The school called again</a>
+        <a href="/cards/m02" class="browse-chip">The homework explosion</a>
+      </div>
+      <a href="/cards" class="browse-all">Browse every card &rarr;</a>
     </div>
   </section>
 
@@ -63,14 +81,14 @@ import AIRouter from '../components/AIRouter.jsx';
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z" stroke="var(--sage-dark)" stroke-width="1.5" fill="none"/><path d="M7 10l2 2 4-4" stroke="var(--sage-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
         <h3>Your pattern</h3>
-        <p>Identify which ADHD parenting loop keeps catching you — Reactor, Juggler, Looper, Spiraller, or Escaper. Each has its own module sequence.</p>
+        <p>Identify which ADHD parenting loop keeps catching you: Reactor, Juggler, Looper, Spiraller, or Escaper. Each has its own module sequence.</p>
       </div>
       <div class="what-block">
         <span class="what-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 15V5a2 2 0 012-2h8a2 2 0 012 2v10" stroke="var(--lavender)" stroke-width="1.5" fill="none"/><path d="M2 15h16" stroke="var(--lavender)" stroke-width="1.5" stroke-linecap="round"/></svg>
         </span>
         <h3>Want to go deeper?</h3>
-        <p><a href="/grow" style="color:var(--lavender);text-decoration:none;font-weight:500">Both of You</a> is a self-guided program for parents who want to understand the pattern behind the moments — and have a plan for the next time it happens.</p>
+        <p><a href="/grow" style="color:var(--lavender);text-decoration:none;font-weight:500">Both of You</a> is a self-guided program for parents who want to understand the pattern behind the moments, and have a plan for the next time it happens.</p>
       </div>
     </div>
   </section>
@@ -149,6 +167,27 @@ import AIRouter from '../components/AIRouter.jsx';
     max-width: 480px; margin-bottom: var(--space-xl);
   }
   @media (max-width: 480px) { .hero { padding: var(--space-2xl) 0 var(--space-xl); } }
+
+  .browse { padding: 0 0 var(--space-xl); }
+  .browse-inner { max-width: 640px; margin: 0 auto; padding: 0 var(--page-pad); }
+  .browse-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--pewter); opacity: 0.7;
+    margin-bottom: var(--space-sm);
+  }
+  .browse-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-sm); }
+  .browse-chip {
+    display: inline-block; padding: 9px 16px;
+    background: white; border: 1px solid var(--mist-border);
+    border-radius: 100px; font-size: 14px; color: var(--slate);
+    text-decoration: none; line-height: 1.3;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .browse-chip:hover { border-color: var(--blue); box-shadow: 0 2px 10px rgba(74,111,165,0.1); }
+  .browse-all {
+    font-size: 14px; color: var(--blue); text-decoration: none; font-weight: 500;
+  }
+  .browse-all:hover { text-decoration: underline; }
 
   .quiz-cta { padding: var(--space-2xl) 0; border-top: 1px solid var(--mist-border); }
   .quiz-cta-inner { max-width: 640px; margin: 0 auto; padding: 0 var(--page-pad); }

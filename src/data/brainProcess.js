@@ -1,5 +1,5 @@
-// ADHD Reflect — Brain Process Explanations
-// What your nervous system just did — for every card
+// ADHD Reflect. Brain Process Explanations
+// What your nervous system just did, for every card
 // Grounded in the Scientific Research Bible
 
 export const BRAIN_PROCESS = {

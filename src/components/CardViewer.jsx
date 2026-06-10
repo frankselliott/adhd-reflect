@@ -204,7 +204,7 @@ function ShareButton({ title, url }) {
   useEffect(() => { setCanShare(typeof navigator !== 'undefined' && !!navigator.share); }, []);
   if (!canShare) return null;
   return (
-    <button onClick={() => navigator.share({ title: title + ' — ADHD Reflect', text: title, url: 'https://adhdreflect.com' + url }).catch(() => {})} style={{
+    <button onClick={() => navigator.share({ title: title + ' · ADHD Reflect', text: title, url: 'https://adhdreflect.com' + url }).catch(() => {})} style={{
       appearance: 'none', border: 0, cursor: 'pointer', background: 'transparent', padding: '4px', color: '#A09589',
     }} title="Share">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

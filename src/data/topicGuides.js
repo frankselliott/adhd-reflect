@@ -1,4 +1,4 @@
-// ADHD Reflect — Standalone Topic Guides
+// ADHD Reflect. Standalone Topic Guides
 // 20 research-backed guides organized by topic
 
 export const TOPIC_GUIDES = [
@@ -695,7 +695,7 @@ The sibling relationship is being shaped by the ADHD dynamic in ways that may pe
       {situation: `When their moment was interrupted by a meltdown`, say: `That was your moment and it got interrupted. I am sorry. That was not fair.`},
       {situation: `When they ask why their sibling gets away with things`, say: `It looks different and I understand why that feels unfair. Your sibling's brain needs different support, the same way you need different things too.`},
     ],
-    partner: `Both parents need to actively protect the sibling's experience. This means one parent can handle the ADHD child's meltdown while the other stays with the sibling. If you are a single parent, this is harder. But even naming the sibling's experience — 'I know that was tough on you' — makes a measurable difference.`,
+    partner: `Both parents need to actively protect the sibling's experience. This means one parent can handle the ADHD child's meltdown while the other stays with the sibling. If you are a single parent, this is harder. But even naming the sibling's experience, 'I know that was tough on you', makes a measurable difference.`,
     moreHelp: `If the sibling is showing signs of anxiety, depression, withdrawal, or behavioural changes, they may need their own support. Therapy for siblings of ADHD children is a legitimate and helpful intervention. They deserve a space where they are the priority.`,
     relatedCards: ["p71", "m59", "m60", "m61", "p73", "p74", "p31"],
   },
@@ -733,7 +733,7 @@ The resentment from other family members, including you, is building. You did no
     patternTypes: ["spiraller", "escaper", "reactor"],
     perspectives: ["me"],
     recognize: `You resent your child. You do not like being around them. You feel numb where love used to be. You are waiting for the next explosion. You replay the cruel things they said. You enjoy your easier child more. These thoughts exist and you are ashamed of every one of them.`,
-    brain: `Resentment is not a failure of love. It is a depletion signal. Your nervous system has been running at emergency capacity for so long that the emotional system has started to conserve. The numbness, the avoidance, the preference for the easier child — these are all signs that you have exceeded your sustainable load.
+    brain: `Resentment is not a failure of love. It is a depletion signal. Your nervous system has been running at emergency capacity for so long that the emotional system has started to conserve. The numbness, the avoidance, the preference for the easier child, these are all signs that you have exceeded your sustainable load.
 
 The shame of having these thoughts adds weight to the thoughts themselves. You cannot address the depletion while also performing constant guilt about the depletion. Something has to give.`,
     kidBrain: `Your child does not know you feel this way, or they sense it without understanding it. Children are precise readers of emotional withdrawal. If you are pulling back, they feel the distance even if they cannot name it. This can increase their behaviour as they escalate to find your emotional presence.`,

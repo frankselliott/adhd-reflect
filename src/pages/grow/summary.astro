@@ -46,7 +46,7 @@ async function buildSummary() {
         <div class="summary-label">Your summary card</div>
         <h1 class="summary-title">You came in looking for what to do differently.</h1>
         <div class="summary-card">
-          <div class="summary-field"><div class="summary-field-label">Your pattern</div><div class="summary-field-value">${patternName} — ${completedCount} of 20 modules completed</div></div>
+          <div class="summary-field"><div class="summary-field-label">Your pattern</div><div class="summary-field-value">${patternName} · ${completedCount} of 20 modules completed</div></div>
           ${reflection1 ? `<div class="summary-field"><div class="summary-field-label">Why you started</div><div class="summary-quote">"${reflection1}"</div></div>` : ''}
           ${midCourseCheckin?.q2 ? `<div class="summary-field"><div class="summary-field-label">One thing you actually tried</div><div class="summary-quote">"${midCourseCheckin.q2}"</div></div>` : ''}
           ${midCourseCheckin?.q1 ? `<div class="summary-field"><div class="summary-field-label">What surprised you most</div><div class="summary-quote">"${midCourseCheckin.q1}"</div></div>` : ''}

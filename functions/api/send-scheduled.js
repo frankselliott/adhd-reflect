@@ -1,4 +1,4 @@
-// ADHD Reflect — Send scheduled practice emails
+// ADHD Reflect. Send scheduled practice emails
 // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
 
 const EMAILS = {
@@ -44,7 +44,7 @@ The return to normal is the repair. Your child does not need a perfect parent. T
 If repair after rupture is something you want to go deeper on:
 https://adhdreflect.com/guides/g11
 
-We also have a full module on repair — what it actually is, why ADHD parents skip it, and what a two-sentence repair sounds like in a real household. It is part of Both of You, our self-guided program for ADHD parents raising ADHD kids. Worth a look if the repair piece keeps eluding you:
+We also have a full module on repair, what it actually is, why ADHD parents skip it, and what a two-sentence repair sounds like in a real household. It is part of Both of You, our self-guided program for ADHD parents raising ADHD kids. Worth a look if the repair piece keeps eluding you:
 https://adhdreflect.com/grow
 
 — ADHD Reflect`
@@ -57,7 +57,7 @@ What changes is speed. The gap between the reaction and the repair gets shorter.
 
 That is real progress. It just does not look like the calm-parent-influencer version of progress.
 
-If these four emails have been useful and you want to go further — not a subscription, not a course with twenty hours of video, just twenty short text modules you can read on your phone — Both of You is built specifically for Reactor parents and the four other patterns that come with ADHD. One payment, no time pressure, no streaks:
+If these four emails have been useful and you want to go further, not a subscription, not a course with twenty hours of video, just twenty short text modules you can read on your phone, Both of You is built specifically for Reactor parents and the four other patterns that come with ADHD. One payment, no time pressure, no streaks:
 https://adhdreflect.com/grow
 
 And if you want to talk to someone who actually gets ADHD families:
@@ -108,7 +108,7 @@ Drop it. Watch what happens. Usually nothing. The thing you were gripping was no
 
 Your family needs you functional more than they need you thorough. Those two things are in competition and functional wins.
 
-If the invisible load is something you want to work through more systematically, we have two modules on it in Both of You — one on why the morning keeps collapsing, one on what a routine actually looks like when it is built for an ADHD brain rather than against it:
+If the invisible load is something you want to work through more systematically, we have two modules on it in Both of You, one on why the morning keeps collapsing, one on what a routine actually looks like when it is built for an ADHD brain rather than against it:
 https://adhdreflect.com/grow
 
 — ADHD Reflect`
@@ -123,7 +123,7 @@ These are not crutches. They are plumbing. Nobody carries water when pipes exist
 
 Build one system this week. The smallest one. Keep it simple. Complicated systems do not survive ADHD. Simple ones do.
 
-If these four emails have landed and you want a structured way through the rest of it — morning routines, partner dynamics, the school calls, what to do when your child melts down and you have nothing left — Both of You covers all of it. Twenty short modules, no video, works on a phone:
+If these four emails have landed and you want a structured way through the rest of it, morning routines, partner dynamics, the school calls, what to do when your child melts down and you have nothing left, Both of You covers all of it. Twenty short modules, no video, works on a phone:
 https://adhdreflect.com/grow
 
 For specific professional support:
@@ -168,11 +168,11 @@ https://adhdreflect.com/guides/g04
       subject: "What the fight is actually about",
       text: `The loop ran again. But this time you saw it. That counts, even if it does not feel like it.
 
-After the loop finishes — not during, after — try: "I noticed we keep landing in the same place. What is actually going on underneath this?"
+After the loop finishes, not during, after, try: "I noticed we keep landing in the same place. What is actually going on underneath this?"
 
 The argument about screen time is usually about control. The argument about homework is usually about adequacy. The argument about bedtime is usually about depletion. The surface issue runs the loop. The fuel is underneath.
 
-We have a module specifically for loopers on how to stop without feeling like you lost — including what to do with the discomfort of leaving something unresolved on purpose. It is in Both of You if you want to go further with this:
+We have a module specifically for loopers on how to stop without feeling like you lost, including what to do with the discomfort of leaving something unresolved on purpose. It is in Both of You if you want to go further with this:
 https://adhdreflect.com/grow
 
 If your partner is part of the loop, this might also be useful:
@@ -188,7 +188,7 @@ But you are catching the loop earlier. Exiting sooner. Recovering faster. That i
 
 You noticed on round two instead of round five. You stopped before the damage point. You named it before it became an action. That is harder than it sounds and you are doing it.
 
-If you want to keep going with this work — the repair after the loop, the partner dynamic, the school version of the same conversation — Both of You has twenty modules that go deeper on all of it. No video, no live sessions, reads like a conversation rather than a textbook:
+If you want to keep going with this work, the repair after the loop, the partner dynamic, the school version of the same conversation, Both of You has twenty modules that go deeper on all of it. No video, no live sessions, reads like a conversation rather than a textbook:
 https://adhdreflect.com/grow
 
 If you and your partner are stuck in a loop together and need a professional in the room:
@@ -235,7 +235,7 @@ This week, build a counter-file. Three things that went okay today. Not great. O
 
 The spiral will tell you these do not count. They count. Write them somewhere visible. When the spiral starts, read the list. Not to feel better. To see the whole picture instead of just the dark corner.
 
-The hardest part of the spiraller pattern is that the shame consumes the energy that should go into repair. We have a module specifically on getting from the spiral to the actual repair — what it looks like, why simpler is better, and why the repair is for them not for your guilt. It is in Both of You:
+The hardest part of the spiraller pattern is that the shame consumes the energy that should go into repair. We have a module specifically on getting from the spiral to the actual repair, what it looks like, why simpler is better, and why the repair is for them not for your guilt. It is in Both of You:
 https://adhdreflect.com/grow
 
 — ADHD Reflect`
@@ -248,7 +248,7 @@ But you are catching the spiral earlier. It reaches less depth before you notice
 
 Your brain will keep offering you the catastrophic version. You are learning to read it as a draft, not a final document.
 
-If these four emails have helped and you want a more structured way through it — the spiral, the repair, what to do after the hard moment — Both of You goes deeper on all of it. Twenty short modules written specifically for parents where both the adult and the child have ADHD:
+If these four emails have helped and you want a more structured way through it, the spiral, the repair, what to do after the hard moment, Both of You goes deeper on all of it. Twenty short modules written specifically for parents where both the adult and the child have ADHD:
 https://adhdreflect.com/grow
 
 For professional support from people who understand ADHD brains that spiral:
@@ -282,7 +282,7 @@ https://adhdreflect.com/guides/g01
 
 Now try the return. Not preventing the escape. The coming back part.
 
-When you catch yourself in the escape — the scroll, the shutdown, the bathroom — give yourself five minutes. Deliberately. "I am taking five minutes." Then come back. Put the phone down. Walk into the room. Say: "I am back."
+When you catch yourself in the escape, the scroll, the shutdown, the bathroom, give yourself five minutes. Deliberately. "I am taking five minutes." Then come back. Put the phone down. Walk into the room. Say: "I am back."
 
 Five minutes of deliberate absence is different from an hour of unconscious checkout. Same behaviour. Different awareness. Different impact.
 
@@ -301,7 +301,7 @@ This week, before you escape, name it. "I am avoiding the bedtime conversation."
 
 Naming the thing does not stop the escape. It makes the escape a choice instead of a reflex. "I am choosing to avoid this" is different from "I am scrolling." Same phone in your hand. Different level of honesty.
 
-We have two modules for escaper parents in Both of You — one on why you leave even when you stay, one on what the small return actually looks like when you have nothing left to give. Worth reading if the coming-back part is where you keep getting stuck:
+We have two modules for escaper parents in Both of You, one on why you leave even when you stay, one on what the small return actually looks like when you have nothing left to give. Worth reading if the coming-back part is where you keep getting stuck:
 https://adhdreflect.com/grow
 
 If you are escaping because you are completely depleted:
@@ -319,7 +319,7 @@ You still reached for the phone, but five minutes instead of thirty. You still c
 
 The escape is not the failure. The failure to return is. And you are returning.
 
-If these four emails have been useful and you want more structure — the partner dynamic, what your child experiences when you check out, how to build the return as a habit — Both of You covers all of it in twenty short modules. No video, no live sessions, works on a phone in fragments:
+If these four emails have been useful and you want more structure, the partner dynamic, what your child experiences when you check out, how to build the return as a habit, Both of You covers all of it in twenty short modules. No video, no live sessions, works on a phone in fragments:
 https://adhdreflect.com/grow
 
 For real support from people who understand ADHD avoidance without judging it:

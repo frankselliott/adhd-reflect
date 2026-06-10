@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 const authRequired = Astro.url.searchParams.get('auth');
 const invalid = Astro.url.searchParams.get('invalid');
 ---
-<Base title="Both of You — A self-guided program" description="For parents with ADHD raising children with ADHD. 20 modules. Works on a phone. No live sessions." current="grow">
+<Base title="Both of You: A self-guided program" description="For parents with ADHD raising children with ADHD. 20 modules. Works on a phone. No live sessions." current="grow">
 
   {authRequired && (
     <div class="grow-access-gate">
@@ -16,7 +16,7 @@ const invalid = Astro.url.searchParams.get('invalid');
           </svg>
         </div>
         <h2 class="grow-access-title">Get your access link</h2>
-        <p class="grow-access-body">Enter the email you used when you purchased Both of You. We'll send your access link — works on any device.</p>
+        <p class="grow-access-body">Enter the email you used when you purchased Both of You. We'll send your access link. It works on any device.</p>
         <div class="grow-access-form" id="gate-form">
           <input
             id="gate-email"
@@ -33,7 +33,7 @@ const invalid = Astro.url.searchParams.get('invalid');
             <circle cx="9" cy="9" r="8" stroke="#7FA88E" stroke-width="1.2"/>
             <path d="M5 9l3 3 5-6" stroke="#7FA88E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Check your inbox — your link is on its way. Check spam if it doesn't arrive in a minute.
+          Check your inbox. Your link is on its way. Check spam if it doesn't arrive in a minute.
         </div>
         <div id="gate-error" style="display:none" class="grow-access-error"></div>
         <p class="grow-access-footer">New here? <a href="#buy">See what's included</a> · Haven't purchased? <a href="#buy">Get Both of You</a></p>
@@ -67,7 +67,7 @@ const invalid = Astro.url.searchParams.get('invalid');
             <circle cx="9" cy="9" r="8" stroke="#7FA88E" stroke-width="1.2"/>
             <path d="M5 9l3 3 5-6" stroke="#7FA88E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Check your inbox — a fresh link is on its way.
+          Check your inbox. A fresh link is on its way.
         </div>
         <div id="gate-error" style="display:none" class="grow-access-error"></div>
       </div>
@@ -90,7 +90,7 @@ const invalid = Astro.url.searchParams.get('invalid');
     <div class="container">
       <p class="moment-scene">It's 5.47pm. Your kid is losing it. You know exactly what you're supposed to do.</p>
       <p class="moment-scene">You do the opposite anyway.</p>
-      <p class="moment-body">That gap — between knowing and doing — is not a character flaw. It has a specific explanation. And it's the thing every other parenting course ignores.</p>
+      <p class="moment-body">That gap between knowing and doing is not a character flaw. It has a specific explanation. And it's the thing every other parenting course ignores.</p>
       <p class="moment-body">Every book, every article, every calm parent on Instagram shares one assumption: <strong>the adult in the room is the regulated one.</strong></p>
       <p class="moment-body">When you also have ADHD, that assumption is wrong. And when it's wrong, the advice doesn't just fail. It makes you feel worse for not being able to follow it.</p>
       <p class="moment-callout">Both of You is built for the household where two ADHD nervous systems are in the same four walls at the same time.</p>
@@ -114,7 +114,7 @@ const invalid = Astro.url.searchParams.get('invalid');
         <div class="diff-card diff-card-highlight">
           <div class="diff-card-head">Both of You</div>
           <ul class="diff-list">
-            <li>Starts from the correct premise — both of you have ADHD</li>
+            <li>Starts from the correct premise: both of you have ADHD</li>
             <li>Teaches what to do in the 30 seconds you actually have</li>
             <li>Built for the days when you have nothing left</li>
             <li>Written by a parent with ADHD raising a child with ADHD</li>
@@ -164,23 +164,23 @@ const invalid = Astro.url.searchParams.get('invalid');
       <div class="includes-grid">
         <div class="include-item">
           <div class="include-num">20</div>
-          <div class="include-text">text-based modules, each 10–18 minutes. Readable on a phone. Most people read 8–12 based on their pattern — but all 20 are yours.</div>
+          <div class="include-text">text-based modules, each 10–18 minutes. Readable on a phone. Most people read 8–12 based on their pattern, but all 20 are yours.</div>
         </div>
         <div class="include-item">
           <div class="include-num">8</div>
-          <div class="include-text">modules suggested first based on your quiz pattern — foundation modules plus pattern-specific ones matched to how your ADHD shows up.</div>
+          <div class="include-text">modules suggested first based on your quiz pattern: foundation modules plus pattern-specific ones matched to how your ADHD shows up.</div>
         </div>
         <div class="include-item">
           <div class="include-num">20</div>
-          <div class="include-text">right now cards — one per module. Print them. Put them on your fridge. They're the tool for the moment, not just the module.</div>
+          <div class="include-text">right now cards, one per module. Print them. Put them on your fridge. They're the tool for the moment, not just the module.</div>
         </div>
         <div class="include-item">
           <div class="include-num">20</div>
-          <div class="include-text">if-then plans — one per module, written by you in your own words for your specific household. The plan for the next time it happens.</div>
+          <div class="include-text">if-then plans, one per module, written by you in your own words for your specific household. The plan for the next time it happens.</div>
         </div>
         <div class="include-item">
           <div class="include-num">20</div>
-          <div class="include-text">interactive experiments — each module has a structured exercise that makes the concept personal before you leave the page.</div>
+          <div class="include-text">interactive experiments. Each module has a structured exercise that makes the concept personal before you leave the page.</div>
         </div>
         <div class="include-item">
           <div class="include-num">1</div>
@@ -197,7 +197,7 @@ const invalid = Astro.url.searchParams.get('invalid');
       <div class="modules-layers">
 
         <div class="module-layer">
-          <div class="layer-name">Foundation — everyone starts here</div>
+          <div class="layer-name">Foundation. Everyone starts here</div>
           <ol class="module-ol">
             <li>Why nothing you've tried has actually fixed it</li>
             <li>What your body does before your brain catches up</li>
@@ -208,9 +208,9 @@ const invalid = Astro.url.searchParams.get('invalid');
         </div>
 
         <div class="module-layer">
-          <div class="layer-name">Your pattern — your quiz result suggests which to read first</div>
+          <div class="layer-name">Your pattern. Your quiz result suggests which to read first</div>
           <ol class="module-ol" start="6">
-            <li>There's a moment before you snap — how to find it <span class="pattern-tag">Reactor</span></li>
+            <li>There's a moment before you snap, and how to find it <span class="pattern-tag">Reactor</span></li>
             <li>Fewer words. Lower temperature. <span class="pattern-tag">Reactor</span></li>
             <li>Why the morning keeps collapsing <span class="pattern-tag">Juggler</span></li>
             <li>One routine you can actually keep <span class="pattern-tag">Juggler</span></li>
@@ -245,23 +245,23 @@ const invalid = Astro.url.searchParams.get('invalid');
       <div class="how-steps">
         <div class="how-step">
           <div class="how-step-num">1</div>
-          <div class="how-step-body"><strong>Take the quiz</strong> — if you haven't already. It identifies your parenting pattern and your first five modules are suggested from that.</div>
+          <div class="how-step-body"><strong>Take the quiz</strong>, if you haven't already. It identifies your parenting pattern and your first five modules are suggested from that.</div>
         </div>
         <div class="how-step">
           <div class="how-step-num">2</div>
-          <div class="how-step-body"><strong>Read in fragments</strong> — each module is 10–18 minutes on a phone. You don't need to sit down. You don't need to be in a good headspace.</div>
+          <div class="how-step-body"><strong>Read in fragments.</strong> Each module is 10–18 minutes on a phone. You don't need to sit down. You don't need to be in a good headspace.</div>
         </div>
         <div class="how-step">
           <div class="how-step-num">3</div>
-          <div class="how-step-body"><strong>Do the experiment and write your plan</strong> — each module has a structured exercise and an if-then plan written in your words. Not graded. Saved privately.</div>
+          <div class="how-step-body"><strong>Do the experiment and write your plan.</strong> Each module has a structured exercise and an if-then plan written in your words. Not graded. Saved privately.</div>
         </div>
         <div class="how-step">
           <div class="how-step-num">4</div>
-          <div class="how-step-body"><strong>Take the card</strong> — each module has a right now card with one script for the next hard moment. Copy it, print it, put it where you'll see it.</div>
+          <div class="how-step-body"><strong>Take the card.</strong> Each module has a right now card with one script for the next hard moment. Copy it, print it, put it where you'll see it.</div>
         </div>
         <div class="how-step">
           <div class="how-step-num">5</div>
-          <div class="how-step-body"><strong>Come back when you're ready</strong> — no streaks. No you're-behind states. The module map remembers where you left off.</div>
+          <div class="how-step-body"><strong>Come back when you're ready.</strong> No streaks. No you're-behind states. The module map remembers where you left off.</div>
         </div>
       </div>
     </div>
@@ -271,6 +271,35 @@ const invalid = Astro.url.searchParams.get('invalid');
   <section class="section-disclaimer">
     <div class="container">
       <p class="disclaimer-text">Both of You is not therapy and not a clinical intervention. It's structured practical content grounded in published ADHD research, written by a parent with ADHD raising a child with ADHD. If you need professional support, the <a href="/resources">resources page</a> can help you find it.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-faq">
+    <div class="container">
+      <div class="faq-label">Questions you probably have</div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">Is this therapy?</summary>
+          <p class="faq-a">No. It's structured practical content grounded in published ADHD research, written by a parent with ADHD raising a child with ADHD. If you need clinical support, the <a href="/resources">resources page</a> can help you find it. Both can be true at once: many people do this alongside therapy.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What ages does it cover?</summary>
+          <p class="faq-a">The core dynamics apply from roughly age 4 through the teens. The scripts and examples skew primary-school age, but the parent half of the program is about your nervous system, and that doesn't have an age limit.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What if neither of us has a formal diagnosis?</summary>
+          <p class="faq-a">That's fine. If the moments on this page sound like your house, the content will fit. Nothing in the program requires a diagnosis, and nothing in it diagnoses you.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How long do I have access?</summary>
+          <p class="faq-a">It's a one-time payment with lifetime access. No subscription, no renewal, no streaks. Come back in six months and everything is exactly where you left it.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What if it's not for me?</summary>
+          <p class="faq-a">Email us within 14 days and we'll refund you in full. No form, no questions, no awkwardness.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -313,7 +342,7 @@ const invalid = Astro.url.searchParams.get('invalid');
             <circle cx="9" cy="9" r="8" stroke="#7FA88E" stroke-width="1.2"/>
             <path d="M5 9l3 3 5-6" stroke="#7FA88E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span>If that email has a purchase, the link is on its way. Check your inbox — and your spam folder.</span>
+          <span>If that email has a purchase, the link is on its way. Check your inbox, and your spam folder.</span>
         </div>
         <div id="recover-error" class="recover-error" style="display:none"></div>
       </div>
@@ -675,6 +704,60 @@ const invalid = Astro.url.searchParams.get('invalid');
 .disclaimer-text a { color: var(--blue); }
 
 /* ─── Buy ─── */
+.section-faq {
+  padding: var(--space-3xl) 0;
+  border-bottom: 1px solid var(--mist-border);
+}
+.faq-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-lg);
+}
+.faq-list {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-item {
+  background: white;
+  border: 1px solid var(--mist-border);
+  border-radius: var(--radius-md);
+  padding: 0;
+}
+.faq-q {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--slate);
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--pewter);
+  font-weight: 300;
+}
+.faq-item[open] .faq-q::after { content: '\2212'; }
+.faq-a {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--pewter);
+  padding: 0 20px 18px;
+}
+.faq-a a { color: var(--blue); }
+
 .section-buy {
   padding: var(--space-4xl) 0;
   border-bottom: 1px solid var(--mist-border);

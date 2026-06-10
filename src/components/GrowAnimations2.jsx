@@ -61,7 +61,7 @@ export function AdviceGapAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="What parenting advice assumes vs your household">
       <ReplayButton2 onClick={replay} />
-      <div className="anim-label-top">What the advice was built for — and what it missed</div>
+      <div className="anim-label-top">What the advice was built for, and what it missed</div>
       <svg viewBox="0 0 360 175" style={{ width: '100%', display: 'block' }}>
         {/* Left panel */}
         <g style={{ opacity: go ? 1 : 0, transform: go ? 'translateX(0)' : 'translateX(-14px)', transition: 'opacity 0.5s 0.3s, transform 0.5s 0.3s' }}>
@@ -113,7 +113,7 @@ export function InputCapacityAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="More words, less received">
       <ReplayButton2 onClick={replay} />
-      <div className="anim-label-top">More input — less received</div>
+      <div className="anim-label-top">More input, less received</div>
       <svg viewBox="0 0 360 170" style={{ width: '100%', display: 'block' }}>
         {/* Axes */}
         <line x1="45" y1="20" x2="45" y2="138" stroke={B.pewterL} strokeWidth="1.5"/>
@@ -147,7 +147,7 @@ export function InputCapacityAnimation() {
           <text x="295" y="110" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="IBM Plex Mono, monospace" opacity="0.7">zero received</text>
         </g>
       </svg>
-      <div className="anim-caption">Every sentence past the third works against you. The lesson is real — the conditions to receive it don't exist yet.</div>
+      <div className="anim-caption">Every sentence past the third works against you. The lesson is real. The conditions to receive it don't exist yet.</div>
     </div>
   );
 }
@@ -169,7 +169,7 @@ export function InvisibleStepsAnimation() {
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}/>
         <text x="25" y="34" fontSize="11" fill={B.lavender} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.2s' }}>
-          WORKING MEMORY — invisible steps
+          WORKING MEMORY · invisible steps
         </text>
         {/* Memory chips — evenly spaced */}
         {memoryItems.map((item, i) => {
@@ -207,7 +207,7 @@ export function InvisibleStepsAnimation() {
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}/>
         <text x="25" y="134" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace"
           style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}>
-          THE CHART — visible steps
+          THE CHART · visible steps
         </text>
         {/* Chart chips */}
         {chartItems.map((item, i) => {
@@ -253,7 +253,7 @@ export function OpenLoopAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The argument loop and the clean exit">
       <ReplayButton2 onClick={() => { replay(); setPhase(0); }} />
-      <div className="anim-label-top">The loop — and the exit that delivers the lesson</div>
+      <div className="anim-label-top">The loop, and the exit that delivers the lesson</div>
       <svg viewBox="0 0 360 175" style={{ width: '100%', display: 'block' }}>
         <text x="120" y="18" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace">
           {phase === 0 ? 'starting' : phase === 1 ? 'loop begins' : phase === 2 ? 'still going...' : phase === 3 ? 'exit point' : '12 hours later'}
@@ -271,7 +271,7 @@ export function OpenLoopAnimation() {
         {/* Discomfort note */}
         {phase >= 3 && (
           <text x="120" y="162" textAnchor="middle" fontSize="11" fill={B.pewter} fontFamily="IBM Plex Mono, monospace">
-            open loop discomfort — real, survivable
+            open loop discomfort: real, survivable
           </text>
         )}
         {/* Exit arrow */}
@@ -316,7 +316,7 @@ export function LoopExitAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="The stop-script and lesson delivered later">
       <ReplayButton2 onClick={() => { replay(); setPhase(0); }} />
-      <div className="anim-label-top">The stop — and where the lesson actually lands</div>
+      <div className="anim-label-top">The stop, and where the lesson actually lands</div>
       <svg viewBox="0 0 360 180" style={{ width: '100%', display: 'block' }}>
         {/* Loop */}
         <g style={{ opacity: phase >= 1 && phase < 3 ? 1 : 0, transition: 'opacity 0.4s' }}>
@@ -335,7 +335,7 @@ export function LoopExitAnimation() {
         {/* Discomfort */}
         <g style={{ opacity: phase >= 3 ? 1 : 0, transition: 'opacity 0.4s' }}>
           <rect x="60" y="132" width="230" height="28" rx="6" fill={B.redL} stroke={B.red} strokeWidth="0.8" strokeDasharray="4 3"/>
-          <text x="175" y="149" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="Lexend, sans-serif">open loop discomfort — real, survivable</text>
+          <text x="175" y="149" textAnchor="middle" fontSize="11" fill={B.red} fontFamily="Lexend, sans-serif">open loop discomfort: real, survivable</text>
         </g>
         {/* 12 hours later */}
         <g style={{ opacity: phase >= 4 ? 1 : 0, transition: 'opacity 0.5s' }}>
@@ -464,7 +464,7 @@ export function TwoVersionsAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Two versions of the same moment">
       <ReplayButton2 onClick={replay} />
-      <div className="anim-label-top">Same moment — two completely different views</div>
+      <div className="anim-label-top">Same moment, two completely different views</div>
       <svg viewBox="0 0 360 190" style={{ width: '100%', display: 'block' }}>
         {/* Centre moment */}
         <g style={{ opacity: go ? 1 : 0, transition: 'opacity 0.4s 0.3s' }}>
@@ -504,7 +504,7 @@ export function TwoVersionsAnimation() {
           both real · describing different things
         </text>
       </svg>
-      <div className="anim-caption">They see the match. They don't see what was already burning. The goal isn't one correct version — it's understanding there were two.</div>
+      <div className="anim-caption">They see the match. They don't see what was already burning. The goal isn't one correct version. It's understanding there were two.</div>
     </div>
   );
 }
@@ -521,7 +521,7 @@ export function NotchUpstreamAnimation() {
   return (
     <div ref={ref} className="anim-wrap" style={{ position: 'relative' }} aria-label="Catching it earlier over time">
       <ReplayButton2 onClick={replay} />
-      <div className="anim-label-top">The goal — one notch earlier each time</div>
+      <div className="anim-label-top">The goal: one notch earlier each time</div>
       <svg viewBox="0 0 360 185" style={{ width: '100%', display: 'block' }}>
         {iterations.map((iter, i) => {
           const y = 28 + i * 36;
