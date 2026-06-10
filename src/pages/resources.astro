@@ -630,27 +630,6 @@ import Base from '../layouts/Base.astro';
   </div>
 </div>
 
-<!-- COMING SOON: THERAPIST MATCHING -->
-<div class="coming-soon">
-  <div class="coming-soon-inner">
-    <div class="coming-soon-left">
-      <div class="coming-soon-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#4A6FA5" stroke-width="1.5"/>
-          <path d="M8 12h8M12 8v8" stroke="#4A6FA5" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <p class="coming-soon-label">Coming soon</p>
-        <h2 class="coming-soon-title">Find an ADHD-informed therapist or coach</h2>
-        <p class="coming-soon-desc">We're building a directory of therapists, psychologists and coaches who actually understand what it's like to parent with ADHD — not just treat ADHD in children. Country-aware, clearly labelled, with transparent pricing and wait times where available.</p>
-      </div>
-    </div>
-    <button class="coming-soon-btn" onclick="this.textContent='✓ We\'ll let you know'">
-      Notify me when it's ready
-    </button>
-  </div>
-</div>
 
 <!-- FOOTER NOTE -->
 <footer class="footer-note" style="margin-top:40px;">
@@ -1008,78 +987,7 @@ body {
 /* ─── AU HIGHLIGHT ─── */
 /* AU highlight removed */
 
-/* ─── COMING SOON STRIP ─── */
-.coming-soon {
-  max-width: 960px;
-  margin: 0 auto 16px;
-  padding: 0 40px;
-}
-.coming-soon-inner {
-  background: linear-gradient(135deg, rgba(74,111,165,0.06), rgba(155,139,180,0.08));
-  border: 1px solid rgba(74,111,165,0.15);
-  border-radius: 16px;
-  padding: 28px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.coming-soon-left {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.coming-soon-icon {
-  width: 44px;
-  height: 44px;
-  background: rgba(74,111,165,0.1);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.coming-soon-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 4px;
-}
-.coming-soon-title {
-  font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--slate);
-  margin-bottom: 6px;
-  font-variation-settings: "opsz" 24;
-}
-.coming-soon-desc {
-  font-size: 14px;
-  color: var(--pewter);
-  line-height: 1.55;
-  max-width: 480px;
-}
-.coming-soon-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 20px;
-  background: var(--blue);
-  color: white;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.15s;
-  white-space: nowrap;
-  border: none;
-  cursor: pointer;
-  font-family: var(--sans);
-}
-.coming-soon-btn:hover { background: var(--blue-deep); }
+
 
 /* ─── NO RESULTS ─── */
 .no-results {
@@ -1143,8 +1051,6 @@ body {
   .filter-bar { padding: 0 20px; }
   .count-bar { padding: 0 20px; }
   .resource-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
-  .coming-soon { padding: 0 20px; }
-  .coming-soon-inner { flex-direction: column; }
   .footer-note { padding: 0 20px 48px; }
 }
 
