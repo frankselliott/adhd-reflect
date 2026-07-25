@@ -1,0 +1,83 @@
+---
+// Quiet social proof from the r/ADHDparenting launch thread. Deliberately
+// understated: no stars, no avatars, no cards, no "Testimonials" heading, no
+// Review or Testimonial structured data. The link to the full thread is what
+// makes these unattributed quotes verifiable rather than unverifiable.
+const QUOTES = [
+  'Thank you for making me feel seen and understood.',
+  'Spent half an hour reading different cards and weeping.',
+  'Anything that helps us pause and step back and reflect is awesome.',
+];
+const THREAD = 'https://www.reddit.com/r/ADHDparenting/comments/1v6324r/';
+---
+<section class="from-reddit">
+  <div class="from-reddit-inner">
+    <p class="from-reddit-framing">What some parents said when this launched on r/ADHDparenting.</p>
+    <div class="from-reddit-quotes">
+      {QUOTES.map(q => (
+        <figure class="from-reddit-quote">
+          <blockquote>{q}</blockquote>
+          <figcaption>a parent on r/ADHDparenting</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="from-reddit-link-wrap">Read <a class="from-reddit-link" href={THREAD} target="_blank" rel="noopener">the full thread</a>.</p>
+  </div>
+</section>
+
+<style>
+  .from-reddit {
+    padding: var(--space-xl) 0;
+  }
+  .from-reddit-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+  }
+  .from-reddit-framing {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pewter);
+    margin-bottom: var(--space-lg);
+  }
+  .from-reddit-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .from-reddit-quote {
+    margin: 0;
+  }
+  .from-reddit-quote blockquote {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--slate);
+  }
+  .from-reddit-quote figcaption {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: var(--pewter);
+  }
+  .from-reddit-link-wrap {
+    margin-top: var(--space-lg);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--pewter);
+  }
+  .from-reddit-link {
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .from-reddit-link:hover {
+    border-bottom-color: var(--blue);
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import AIRouter from '../components/AIRouter.jsx';
+import FromReddit from '../components/FromReddit.astro';
 ---
 <Base title="ADHD Reflect" description="For ADHD parents raising ADHD kids. Work out what's happening before everyone escalates.">
 
@@ -10,7 +11,7 @@ import AIRouter from '../components/AIRouter.jsx';
       <p class="hero-label">For ADHD parents raising ADHD kids</p>
       <h1 class="hero-title">What just <em>happened?</em></h1>
       <p class="hero-body">
-        Describe a hard moment. The tool finds what's actually happening. Not generic parenting advice, but the specific ADHD dynamic underneath it.
+        Describe a hard moment. The tool names the specific ADHD dynamic underneath it, the part generic parenting advice usually walks straight past.
       </p>
       <AIRouter client:load />
     </div>
@@ -39,7 +40,7 @@ import AIRouter from '../components/AIRouter.jsx';
     <div class="quiz-cta-inner">
       <div class="quiz-cta-content">
         <h2>Keep seeing the same pattern?</h2>
-        <p>Take a three-minute quiz to see how your ADHD tends to show up when parenting gets hard. Not a diagnosis. A way to notice what keeps happening.</p>
+        <p>Take a three-minute quiz to see how your ADHD tends to show up when parenting gets hard. It is a reflective tool that points to the pattern underneath, rather than a clinical result.</p>
         <a href="/quiz" class="btn btn-primary">Find my pattern</a>
       </div>
     </div>
@@ -58,7 +59,7 @@ import AIRouter from '../components/AIRouter.jsx';
         </div>
         <div>
           <p class="install-title">Save to your home screen</p>
-          <p class="install-desc">Open straight to the search when you need it. No app store. One tap.</p>
+          <p class="install-desc">Add it to your home screen and it opens straight to the search in one tap, with no app store to visit.</p>
         </div>
       </div>
       <button class="install-btn" id="install-btn">Add</button>
@@ -99,11 +100,13 @@ import AIRouter from '../components/AIRouter.jsx';
       <h2>Sound familiar?</h2>
       <div class="who-list">
         <p>You know exactly what you're supposed to do. You do the opposite anyway. Every time.</p>
-        <p>The parenting books describe a calm, consistent adult who can pause and choose. That's not how your brain works. Not at 5.47pm.</p>
-        <p>You're not looking for another strategy. You're looking for something that actually accounts for the household you're in.</p>
+        <p>The parenting books describe a calm, consistent adult who can pause and choose. Your brain works differently, especially at 5.47pm when the pause you'd need is the first thing to go.</p>
+        <p>You've tried the strategies. What you want is something built for the household you're in.</p>
       </div>
     </div>
   </section>
+
+  <FromReddit />
 
 
 
