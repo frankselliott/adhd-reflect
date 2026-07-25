@@ -539,6 +539,9 @@ function ResultScreen({ results }) {
               } else if (data.reason === 'rate_limited') {
                 showError('Too many attempts. Try again shortly.');
                 if (btn) { btn.textContent = 'Send me my practice plan'; btn.disabled = false; }
+              } else if (data.reason === 'storage_unavailable') {
+                showError('Something went wrong on our end. Please try again shortly.');
+                if (btn) { btn.textContent = 'Send me my practice plan'; btn.disabled = false; }
               } else if (data.reason === 'unsubscribed') {
                 if (btn) { btn.textContent = 'You have unsubscribed'; btn.disabled = true; }
                 if (note) note.textContent = "You've unsubscribed before. Use the resubscribe link in any old email, or email hello@adhdreflect.com.";

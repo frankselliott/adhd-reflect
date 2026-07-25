@@ -410,10 +410,17 @@ export async function onRequestGet({ request, env }) {
   } while (cursor);
   if (capped) console.warn('send-scheduled: hit ' + MAX_PAGES + '-page ceiling; more subscribers remain unprocessed this run');
 
-  // Advance one recipient in KV after a successful send.
+  // Advance one recipient in KV after a successful send. Anchor the next date
+  // to the PREVIOUS scheduled date plus 7 days, not to now, so a late cron run
+  // does not push the whole schedule forward permanently. If the cron has
+  // missed several days the new date may still be in the past, which just makes
+  // this person due again next run: one email per person per run (the loop
+  // sends a single step each time), and the schedule re-converges over the
+  // following days rather than firing a burst.
   const advance = async (d) => {
+    const prev = new Date(d.schedule.nextEmailDate).getTime();
     d.schedule.emailsSent += 1;
-    d.schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
+    d.schedule.nextEmailDate = new Date(prev + 7*24*60*60*1000).toISOString();
     d.schedule.lastSent = now.toISOString();
     await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
     sent++;

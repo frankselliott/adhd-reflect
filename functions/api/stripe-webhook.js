@@ -59,7 +59,7 @@ export async function onRequestPost({ request, env }) {
         });
         {
           const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
-          await sendEmail(env, {
+          const emailResult = await sendEmail(env, {
             to: email,
             subject: 'You\'re in. Both of You',
             tags: [{ name: 'type', value: 'purchase' }],
@@ -69,6 +69,14 @@ export async function onRequestPost({ request, env }) {
             html: purchaseEmailHtml({ accessUrl }),
             text: `You're in.\n\nBoth of You is ready when you are.\n\nOpen it here:\n${accessUrl}\n\nThis link works on any device. Bookmark this email, it's how you get back in. No password needed.\n\nLost the link? Go to adhdreflect.com/grow and use "Recover access."\n\n---\n\nWhere to start: Module 1 is the beginning. If you've taken the pattern quiz, your first modules are waiting based on your result. Each module is 10-18 minutes on a phone.\n\nBetween modules: adhdreflect.com has a free search tool for hard moments, describe what's happening and it matches you to a card.\n\nNeed to talk to someone? online-therapy.com offers CBT-based therapy from $40/week. Use code THERAPY20 for 20% off your first month. (We earn a small commission if you sign up.)\n\n---\n\nADHD Reflect · adhdreflect.com\nThis is not medical advice.`,
           });
+          // Email must not fail silently. Return non-2xx so Stripe retries.
+          // The idempotency key above is the Stripe session ID, so a retry
+          // cannot double-send the receipt. sendEmail() has already logged the
+          // Resend error body; log the session for correlation.
+          if (!emailResult.ok) {
+            console.error('purchase email failed for session', session.id, emailResult.error);
+            return new Response('Purchase email delivery failed', { status: 500 });
+          }
         }
       }
     }

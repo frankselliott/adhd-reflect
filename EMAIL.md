@@ -151,3 +151,11 @@ unsubscribe, by design, and are never affected by an unsubscribe.
   link does.
 - Routes do not collide: the page is `/unsubscribe`, the function is
   `/api/unsubscribe`.
+
+## Known limitations
+
+- **Discount-code overshoot.** `grow/free-access.js` and `grow/checkout.js`
+  increment a code's `usedCount` with a non-atomic read-increment-write (KV has
+  no atomic increment). Two simultaneous redemptions of a limited code can both
+  pass the `maxUses` check and both succeed, slightly overshooting the limit.
+  Accepted as low-stakes; a hard cap would require Durable Objects.

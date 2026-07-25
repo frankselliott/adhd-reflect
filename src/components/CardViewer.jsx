@@ -223,7 +223,8 @@ function InstallPopup() {
     // Already installed or dismissed
     if (window.matchMedia('(display-mode: standalone)').matches) return;
     if (window.navigator.standalone) return;
-    const dismissed = localStorage.getItem('adhd-reflect-install-dismissed');
+    let dismissed = null;
+    try { dismissed = localStorage.getItem('adhd-reflect-install-dismissed'); } catch (e) {}
     if (dismissed && Date.now() - parseInt(dismissed) < 7 * 24 * 60 * 60 * 1000) return;
 
     // Desktop: don't show
