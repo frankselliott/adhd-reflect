@@ -12,6 +12,34 @@ import { TOPIC_GUIDES } from '../../data/topicGuides.js';
     </div>
   </section>
 
+  <!-- SEO: server-rendered links to every guide so the pages are not orphans
+       (GuideBrowser renders over this and it is hidden on mount) -->
+  <article id="seo-content" class="guides-seo">
+    <h2>All guides</h2>
+    <ul>
+      {TOPIC_GUIDES.map(g => (
+        <li><a href={`/guides/${g.id}`}>{g.title}</a></li>
+      ))}
+    </ul>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "ADHD Reflect Guide Library",
+    "description": "Research-backed guides for ADHD parents raising ADHD kids. Understand why the hard moments keep happening and what to do differently.",
+    "numberOfItems": TOPIC_GUIDES.length,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": TOPIC_GUIDES.map((g, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": g.title,
+        "url": `https://adhdreflect.com/guides/${g.id}`,
+      })),
+    },
+  })} />
+
   <div id="guide-browser-root"></div>
 
   <script id="guides-data" type="application/json" set:html={JSON.stringify(TOPIC_GUIDES.map(g => ({
@@ -24,6 +52,10 @@ import { TOPIC_GUIDES } from '../../data/topicGuides.js';
   })))} />
 
   <script>
+    // Hide SEO content once React loads
+    const seoEl = document.getElementById('seo-content');
+    if (seoEl) seoEl.style.display = 'none';
+
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import GuideBrowser from '../../components/GuideBrowser.jsx';
@@ -48,5 +80,10 @@ import { TOPIC_GUIDES } from '../../data/topicGuides.js';
   }
   .guides-title em { font-style: italic; color: #4B6B4E; }
   .guides-body { font-size: 17px; line-height: 1.6; color: #6B6358; max-width: 520px; }
+  .guides-seo { max-width: 720px; margin: 0 auto; padding: 0 24px 40px; font-family: var(--serif); }
+  .guides-seo h2 { font-size: 20px; font-weight: 400; color: #191714; margin-bottom: 12px; }
+  .guides-seo ul { list-style: none; padding: 0; margin: 0; }
+  .guides-seo li { margin-bottom: 8px; }
+  .guides-seo a { color: #4B6B4E; font-size: 16px; line-height: 1.5; text-decoration: none; }
 </style>
 
