@@ -447,6 +447,38 @@ function ResultScreen({ results }) {
           })()}
         </div>
 
+        {/* Share your result. One button: native share on mobile, copy-link on desktop. */}
+        <div style={{ margin: '4px 0 28px', textAlign: 'center' }}>
+          <button
+            style={{
+              display: 'inline-block', padding: '12px 26px',
+              fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 500,
+              color: 'var(--blue)', background: 'transparent',
+              border: '1.5px solid var(--blue)', borderRadius: 999,
+              cursor: 'pointer', transition: 'background 0.15s, color 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--blue)'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--blue)'; }}
+            onClick={e => {
+              const btn = e.currentTarget;
+              const url = 'https://adhdreflect.com/quiz?p=' + primary;
+              const shareData = {
+                title: "I'm " + patternName,
+                text: "I did the ADHD parenting pattern quiz. Apparently I'm " + patternName + ".",
+                url,
+              };
+              if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+              } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                  btn.textContent = 'Link copied';
+                  setTimeout(() => { btn.textContent = 'Share your pattern'; }, 2000);
+                }).catch(() => {});
+              }
+            }}
+          >Share your pattern</button>
+        </div>
+
         {/* Email signup for 4-week practice sequence */}
         <div style={styles.emailBox}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
