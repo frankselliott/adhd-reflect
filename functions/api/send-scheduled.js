@@ -1,6 +1,8 @@
 // ADHD Reflect. Send scheduled practice emails
 // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
 
+import { sendBatch } from './_lib/email.js';
+
 const EMAILS = {
   reactor: [
     {
@@ -338,18 +340,16 @@ export async function onRequestGet({ request, env }) {
   if (!env.ADMIN_KEY || cronKey !== env.ADMIN_KEY) {
     return new Response('Unauthorized', { status: 401 });
   }
-  if (!env.SENDER_API_KEY || !env.SEARCH_LOGS) {
+  if (!env.RESEND_API_KEY || !env.SEARCH_LOGS) {
     return new Response('Not configured', { status: 500 });
   }
-  const senderHeaders = {
-    'Authorization': 'Bearer ' + env.SENDER_API_KEY,
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  };
+
   const list = await env.SEARCH_LOGS.list({ prefix: 'email:', limit: 500 });
   const now = new Date();
   let sent = 0, skipped = 0, errors = 0;
 
+  // Collect everyone due this run, then send them via Resend's batch endpoint.
+  const due = [];
   for (const key of list.keys) {
     const raw = await env.SEARCH_LOGS.get(key.name);
     if (!raw) continue;
@@ -359,25 +359,48 @@ export async function onRequestGet({ request, env }) {
     const patternEmails = EMAILS[schedule.pattern];
     if (!patternEmails || !patternEmails[schedule.emailsSent]) { skipped++; continue; }
     const emailToSend = patternEmails[schedule.emailsSent];
-    try {
-      const sendRes = await fetch('https://api.sender.net/v2/transactional-emails/send', {
-        method: 'POST', headers: senderHeaders,
-        body: JSON.stringify({
-          from: { name: 'ADHD Reflect', email: 'hello@adhdreflect.com' },
-          to: [{ email: schedule.email }],
-          subject: emailToSend.subject,
-          text: emailToSend.text,
-        }),
-      });
-      if (sendRes.ok) {
-        schedule.emailsSent += 1;
-        schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
-        schedule.lastSent = now.toISOString();
-        await env.SEARCH_LOGS.put(key.name, JSON.stringify(schedule), { expirationTtl: 60*60*24*60 });
-        sent++;
-      } else { errors++; }
-    } catch (e) { errors++; }
+
+    // Marketing send: needs an unsubscribe path in the header and the body.
+    const unsubUrl = 'https://adhdreflect.com/unsubscribe?e=' + encodeURIComponent(schedule.email);
+
+    due.push({
+      keyName: key.name,
+      schedule,
+      message: {
+        to: schedule.email,
+        subject: emailToSend.subject,
+        text: emailToSend.text + '\n\nUnsubscribe any time: ' + unsubUrl,
+        tags: [{ name: 'type', value: 'drip' }],
+        // Per-recipient, per-drip-step key so a cron retry cannot double-send.
+        idempotencyKey: 'drip-' + schedule.email + '-' + schedule.emailsSent,
+        headers: {
+          'List-Unsubscribe': '<' + unsubUrl + '>',
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
+      },
+    });
   }
+
+  // Send in groups of 100 (Resend's batch limit). Fail soft per group: a bad
+  // group does not stop the others, and only sent recipients advance in KV.
+  const GROUP = 100;
+  for (let i = 0; i < due.length; i += GROUP) {
+    const group = due.slice(i, i + GROUP);
+    const result = await sendBatch(env, group.map((d) => d.message));
+    const ok = result.chunks.length > 0 && result.chunks.every((c) => c.ok);
+    if (ok) {
+      for (const d of group) {
+        d.schedule.emailsSent += 1;
+        d.schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
+        d.schedule.lastSent = now.toISOString();
+        await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
+        sent++;
+      }
+    } else {
+      errors += group.length;
+    }
+  }
+
   return new Response(JSON.stringify({ sent, skipped, errors, total: list.keys.length }), {
     headers: { 'Content-Type': 'application/json' },
   });

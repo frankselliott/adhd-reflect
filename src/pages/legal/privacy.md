@@ -113,13 +113,13 @@ We use a small number of carefully chosen services to run ADHD Reflect. These ar
 | Service | What it does | What we share with it |
 |---|---|---|
 | **Anthropic (Claude API)** | Matches your assistant input to the right card or guide. | The text you type into the assistant. Not used for model training. |
-| **Sender.net** | Sends the newsletter and weekly practice emails. | Your email address and which pattern you scored on. |
+| **Resend** | Sends the welcome email and weekly practice emails. | Your email address and which pattern you scored on. |
 | **Stripe** | Processes payments for paid features. | Name, email, country and payment details (handled by Stripe directly). |
 | **Supabase** (or equivalent hosted database) | Stores account, quiz pattern and saved cards. | Email, hashed password, pattern result, saved cards. |
 | **Replit / Cloudflare / Vercel** | Hosts the site. | Standard technical logs. |
 | **Plausible** (or similar) | Counts visits without cookies. | Anonymous, aggregated page views. |
 
-We do not share what you type into the assistant with any of these services other than Anthropic. We do not share your quiz result with anyone other than Sender.net (so we can match your weekly practice to your pattern).
+We do not share what you type into the assistant with any of these services other than Anthropic. We do not share your quiz result with anyone other than Resend (so we can send you the weekly practice that matches your pattern).
 
 If we ever change a service in this list, we will update this page.
 
