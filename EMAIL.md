@@ -32,8 +32,14 @@ a generated plain-text fallback; we never send html alone).
 |---|---|---|
 | `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
 | `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
-| `ADMIN_KEY` | Required | cron auth for `send-scheduled` |
+| `ADMIN_KEY` | Required | cron auth for `send-scheduled`, `email-health`, `email-clear` |
+| `RESEND_SEGMENT_ID` | Optional | reported by `email-health`; not yet used by the send code |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
+
+> Cloudflare Pages secrets are **per-environment**. A value set only for
+> **Preview** is not present in **Production**. If `email-health` shows
+> `RESEND_API_KEY: false` on the live site, set it in the Production scope of
+> the Pages project and redeploy.
 
 ## Send sites
 
@@ -47,6 +53,30 @@ a generated plain-text fallback; we never send html alone).
 `functions/api/grow/free-access.js` sends **no** email: it returns the
 `accessUrl` and `src/pages/grow/redeem.astro` redirects the browser to it.
 Nothing to migrate there.
+
+## Diagnostics
+
+`subscribe.js` reports the real welcome-send outcome instead of a blanket
+success, so a silent no-send is visible. Response shape:
+`{ success, pattern, welcomeSent, reason }`, where `reason` is one of:
+
+- `sent` — welcome delivered to Resend.
+- `already_subscribed` — a schedule already existed; guard fired, nothing sent
+  (this is correct, not an error).
+- `unsubscribed` — the address opted out; `success:false`, nothing sent.
+- `email_not_configured` — `RESEND_API_KEY` is unbound, so no POST was made.
+- `send_failed` — Resend rejected the send (details logged, never returned).
+
+The quiz surfaces a quiet line to the user when `welcomeSent` is false (except
+`already_subscribed`).
+
+Admin tools (both `GET`, `ADMIN_KEY` via `?key=`):
+- `/api/email-health?key=…` — booleans for which env vars and KV bindings are
+  present on **this** deployment (never their values), plus the deploy commit
+  SHA/branch. Use it to confirm a Production binding in one request.
+- `/api/email-clear?key=…&e=<addr>` — deletes `email:<addr>` from `SEARCH_LOGS`
+  so the repeat-signup guard no longer fires and the address can be retested.
+  Does not touch `unsub:<addr>`, Grow access, tokens or purchases.
 
 ## Unsubscribe
 

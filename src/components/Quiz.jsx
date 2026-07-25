@@ -494,6 +494,10 @@ function ResultScreen({ results }) {
                 if (btn) btn.textContent = 'You are in!';
                 if (emailEl) emailEl.style.display = 'none';
                 try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
+                if (data.welcomeSent === false && data.reason !== 'already_subscribed') {
+                  const note = document.querySelector('[data-signup-note]');
+                  if (note) note.textContent = "You're on the list. The welcome email did not go through just now, but your plan still starts tomorrow. If nothing arrives, email hello@adhdreflect.com.";
+                }
               } else if (data.reason === 'unsubscribed') {
                 if (btn) { btn.textContent = 'You have unsubscribed'; btn.disabled = true; }
                 const note = document.querySelector('[data-signup-note]');
