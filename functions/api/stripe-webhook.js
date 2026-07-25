@@ -62,6 +62,9 @@ export async function onRequestPost({ request, env }) {
             to: email,
             subject: 'You\'re in. Both of You',
             tags: [{ name: 'type', value: 'purchase' }],
+            // Stripe retries the same event on a 5xx; keying on the session ID
+            // means a retry cannot send a second receipt.
+            idempotencyKey: 'purchase-' + session.id,
             html: `
                 <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:540px;margin:0 auto;padding:40px 24px;background:#F7F5F0">
 

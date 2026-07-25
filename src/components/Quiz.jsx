@@ -494,6 +494,10 @@ function ResultScreen({ results }) {
                 if (btn) btn.textContent = 'You are in!';
                 if (emailEl) emailEl.style.display = 'none';
                 try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
+              } else if (data.reason === 'unsubscribed') {
+                if (btn) { btn.textContent = 'You have unsubscribed'; btn.disabled = true; }
+                const note = document.querySelector('[data-signup-note]');
+                if (note) note.textContent = "You've unsubscribed before. Use the resubscribe link in any old email, or email hello@adhdreflect.com.";
               } else {
                 if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
               }
@@ -501,7 +505,7 @@ function ResultScreen({ results }) {
               if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
             }
           }}>Send me my practice plan</button>
-          <p style={styles.emailNote}>Free. Four emails over four weeks. Then one per week if you want it. Unsubscribe anytime.</p>
+          <p style={styles.emailNote} data-signup-note>Free. Four emails over four weeks. Then one per week if you want it. Unsubscribe anytime.</p>
         </div>
 
         {/* Disclaimer */}
