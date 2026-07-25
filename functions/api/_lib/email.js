@@ -12,6 +12,88 @@ const DEFAULT_REPLY_TO = 'hello@adhdreflect.com';
 
 const BATCH_MAX = 100; // Resend batch limit per call.
 
+const RESEND_SUPPRESSIONS_URL = 'https://api.resend.com/suppressions';
+
+// Normalise an address so signing, verifying and KV keys always agree.
+export function normalizeEmail(email) {
+  return String(email || '').toLowerCase().trim();
+}
+
+// Signed unsubscribe token: first 16 hex chars of
+// HMAC-SHA256(normalised email, UNSUB_SECRET). Workers-safe (crypto.subtle),
+// no node imports. Used everywhere an unsubscribe link or List-Unsubscribe
+// header is built, so anyone cannot unsubscribe anyone.
+export async function signUnsub(env, email) {
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(env.UNSUB_SECRET || ''),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(normalizeEmail(email)));
+  const hex = Array.from(new Uint8Array(mac)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  return hex.slice(0, 16);
+}
+
+// Constant-time-ish check of a supplied token against the expected signature.
+export async function verifyUnsub(env, email, token) {
+  if (!token) return false;
+  const expected = await signUnsub(env, email);
+  if (token.length !== expected.length) return false;
+  let diff = 0;
+  for (let i = 0; i < expected.length; i++) {
+    diff |= token.charCodeAt(i) ^ expected.charCodeAt(i);
+  }
+  return diff === 0;
+}
+
+// Resend suppression list is a backstop only: KV is the source of truth.
+// Both calls are best-effort and never throw.
+export async function addSuppression(env, email) {
+  if (!env.RESEND_API_KEY) return { ok: false };
+  try {
+    const res = await fetch(RESEND_SUPPRESSIONS_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: normalizeEmail(email) }),
+    });
+    if (!res.ok) {
+      let data = null;
+      try { data = await res.json(); } catch (_) { /* non-JSON body */ }
+      console.error('Resend suppression add failed', res.status, JSON.stringify(data));
+      return { ok: false };
+    }
+    return { ok: true };
+  } catch (e) {
+    console.error('Resend suppression add threw', e && e.message);
+    return { ok: false };
+  }
+}
+
+export async function removeSuppression(env, email) {
+  if (!env.RESEND_API_KEY) return { ok: false };
+  try {
+    const res = await fetch(`${RESEND_SUPPRESSIONS_URL}/${encodeURIComponent(normalizeEmail(email))}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
+    });
+    if (!res.ok) {
+      let data = null;
+      try { data = await res.json(); } catch (_) { /* non-JSON body */ }
+      console.error('Resend suppression remove failed', res.status, JSON.stringify(data));
+      return { ok: false };
+    }
+    return { ok: true };
+  } catch (e) {
+    console.error('Resend suppression remove threw', e && e.message);
+    return { ok: false };
+  }
+}
+
 // Small deterministic non-crypto hash (djb2). Used to derive a stable
 // per-chunk Idempotency-Key from the caller's per-recipient keys, so a
 // retried batch call dedupes at Resend. No node:crypto needed.

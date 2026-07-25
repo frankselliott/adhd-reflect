@@ -19,7 +19,8 @@ a generated plain-text fallback; we never send html alone).
 
 | Variable | Status | Used by |
 |---|---|---|
-| `RESEND_API_KEY` | **Required** | every email send |
+| `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
+| `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
 | `ADMIN_KEY` | Required | cron auth for `send-scheduled` |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
 
@@ -36,12 +37,35 @@ a generated plain-text fallback; we never send html alone).
 `accessUrl` and `src/pages/grow/redeem.astro` redirects the browser to it.
 Nothing to migrate there.
 
-## Unsubscribe — action needed
+## Unsubscribe
 
-Marketing sends (`welcome` and `drip`) set `List-Unsubscribe` /
-`List-Unsubscribe-Post` headers and a body link pointing to
-`https://adhdreflect.com/unsubscribe?e=<email>`. **That route does not exist
-yet** — it needs to be built (a Pages Function that removes the
-`email:<address>` key from the `SEARCH_LOGS` KV namespace and shows a
-confirmation). Transactional sends (`purchase`, `recovery`) carry no
-unsubscribe, by design.
+Marketing sends (`welcome` and `drip`) carry a **signed** unsubscribe link so
+one recipient cannot unsubscribe another. The token is the first 16 hex chars
+of `HMAC-SHA256(normalised email, UNSUB_SECRET)` (`signUnsub()` in
+`_lib/email.js`, `crypto.subtle`, no node imports). Both the header and the body
+link use it:
+
+- `List-Unsubscribe` header → `https://adhdreflect.com/api/unsubscribe?e=<email>&t=<token>`
+  (with `List-Unsubscribe-Post: List-Unsubscribe=One-Click`).
+- Human footer link → `https://adhdreflect.com/unsubscribe?e=<email>&t=<token>`.
+
+Transactional sends (`purchase`, `recovery`, `free-access`) carry no
+unsubscribe, by design, and are never affected by an unsubscribe.
+
+**How it works**
+- `functions/api/unsubscribe.js` — `POST` handles mailbox-provider one-click
+  (verify token, unsubscribe, 200 empty body). `GET` is called by the page and
+  returns a JSON status; `action=resubscribe` reverses it. Invalid/missing
+  token → 400 with no hint about whether the address exists.
+- `src/pages/unsubscribe.astro` — the human-facing page. Reads `e`/`t`, calls
+  the API, shows done / already done / broken, with a one-click resubscribe
+  link on the done states.
+- Unsubscribing writes `unsub:<email>` to the `SEARCH_LOGS` KV namespace
+  (timestamped, ~5-year TTL) and adds the address to the Resend suppression
+  list as a backstop. **KV is the source of truth.** `send-scheduled.js` and
+  `subscribe.js` both check `unsub:<email>` and skip.
+- Resubscribing deletes the KV key and removes the Resend suppression. Signing
+  up again does **not** resubscribe an opted-out address; only the resubscribe
+  link does.
+- Routes do not collide: the page is `/unsubscribe`, the function is
+  `/api/unsubscribe`.

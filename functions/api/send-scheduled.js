@@ -1,7 +1,7 @@
 // ADHD Reflect. Send scheduled practice emails
 // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
 
-import { sendBatch } from './_lib/email.js';
+import { sendBatch, signUnsub, normalizeEmail } from './_lib/email.js';
 
 const EMAILS = {
   reactor: [
@@ -356,12 +356,17 @@ export async function onRequestGet({ request, env }) {
     const schedule = JSON.parse(raw);
     if (new Date(schedule.nextEmailDate) > now) { skipped++; continue; }
     if (schedule.emailsSent >= 4) { skipped++; continue; }
+    // Honour unsubscribes. KV is the source of truth.
+    if (await env.SEARCH_LOGS.get('unsub:' + normalizeEmail(schedule.email))) { skipped++; continue; }
     const patternEmails = EMAILS[schedule.pattern];
     if (!patternEmails || !patternEmails[schedule.emailsSent]) { skipped++; continue; }
     const emailToSend = patternEmails[schedule.emailsSent];
 
-    // Marketing send: needs an unsubscribe path in the header and the body.
-    const unsubUrl = 'https://adhdreflect.com/unsubscribe?e=' + encodeURIComponent(schedule.email);
+    // Marketing send: needs a signed unsubscribe path in the header and body.
+    const token = await signUnsub(env, schedule.email);
+    const q = 'e=' + encodeURIComponent(schedule.email) + '&t=' + token;
+    const unsubPage = 'https://adhdreflect.com/unsubscribe?' + q;
+    const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
 
     due.push({
       keyName: key.name,
@@ -369,12 +374,12 @@ export async function onRequestGet({ request, env }) {
       message: {
         to: schedule.email,
         subject: emailToSend.subject,
-        text: emailToSend.text + '\n\nUnsubscribe any time: ' + unsubUrl,
+        text: emailToSend.text + '\n\nUnsubscribe any time: ' + unsubPage,
         tags: [{ name: 'type', value: 'drip' }],
         // Per-recipient, per-drip-step key so a cron retry cannot double-send.
         idempotencyKey: 'drip-' + schedule.email + '-' + schedule.emailsSent,
         headers: {
-          'List-Unsubscribe': '<' + unsubUrl + '>',
+          'List-Unsubscribe': '<' + unsubApi + '>',
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
         },
       },

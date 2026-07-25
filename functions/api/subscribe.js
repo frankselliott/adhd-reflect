@@ -1,5 +1,5 @@
 // ADHD Reflect — Subscribe endpoint
-import { sendEmail } from './_lib/email.js';
+import { sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
 
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
@@ -8,6 +8,12 @@ export async function onRequestPost({ request, env }) {
     const { email, pattern } = body;
     if (!email || !pattern) {
       return new Response(JSON.stringify({ error: 'Email and pattern required' }), { status: 400, headers });
+    }
+
+    // Honour unsubscribes. Someone who opted out re-subscribes only via the
+    // resubscribe link, not by signing up again.
+    if (env.SEARCH_LOGS && await env.SEARCH_LOGS.get('unsub:' + normalizeEmail(email))) {
+      return new Response(JSON.stringify({ success: true, pattern }), { status: 200, headers });
     }
 
     // Record the drip schedule. send-scheduled.js reads this and sends the
@@ -22,14 +28,17 @@ export async function onRequestPost({ request, env }) {
       }), { expirationTtl: 60*60*24*60 });
     }
 
-    // Welcome email. Marketing send, so it carries an unsubscribe path.
-    const unsubUrl = 'https://adhdreflect.com/unsubscribe?e=' + encodeURIComponent(email);
+    // Welcome email. Marketing send, so it carries a signed unsubscribe path.
+    const token = await signUnsub(env, email);
+    const q = 'e=' + encodeURIComponent(email) + '&t=' + token;
+    const unsubUrl = 'https://adhdreflect.com/unsubscribe?' + q;
+    const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
     await sendEmail(env, {
       to: email,
       subject: 'You\'re in. Your first practice lands tomorrow.',
       tags: [{ name: 'type', value: 'welcome' }],
       headers: {
-        'List-Unsubscribe': '<' + unsubUrl + '>',
+        'List-Unsubscribe': '<' + unsubApi + '>',
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
       html: `
