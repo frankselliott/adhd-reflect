@@ -1,3 +1,5 @@
+import { sendEmail } from '../_lib/email.js';
+
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
 
@@ -22,19 +24,14 @@ export async function onRequestPost({ request, env }) {
       return new Response(JSON.stringify({ success: true }), { headers });
     }
 
-    // Resend access email
-    if (env.SENDER_API_KEY) {
+    // Re-send the access email
+    {
       const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
-      await fetch('https://api.sender.net/v2/transactional/send', {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + env.SENDER_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: normalised,
-          subject: 'Your Both of You access link',
-          html: `
+      await sendEmail(env, {
+        to: normalised,
+        subject: 'Your Both of You access link',
+        tags: [{ name: 'type', value: 'recovery' }],
+        html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px">
               <p style="font-size:16px;color:#1F2A37;margin-bottom:24px">Here's your access link for Both of You.</p>
               <p style="margin-bottom:24px">
@@ -47,8 +44,7 @@ export async function onRequestPost({ request, env }) {
               <p style="font-size:13px;color:#999;margin-top:24px">adhdreflect.com</p>
             </div>
           `,
-          text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
-        }),
+        text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
       });
     }
 

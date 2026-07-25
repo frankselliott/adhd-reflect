@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Unsubscribe" description="Manage your ADHD Reflect emails.">
+  <div class="unsub-wrap">
+    <div class="unsub-inner">
+      <div class="unsub-label">ADHD Reflect</div>
+
+      <div id="unsub-loading" class="unsub-state">
+        <h1 class="unsub-title">One moment</h1>
+        <p class="unsub-sub">Updating your email preferences.</p>
+      </div>
+
+      <div id="unsub-done" class="unsub-state" hidden>
+        <h1 class="unsub-title">You're unsubscribed</h1>
+        <p class="unsub-sub">You won't get any more practice emails or newsletters. This takes effect straight away.</p>
+        <p class="unsub-note">Account emails still reach you as normal: your purchase receipt, your access link, and recovery links are not affected.</p>
+        <p class="unsub-resub">Changed your mind? <a id="resub-link" href="#">Resubscribe</a></p>
+      </div>
+
+      <div id="unsub-already" class="unsub-state" hidden>
+        <h1 class="unsub-title">You're already unsubscribed</h1>
+        <p class="unsub-sub">There's nothing more to do. You're off the practice emails and the newsletter.</p>
+        <p class="unsub-note">Account emails (receipts, access and recovery links) still reach you as normal.</p>
+        <p class="unsub-resub">Changed your mind? <a id="resub-link-2" href="#">Resubscribe</a></p>
+      </div>
+
+      <div id="unsub-resubscribed" class="unsub-state" hidden>
+        <h1 class="unsub-title">You're back on the list</h1>
+        <p class="unsub-sub">Your practice emails will pick up again. Welcome back.</p>
+      </div>
+
+      <div id="unsub-invalid" class="unsub-state" hidden>
+        <h1 class="unsub-title">This link didn't work</h1>
+        <p class="unsub-sub">The link looks broken or out of date. Use the unsubscribe link at the bottom of a recent email, or email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a> and we'll sort it out.</p>
+      </div>
+
+      <div class="unsub-footer">
+        <a href="/">Back to adhdreflect.com</a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+.unsub-wrap {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--page-pad);
+}
+.unsub-inner {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.unsub-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+}
+.unsub-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 7vw, 40px);
+  font-weight: 300;
+  color: var(--slate);
+  font-variation-settings: 'opsz' 40;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+.unsub-sub {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--pewter);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+.unsub-note {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+  line-height: 1.6;
+  background: rgba(31,42,55,0.04);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: var(--space-lg);
+}
+.unsub-resub {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--pewter);
+}
+.unsub-sub a, .unsub-resub a { color: var(--blue); text-decoration: none; }
+.unsub-sub a:hover, .unsub-resub a:hover { text-decoration: underline; }
+.unsub-footer {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--mist-border);
+}
+.unsub-footer a {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  text-decoration: none;
+}
+.unsub-footer a:hover { text-decoration: underline; }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const e = params.get('e');
+  const t = params.get('t');
+  const action = params.get('action') === 'resubscribe' ? 'resubscribe' : 'unsubscribe';
+
+  function show(id) {
+    document.querySelectorAll('.unsub-state').forEach((el) => { el.hidden = true; });
+    const el = document.getElementById(id);
+    if (el) el.hidden = false;
+  }
+
+  async function run() {
+    if (!e || !t) { show('unsub-invalid'); return; }
+
+    const qs = 'e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=' + action;
+    const resubUrl = '/unsubscribe?e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=resubscribe';
+    const l1 = document.getElementById('resub-link');
+    const l2 = document.getElementById('resub-link-2');
+    if (l1) l1.setAttribute('href', resubUrl);
+    if (l2) l2.setAttribute('href', resubUrl);
+
+    try {
+      const res = await fetch('/api/unsubscribe?' + qs);
+      if (!res.ok) { show('unsub-invalid'); return; }
+      const data = await res.json();
+      if (data.status === 'done') show('unsub-done');
+      else if (data.status === 'already') show('unsub-already');
+      else if (data.status === 'resubscribed') show('unsub-resubscribed');
+      else show('unsub-invalid');
+    } catch (err) {
+      show('unsub-invalid');
+    }
+  }
+
+  run();
+</script>

@@ -1,3 +1,5 @@
+import { sendEmail } from './_lib/email.js';
+
 async function verifyStripeSignature(body, signature, secret) {
   const parts = signature.split(',');
   const timestamp = parts.find(p => p.startsWith('t=')).split('=')[1];
@@ -54,18 +56,13 @@ export async function onRequestPost({ request, env }) {
         await env.GROW_DATA.put('email:' + email.toLowerCase().trim(), token, {
           expirationTtl: 60 * 60 * 24 * 365 * 2,
         });
-        if (env.SENDER_API_KEY) {
+        {
           const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
-          await fetch('https://api.sender.net/v2/transactional/send', {
-            method: 'POST',
-            headers: {
-              Authorization: 'Bearer ' + env.SENDER_API_KEY,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              to: email,
-              subject: 'You\'re in. Both of You',
-              html: `
+          await sendEmail(env, {
+            to: email,
+            subject: 'You\'re in. Both of You',
+            tags: [{ name: 'type', value: 'purchase' }],
+            html: `
                 <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:540px;margin:0 auto;padding:40px 24px;background:#F7F5F0">
 
                   <!-- Logo mark -->
@@ -123,7 +120,6 @@ export async function onRequestPost({ request, env }) {
                 </div>
               `,
               text: `You're in.\n\nBoth of You is ready when you are.\n\nOpen it here:\n${accessUrl}\n\nThis link works on any device. Bookmark this email, it's how you get back in. No password needed.\n\nLost the link? Go to adhdreflect.com/grow and use "Recover access."\n\n---\n\nWhere to start: Module 1 is the beginning. If you've taken the pattern quiz, your first modules are waiting based on your result. Each module is 10-18 minutes on a phone.\n\nBetween modules: adhdreflect.com has a free search tool for hard moments, describe what's happening and it matches you to a card.\n\nNeed to talk to someone? online-therapy.com offers CBT-based therapy from $40/week. Use code THERAPY20 for 20% off your first month. (We earn a small commission if you sign up.)\n\n---\n\nADHD Reflect · adhdreflect.com\nThis is not medical advice.`,
-            }),
           });
         }
       }
