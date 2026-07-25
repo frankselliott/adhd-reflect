@@ -33,7 +33,7 @@ a generated plain-text fallback; we never send html alone).
 | `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
 | `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
 | `ADMIN_KEY` | Required | cron auth for `send-scheduled`, `email-health`, `email-clear` |
-| `RESEND_SEGMENT_ID` | Optional | reported by `email-health`; not yet used by the send code |
+| `RESEND_SEGMENT_ID` | **Required** for contact sync | segment every mirrored contact is added to |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
 
 > Cloudflare Pages secrets are **per-environment**. A value set only for
@@ -53,6 +53,34 @@ a generated plain-text fallback; we never send html alone).
 `functions/api/grow/free-access.js` sends **no** email: it returns the
 `accessUrl` and `src/pages/grow/redeem.astro` redirects the browser to it.
 Nothing to migrate there.
+
+## Subscriber storage: KV vs Resend
+
+Two stores, synced **one way, KV → Resend**:
+
+- **KV `email:<addr>`** holds the **drip schedule** (pattern, `emailsSent`,
+  `nextEmailDate`) with a **60-day TTL**. It drives `send-scheduled.js` and is
+  the source of truth for the drip. It is deliberately ephemeral.
+- **Resend contacts** hold the **durable list**. The `pattern` custom property
+  (string, no fallback — an empty pattern is a visible bug, not silent) is set
+  on each contact and every contact is added to the `RESEND_SEGMENT_ID` segment.
+  Contacts persist after the KV schedule expires.
+
+`upsertContact(env, { email, pattern, unsubscribed })` in `_lib/email.js` does
+the mirroring (top-level `/contacts`, segment via
+`/contacts/{id}/segments/{segment_id}`). It is best-effort: it never throws and
+never blocks or fails a signup. `pattern` is written only when supplied, so an
+unsubscribe toggle never blanks it.
+
+- `subscribe.js` calls it after the KV write and welcome send; the response
+  gains `contactSynced: true|false` alongside `welcomeSent`.
+- `unsubscribe.js` sets `unsubscribed: true` on opt-out and `false` on
+  resubscribe, so Broadcasts can respect it. KV remains the drip's source of
+  truth.
+- `/api/backfill-contacts?key=…` (GET, `ADMIN_KEY`) mirrors every existing KV
+  subscriber into Resend, cursor-paginated, idempotent, safe to run repeatedly.
+  Opt-outs are written as `unsubscribed: true` rather than skipped. Returns
+  `{ processed, created, updated, failed, skipped }`.
 
 ## Diagnostics
 

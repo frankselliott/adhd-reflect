@@ -8,6 +8,7 @@ import {
   addSuppression,
   removeSuppression,
   normalizeEmail,
+  upsertContact,
 } from './_lib/email.js';
 
 // Keep the opt-out on file for years, well beyond the drip schedule TTL.
@@ -25,12 +26,16 @@ async function doUnsubscribe(env, email) {
     );
   }
   await addSuppression(env, email); // best-effort backstop
+  // Flag the Resend contact so Broadcasts respect the opt-out later. KV stays
+  // the source of truth for the drip; no pattern is passed, so it is untouched.
+  await upsertContact(env, { email, unsubscribed: true });
   return 'done';
 }
 
 async function doResubscribe(env, email) {
   if (env.SEARCH_LOGS) await env.SEARCH_LOGS.delete('unsub:' + email);
   await removeSuppression(env, email); // best-effort backstop
+  await upsertContact(env, { email, unsubscribed: false });
   return 'resubscribed';
 }
 

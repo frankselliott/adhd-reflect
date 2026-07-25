@@ -1,5 +1,5 @@
 // ADHD Reflect — Subscribe endpoint
-import { sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
+import { sendEmail, signUnsub, normalizeEmail, upsertContact } from './_lib/email.js';
 import { PATTERN_NAMES, VALID_PATTERNS } from './_lib/patterns.js';
 import { welcomeEmailHtml } from './_lib/emails.js';
 
@@ -84,7 +84,11 @@ Unsubscribe any time: ${unsubUrl}`,
       ? 'sent'
       : (!env.RESEND_API_KEY ? 'email_not_configured' : 'send_failed');
 
-    return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason }), { status: 200, headers });
+    // Mirror into Resend contacts (durable list). KV still drives the drip;
+    // this is for retention, not routing, and must never fail the signup.
+    const contact = await upsertContact(env, { email, pattern, unsubscribed: false });
+
+    return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason, contactSynced: contact.ok }), { status: 200, headers });
   } catch (e) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
   }
