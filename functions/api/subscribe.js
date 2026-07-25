@@ -22,14 +22,15 @@ export async function onRequestPost({ request, env }) {
     // Honour unsubscribes. Someone who opted out re-subscribes only via the
     // resubscribe link, not by signing up again.
     if (env.SEARCH_LOGS && await env.SEARCH_LOGS.get('unsub:' + norm)) {
-      return new Response(JSON.stringify({ success: false, reason: 'unsubscribed' }), { status: 200, headers });
+      return new Response(JSON.stringify({ success: false, welcomeSent: false, reason: 'unsubscribed' }), { status: 200, headers });
     }
 
     // Guard against repeat signups: if a schedule already exists, do not
-    // overwrite it and do not resend the welcome.
+    // overwrite it and do not resend the welcome. Distinguished by reason so a
+    // no-send here is not mistaken for a successful send.
     const scheduleKey = 'email:' + norm;
     if (env.SEARCH_LOGS && await env.SEARCH_LOGS.get(scheduleKey)) {
-      return new Response(JSON.stringify({ success: true, pattern }), { status: 200, headers });
+      return new Response(JSON.stringify({ success: true, pattern, welcomeSent: false, reason: 'already_subscribed' }), { status: 200, headers });
     }
 
     // Record the drip schedule. send-scheduled.js reads this and sends the
@@ -48,7 +49,7 @@ export async function onRequestPost({ request, env }) {
     const q = 'e=' + encodeURIComponent(email) + '&t=' + token;
     const unsubUrl = 'https://adhdreflect.com/unsubscribe?' + q;
     const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
-    await sendEmail(env, {
+    const result = await sendEmail(env, {
       to: email,
       subject: 'You\'re in. First one lands tomorrow.',
       tags: [{ name: 'type', value: 'welcome' }],
@@ -83,7 +84,16 @@ adhdreflect.com
 Unsubscribe any time: ${unsubUrl}`,
     });
 
-    return new Response(JSON.stringify({ success: true, pattern }), { status: 200, headers });
+    // Report the real send outcome so a silent failure is visible. The signup
+    // itself succeeded (schedule written); welcomeSent reflects the email only.
+    // Reasons are machine-readable and non-sensitive. The API key and any
+    // Resend error body are logged by sendEmail(), never returned to the client.
+    const welcomeSent = result.ok;
+    const reason = result.ok
+      ? 'sent'
+      : (!env.RESEND_API_KEY ? 'email_not_configured' : 'send_failed');
+
+    return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason }), { status: 200, headers });
   } catch (e) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
   }
