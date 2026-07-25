@@ -3,6 +3,21 @@ import { sendEmail, signUnsub, normalizeEmail, upsertContact } from './_lib/emai
 import { PATTERN_NAMES, VALID_PATTERNS } from './_lib/patterns.js';
 import { welcomeEmailHtml } from './_lib/emails.js';
 
+// Local part, @, domain, a dot, and a TLD of 2+. Not full RFC 5322. Kept in
+// sync with the client check in src/components/Quiz.jsx; client validation is
+// only decoration on a public, CORS-* endpoint, so this is the real gate.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const JUNK_DOMAINS = new Set(['localhost', 'example.com', 'test.com']);
+
+function isValidEmail(email) {
+  if (!email || email.length > 254) return false;
+  if (!EMAIL_RE.test(email)) return false;
+  const domain = email.slice(email.lastIndexOf('@') + 1);
+  if (!domain.includes('.')) return false;
+  if (JUNK_DOMAINS.has(domain)) return false;
+  return true;
+}
+
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
   try {
@@ -19,6 +34,11 @@ export async function onRequestPost({ request, env }) {
     }
     const patternName = PATTERN_NAMES[pattern];
     const norm = normalizeEmail(email);
+
+    // Validate the address before touching KV, Resend or the welcome send.
+    if (!isValidEmail(norm)) {
+      return new Response(JSON.stringify({ success: false, reason: 'invalid_email' }), { status: 400, headers });
+    }
 
     // Honour unsubscribes. Someone who opted out re-subscribes only via the
     // resubscribe link, not by signing up again.
@@ -38,7 +58,7 @@ export async function onRequestPost({ request, env }) {
     // pattern practices over the following weeks.
     if (env.SEARCH_LOGS) {
       await env.SEARCH_LOGS.put(scheduleKey, JSON.stringify({
-        email, pattern,
+        email: norm, pattern,
         signupDate: new Date().toISOString(),
         emailsSent: 0,
         nextEmailDate: new Date(Date.now() + 24*60*60*1000).toISOString(),
@@ -46,12 +66,12 @@ export async function onRequestPost({ request, env }) {
     }
 
     // Welcome email. Marketing send, so it carries a signed unsubscribe path.
-    const token = await signUnsub(env, email);
-    const q = 'e=' + encodeURIComponent(email) + '&t=' + token;
+    const token = await signUnsub(env, norm);
+    const q = 'e=' + encodeURIComponent(norm) + '&t=' + token;
     const unsubUrl = 'https://adhdreflect.com/unsubscribe?' + q;
     const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
     const result = await sendEmail(env, {
-      to: email,
+      to: norm,
       subject: 'You\'re in. First one lands tomorrow.',
       tags: [{ name: 'type', value: 'welcome' }],
       headers: {
@@ -86,7 +106,7 @@ Unsubscribe any time: ${unsubUrl}`,
 
     // Mirror into Resend contacts (durable list). KV still drives the drip;
     // this is for retention, not routing, and must never fail the signup.
-    const contact = await upsertContact(env, { email, pattern, unsubscribed: false });
+    const contact = await upsertContact(env, { email: norm, pattern, unsubscribed: false });
 
     return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason, contactSynced: contact.ok }), { status: 200, headers });
   } catch (e) {
