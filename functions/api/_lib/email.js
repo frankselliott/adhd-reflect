@@ -252,3 +252,98 @@ export async function sendBatch(env, messages) {
 
   return { sent, failed, chunks: results };
 }
+
+// ── Resend contacts (durable subscriber list) ───────────────────────────────
+// KV holds the drip schedule (60-day TTL); Resend contacts persist. We mirror
+// KV -> Resend so the free list survives. Current Resend API: top-level
+// /contacts, segments joined via /contacts/{id}/segments/{segment_id}, and the
+// `pattern` custom property is a first-class field on the contact.
+
+const RESEND_CONTACTS_URL = 'https://api.resend.com/contacts';
+
+// fetch with backoff on 429 (and 5xx). Contact writes are not sends, so
+// warm-up limits do not apply, but the rate limiter still can. Never throws.
+async function resendRequest(env, url, { method = 'GET', body } = {}) {
+  const opts = {
+    method,
+    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
+  };
+  if (body !== undefined) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(body);
+  }
+  const delays = [0, 500, 1500];
+  let res;
+  for (let i = 0; i < delays.length; i++) {
+    if (delays[i]) await sleep(delays[i]);
+    res = await fetch(url, opts);
+    if (res.status !== 429 && res.status < 500) return res;
+  }
+  return res; // exhausted retries; caller logs
+}
+
+async function readJson(res) {
+  try { return await res.json(); } catch (_) { return null; }
+}
+
+async function getContactId(env, email) {
+  const res = await resendRequest(env, `${RESEND_CONTACTS_URL}/${encodeURIComponent(email)}`);
+  if (!res || !res.ok) return null;
+  const data = await readJson(res);
+  return (data && (data.id || (data.data && data.data.id))) || null;
+}
+
+// Create or update a contact, set the `pattern` property, add to the segment.
+// Best-effort: never throws, returns { ok, id, created, error }. A contact
+// write must never block or fail a signup. `pattern` is only written when
+// supplied, so an unsubscribe toggle does not blank it (and never writes an
+// empty pattern, which the property is deliberately set up to surface as a bug).
+export async function upsertContact(env, { email, pattern, unsubscribed } = {}) {
+  if (!env.RESEND_API_KEY) {
+    console.error('upsertContact: RESEND_API_KEY not configured');
+    return { ok: false, id: null, created: false, error: 'RESEND_API_KEY not configured' };
+  }
+  const norm = normalizeEmail(email);
+  if (!norm) return { ok: false, id: null, created: false, error: 'no email' };
+
+  const payload = { email: norm };
+  if (pattern != null) payload.pattern = pattern; // first-class custom property
+  if (typeof unsubscribed === 'boolean') payload.unsubscribed = unsubscribed;
+
+  try {
+    let id = null;
+    let created = false;
+
+    const res = await resendRequest(env, RESEND_CONTACTS_URL, { method: 'POST', body: payload });
+    const data = await readJson(res);
+    if (res && res.ok && data && (data.id || (data.data && data.data.id))) {
+      id = data.id || data.data.id;
+      created = true;
+    } else {
+      // Already exists (or create rejected): fetch the id and patch it.
+      id = await getContactId(env, norm);
+      if (id) {
+        const up = await resendRequest(env, `${RESEND_CONTACTS_URL}/${id}`, { method: 'PATCH', body: payload });
+        if (!up || !up.ok) {
+          console.error('Resend contact update failed', up && up.status, JSON.stringify(await readJson(up)));
+        }
+      } else {
+        console.error('Resend contact create failed', res && res.status, JSON.stringify(data));
+        return { ok: false, id: null, created: false, error: (data && data.message) || `HTTP ${res && res.status}` };
+      }
+    }
+
+    // Add to the segment. Idempotent: a repeat add is a no-op (or 409).
+    if (id && env.RESEND_SEGMENT_ID) {
+      const seg = await resendRequest(env, `${RESEND_CONTACTS_URL}/${id}/segments/${env.RESEND_SEGMENT_ID}`, { method: 'POST' });
+      if (seg && !seg.ok && seg.status !== 409) {
+        console.error('Resend segment add failed', seg.status, JSON.stringify(await readJson(seg)));
+      }
+    }
+
+    return { ok: true, id, created, error: null };
+  } catch (e) {
+    console.error('upsertContact threw', e && e.message);
+    return { ok: false, id: null, created: false, error: (e && e.message) || 'upsert failed' };
+  }
+}
