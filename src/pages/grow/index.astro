@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import FromReddit from '../../components/FromReddit.astro';
 const authRequired = Astro.url.searchParams.get('auth');
 const invalid = Astro.url.searchParams.get('invalid');
 ---
@@ -81,7 +82,7 @@ const invalid = Astro.url.searchParams.get('invalid');
       <h1 class="hero-title">Both of You</h1>
       <p class="hero-sub">A self-guided program for the household where two ADHD nervous systems<br/>are in the same four walls at the same time.</p>
       <a href="#buy" class="hero-cta" id="hero-cta-btn">Start for $49</a>
-      <p class="hero-cta-note">One payment. Works on any device. No live sessions.</p>
+      <p class="hero-cta-note">One payment, and it works on any device. You move through it in your own time, with nothing to show up for live.</p>
     </div>
   </section>
 
@@ -131,7 +132,7 @@ const invalid = Astro.url.searchParams.get('invalid');
       <div class="moments-grid">
         <div class="moment-item">
           <div class="moment-item-title">Why you lose it at 5pm</div>
-          <div class="moment-item-body">The mask you hold at work comes off the moment you walk in the door. That's not weakness. That's the cost of masking all day.</div>
+          <div class="moment-item-body">The mask you hold at work comes off the moment you walk in the door. That is the cost of holding it together all day, and it has to come off somewhere.</div>
         </div>
         <div class="moment-item">
           <div class="moment-item-title">Why they save the worst for you</div>
@@ -147,7 +148,7 @@ const invalid = Astro.url.searchParams.get('invalid');
         </div>
         <div class="moment-item">
           <div class="moment-item-title">Why the morning keeps collapsing</div>
-          <div class="moment-item-body">The laminated chart lasted eleven days. Not because you gave up. Because the system had too many invisible steps for one ADHD brain to hold.</div>
+          <div class="moment-item-body">The laminated chart lasted eleven days. It collapsed because the system had too many invisible steps for one ADHD brain to hold, which is a flaw in the system rather than in you.</div>
         </div>
         <div class="moment-item">
           <div class="moment-item-title">Why you leave even when you stay</div>
@@ -293,15 +294,17 @@ const invalid = Astro.url.searchParams.get('invalid');
         </details>
         <details class="faq-item">
           <summary class="faq-q">How long do I have access?</summary>
-          <p class="faq-a">It's a one-time payment with lifetime access. No subscription, no renewal, no streaks. Come back in six months and everything is exactly where you left it.</p>
+          <p class="faq-a">It's a one-time payment with lifetime access, so there is nothing to renew and no streak to keep up. Come back in six months and everything is exactly where you left it.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">What if it's not for me?</summary>
-          <p class="faq-a">Email us within 14 days and we'll refund you in full. No form, no questions, no awkwardness.</p>
+          <p class="faq-a">Email us within 14 days and we'll refund you in full. There is no form to fill in and nothing you need to justify.</p>
         </details>
       </div>
     </div>
   </section>
+
+  <FromReddit />
 
   <!-- BUY -->
   <section class="section-buy" id="buy">
@@ -311,7 +314,7 @@ const invalid = Astro.url.searchParams.get('invalid');
         <div class="buy-price" id="buy-price-display">$49 <span class="buy-currency" id="buy-currency-display">USD</span></div>
         <div class="buy-price-note">One payment. Lifetime access. All 20 modules.</div>
         <button class="buy-cta" id="grow-checkout-btn">Start the program</button>
-        <p class="buy-small">You'll get an access link by email straight after payment.<br/>No account needed. No password to remember. Works on any device.</p>
+        <p class="buy-small">You'll get an access link by email straight after payment. That link is your way in on any device, so there is no account or password to set up.</p>
         <p class="buy-small">Want the evidence first? Read <a href="/what-this-is-based-on">what this is based on</a>.</p>
         <div class="buy-guarantee">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10.5 6H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6H5.5L8 1Z" stroke="#7FA88E" stroke-width="1.2" fill="none"/></svg>
