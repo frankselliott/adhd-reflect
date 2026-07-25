@@ -256,8 +256,9 @@ export async function sendBatch(env, messages) {
 // ── Resend contacts (durable subscriber list) ───────────────────────────────
 // KV holds the drip schedule (60-day TTL); Resend contacts persist. We mirror
 // KV -> Resend so the free list survives. Current Resend API: top-level
-// /contacts, segments joined via /contacts/{id}/segments/{segment_id}, and the
-// `pattern` custom property is a first-class field on the contact.
+// /contacts, segments joined via /contacts/{id}/segments/{segment_id}, and
+// custom properties nested under `properties` ({ properties: { pattern } });
+// reads come back as { pattern: { value, type } }.
 
 const RESEND_CONTACTS_URL = 'https://api.resend.com/contacts';
 
@@ -307,7 +308,10 @@ export async function upsertContact(env, { email, pattern, unsubscribed } = {}) 
   if (!norm) return { ok: false, id: null, created: false, error: 'no email' };
 
   const payload = { email: norm };
-  if (pattern != null) payload.pattern = pattern; // first-class custom property
+  // Custom properties are nested under `properties`; a top-level field is
+  // silently ignored. Only written when supplied, so an unsubscribe toggle
+  // (no pattern) cannot blank it. Reads come back as { pattern: { value, type } }.
+  if (pattern != null) payload.properties = { pattern };
   if (typeof unsubscribed === 'boolean') payload.unsubscribed = unsubscribed;
 
   try {

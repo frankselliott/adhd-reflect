@@ -72,6 +72,11 @@ the mirroring (top-level `/contacts`, segment via
 never blocks or fails a signup. `pattern` is written only when supplied, so an
 unsubscribe toggle never blanks it.
 
+Custom properties are **nested under `properties`** on write
+(`{ email, unsubscribed, properties: { pattern } }`) — a top-level `pattern`
+field is silently ignored. On read, a property comes back shaped as
+`{ pattern: { value, type } }`, so read `.value`, not the bare field.
+
 - `subscribe.js` calls it after the KV write and welcome send; the response
   gains `contactSynced: true|false` alongside `welcomeSent`.
 - `unsubscribe.js` sets `unsubscribed: true` on opt-out and `false` on
