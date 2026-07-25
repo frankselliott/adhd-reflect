@@ -26,12 +26,19 @@ export default function AIRouter() {
   const [input, setInput] = useState('');
   const [state, setState] = useState('idle');
 
-  // Prevent loop on back-navigation
+  // Prevent loop on back-navigation, and honour the ?q= prefill from the
+  // WebSite SearchAction so a search landing actually runs the assistant.
   useEffect(() => {
     if (sessionStorage.getItem('adhd-reflect-navigated')) {
       sessionStorage.removeItem('adhd-reflect-navigated');
       setInput('');
       setState('idle');
+      return;
+    }
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q && q.trim().length >= 3) {
+      setInput(q);
+      handleSubmit(q);
     }
   }, []);
   const [matches, setMatches] = useState([]);
@@ -141,11 +148,14 @@ function CrisisNumbers() {
     return CRISIS_WORDS.some(w => lower.includes(w));
   }
 
-  async function handleSubmit() {
-    if (!input.trim() || input.trim().length < 3) return;
+  async function handleSubmit(rawText) {
+    // Accept an explicit string (used by the ?q= prefill); otherwise use the
+    // input state. onClick/onKeyDown pass an event, which falls back to input.
+    const text = typeof rawText === 'string' ? rawText : input;
+    if (!text.trim() || text.trim().length < 3) return;
 
     // Immediate client-side crisis check
-    if (isCrisisInput(input)) {
+    if (isCrisisInput(text)) {
       setState('crisis');
       return;
     }
@@ -158,7 +168,7 @@ function CrisisNumbers() {
       const res = await fetch('/api/match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: input.trim() }),
+        body: JSON.stringify({ text: text.trim() }),
       });
       const data = await res.json();
 
@@ -173,7 +183,7 @@ function CrisisNumbers() {
       if (matches.length >= 1) {
         // Store all matches in sessionStorage for "wrong match" flow
         try { sessionStorage.setItem('adhd-reflect-matches', JSON.stringify(matches)); } catch(e) {}
-        try { sessionStorage.setItem('adhd-reflect-query', input.trim()); } catch(e) {}
+        try { sessionStorage.setItem('adhd-reflect-query', text.trim()); } catch(e) {}
         // Navigate to best match
         sessionStorage.setItem('adhd-reflect-navigated', 'true');
         window.location.replace('/cards/' + matches[0].id);
