@@ -74,6 +74,7 @@ export async function onRequestPost({ request, env }) {
     }
     return new Response('OK', { status: 200 });
   } catch (e) {
-    return new Response('Error: ' + e.message, { status: 500 });
+    console.error('stripe-webhook error', e && e.message);
+    return new Response('Internal error', { status: 500 });
   }
 }

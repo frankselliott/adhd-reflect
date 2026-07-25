@@ -146,7 +146,8 @@ Unsubscribe any time: ${unsubUrl}`,
 
     return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason, contactSynced: contact.ok }), { status: 200, headers });
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+    console.error('subscribe error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), { status: 500, headers });
   }
 }
 export async function onRequestOptions() {

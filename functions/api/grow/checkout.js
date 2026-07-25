@@ -68,11 +68,13 @@ export async function onRequestPost({ request, env }) {
     });
     const session = await res.json();
     if (!session.url) {
-      return new Response(JSON.stringify({ error: 'Could not create checkout session', detail: session }), { status: 500, headers });
+      console.error('checkout: stripe session error', JSON.stringify(session));
+      return new Response(JSON.stringify({ error: 'Could not create checkout session.' }), { status: 500, headers });
     }
     return new Response(JSON.stringify({ url: session.url }), { status: 200, headers });
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+    console.error('checkout error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), { status: 500, headers });
   }
 }
 

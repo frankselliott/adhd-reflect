@@ -26,7 +26,8 @@ export async function onRequestPost({ env, request }) {
       description: data.type === 'free' ? 'Free access' : `${data.value}% off`,
     }), { headers });
   } catch(e) {
-    return new Response(JSON.stringify({ valid: false, error: e.message }), { status: 500, headers });
+    console.error('validate-discount error', e && e.message);
+    return new Response(JSON.stringify({ valid: false, error: 'Something went wrong.' }), { status: 500, headers });
   }
 }
 
