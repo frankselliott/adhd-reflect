@@ -12,12 +12,54 @@ const sessionId = Astro.url.searchParams.get('session_id');
         </svg>
       </div>
       <h1 class="grow-welcome-title">You're in.</h1>
-      <p class="grow-welcome-body">Check your email for your access link. It's on its way now.</p>
-      <p class="grow-welcome-body">The link is how you get back in. Bookmark it or save the email.</p>
-      <p class="grow-welcome-note">Didn't get it within a few minutes? Check your spam folder, or email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
+
+      <!-- On-screen access link, filled in once the webhook has written it -->
+      <div id="access-ready" hidden>
+        <p class="grow-welcome-body">Here's your access link.</p>
+        <a id="access-link" class="grow-welcome-cta" href="#">Open Both of You</a>
+        <p class="grow-welcome-body">Bookmark this. It's how you get back in on any device. No password.</p>
+      </div>
+      <p id="access-checking" class="grow-welcome-body" hidden>Fetching your access link...</p>
+
+      <!-- Fallback shown from the start, so every path out is visible immediately -->
+      <p class="grow-welcome-body">Your access link is also on its way to your email. Bookmark it or save the email.</p>
+      <p class="grow-welcome-body">You can get back in any time at <a href="/grow">adhdreflect.com/grow</a> using the email address you paid with.</p>
+      <p class="grow-welcome-note">Nothing after a few minutes? Check your spam folder, or email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a></p>
       <a href="/grow" class="grow-welcome-back">Back to the program page</a>
     </div>
   </div>
+
+  <script>
+    // Resolve the access link on screen. The webhook writes it keyed by the
+    // Stripe session ID; it may lag the redirect by a few seconds, so poll for
+    // about 30 seconds then stop. The emailed link and the /grow recovery path
+    // are already shown, so a timeout still leaves two ways in.
+    const sid = new URLSearchParams(window.location.search).get('session_id');
+    const ready = document.getElementById('access-ready');
+    const link = document.getElementById('access-link');
+    const checking = document.getElementById('access-checking');
+    if (sid) {
+      checking.hidden = false;
+      let tries = 0;
+      const MAX = 15; // ~30s at 2s
+      const poll = async () => {
+        tries++;
+        try {
+          const res = await fetch('/api/grow/session-access?session_id=' + encodeURIComponent(sid));
+          const data = await res.json();
+          if (data && data.accessUrl) {
+            link.setAttribute('href', data.accessUrl);
+            ready.hidden = false;
+            checking.hidden = true;
+            return;
+          }
+        } catch (e) {}
+        if (tries >= MAX) { checking.hidden = true; return; }
+        setTimeout(poll, 2000);
+      };
+      poll();
+    }
+  </script>
 </Base>
 
 <style>
@@ -57,6 +99,20 @@ const sessionId = Astro.url.searchParams.get('session_id');
   line-height: 1.6;
 }
 .grow-welcome-note a { color: var(--blue); }
+.grow-welcome-cta {
+  display: inline-block;
+  margin: var(--space-sm) 0 var(--space-md);
+  padding: 16px 40px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.grow-welcome-cta:hover { background: var(--blue-deep); }
 .grow-welcome-back {
   display: inline-block;
   font-family: var(--sans);

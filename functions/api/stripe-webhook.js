@@ -59,6 +59,11 @@ export async function onRequestPost({ request, env }) {
         });
         {
           const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
+          // Second delivery path: the success page resolves this on screen so a
+          // buyer is never left with nothing if the email fails. Short 24h TTL,
+          // because the session ID sits in browser history and support emails
+          // and whoever holds it holds the access token.
+          await env.GROW_DATA.put('session:' + session.id, accessUrl, { expirationTtl: 60 * 60 * 24 });
           const emailResult = await sendEmail(env, {
             to: email,
             subject: 'You\'re in. Both of You',
