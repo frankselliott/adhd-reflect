@@ -1,3 +1,18 @@
+// Paginate a KV prefix fully. A single list() caps at ~1000 keys, so without a
+// cursor the dashboard silently under-counts. Bounded at maxPages so a huge
+// namespace cannot run away in one admin request.
+async function listAllKeys(kv, prefix, maxPages = 50) {
+  const keys = [];
+  let cursor, pages = 0;
+  do {
+    const res = await kv.list({ prefix, cursor });
+    keys.push(...res.keys);
+    cursor = res.list_complete ? undefined : res.cursor;
+    pages++;
+  } while (cursor && pages < maxPages);
+  return keys;
+}
+
 export async function onRequestGet({ env, request }) {
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
@@ -15,9 +30,9 @@ export async function onRequestGet({ env, request }) {
     // ── Search analytics (from SEARCH_LOGS KV) ──
     if (section === 'all' || section === 'search') {
       if (env.SEARCH_LOGS) {
-        const listResult = await env.SEARCH_LOGS.list({ prefix: 'search:', limit: 1000 });
+        const searchKeys = await listAllKeys(env.SEARCH_LOGS, 'search:');
         const logs = [];
-        for (const k of listResult.keys) {
+        for (const k of searchKeys) {
           const value = await env.SEARCH_LOGS.get(k.name);
           if (value) { try { logs.push(JSON.parse(value)); } catch(e) {} }
         }
@@ -55,9 +70,9 @@ export async function onRequestGet({ env, request }) {
     // ── Course analytics (from GROW_DATA KV) ──
     if (section === 'all' || section === 'course') {
       if (env.GROW_DATA) {
-        const tokenList = await env.GROW_DATA.list({ prefix: 'token:', limit: 1000 });
+        const tokenKeys = await listAllKeys(env.GROW_DATA, 'token:');
         const users = [];
-        for (const k of tokenList.keys) {
+        for (const k of tokenKeys) {
           const value = await env.GROW_DATA.get(k.name);
           if (value) {
             try {
@@ -95,7 +110,7 @@ export async function onRequestGet({ env, request }) {
 
         // Module completion rates
         const moduleCounts = {};
-        for (const k of tokenList.keys) {
+        for (const k of tokenKeys) {
           const value = await env.GROW_DATA.get(k.name);
           if (value) {
             try {
@@ -135,9 +150,9 @@ export async function onRequestGet({ env, request }) {
     // ── Discount codes (from GROW_DATA KV, prefix discount:) ──
     if (section === 'all' || section === 'discounts') {
       if (env.GROW_DATA) {
-        const discountList = await env.GROW_DATA.list({ prefix: 'discount:', limit: 500 });
+        const discountKeys = await listAllKeys(env.GROW_DATA, 'discount:');
         const codes = [];
-        for (const k of discountList.keys) {
+        for (const k of discountKeys) {
           const value = await env.GROW_DATA.get(k.name);
           if (value) {
             try { codes.push(JSON.parse(value)); } catch(e) {}
@@ -152,7 +167,8 @@ export async function onRequestGet({ env, request }) {
     });
 
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), {
+    console.error('admin error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), {
       status: 500, headers: { 'Content-Type': 'application/json' },
     });
   }

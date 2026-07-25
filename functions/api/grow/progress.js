@@ -40,7 +40,8 @@ export async function onRequestPost({ request, env }) {
       progress: userData.progress,
     }), { status: 200, headers });
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+    console.error('progress error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), { status: 500, headers });
   }
 }
 
@@ -68,6 +69,7 @@ export async function onRequestGet({ request, env }) {
       completedCount: Object.keys(userData.progress || {}).length,
     }), { status: 200, headers });
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+    console.error('progress error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), { status: 500, headers });
   }
 }

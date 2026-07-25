@@ -285,7 +285,7 @@ export async function onRequestPost(context) {
       try {
         const cached = await env.SEARCH_LOGS.get(cacheKey);
         if (cached) {
-          env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: true, cached: true, topMatch: JSON.parse(cached).matches?.[0]?.id || null, topMatchTitle: JSON.parse(cached).matches?.[0]?.title || null }), { expirationTtl: 7776000 });
+          context.waitUntil(env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: true, cached: true, topMatch: JSON.parse(cached).matches?.[0]?.id || null, topMatchTitle: JSON.parse(cached).matches?.[0]?.title || null }), { expirationTtl: 7776000 }));
           return new Response(cached, { status: 200, headers });
         }
       } catch(e) {}
@@ -334,8 +334,8 @@ export async function onRequestPost(context) {
     // Cache + log
     if (env.SEARCH_LOGS) {
       try {
-        if (!result.crisis && result.matches?.length > 0) env.SEARCH_LOGS.put(cacheKey, JSON.stringify(result), { expirationTtl: 2592000 });
-        env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: !result.crisis && result.matches?.length > 0, crisis: result.crisis || false, cached: false, topMatch: result.matches?.[0]?.id || null, topMatchTitle: result.matches?.[0]?.title || null }), { expirationTtl: 7776000 });
+        if (!result.crisis && result.matches?.length > 0) context.waitUntil(env.SEARCH_LOGS.put(cacheKey, JSON.stringify(result), { expirationTtl: 2592000 }));
+        context.waitUntil(env.SEARCH_LOGS.put('search:' + Date.now() + ':' + Math.random().toString(36).slice(2,6), JSON.stringify({ query: userInput.slice(0,200), timestamp: new Date().toISOString(), matched: !result.crisis && result.matches?.length > 0, crisis: result.crisis || false, cached: false, topMatch: result.matches?.[0]?.id || null, topMatchTitle: result.matches?.[0]?.title || null }), { expirationTtl: 7776000 }));
       } catch(e) {}
     }
 

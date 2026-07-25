@@ -1,8 +1,10 @@
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
-  const token = url.searchParams.get('token');
+  const token = url.searchParams.get('token') || '';
 
-  if (!token || !env.GROW_DATA) {
+  // The token must be the 64-hex format we issue. Anything else cannot match a
+  // stored token, and must never be reflected into the page below.
+  if (!/^[a-f0-9]{64}$/.test(token) || !env.GROW_DATA) {
     return Response.redirect('https://adhdreflect.com/grow', 302);
   }
 
@@ -11,7 +13,12 @@ export async function onRequestGet({ request, env }) {
     return Response.redirect('https://adhdreflect.com/grow?invalid=1', 302);
   }
 
-  const redirectTo = url.searchParams.get('next') || '/grow/home';
+  // Only an internal /grow/ path is allowed as the redirect target. Anything
+  // else (an external URL, a javascript: URI, or a quote-breaking payload) is
+  // ignored and we fall back to the course home. This closes an XSS and
+  // open-redirect hole where `next` was interpolated straight into the page.
+  const nextParam = url.searchParams.get('next') || '';
+  const redirectTo = /^\/grow\/[A-Za-z0-9/_-]*$/.test(nextParam) ? nextParam : '/grow/home';
 
   // Return an HTML page that:
   // 1. Sets the cookie (via Set-Cookie header)

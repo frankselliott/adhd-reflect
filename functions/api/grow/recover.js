@@ -40,7 +40,8 @@ export async function onRequestPost({ request, env }) {
     return new Response(JSON.stringify({ success: true }), { headers });
 
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+    console.error('recover error', e && e.message);
+    return new Response(JSON.stringify({ error: 'Something went wrong.' }), { status: 500, headers });
   }
 }
 
