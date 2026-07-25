@@ -1,0 +1,100 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+// Layout for public, indexable markdown content pages (not the legal pages,
+// which are noindex). Full Base.astro head: canonical, Open Graph, Twitter,
+// indexable robots, default og:image. Legal.astro's prose body, no updated line.
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || 'ADHD Reflect';
+const description = frontmatter?.description || 'For ADHD parents raising ADHD kids. Not therapy. Not advice. Just what helps.';
+const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`;
+const ogImageUrl = 'https://adhdreflect.com/og-default.png';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{fullTitle}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#4A6FA5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="ADHD Reflect" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={fullTitle} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta property="og:url" content={`https://adhdreflect.com${Astro.url.pathname}`} />
+  <meta property="og:site_name" content="ADHD Reflect" />
+
+  <!-- Indexable -->
+  <link rel="canonical" href={`https://adhdreflect.com${Astro.url.pathname}`} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ADHD Reflect",
+    "url": "https://adhdreflect.com",
+    "description": "For ADHD parents raising ADHD kids. Describe what just happened and find what helps.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://adhdreflect.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ADHD Reflect",
+    "url": "https://adhdreflect.com",
+    "description": "Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in."
+  }
+  </script>
+</head>
+<body>
+  <Nav />
+  <main class="prose">
+    <p class="prose-label">{frontmatter?.label || ''}</p>
+    <h1>{title}</h1>
+    <hr />
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
+
+<style>
+  .prose-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space-sm);
+  }
+</style>
