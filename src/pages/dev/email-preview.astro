@@ -1,0 +1,57 @@
+---
+// Dev-only email preview. Not linked from anywhere, excluded from the sitemap.
+// Renders each template with dummy data so changes can be eyeballed without
+// sending. It imports the same builders the endpoints use, so it stays honest.
+import { welcomeEmailHtml, purchaseEmailHtml, recoveryEmailHtml, dripEmailHtml } from '../../../functions/api/_lib/emails.js';
+
+const dummyUnsub = 'https://adhdreflect.com/unsubscribe?e=you%40example.com&t=abc123';
+const dummyAccess = 'https://adhdreflect.com/grow/access?token=xxxxxxxxxxxxxxxx';
+
+// A representative drip email (dummy sample of what send-scheduled.js passes in).
+const dripSample = {
+  subject: 'You yelled. Now what.',
+  text: `If you are reading this, you probably yelled today. Or yesterday. Or you are saving this email for when you inevitably do.
+
+The reactor pattern means your emotional response arrives before your thinking brain gets a vote. Heat, volume, speed. Then the shame. You know this sequence.
+
+If you want to understand what is actually happening in your nervous system during those moments:
+https://adhdreflect.com/guides/g01
+
+ADHD Reflect`,
+};
+
+const previews = [
+  { label: 'Welcome — full frame, unsubscribe', html: welcomeEmailHtml({ patternName: 'The Shame Spiraller', unsubUrl: dummyUnsub }) },
+  { label: 'Purchase — full frame, transactional', html: purchaseEmailHtml({ accessUrl: dummyAccess }) },
+  { label: 'Recovery — full frame', html: recoveryEmailHtml({ accessUrl: dummyAccess }) },
+  { label: 'Drip — minimal frame', html: dripEmailHtml({ text: dripSample.text, subject: dripSample.subject, unsubUrl: dummyUnsub }) },
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Email preview</title>
+  <style>
+    body { margin: 0; background: #0E0D0B; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 32px 16px; }
+    h1 { color: rgba(255,255,255,.5); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 400; text-align: center; margin: 0 0 28px; }
+    h2 { color: rgba(255,255,255,.35); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 400; margin: 0 0 12px; }
+    .wrap { max-width: 1400px; margin: 0 auto; display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+    .col { flex: 1 1 380px; max-width: 440px; }
+    iframe { width: 100%; height: 820px; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; background: #fff; }
+  </style>
+</head>
+<body>
+  <h1>ADHD Reflect · email templates · dummy data, not sent</h1>
+  <div class="wrap">
+    {previews.map((v) => (
+      <div class="col">
+        <h2>{v.label}</h2>
+        <iframe srcdoc={v.html} loading="lazy" title={v.label}></iframe>
+      </div>
+    ))}
+  </div>
+</body>
+</html>

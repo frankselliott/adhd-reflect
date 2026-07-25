@@ -2,6 +2,7 @@
 // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
 
 import { sendBatch, sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
+import { dripEmailHtml } from './_lib/emails.js';
 
 // Simple sanity check. One invalid address must not stall the whole drip,
 // because Resend's batch endpoint is atomic (all-or-nothing per call).
@@ -385,6 +386,7 @@ export async function onRequestGet({ request, env }) {
         to: schedule.email,
         subject: emailToSend.subject,
         text: emailToSend.text + '\n\nUnsubscribe any time: ' + unsubPage,
+        html: dripEmailHtml({ text: emailToSend.text, subject: emailToSend.subject, unsubUrl: unsubPage }),
         tags: [{ name: 'type', value: 'drip' }],
         // Per-recipient, per-drip-step key so a cron retry cannot double-send.
         idempotencyKey: 'drip-' + schedule.email + '-' + schedule.emailsSent,

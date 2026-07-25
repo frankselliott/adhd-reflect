@@ -1,4 +1,5 @@
 import { sendEmail } from '../_lib/email.js';
+import { recoveryEmailHtml } from '../_lib/emails.js';
 
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
@@ -31,19 +32,7 @@ export async function onRequestPost({ request, env }) {
         to: normalised,
         subject: 'Your Both of You access link',
         tags: [{ name: 'type', value: 'recovery' }],
-        html: `
-            <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px">
-              <p style="font-size:16px;color:#1F2A37;margin-bottom:24px">Here's your access link for Both of You.</p>
-              <p style="margin-bottom:24px">
-                <a href="${accessUrl}" style="background:#4A6FA5;color:white;padding:14px 28px;border-radius:100px;text-decoration:none;display:inline-block;font-size:16px">
-                  Open Both of You
-                </a>
-              </p>
-              <p style="font-size:13px;color:#666;margin-bottom:8px">This link works on any device. Bookmark it or save this email — it's how you get in.</p>
-              <p style="font-size:13px;color:#666">No password needed. Just the link.</p>
-              <p style="font-size:13px;color:#999;margin-top:24px">adhdreflect.com</p>
-            </div>
-          `,
+        html: recoveryEmailHtml({ accessUrl }),
         text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
       });
     }

@@ -1,6 +1,7 @@
 // ADHD Reflect — Subscribe endpoint
 import { sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
 import { PATTERN_NAMES, VALID_PATTERNS } from './_lib/patterns.js';
+import { welcomeEmailHtml } from './_lib/emails.js';
 
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
@@ -57,17 +58,7 @@ export async function onRequestPost({ request, env }) {
         'List-Unsubscribe': '<' + unsubApi + '>',
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
-      html: `
-        <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;color:#1F2A37">
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Your pattern: <strong>${patternName}</strong>.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">That's the whole thing. Four emails.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">In between, <a href="https://adhdreflect.com" style="color:#4A6FA5;text-decoration:none">adhdreflect.com</a> has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 24px">Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.</p>
-          <p style="font-size:14px;color:#56606E;line-height:1.6;margin:0">ADHD Reflect<br><a href="https://adhdreflect.com" style="color:#9B8BB4;text-decoration:none">adhdreflect.com</a></p>
-          <p style="font-size:12px;color:#9B8BB4;line-height:1.6;margin:24px 0 0">Too many emails? <a href="${unsubUrl}" style="color:#9B8BB4">Unsubscribe any time</a>.</p>
-        </div>
-      `,
+      html: welcomeEmailHtml({ patternName, unsubUrl }),
       text: `Your pattern: ${patternName}.
 
 Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.
