@@ -2,6 +2,7 @@
 import { sendEmail, signUnsub, normalizeEmail, upsertContact } from './_lib/email.js';
 import { PATTERN_NAMES, VALID_PATTERNS } from './_lib/patterns.js';
 import { welcomeEmailHtml } from './_lib/emails.js';
+import { welcome as welcomeCopy } from './_lib/emailCopy.js';
 
 // Local part, @, domain, a dot, and a TLD of 2+. Not full RFC 5322. Kept in
 // sync with the client check in src/components/Quiz.jsx; client validation is
@@ -115,27 +116,14 @@ export async function onRequestPost({ request, env }) {
     const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
     const result = await sendEmail(env, {
       to: norm,
-      subject: 'You\'re in. First one lands tomorrow.',
+      subject: welcomeCopy.subject,
       tags: [{ name: 'type', value: 'welcome' }],
       headers: {
         'List-Unsubscribe': '<' + unsubApi + '>',
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
       html: welcomeEmailHtml({ patternName, unsubUrl }),
-      text: `Your pattern: ${patternName}.
-
-Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.
-
-That's the whole thing. Four emails.
-
-In between, adhdreflect.com has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.
-
-Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.
-
-ADHD Reflect
-adhdreflect.com
-
-Unsubscribe any time: ${unsubUrl}`,
+      text: welcomeCopy.text({ patternName, unsubUrl }),
     });
 
     // Report the real send outcome so a silent failure is visible. The signup

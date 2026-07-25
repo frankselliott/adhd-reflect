@@ -24,6 +24,8 @@ const C = {
   border: 'rgba(31,42,55,0.08)',
 };
 
+import { SENDER, SITE_DISPLAY, NOT_MEDICAL, footerUnsubPrompt, footerUnsubText, footerTransactionalNote } from './emailCopy.js';
+
 const SANS = "'Helvetica Neue',Helvetica,Arial,sans-serif";
 const SERIF = "Georgia,'Times New Roman',serif";
 
@@ -72,12 +74,12 @@ function brandbar(align) {
 function footer({ unsubUrl, transactional }) {
   const unsub = unsubUrl
     ? `<p style="margin:0 0 10px;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.pewter};">
-         Too many emails? <a href="${esc(unsubUrl)}" style="color:${C.pewter};text-decoration:underline;">Unsubscribe any time</a>.
+         ${footerUnsubPrompt} <a href="${esc(unsubUrl)}" style="color:${C.pewter};text-decoration:underline;">${footerUnsubText}</a>.
        </p>`
     : '';
   const note = transactional
     ? `<p style="margin:0 0 10px;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.pewter};">
-         You are getting this because you bought or requested access. It is not marketing.
+         ${footerTransactionalNote}
        </p>`
     : '';
   return `<tr>
@@ -85,8 +87,8 @@ function footer({ unsubUrl, transactional }) {
     ${unsub}
     ${note}
     <p style="margin:0;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.pewter};">
-      <a href="${SITE}" style="color:${C.pewter};text-decoration:none;">adhdreflect.com</a><br>
-      This is not medical advice.
+      <a href="${SITE}" style="color:${C.pewter};text-decoration:none;">${SITE_DISPLAY}</a><br>
+      ${NOT_MEDICAL}
     </p>
   </td>
 </tr>`;
@@ -144,9 +146,9 @@ export function layoutPlain({ preheader, body, unsubUrl }) {
 
     <tr><td style="padding:32px 8px 0;">
       <p style="margin:0;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.pewter};">
-        ADHD Reflect · <a href="${SITE}" style="color:${C.pewter};text-decoration:none;">adhdreflect.com</a><br>
-        ${unsubUrl ? `<a href="${esc(unsubUrl)}" style="color:${C.pewter};text-decoration:underline;">Unsubscribe any time</a><br>` : ''}
-        This is not medical advice.
+        ${SENDER} · <a href="${SITE}" style="color:${C.pewter};text-decoration:none;">${SITE_DISPLAY}</a><br>
+        ${unsubUrl ? `<a href="${esc(unsubUrl)}" style="color:${C.pewter};text-decoration:underline;">${footerUnsubText}</a><br>` : ''}
+        ${NOT_MEDICAL}
       </p>
     </td></tr>
 
