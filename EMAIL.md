@@ -11,6 +11,17 @@ through a single helper: `functions/api/_lib/email.js`.
 - `sendBatch(env, messages)` posts to `https://api.resend.com/emails/batch` in
   chunks of 100 and fails soft per chunk.
 
+**Resend batch limits.** The batch endpoint is **atomic**: a chunk either sends
+in full or not at all, so one invalid address fails the whole chunk. Batch also
+does **not** support attachments or `scheduled_at`. `send-scheduled.js` guards
+against this by validating each address first and, if a chunk still fails,
+retrying it as individual `sendEmail()` calls (idempotency keys intact) so the
+valid recipients get through.
+
+**Sending-domain warm-up.** `adhdreflect.com` is a new sending domain in Resend
+and is subject to warm-up limits of roughly **150 sends on day one**, ramping up
+from there. Keep early drip/welcome volume under that until reputation builds.
+
 Defaults: from `ADHD Reflect <hello@adhdreflect.com>`, reply-to
 `hello@adhdreflect.com`. Every send includes a text part (html-only callers get
 a generated plain-text fallback; we never send html alone).
@@ -28,7 +39,7 @@ a generated plain-text fallback; we never send html alone).
 
 | File | Trigger | From | Tag | Idempotent |
 |---|---|---|---|---|
-| `functions/api/stripe-webhook.js` | Stripe `checkout.session.completed` | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `purchase` | no |
+| `functions/api/stripe-webhook.js` | Stripe `checkout.session.completed` | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `purchase` | yes (`purchase-{session.id}`) |
 | `functions/api/grow/recover.js` | POST from the recover form | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `recovery` | no |
 | `functions/api/subscribe.js` | POST from the pattern signup | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `welcome` | no |
 | `functions/api/send-scheduled.js` | Daily cron (cron-job.org) | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `drip` | yes (`drip-{email}-{step}`) |
@@ -57,9 +68,13 @@ unsubscribe, by design, and are never affected by an unsubscribe.
   (verify token, unsubscribe, 200 empty body). `GET` is called by the page and
   returns a JSON status; `action=resubscribe` reverses it. Invalid/missing
   token → 400 with no hint about whether the address exists.
-- `src/pages/unsubscribe.astro` — the human-facing page. Reads `e`/`t`, calls
-  the API, shows done / already done / broken, with a one-click resubscribe
-  link on the done states.
+- `src/pages/unsubscribe.astro` — the human-facing page. Reads `e`/`t`. For
+  unsubscribe it shows a confirm button (with the address masked as
+  `f****@domain.com`) and only calls the API on click, so link scanners that
+  execute JS cannot silently unsubscribe anyone. Resubscribe (a deliberate
+  click on our own page) runs on load. Shows done / already done / resubscribed
+  / broken, with a one-click resubscribe link on the done states. The `POST`
+  one-click path in the function stays confirmation-free for mailbox providers.
 - Unsubscribing writes `unsub:<email>` to the `SEARCH_LOGS` KV namespace
   (timestamped, ~5-year TTL) and adds the address to the Resend suppression
   list as a backstop. **KV is the source of truth.** `send-scheduled.js` and

@@ -6,7 +6,14 @@ import Base from '../layouts/Base.astro';
     <div class="unsub-inner">
       <div class="unsub-label">ADHD Reflect</div>
 
-      <div id="unsub-loading" class="unsub-state">
+      <div id="unsub-confirm" class="unsub-state" hidden>
+        <h1 class="unsub-title">Unsubscribe?</h1>
+        <p class="unsub-sub">Stop practice emails and newsletters to <strong id="confirm-email"></strong>?</p>
+        <button id="unsub-confirm-btn" class="unsub-btn" type="button">Unsubscribe</button>
+        <p class="unsub-note">Account emails (receipts, access and recovery links) are not affected.</p>
+      </div>
+
+      <div id="unsub-loading" class="unsub-state" hidden>
         <h1 class="unsub-title">One moment</h1>
         <p class="unsub-sub">Updating your email preferences.</p>
       </div>
@@ -108,6 +115,22 @@ import Base from '../layouts/Base.astro';
   text-decoration: none;
 }
 .unsub-footer a:hover { text-decoration: underline; }
+.unsub-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  margin-bottom: var(--space-lg);
+  background: var(--blue);
+  color: white;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.unsub-btn:hover { background: var(--blue-deep); transform: translateY(-1px); }
+.unsub-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 </style>
 
 <script>
@@ -122,16 +145,18 @@ import Base from '../layouts/Base.astro';
     if (el) el.hidden = false;
   }
 
-  async function run() {
-    if (!e || !t) { show('unsub-invalid'); return; }
+  // Mask the address for display: f****@domain.com
+  function maskEmail(addr) {
+    const at = addr.indexOf('@');
+    if (at < 1) return addr;
+    return addr[0] + '****@' + addr.slice(at + 1);
+  }
 
+  // The actual state change. Only ever called on an explicit click for
+  // unsubscribe, so link scanners that execute JS cannot silently unsubscribe.
+  async function callApi() {
+    show('unsub-loading');
     const qs = 'e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=' + action;
-    const resubUrl = '/unsubscribe?e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=resubscribe';
-    const l1 = document.getElementById('resub-link');
-    const l2 = document.getElementById('resub-link-2');
-    if (l1) l1.setAttribute('href', resubUrl);
-    if (l2) l2.setAttribute('href', resubUrl);
-
     try {
       const res = await fetch('/api/unsubscribe?' + qs);
       if (!res.ok) { show('unsub-invalid'); return; }
@@ -143,6 +168,29 @@ import Base from '../layouts/Base.astro';
     } catch (err) {
       show('unsub-invalid');
     }
+  }
+
+  function run() {
+    if (!e || !t) { show('unsub-invalid'); return; }
+
+    const resubUrl = '/unsubscribe?e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=resubscribe';
+    const l1 = document.getElementById('resub-link');
+    const l2 = document.getElementById('resub-link-2');
+    if (l1) l1.setAttribute('href', resubUrl);
+    if (l2) l2.setAttribute('href', resubUrl);
+
+    // Resubscribe is a deliberate click on our own page, so it runs on load.
+    // Unsubscribe waits for a confirm click.
+    if (action === 'resubscribe') {
+      callApi();
+      return;
+    }
+
+    const label = document.getElementById('confirm-email');
+    if (label) label.textContent = maskEmail(e);
+    const btn = document.getElementById('unsub-confirm-btn');
+    if (btn) btn.addEventListener('click', () => { btn.disabled = true; callApi(); });
+    show('unsub-confirm');
   }
 
   run();

@@ -1,7 +1,11 @@
 // ADHD Reflect. Send scheduled practice emails
 // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
 
-import { sendBatch, signUnsub, normalizeEmail } from './_lib/email.js';
+import { sendBatch, sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
+
+// Simple sanity check. One invalid address must not stall the whole drip,
+// because Resend's batch endpoint is atomic (all-or-nothing per call).
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EMAILS = {
   reactor: [
@@ -16,7 +20,7 @@ This week, do not try to fix it. Just notice the body signal that arrives before
 If you want to understand what is actually happening in your nervous system during those moments:
 https://adhdreflect.com/guides/g01
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "One exhale. That is the whole trick.",
@@ -31,7 +35,7 @@ If you exhale and still yell, congratulations, you are a human being with ADHD. 
 More on what happens when two nervous systems collide in the same room:
 https://adhdreflect.com/guides/g04
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "The twenty-second repair",
@@ -49,7 +53,7 @@ https://adhdreflect.com/guides/g11
 We also have a full module on repair, what it actually is, why ADHD parents skip it, and what a two-sentence repair sounds like in a real household. It is part of Both of You, our self-guided program for ADHD parents raising ADHD kids. Worth a look if the repair piece keeps eluding you:
 https://adhdreflect.com/grow
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "You will still yell. You will get faster.",
@@ -67,7 +71,7 @@ https://adhdreflect.com/resources
 
 Keep going. You are doing harder work than most people will ever understand.
 
-— ADHD Reflect`
+ADHD Reflect`
     },
   ],
 
@@ -83,7 +87,7 @@ This week, try this: at the end of today, write down everything you tracked, man
 If you want to understand why your working memory keeps betraying you:
 https://adhdreflect.com/guides/g02
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "One thing before the chaos",
@@ -98,7 +102,7 @@ The urgent things will scream regardless. The important things just quietly disa
 Why time feels different for ADHD brains and what to do about it:
 https://adhdreflect.com/guides/g06
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Drop something on purpose",
@@ -113,7 +117,7 @@ Your family needs you functional more than they need you thorough. Those two thi
 If the invisible load is something you want to work through more systematically, we have two modules on it in Both of You, one on why the morning keeps collapsing, one on what a routine actually looks like when it is built for an ADHD brain rather than against it:
 https://adhdreflect.com/grow
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Systems, not willpower",
@@ -133,7 +137,7 @@ https://adhdreflect.com/resources
 
 You are managing more than most people can see. That is not nothing.
 
-— ADHD Reflect`
+ADHD Reflect`
     },
   ],
 
@@ -149,7 +153,7 @@ This week, just map one loop. Write it down: "It started with X. I did Y. We end
 If the argument loop is one of your regulars:
 https://adhdreflect.com/guides/g20
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Change your half",
@@ -164,7 +168,7 @@ The loop needs both parts. When yours changes, the loop cannot complete the same
 Understanding the two-nervous-system dynamic underneath the loop:
 https://adhdreflect.com/guides/g04
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "What the fight is actually about",
@@ -180,7 +184,7 @@ https://adhdreflect.com/grow
 If your partner is part of the loop, this might also be useful:
 https://adhdreflect.com/guides/g12
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "The loop is the teacher",
@@ -196,7 +200,7 @@ https://adhdreflect.com/grow
 If you and your partner are stuck in a loop together and need a professional in the room:
 https://adhdreflect.com/resources
 
-— ADHD Reflect`
+ADHD Reflect`
     },
   ],
 
@@ -212,7 +216,7 @@ This week, just notice the distance. When you catch yourself spiralling, write d
 Understanding the shame spiral and why your brain does this:
 https://adhdreflect.com/guides/g03
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Fact or fear?",
@@ -227,7 +231,7 @@ You do not need to argue with the fear. Just label it. "That is the spiral talki
 Why rejection sensitivity makes the spiral spin faster:
 https://adhdreflect.com/guides/g05
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Your brain has a selective memory",
@@ -240,7 +244,7 @@ The spiral will tell you these do not count. They count. Write them somewhere vi
 The hardest part of the spiraller pattern is that the shame consumes the energy that should go into repair. We have a module specifically on getting from the spiral to the actual repair, what it looks like, why simpler is better, and why the repair is for them not for your guilt. It is in Both of You:
 https://adhdreflect.com/grow
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "You are not your worst thought",
@@ -258,7 +262,7 @@ https://adhdreflect.com/resources
 
 You are doing this. Imperfectly. Which is the only way it gets done.
 
-— ADHD Reflect`
+ADHD Reflect`
     },
   ],
 
@@ -276,7 +280,7 @@ This week, just notice the escape. Do not stop it. Notice it. "That is the escap
 Understanding what your nervous system is doing when it checks out:
 https://adhdreflect.com/guides/g01
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Five minutes, then come back",
@@ -293,7 +297,7 @@ The practice is not the escape. It is the return.
 If burnout is driving the escapes:
 https://adhdreflect.com/guides/g15
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Name what you are running from",
@@ -309,7 +313,7 @@ https://adhdreflect.com/grow
 If you are escaping because you are completely depleted:
 https://adhdreflect.com/guides/g15
 
-— ADHD Reflect`
+ADHD Reflect`
     },
     {
       subject: "Present is a practice, not a personality",
@@ -329,7 +333,7 @@ https://adhdreflect.com/resources
 
 You are here. You are reading this. You came back. That is the practice.
 
-— ADHD Reflect`
+ADHD Reflect`
     },
   ],
 };
@@ -356,6 +360,12 @@ export async function onRequestGet({ request, env }) {
     const schedule = JSON.parse(raw);
     if (new Date(schedule.nextEmailDate) > now) { skipped++; continue; }
     if (schedule.emailsSent >= 4) { skipped++; continue; }
+    // Skip malformed addresses so a bad KV row cannot poison the batch.
+    if (!EMAIL_RE.test(String(schedule.email || '').trim())) {
+      console.warn('send-scheduled: skipping invalid address', key.name);
+      skipped++;
+      continue;
+    }
     // Honour unsubscribes. KV is the source of truth.
     if (await env.SEARCH_LOGS.get('unsub:' + normalizeEmail(schedule.email))) { skipped++; continue; }
     const patternEmails = EMAILS[schedule.pattern];
@@ -386,23 +396,32 @@ export async function onRequestGet({ request, env }) {
     });
   }
 
-  // Send in groups of 100 (Resend's batch limit). Fail soft per group: a bad
-  // group does not stop the others, and only sent recipients advance in KV.
+  // Advance one recipient in KV after a successful send.
+  const advance = async (d) => {
+    d.schedule.emailsSent += 1;
+    d.schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
+    d.schedule.lastSent = now.toISOString();
+    await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
+    sent++;
+  };
+
+  // Send in groups of 100 (Resend's batch limit). Because batch is atomic, a
+  // failed group is retried as individual sends so the valid recipients still
+  // get through. Each message keeps its per-recipient idempotency key, so the
+  // fallback cannot double-send what the batch may have already delivered.
   const GROUP = 100;
   for (let i = 0; i < due.length; i += GROUP) {
     const group = due.slice(i, i + GROUP);
     const result = await sendBatch(env, group.map((d) => d.message));
     const ok = result.chunks.length > 0 && result.chunks.every((c) => c.ok);
     if (ok) {
-      for (const d of group) {
-        d.schedule.emailsSent += 1;
-        d.schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
-        d.schedule.lastSent = now.toISOString();
-        await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
-        sent++;
-      }
+      for (const d of group) await advance(d);
     } else {
-      errors += group.length;
+      for (const d of group) {
+        const r = await sendEmail(env, d.message);
+        if (r.ok) await advance(d);
+        else errors++;
+      }
     }
   }
 
