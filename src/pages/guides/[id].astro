@@ -16,6 +16,30 @@ const relatedCardTitles = (guide.relatedCards || [])
   .filter(id => cardsMap[id])
   .map(id => ({ id, title: cardsMap[id].title }));
 
+// Strip inline markdown the same way the cards page does, but do NOT
+// truncate: guides are long-form and the whole point is the full text being
+// crawlable. Split each field into real paragraphs so the server-rendered
+// article is proper headings and paragraphs, not one blob.
+function stripMarkdown(s) {
+  return String(s || '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')          // images
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')        // links -> text
+    .replace(/`([^`]+)`/g, '$1')                    // inline code
+    .replace(/[*_]{1,3}([^*_]+?)[*_]{1,3}/g, '$1')  // bold / italic -> text
+    .replace(/^#{1,6}\s+/gm, '')                    // headings
+    .replace(/^>\s?/gm, '')                         // blockquotes
+    .trim();
+}
+function toParagraphs(s) {
+  return String(s || '')
+    .split(/\n\n+/)
+    .map(b => stripMarkdown(b).replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+function inlineText(s) {
+  return stripMarkdown(s).replace(/\s+/g, ' ').trim();
+}
+
 // AI answer engines cite short, self-contained passages. seoTitle is the
 // natural-language question form used for the <title> and the FAQ question;
 // the H1 (rendered by the guide viewer) keeps the brand-voice title. The
@@ -52,12 +76,81 @@ const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
     </div>
   )}
 
+  <!-- SEO: full server-rendered guide for crawlers (React renders over this) -->
+  <article id="seo-content" class="seo-article">
+    <h1>{guide.title}</h1>
+    <p class="seo-type">{guide.topic}</p>
+    {guide.recognize && <p>{guide.recognize}</p>}
+
+    {guide.brain && (
+      <section>
+        <h2>What is happening in your brain</h2>
+        {toParagraphs(guide.brain).map(p => <p>{p}</p>)}
+      </section>
+    )}
+    {guide.kidBrain && (
+      <section>
+        <h2>What is happening in your child's brain</h2>
+        {toParagraphs(guide.kidBrain).map(p => <p>{p}</p>)}
+      </section>
+    )}
+    {guide.dualDynamic && (
+      <section>
+        <h2>The dual-ADHD dynamic</h2>
+        {toParagraphs(guide.dualDynamic).map(p => <p>{p}</p>)}
+      </section>
+    )}
+    {guide.strategies && guide.strategies.length > 0 && (
+      <section>
+        <h2>What actually works</h2>
+        <ol>
+          {guide.strategies.map(s => <li>{inlineText(s)}</li>)}
+        </ol>
+      </section>
+    )}
+    {guide.scripts && guide.scripts.length > 0 && (
+      <section>
+        <h2>Scripts</h2>
+        {guide.scripts.map(sc => (
+          <div>
+            <h3>{sc.situation}</h3>
+            <p>"{sc.say}"</p>
+          </div>
+        ))}
+      </section>
+    )}
+    {guide.partner && (
+      <section>
+        <h2>What your partner needs to know</h2>
+        {toParagraphs(guide.partner).map(p => <p>{p}</p>)}
+      </section>
+    )}
+    {guide.moreHelp && (
+      <section>
+        <h2>When to get more help</h2>
+        {toParagraphs(guide.moreHelp).map(p => <p>{p}</p>)}
+      </section>
+    )}
+    {relatedCardTitles.length > 0 && (
+      <section>
+        <h2>Related in-the-moment cards</h2>
+        <ul>
+          {relatedCardTitles.map(c => <li><a href={`/cards/${c.id}`}>{c.title}</a></li>)}
+        </ul>
+      </section>
+    )}
+  </article>
+
   <div id="guide-root"></div>
 
   <script id="guide-data" type="application/json" set:html={JSON.stringify(guide)} />
   <script id="related-data" type="application/json" set:html={JSON.stringify(relatedCardTitles)} />
 
   <script>
+    // Hide SEO content once React loads
+    const seoEl = document.getElementById('seo-content');
+    if (seoEl) seoEl.style.display = 'none';
+
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import TopicGuideViewer from '../../components/TopicGuideViewer.jsx';
@@ -72,6 +165,15 @@ const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 </Base>
 
 <style is:global>
+  .seo-article {
+    max-width: 640px; margin: 0 auto; padding: 40px 24px;
+    font-family: var(--serif); color: #6B6358; line-height: 1.7;
+  }
+  .seo-article h1 { font-size: 28px; font-weight: 300; color: #191714; margin-bottom: 8px; }
+  .seo-article h2 { font-size: 20px; font-weight: 400; color: #191714; margin-top: 24px; }
+  .seo-article h3 { font-size: 16px; font-weight: 500; color: #4B6B4E; margin-top: 16px; }
+  .seo-article p { margin-bottom: 12px; }
+  .seo-type { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: #4A6FA5; text-transform: uppercase; }
   .guide-lead {
     max-width: 640px;
     margin: 0 auto;
