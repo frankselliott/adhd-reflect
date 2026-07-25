@@ -4,6 +4,8 @@
 export const TOPIC_GUIDES = [
   {
     id: "g01",
+    seoTitle: "Why does my ADHD take me from calm to rage fast?",
+    answerBlock: "Your ADHD brain has a shorter gap between trigger and reaction. The prefrontal cortex, which handles impulse control and the pause before acting, goes offline fastest under load, so the amygdala fires before it can intervene. The small thing was not the trigger. It was the last input your regulatory system could hold. This is physiology, not a character flaw. Change the environment to interrupt it.",
     title: `Your nervous system under pressure`,
     topic: "nervous-system",
     patternTypes: ["reactor", "escaper"],
@@ -37,6 +39,8 @@ The most reliable pattern interrupt is environmental, not cognitive. You cannot 
   },
   {
     id: "g02",
+    seoTitle: "Why can't I keep the parenting logistics in my head?",
+    answerBlock: "ADHD working memory holds fewer items for less time than neurotypical working memory. Parenting runs on huge invisible overhead, dates, promises, routines, transitions, that lives exactly where ADHD is weakest. You are not forgetting because you do not care. You are forgetting because the brain that cares deeply is the same one that cannot hold the reminder. Move each demand onto an external system instead.",
     title: `Working memory and the invisible load`,
     topic: "executive-function",
     patternTypes: ["juggler"],
@@ -67,6 +71,8 @@ The solution is never 'try harder to remember.' The solution is always 'build an
   },
   {
     id: "g03",
+    seoTitle: "Why does my ADHD shame spiral last for hours?",
+    answerBlock: "ADHD brains carry a longer emotional hangover, with fewer dopamine transporters in the regions that regulate emotion, so the off switch for a bad feeling works less reliably. The spiral feels like accountability, but rumination is not how behaviour changes. The energy going into replaying it is energy not going into repair, and the repair is what changes the relationship. Set a time limit, then make a brief repair.",
     title: `The shame spiral after you lose it`,
     topic: "emotional-regulation",
     patternTypes: ["spiraller"],
@@ -97,6 +103,8 @@ The repair does not need to be large. Two sentences, delivered when both of you 
   },
   {
     id: "g04",
+    seoTitle: "Why do my child and I escalate together so fast?",
+    answerBlock: "Limbic resonance means one nervous system entrains to another. When your child is dysregulated, your amygdala matches their distress, and in an ADHD parent the prefrontal cortex moderates that resonance less reliably, so two reactive systems amplify each other. Co-regulation needs one calm system to borrow, and the adult goes first. You cannot will your way calm, so change the environment: leave the room, lower the lights, create distance.",
     title: `Two nervous systems in one room`,
     topic: "dual-adhd",
     patternTypes: ["reactor", "looper"],
@@ -127,6 +135,8 @@ Leave the room. Lower the lights. Turn off the sound. Reduce the number of peopl
   },
   {
     id: "g05",
+    seoTitle: "Why does mild criticism hurt me and my child so much?",
+    answerBlock: "Rejection Sensitive Dysphoria is a core ADHD feature. The circuits that process social rejection overlap with physical pain circuits, so a mild correction arrives at full intensity with no dimmer switch. The reasonable thought that they did not mean it cannot reach the processing centre fast enough. The pain is real; the interpretation may not be. Deliver corrections at the lowest emotional temperature and validate the feeling before testing it.",
     title: `Rejection sensitivity in parent and child`,
     topic: "emotional-regulation",
     patternTypes: ["spiraller", "looper"],
@@ -161,6 +171,8 @@ The way through: deliver corrections in the lowest emotional temperature possibl
 
   {
     id: "g06",
+    seoTitle: "Why are we always late even when we start on time?",
+    answerBlock: "Time blindness is one of the most consistent ADHD impairments. The internal clock that estimates duration and generates urgency does not run reliably, so five minutes can feel like two and deadlines stay abstract until crisis point. This is a perceptual deficit, not laziness or disrespect. Telling a time-blind person to hurry adds no information. The only reliable fix is making time visible with clocks and timers.",
     title: `Time blindness and lateness`,
     topic: "executive-function",
     patternTypes: ["juggler"],
@@ -183,6 +195,8 @@ This is not laziness or disrespect. It is a genuine perceptual deficit. Telling 
 
   {
     id: "g07",
+    seoTitle: "Why does my child fall apart when ADHD meds wear off?",
+    answerBlock: "Stimulant medication works by raising dopamine and norepinephrine in the prefrontal cortex. When the dose wears off, those neurotransmitters drop, sometimes briefly below baseline, and this rebound dip is pharmacological, not behavioural. For 30 to 60 minutes, emotional regulation and frustration tolerance can be worse than unmedicated. Your child did not choose to crash. Plan for the window: lower demands, protein-heavy snacks, no homework or hard conversations.",
     title: `Medication, rebound, and the daily cycle`,
     topic: "medication",
     patternTypes: ["reactor", "juggler"],
@@ -207,6 +221,8 @@ Appetite suppression is the most common stimulant side effect. The hunger signal
 
   {
     id: "g08",
+    seoTitle: "Why do I need silence when my child needs noise?",
+    answerBlock: "ADHD sensory processing is different, not defective. Some ADHD brains are hypersensitive, so sounds are louder; others are hyposensitive and seek more movement, noise, and touch. In a dual-ADHD household the parent and child often sit at opposite ends, and both needs are nervous system requirements, not preferences. Accommodate both rather than suppressing one: separate loud and quiet spaces, plus earplugs that lower volume without blocking speech.",
     title: `Sensory overload at home`,
     topic: "sensory",
     patternTypes: ["reactor", "escaper"],
@@ -229,6 +245,8 @@ In a dual-ADHD household, you may have opposite sensory profiles. The parent who
 
   {
     id: "g09",
+    seoTitle: "Why does turning off the screen cause a meltdown?",
+    answerBlock: "Transitions demand executive function, stopping, shifting, and initiating, which all use the prefrontal cortex ADHD impairs. There is a deeper mechanism too: a preferred activity supplies reliable dopamine, so stopping is experienced as a neurological loss, not a change of plans. That is why even good transitions are hard. Warnings help because they give the brain time to let go, so use a two-minute and one-minute warning every time.",
     title: `Transitions and the dopamine gap`,
     topic: "transitions",
     patternTypes: ["reactor", "juggler"],
@@ -255,6 +273,8 @@ Warnings help because they give the brain time to begin the internal transition.
 
   {
     id: "g10",
+    seoTitle: "Why won't my ADHD brain switch off at bedtime?",
+    answerBlock: "ADHD sleep problems affect 25 to 50 percent of people with ADHD, driven by three mechanisms. The circadian rhythm runs late, so melatonin releases later than the socially expected bedtime. When stimulation stops, the default mode network gets busier, not quieter, accelerating thoughts. Stimulant timing can delay onset further. A dark, quiet room is activating, not calming, so give the brain one channel to follow, like an audiobook.",
     title: `Sleep and the racing mind`,
     topic: "sleep",
     patternTypes: ["reactor", "escaper"],
@@ -283,6 +303,8 @@ The result: a child lying in bed with their eyes open and their brain running, a
 
   {
     id: "g11",
+    seoTitle: "How do I repair with my child after I lose it?",
+    answerBlock: "Repair is the core parenting skill for ADHD families, because ruptures happen more often when the regulatory system fails more frequently. Research is consistent: children's outcomes turn not on whether ruptures happen but on whether repair follows. Rupture without repair damages the relationship; rupture followed by consistent repair strengthens it, because the child learns relationships survive conflict. Keep it to two sentences once you are both back at baseline.",
     title: `The repair after rupture`,
     topic: "repair",
     patternTypes: ["spiraller", "reactor"],
@@ -307,6 +329,8 @@ The good news: research consistently shows that children's outcomes are determin
 
   {
     id: "g12",
+    seoTitle: "Why doesn't my partner see my ADHD overwhelm?",
+    answerBlock: "ADHD is invisible. Overwhelm, sensory overload, and executive function failure are not visible to the person beside you. Your partner sees the output, the snap, the forgotten form, but not the process behind it. If they are not ADHD, staying calm or remembering the form is genuinely easy for their brain, so the empathy gap is a difference they do not share, not malice. Share one clear resource with them.",
     title: `Your partner does not see what you see`,
     topic: "relationships",
     patternTypes: ["spiraller", "reactor", "looper"],
@@ -332,6 +356,8 @@ The conversation is not 'who is right.' It is 'what does this child need from us
 
   {
     id: "g13",
+    seoTitle: "Why does my ADHD child keep losing friends?",
+    answerBlock: "ADHD social processing runs slower than neurotypical. Your child misses subtle cues, misreads tone, interrupts, or reacts too intensely, and verbal impulsivity turns thoughts into words before the social filter can check them. They usually know the rules; they cannot implement them fast enough, and rejection sensitivity makes each loss land harder. One good friendship matters more than popularity, and structured activities with clear rules are easier than free play.",
     title: `Your child's social world`,
     topic: "social",
     patternTypes: ["spiraller"],
@@ -359,6 +385,8 @@ One good friendship matters more than popularity. Structured social activities w
 
   {
     id: "g14",
+    seoTitle: "Did I have ADHD all along, like my child does?",
+    answerBlock: "Parent-recognised ADHD after a child's diagnosis is one of the most common adult discovery pathways, and the pattern recognition is strong because you share the neurology. What you are seeing is real. The realisation usually arrives in stages: recognition, then reframing every old lazy or careless label, then grief for the years of misunderstanding, then relief that it was never a character flaw.",
     title: `I think I have ADHD too`,
     topic: "identity",
     patternTypes: ["spiraller", "juggler"],
@@ -382,6 +410,8 @@ The realisation arrives in stages. First, recognition: 'that is me.' Then refram
 
   {
     id: "g15",
+    seoTitle: "Why do I flinch when my ADHD child hugs me?",
+    answerBlock: "Caregiver burnout in ADHD parents is not generic tiredness. It is the depletion of the exact resources ADHD already supplies less of: regulatory capacity, executive function, sensory bandwidth, emotional resilience. Being touched out is a real sensory state; after sustained contact, noise, and demand, the ADHD sensory system reaches saturation, so each additional touch lands on an overloaded system. This is a physiological limit, not rejection of your child.",
     title: `Burnout and being touched out`,
     topic: "burnout",
     patternTypes: ["escaper", "spiraller"],
@@ -405,6 +435,8 @@ Being touched out is a real sensory state. After sustained physical contact, aud
 
   {
     id: "g16",
+    seoTitle: "Why do relatives think my child just needs discipline?",
+    answerBlock: "An uninformed relative's comment about discipline is not just disagreement. ADHD rejection sensitivity means the words activate pain circuits, so the comment lands harder, especially where you already doubt yourself. Extended family who do not understand ADHD often default to compliance through authority, the paradigm they know from a generation that read ADHD symptoms as defiance or laziness. Their framework is outdated, not malicious. A calm boundary is enough.",
     title: `Extended family and judgment`,
     topic: "relationships",
     patternTypes: ["spiraller", "reactor"],
@@ -428,6 +460,8 @@ Extended family who do not understand ADHD often default to the parenting paradi
 
   {
     id: "g17",
+    seoTitle: "When do ADHD parenting patterns need professional help?",
+    answerBlock: "Self-awareness and self-management have limits. When the same pattern repeats weekly despite real effort, the issue is often structural: unoptimised medication, an unaddressed co-occurring condition, or a family dynamic that needs professional intervention. Seeking help is not failure. It is the executive function decision to outsource a problem to someone with better tools, which is the most ADHD-appropriate response possible. Start with your GP.",
     title: `When to get more help`,
     topic: "support",
     patternTypes: ["reactor", "spiraller", "escaper", "juggler", "looper"],
@@ -451,6 +485,8 @@ Seeking help is not failure. It is the executive function decision to outsource 
 
   {
     id: "g18",
+    seoTitle: "Why does the school calling make my stomach drop?",
+    answerBlock: "Parents of children with ADHD get around three times more phone calls from school than other parents, and are far less likely to attend optional events. The conditioning is Pavlovian: school contact has been paired with bad news so often that dread is now automatic. ADHD rejection sensitivity amplifies every concern into a judgment of your parenting. Let the email sit ten minutes before opening it.",
     title: `Your child at school`,
     topic: "school",
     patternTypes: ["spiraller", "juggler"],
@@ -476,6 +512,8 @@ School refusal is not laziness. It is their nervous system anticipating a day of
 
   {
     id: "g19",
+    seoTitle: "Why is every sock seam and food texture a battle?",
+    answerBlock: "Sensory processing differences frequently co-occur with ADHD. Inputs that neurotypical brains filter out arrive at full intensity in your child's nervous system, so the sock seam is not uncomfortable, it is unbearable, and a food texture can trigger an alarm response. Sensory aversions are neurological, not fussiness, and forcing tolerance builds negative associations rather than resilience. Accommodate first: cut the tags, buy the seamless socks, find the safe foods.",
     title: `Food, clothing, and the daily sensory battles`,
     topic: "sensory",
     patternTypes: ["reactor", "juggler"],
@@ -501,6 +539,8 @@ The foods they will eat, the clothes they will wear, the textures they can toler
 
   {
     id: "g20",
+    seoTitle: "Why can't I stop explaining when it isn't working?",
+    answerBlock: "ADHD brains carry strong justice sensitivity and a need for cognitive closure, so a challenge from your child registers as an unresolved problem that demands a response. Walking away from an unfinished argument can feel physically uncomfortable. When your child is dysregulated, they process tone and volume but not complex reasoning, so each explanation lands as more input to push against. Learn one stop-script, say it once, then move away.",
     title: `The argument loop`,
     topic: "communication",
     patternTypes: ["looper"],
@@ -527,6 +567,8 @@ Your child, if they also have ADHD, has the same drive. Two people with ADHD who
   // ─── 12 NEW GUIDES ───
   {
     id: "g21",
+    seoTitle: "Why don't consequences change my child's behaviour?",
+    answerBlock: "Consequences rely on a cognitive bridge: connecting the action to the outcome and holding that link in working memory. ADHD impairs every step, and the ADHD brain discounts future events steeply, so a punishment arriving an hour later is neurologically disconnected from what it addressed. The consequence did not fail because you chose the wrong one. Use natural, immediate consequences, and address the missing skill, not the behaviour.",
     title: `When consequences do not work`,
     topic: "discipline",
     patternTypes: ["reactor", "looper", "juggler"],
@@ -557,6 +599,8 @@ The repeated failure of consequences builds a narrative: 'Nothing I do makes a d
   },
   {
     id: "g22",
+    seoTitle: "Is it ADHD or is my child just misbehaving?",
+    answerBlock: "The question assumes ADHD and behaviour are separate categories. They are not. ADHD is the reason the behaviour happens; the behaviour is still real and still needs addressing. The shift is from is this ADHD or bad behaviour to what skill is missing and how is ADHD impairing it. Name the specific deficit, impulse control, working memory, frustration tolerance, then hold your child accountable for repair, not the impulse.",
     title: `ADHD or bad behaviour`,
     topic: "discipline",
     patternTypes: ["reactor", "looper", "spiraller"],
@@ -586,6 +630,8 @@ What looks like defiance is often frustration. What looks like laziness is often
   },
   {
     id: "g23",
+    seoTitle: "Why does my older child still have toileting accidents?",
+    answerBlock: "ADHD interoception means body signals arrive late or at crisis intensity, so your child genuinely did not feel the need to go until it was urgent. Hiding accidents is shame avoidance, not deception, and wiping is a motor sequencing and sensory tolerance task, not laziness. Schedule toilet stops at every transition rather than waiting for their body to signal, and solve wiping mechanically with wet wipes or a bidet attachment.",
     title: `Toileting, wiping, and body signals`,
     topic: "hygiene",
     patternTypes: ["juggler", "spiraller"],
@@ -615,6 +661,8 @@ Every accident adds to their shame. Every reaction from you, no matter how measu
   },
   {
     id: "g24",
+    seoTitle: "Why won't my ADHD teen shower or use deodorant?",
+    answerBlock: "Puberty stacks new executive function tasks onto a system already struggling with the old ones. Your teen cannot smell what you smell; olfactory habituation means they have adapted to their own scent. The shower is a multi-step sequence demanding tolerance of water pressure, temperature, and product textures. Being told they smell lands on rejection sensitivity as you are gross. Make the routine shorter, not longer, let them choose their products.",
     title: `Hygiene, puberty, and growing bodies`,
     topic: "hygiene",
     patternTypes: ["juggler", "spiraller", "escaper"],
@@ -644,6 +692,8 @@ Puberty also brought identity concerns. Being told they smell or need to shower 
   },
   {
     id: "g25",
+    seoTitle: "What do I do when my child gets physically violent?",
+    answerBlock: "Your child is not choosing violence. When emotional intensity exceeds their regulatory capacity, the excess discharges through physical action, and the impulse reaches the motor system before the braking system can intervene. They are often as horrified as you are. Being scared of your child is proportionate, not a failure. During an outburst, safety comes first: protect yourself and other children and remove dangerous objects. Seek professional support.",
     title: `When your child becomes physically unsafe`,
     topic: "safety",
     patternTypes: ["reactor", "spiraller"],
@@ -673,6 +723,8 @@ The pattern escalates with physical development. The child who threw toys at fiv
   },
   {
     id: "g26",
+    seoTitle: "How is my other child coping beside the meltdowns?",
+    answerBlock: "The sibling of an ADHD child lives with intensity they did not choose, and they are learning that the loudest need gets the most response. Resentment, parentification, anxiety, and withdrawal are all documented responses in these siblings. Some become helpers, some become invisible, some become angry, and all of them need to hear that you see them. Name what you see specifically, protect their space, and schedule one-on-one time.",
     title: `The sibling who is living beside the storm`,
     topic: "siblings",
     patternTypes: ["spiraller", "juggler", "reactor"],
@@ -701,6 +753,8 @@ The sibling relationship is being shaped by the ADHD dynamic in ways that may pe
   },
   {
     id: "g27",
+    seoTitle: "Why does our whole family revolve around one child?",
+    answerBlock: "When every normal outing ended badly, organising family life around one child's triggers is a rational cost-benefit calculation. But the avoidance is progressive: each thing you stop doing removes a data point that could have gone well and narrows the family's world further. Your ADHD child did not choose to shrink the family and may not even see the impact. Rebuild slowly with one low-demand outing a week.",
     title: `When one child shapes the whole family`,
     topic: "siblings",
     patternTypes: ["escaper", "juggler", "spiraller"],
@@ -728,6 +782,8 @@ The resentment from other family members, including you, is building. You did no
   },
   {
     id: "g28",
+    seoTitle: "Why do I resent my own child and feel numb?",
+    answerBlock: "Resentment is not a failure of love. It is a depletion signal. When your nervous system has run at emergency capacity for too long, the emotional system starts to conserve, and the numbness, avoidance, and preference for your easier child are signs you have exceeded your sustainable load. Distinguish the child from the situation, then pursue load reduction, not self-care: cancel something, lower a standard, ask for help.",
     title: `Parent resentment and the thoughts you are ashamed of`,
     topic: "burnout",
     patternTypes: ["spiraller", "escaper", "reactor"],
@@ -755,6 +811,8 @@ The shame of having these thoughts adds weight to the thoughts themselves. You c
   },
   {
     id: "g29",
+    seoTitle: "Why do other kids pull away from my child?",
+    answerBlock: "Your child is running social software at a different speed, louder, faster, more physical, more intense than the norm, and cannot dial their energy to match the group because the arousal system has no such dial. The bossiness is anxiety-driven control-seeking, the interrupting is impulsive, the physical intensity is stimulation-seeking. None of it is malicious. One-on-one playdates work better than groups, and activities where intensity is an asset help most.",
     title: `When your child is too much for other children`,
     topic: "social",
     patternTypes: ["reactor", "juggler"],
@@ -785,6 +843,8 @@ The bossiness is anxiety-driven control-seeking. The interrupting is impulsive. 
   },
   {
     id: "g30",
+    seoTitle: "Why does my tween need help a younger kid needs?",
+    answerBlock: "Executive function in ADHD is delayed by thirty percent, so your twelve-year-old may have the executive function of an eight-year-old. The desire for autonomy is age-appropriate; the capacity is not. By adolescence they are acutely aware of the gap, and rejecting the chart or timer is identity protection, because the supports make the invisible visible. Reframe the tool, not the child, match it to their age, and build the skill.",
     title: `Older kids, younger supports`,
     topic: "development",
     patternTypes: ["juggler", "spiraller", "escaper"],
@@ -814,6 +874,8 @@ The anger about the supports is often bigger than the anger about the ADHD itsel
   },
   {
     id: "g31",
+    seoTitle: "Why does school see behaviour but miss the distress?",
+    answerBlock: "The school is measuring the symptom, not the cause. The talking out is anxiety, the refusal is overwhelm, the aggression is dysregulation. Your child at school is masking, and masking burns enormous cognitive and emotional resources, so the behaviour the school reports is usually the moment the mask failed. The collapse at home is evidence of how hard they worked. Ask the school to address the cause, not the behaviour.",
     title: `When school sees behaviour but misses distress`,
     topic: "school",
     patternTypes: ["spiraller", "looper", "reactor"],
@@ -843,6 +905,8 @@ The restraint collapse at home is evidence of how hard they worked at school. Th
   },
   {
     id: "g32",
+    seoTitle: "What if my child's ADHD isn't the whole picture?",
+    answerBlock: "Your instinct that something else is happening is often the first clinical signal. ADHD rarely travels alone: roughly seventy percent of people with ADHD have at least one co-occurring condition, such as anxiety, depression, autism, learning disabilities, or sensory processing differences. The overlap makes diagnosis and treatment more complex, and the combination creates challenges different from either condition alone. Write down the behaviours that do not fit, then seek assessment.",
     title: `When ADHD does not explain everything`,
     topic: "comorbidity",
     patternTypes: ["spiraller", "looper"],

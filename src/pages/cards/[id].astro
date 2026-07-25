@@ -24,6 +24,12 @@ const topicGuides = CARD_TO_TOPIC_GUIDES[card.id] || [];
 
 const rightNowText = content.parentNow || content.content || '';
 
+// AI answer engines cite short, self-contained passages. seoTitle is the
+// natural-language question form used for the <title> and the FAQ question;
+// the H1 keeps the brand-voice title. answerBlock is the quotable lead.
+const seoTitle = card.seoTitle || card.title;
+const answerBlock = card.answerBlock || '';
+
 // Strip markdown to plain text (keep the words), then cut at a word boundary
 // before 155 chars and only add an ellipsis when the text was actually cut.
 function stripMarkdown(s) {
@@ -62,13 +68,26 @@ const articleSchema = {
     { "@type": "Thing", "name": typeLabel }
   ]
 };
+// FAQPage pairing the question form with the quotable answer, so answer
+// engines have a clean question/answer pair to extract and cite.
+const faqSchema = answerBlock ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": seoTitle,
+    "acceptedAnswer": { "@type": "Answer", "text": answerBlock }
+  }]
+} : null;
+const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 ---
-<Base title={card.title} description={metaDescription} schema={articleSchema}>
+<Base title={seoTitle} description={metaDescription} schema={pageSchema}>
 
   <!-- SEO: server-rendered content for crawlers (React renders over this) -->
   <article id="seo-content" class="seo-article">
     <h1>{card.title}</h1>
     <p class="seo-type">{typeLabel}</p>
+    {answerBlock && <p class="seo-lead">{answerBlock}</p>}
     <section>
       <h2>What to do right now</h2>
       <p>{rightNowText.replace(/\*\*/g, '').slice(0, 500)}</p>
@@ -152,6 +171,7 @@ const articleSchema = {
   .seo-article h2 { font-size: 20px; font-weight: 400; color: #191714; margin-top: 24px; }
   .seo-article h3 { font-size: 16px; font-weight: 500; color: #4B6B4E; margin-top: 16px; }
   .seo-article p { margin-bottom: 12px; }
+  .seo-lead { color: #8A8175; font-style: italic; margin-top: 12px; }
   .seo-type { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: #4A6FA5; text-transform: uppercase; }
 </style>
 

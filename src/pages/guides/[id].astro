@@ -16,6 +16,14 @@ const relatedCardTitles = (guide.relatedCards || [])
   .filter(id => cardsMap[id])
   .map(id => ({ id, title: cardsMap[id].title }));
 
+// AI answer engines cite short, self-contained passages. seoTitle is the
+// natural-language question form used for the <title> and the FAQ question;
+// the H1 (rendered by the guide viewer) keeps the brand-voice title. The
+// answerBlock is server rendered as a quiet lead so it is crawlable and
+// quotable even before the React viewer mounts.
+const seoTitle = guide.seoTitle || `${guide.title} · Guide`;
+const answerBlock = guide.answerBlock || '';
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -25,8 +33,24 @@ const articleSchema = {
   "publisher": { "@type": "Organization", "name": "ADHD Reflect", "url": "https://adhdreflect.com" },
   "mainEntityOfPage": `https://adhdreflect.com/guides/${guide.id}`
 };
+const faqSchema = answerBlock ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": guide.seoTitle || guide.title,
+    "acceptedAnswer": { "@type": "Answer", "text": answerBlock }
+  }]
+} : null;
+const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 ---
-<Base title={`${guide.title} · Guide`} description={guide.recognize} schema={articleSchema}>
+<Base title={seoTitle} description={guide.recognize} schema={pageSchema}>
+
+  {answerBlock && (
+    <div class="guide-lead guide-prose">
+      <p>{answerBlock}</p>
+    </div>
+  )}
 
   <div id="guide-root"></div>
 
@@ -48,6 +72,15 @@ const articleSchema = {
 </Base>
 
 <style is:global>
+  .guide-lead {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 24px 0;
+  }
+  .guide-lead p {
+    color: #8A8175;
+    font-style: italic;
+  }
   .guide-prose p {
     font-family: var(--serif);
     font-variation-settings: "opsz" 16, "wght" 400;
