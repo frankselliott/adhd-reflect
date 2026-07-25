@@ -20,7 +20,10 @@ export async function onRequestPost({ request, env }) {
           const expired = codeData.expiresAt && new Date(codeData.expiresAt) < new Date();
           const maxed = codeData.maxUses !== null && codeData.usedCount >= codeData.maxUses;
           if (!expired && !maxed) {
-            // Increment usage
+            // Increment usage.
+            // KNOWN LIMITATION: not atomic (KV has no atomic increment), so
+            // concurrent redemptions of a limited code can overshoot maxUses.
+            // Accepted; a hard cap would need Durable Objects. See free-access.js.
             codeData.usedCount++;
             await env.GROW_DATA.put(codeKey, JSON.stringify(codeData));
             // Return free access URL — webhook will be skipped, so we create access directly

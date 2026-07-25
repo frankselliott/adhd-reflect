@@ -33,7 +33,12 @@ export async function onRequestPost({ request, env }) {
       return new Response(JSON.stringify({ error: 'That code has reached its usage limit.' }), { status: 400, headers });
     }
 
-    // Increment usage
+    // Increment usage.
+    // KNOWN LIMITATION: this read-increment-write is not atomic (KV has no
+    // atomic increment), so two simultaneous redemptions of a limited code can
+    // both pass the maxUses check and both succeed, slightly overshooting the
+    // limit. Accepted: the overshoot is bounded by concurrency and low stakes.
+    // A hard cap would need Durable Objects. See also grow/checkout.js.
     codeData.usedCount = (codeData.usedCount || 0) + 1;
     await env.GROW_DATA.put(codeKey, JSON.stringify(codeData));
 

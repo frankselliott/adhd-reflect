@@ -69,6 +69,13 @@ export async function onRequestPost({ request, env }) {
       return new Response(JSON.stringify({ success: false, reason: 'invalid_email' }), { status: 400, headers });
     }
 
+    // The drip schedule lives in KV. If that binding is missing we cannot
+    // record the signup, so do not send a welcome and do not report success.
+    if (!env.SEARCH_LOGS) {
+      console.error('subscribe: SEARCH_LOGS binding missing');
+      return new Response(JSON.stringify({ success: false, reason: 'storage_unavailable' }), { status: 503, headers });
+    }
+
     // Rate limit before doing any work, so a blocked caller never triggers a
     // send or a contact write.
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';

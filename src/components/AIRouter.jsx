@@ -29,8 +29,12 @@ export default function AIRouter() {
   // Prevent loop on back-navigation, and honour the ?q= prefill from the
   // WebSite SearchAction so a search landing actually runs the assistant.
   useEffect(() => {
-    if (sessionStorage.getItem('adhd-reflect-navigated')) {
-      sessionStorage.removeItem('adhd-reflect-navigated');
+    let navigated = false;
+    try {
+      navigated = !!sessionStorage.getItem('adhd-reflect-navigated');
+      if (navigated) sessionStorage.removeItem('adhd-reflect-navigated');
+    } catch (e) {}
+    if (navigated) {
       setInput('');
       setState('idle');
       return;
