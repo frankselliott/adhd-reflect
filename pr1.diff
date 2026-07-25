@@ -1,0 +1,880 @@
+diff --git a/.gitignore b/.gitignore
+index de35ccf..58071a6 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -2,3 +2,4 @@ node_modules/
+ dist/
+ .astro/
+ .DS_Store
++changes.patch
+diff --git a/EMAIL.md b/EMAIL.md
+new file mode 100644
+index 0000000..44848f8
+--- /dev/null
++++ b/EMAIL.md
+@@ -0,0 +1,71 @@
++# Email (Resend)
++
++All transactional and marketing email goes through [Resend](https://resend.com).
++Sending domain: **adhdreflect.com** (verified in Resend). Everything routes
++through a single helper: `functions/api/_lib/email.js`.
++
++- `sendEmail(env, { to, subject, html, text, tags, idempotencyKey, headers })`
++  posts to `https://api.resend.com/emails`. Never throws; returns
++  `{ ok, id, error }` and logs the Resend error body on failure. Retries once
++  on 429/5xx, never on other 4xx.
++- `sendBatch(env, messages)` posts to `https://api.resend.com/emails/batch` in
++  chunks of 100 and fails soft per chunk.
++
++Defaults: from `ADHD Reflect <hello@adhdreflect.com>`, reply-to
++`hello@adhdreflect.com`. Every send includes a text part (html-only callers get
++a generated plain-text fallback; we never send html alone).
++
++## Environment variables
++
++| Variable | Status | Used by |
++|---|---|---|
++| `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
++| `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
++| `ADMIN_KEY` | Required | cron auth for `send-scheduled` |
++| `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
++
++## Send sites
++
++| File | Trigger | From | Tag | Idempotent |
++|---|---|---|---|---|
++| `functions/api/stripe-webhook.js` | Stripe `checkout.session.completed` | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `purchase` | no |
++| `functions/api/grow/recover.js` | POST from the recover form | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `recovery` | no |
++| `functions/api/subscribe.js` | POST from the pattern signup | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `welcome` | no |
++| `functions/api/send-scheduled.js` | Daily cron (cron-job.org) | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `drip` | yes (`drip-{email}-{step}`) |
++
++`functions/api/grow/free-access.js` sends **no** email: it returns the
++`accessUrl` and `src/pages/grow/redeem.astro` redirects the browser to it.
++Nothing to migrate there.
++
++## Unsubscribe
++
++Marketing sends (`welcome` and `drip`) carry a **signed** unsubscribe link so
++one recipient cannot unsubscribe another. The token is the first 16 hex chars
++of `HMAC-SHA256(normalised email, UNSUB_SECRET)` (`signUnsub()` in
++`_lib/email.js`, `crypto.subtle`, no node imports). Both the header and the body
++link use it:
++
++- `List-Unsubscribe` header → `https://adhdreflect.com/api/unsubscribe?e=<email>&t=<token>`
++  (with `List-Unsubscribe-Post: List-Unsubscribe=One-Click`).
++- Human footer link → `https://adhdreflect.com/unsubscribe?e=<email>&t=<token>`.
++
++Transactional sends (`purchase`, `recovery`, `free-access`) carry no
++unsubscribe, by design, and are never affected by an unsubscribe.
++
++**How it works**
++- `functions/api/unsubscribe.js` — `POST` handles mailbox-provider one-click
++  (verify token, unsubscribe, 200 empty body). `GET` is called by the page and
++  returns a JSON status; `action=resubscribe` reverses it. Invalid/missing
++  token → 400 with no hint about whether the address exists.
++- `src/pages/unsubscribe.astro` — the human-facing page. Reads `e`/`t`, calls
++  the API, shows done / already done / broken, with a one-click resubscribe
++  link on the done states.
++- Unsubscribing writes `unsub:<email>` to the `SEARCH_LOGS` KV namespace
++  (timestamped, ~5-year TTL) and adds the address to the Resend suppression
++  list as a backstop. **KV is the source of truth.** `send-scheduled.js` and
++  `subscribe.js` both check `unsub:<email>` and skip.
++- Resubscribing deletes the KV key and removes the Resend suppression. Signing
++  up again does **not** resubscribe an opted-out address; only the resubscribe
++  link does.
++- Routes do not collide: the page is `/unsubscribe`, the function is
++  `/api/unsubscribe`.
+diff --git a/functions/api/_lib/email.js b/functions/api/_lib/email.js
+new file mode 100644
+index 0000000..116a431
+--- /dev/null
++++ b/functions/api/_lib/email.js
+@@ -0,0 +1,254 @@
++// ADHD Reflect email helper. Resend transactional + batch sending.
++// Cloudflare Workers runtime: fetch only, no SDK, no Node imports.
++//
++// Every send goes through Resend (https://resend.com). Sending domain
++// adhdreflect.com is verified in Resend. The API key lives in RESEND_API_KEY.
++
++const RESEND_SEND_URL = 'https://api.resend.com/emails';
++const RESEND_BATCH_URL = 'https://api.resend.com/emails/batch';
++
++const DEFAULT_FROM = 'ADHD Reflect <hello@adhdreflect.com>';
++const DEFAULT_REPLY_TO = 'hello@adhdreflect.com';
++
++const BATCH_MAX = 100; // Resend batch limit per call.
++
++const RESEND_SUPPRESSIONS_URL = 'https://api.resend.com/suppressions';
++
++// Normalise an address so signing, verifying and KV keys always agree.
++export function normalizeEmail(email) {
++  return String(email || '').toLowerCase().trim();
++}
++
++// Signed unsubscribe token: first 16 hex chars of
++// HMAC-SHA256(normalised email, UNSUB_SECRET). Workers-safe (crypto.subtle),
++// no node imports. Used everywhere an unsubscribe link or List-Unsubscribe
++// header is built, so anyone cannot unsubscribe anyone.
++export async function signUnsub(env, email) {
++  const key = await crypto.subtle.importKey(
++    'raw',
++    new TextEncoder().encode(env.UNSUB_SECRET || ''),
++    { name: 'HMAC', hash: 'SHA-256' },
++    false,
++    ['sign'],
++  );
++  const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(normalizeEmail(email)));
++  const hex = Array.from(new Uint8Array(mac)).map((b) => b.toString(16).padStart(2, '0')).join('');
++  return hex.slice(0, 16);
++}
++
++// Constant-time-ish check of a supplied token against the expected signature.
++export async function verifyUnsub(env, email, token) {
++  if (!token) return false;
++  const expected = await signUnsub(env, email);
++  if (token.length !== expected.length) return false;
++  let diff = 0;
++  for (let i = 0; i < expected.length; i++) {
++    diff |= token.charCodeAt(i) ^ expected.charCodeAt(i);
++  }
++  return diff === 0;
++}
++
++// Resend suppression list is a backstop only: KV is the source of truth.
++// Both calls are best-effort and never throw.
++export async function addSuppression(env, email) {
++  if (!env.RESEND_API_KEY) return { ok: false };
++  try {
++    const res = await fetch(RESEND_SUPPRESSIONS_URL, {
++      method: 'POST',
++      headers: {
++        Authorization: `Bearer ${env.RESEND_API_KEY}`,
++        'Content-Type': 'application/json',
++      },
++      body: JSON.stringify({ email: normalizeEmail(email) }),
++    });
++    if (!res.ok) {
++      let data = null;
++      try { data = await res.json(); } catch (_) { /* non-JSON body */ }
++      console.error('Resend suppression add failed', res.status, JSON.stringify(data));
++      return { ok: false };
++    }
++    return { ok: true };
++  } catch (e) {
++    console.error('Resend suppression add threw', e && e.message);
++    return { ok: false };
++  }
++}
++
++export async function removeSuppression(env, email) {
++  if (!env.RESEND_API_KEY) return { ok: false };
++  try {
++    const res = await fetch(`${RESEND_SUPPRESSIONS_URL}/${encodeURIComponent(normalizeEmail(email))}`, {
++      method: 'DELETE',
++      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
++    });
++    if (!res.ok) {
++      let data = null;
++      try { data = await res.json(); } catch (_) { /* non-JSON body */ }
++      console.error('Resend suppression remove failed', res.status, JSON.stringify(data));
++      return { ok: false };
++    }
++    return { ok: true };
++  } catch (e) {
++    console.error('Resend suppression remove threw', e && e.message);
++    return { ok: false };
++  }
++}
++
++// Small deterministic non-crypto hash (djb2). Used to derive a stable
++// per-chunk Idempotency-Key from the caller's per-recipient keys, so a
++// retried batch call dedupes at Resend. No node:crypto needed.
++function djb2(str) {
++  let h = 5381;
++  for (let i = 0; i < str.length; i++) {
++    h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
++  }
++  return h.toString(16);
++}
++
++// Minimal HTML to plain-text fallback for callers that only supply html.
++// We never send html alone: every send carries a text part too.
++function htmlToText(html) {
++  return html
++    .replace(/<style[\s\S]*?<\/style>/gi, '')
++    .replace(/<script[\s\S]*?<\/script>/gi, '')
++    .replace(/<\/(p|div|h[1-6]|tr|li)>/gi, '\n')
++    .replace(/<br\s*\/?>/gi, '\n')
++    .replace(/<[^>]+>/g, '')
++    .replace(/&nbsp;/gi, ' ')
++    .replace(/&amp;/gi, '&')
++    .replace(/&lt;/gi, '<')
++    .replace(/&gt;/gi, '>')
++    .replace(/&#39;|&rsquo;|&apos;/gi, "'")
++    .replace(/&quot;/gi, '"')
++    .replace(/\n{3,}/g, '\n\n')
++    .replace(/[ \t]+\n/g, '\n')
++    .trim();
++}
++
++// Shape a single Resend email payload from caller options.
++function buildPayload({ to, subject, html, text, tags, headers, from, replyTo }) {
++  const payload = {
++    from: from || DEFAULT_FROM,
++    to: Array.isArray(to) ? to : [to],
++    subject,
++    reply_to: replyTo || DEFAULT_REPLY_TO,
++  };
++  if (html) payload.html = html;
++  // Always include a text part. Generate it from html if the caller only
++  // gave html. A text-only caller (e.g. the drip) sends text alone, which
++  // Resend accepts; we simply never send html with no text.
++  payload.text = text || (html ? htmlToText(html) : '');
++  if (tags) payload.tags = tags;
++  if (headers) payload.headers = headers;
++  return payload;
++}
++
++async function sleep(ms) {
++  return new Promise((resolve) => setTimeout(resolve, ms));
++}
++
++// POST to Resend with one retry on 429 or 5xx. 4xx is not retried.
++async function postWithRetry(url, apiKey, body, extraHeaders) {
++  const send = () => fetch(url, {
++    method: 'POST',
++    headers: {
++      Authorization: `Bearer ${apiKey}`,
++      'Content-Type': 'application/json',
++      ...(extraHeaders || {}),
++    },
++    body: JSON.stringify(body),
++  });
++
++  let res = await send();
++  if (res.status === 429 || res.status >= 500) {
++    await sleep(500);
++    res = await send();
++  }
++  return res;
++}
++
++// Send a single email. Never throws. Returns { ok, id, error }.
++// opts: { to, subject, html, text, tags, idempotencyKey, headers, from, replyTo }
++export async function sendEmail(env, opts) {
++  if (!env.RESEND_API_KEY) {
++    console.error('sendEmail: RESEND_API_KEY not configured');
++    return { ok: false, id: null, error: 'RESEND_API_KEY not configured' };
++  }
++
++  const payload = buildPayload(opts);
++  const extraHeaders = opts.idempotencyKey
++    ? { 'Idempotency-Key': opts.idempotencyKey }
++    : undefined;
++
++  try {
++    const res = await postWithRetry(RESEND_SEND_URL, env.RESEND_API_KEY, payload, extraHeaders);
++    let data = null;
++    try { data = await res.json(); } catch (_) { /* non-JSON body */ }
++
++    if (!res.ok) {
++      console.error('Resend send failed', res.status, JSON.stringify(data));
++      return { ok: false, id: null, error: (data && data.message) || `HTTP ${res.status}` };
++    }
++    return { ok: true, id: data && data.id, error: null };
++  } catch (e) {
++    console.error('Resend send threw', e && e.message);
++    return { ok: false, id: null, error: (e && e.message) || 'send failed' };
++  }
++}
++
++// Send many emails via Resend's batch endpoint, chunked to BATCH_MAX.
++// Fails soft per chunk: a bad chunk does not stop the others.
++//
++// messages: array of the same option objects sendEmail() takes. If a message
++// carries an idempotencyKey, all keys in a chunk are folded into a single
++// deterministic Idempotency-Key for that batch request (Resend's key is
++// request-scoped, not per-message), so a retried chunk cannot double-send.
++//
++// Returns { sent, failed, chunks: [{ ok, count, error }] }.
++export async function sendBatch(env, messages) {
++  if (!env.RESEND_API_KEY) {
++    console.error('sendBatch: RESEND_API_KEY not configured');
++    return { sent: 0, failed: messages.length, chunks: [] };
++  }
++  if (!messages || messages.length === 0) {
++    return { sent: 0, failed: 0, chunks: [] };
++  }
++
++  const chunks = [];
++  for (let i = 0; i < messages.length; i += BATCH_MAX) {
++    chunks.push(messages.slice(i, i + BATCH_MAX));
++  }
++
++  let sent = 0;
++  let failed = 0;
++  const results = [];
++
++  for (const chunk of chunks) {
++    const body = chunk.map((m) => buildPayload(m));
++
++    const keys = chunk.map((m) => m.idempotencyKey).filter(Boolean);
++    const extraHeaders = keys.length
++      ? { 'Idempotency-Key': 'batch-' + djb2(keys.slice().sort().join('|')) }
++      : undefined;
++
++    try {
++      const res = await postWithRetry(RESEND_BATCH_URL, env.RESEND_API_KEY, body, extraHeaders);
++      if (res.ok) {
++        sent += chunk.length;
++        results.push({ ok: true, count: chunk.length, error: null });
++      } else {
++        let data = null;
++        try { data = await res.json(); } catch (_) { /* non-JSON body */ }
++        console.error('Resend batch failed', res.status, JSON.stringify(data));
++        failed += chunk.length;
++        results.push({ ok: false, count: chunk.length, error: (data && data.message) || `HTTP ${res.status}` });
++      }
++    } catch (e) {
++      console.error('Resend batch threw', e && e.message);
++      failed += chunk.length;
++      results.push({ ok: false, count: chunk.length, error: (e && e.message) || 'batch failed' });
++    }
++  }
++
++  return { sent, failed, chunks: results };
++}
+diff --git a/functions/api/grow/recover.js b/functions/api/grow/recover.js
+index 520264a..4fd70a0 100644
+--- a/functions/api/grow/recover.js
++++ b/functions/api/grow/recover.js
+@@ -1,3 +1,5 @@
++import { sendEmail } from '../_lib/email.js';
++
+ export async function onRequestPost({ request, env }) {
+   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+ 
+@@ -22,19 +24,14 @@ export async function onRequestPost({ request, env }) {
+       return new Response(JSON.stringify({ success: true }), { headers });
+     }
+ 
+-    // Resend access email
+-    if (env.SENDER_API_KEY) {
++    // Re-send the access email
++    {
+       const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
+-      await fetch('https://api.sender.net/v2/transactional/send', {
+-        method: 'POST',
+-        headers: {
+-          Authorization: 'Bearer ' + env.SENDER_API_KEY,
+-          'Content-Type': 'application/json',
+-        },
+-        body: JSON.stringify({
+-          to: normalised,
+-          subject: 'Your Both of You access link',
+-          html: `
++      await sendEmail(env, {
++        to: normalised,
++        subject: 'Your Both of You access link',
++        tags: [{ name: 'type', value: 'recovery' }],
++        html: `
+             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px">
+               <p style="font-size:16px;color:#1F2A37;margin-bottom:24px">Here's your access link for Both of You.</p>
+               <p style="margin-bottom:24px">
+@@ -47,8 +44,7 @@ export async function onRequestPost({ request, env }) {
+               <p style="font-size:13px;color:#999;margin-top:24px">adhdreflect.com</p>
+             </div>
+           `,
+-          text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
+-        }),
++        text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
+       });
+     }
+ 
+diff --git a/functions/api/send-scheduled.js b/functions/api/send-scheduled.js
+index 1aef8d6..147fd4e 100644
+--- a/functions/api/send-scheduled.js
++++ b/functions/api/send-scheduled.js
+@@ -1,6 +1,8 @@
+ // ADHD Reflect. Send scheduled practice emails
+ // Hit daily via cron: /api/send-scheduled?key=ADMIN_KEY
+ 
++import { sendBatch, signUnsub, normalizeEmail } from './_lib/email.js';
++
+ const EMAILS = {
+   reactor: [
+     {
+@@ -338,46 +340,72 @@ export async function onRequestGet({ request, env }) {
+   if (!env.ADMIN_KEY || cronKey !== env.ADMIN_KEY) {
+     return new Response('Unauthorized', { status: 401 });
+   }
+-  if (!env.SENDER_API_KEY || !env.SEARCH_LOGS) {
++  if (!env.RESEND_API_KEY || !env.SEARCH_LOGS) {
+     return new Response('Not configured', { status: 500 });
+   }
+-  const senderHeaders = {
+-    'Authorization': 'Bearer ' + env.SENDER_API_KEY,
+-    'Content-Type': 'application/json',
+-    'Accept': 'application/json',
+-  };
++
+   const list = await env.SEARCH_LOGS.list({ prefix: 'email:', limit: 500 });
+   const now = new Date();
+   let sent = 0, skipped = 0, errors = 0;
+ 
++  // Collect everyone due this run, then send them via Resend's batch endpoint.
++  const due = [];
+   for (const key of list.keys) {
+     const raw = await env.SEARCH_LOGS.get(key.name);
+     if (!raw) continue;
+     const schedule = JSON.parse(raw);
+     if (new Date(schedule.nextEmailDate) > now) { skipped++; continue; }
+     if (schedule.emailsSent >= 4) { skipped++; continue; }
++    // Honour unsubscribes. KV is the source of truth.
++    if (await env.SEARCH_LOGS.get('unsub:' + normalizeEmail(schedule.email))) { skipped++; continue; }
+     const patternEmails = EMAILS[schedule.pattern];
+     if (!patternEmails || !patternEmails[schedule.emailsSent]) { skipped++; continue; }
+     const emailToSend = patternEmails[schedule.emailsSent];
+-    try {
+-      const sendRes = await fetch('https://api.sender.net/v2/transactional-emails/send', {
+-        method: 'POST', headers: senderHeaders,
+-        body: JSON.stringify({
+-          from: { name: 'ADHD Reflect', email: 'hello@adhdreflect.com' },
+-          to: [{ email: schedule.email }],
+-          subject: emailToSend.subject,
+-          text: emailToSend.text,
+-        }),
+-      });
+-      if (sendRes.ok) {
+-        schedule.emailsSent += 1;
+-        schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
+-        schedule.lastSent = now.toISOString();
+-        await env.SEARCH_LOGS.put(key.name, JSON.stringify(schedule), { expirationTtl: 60*60*24*60 });
++
++    // Marketing send: needs a signed unsubscribe path in the header and body.
++    const token = await signUnsub(env, schedule.email);
++    const q = 'e=' + encodeURIComponent(schedule.email) + '&t=' + token;
++    const unsubPage = 'https://adhdreflect.com/unsubscribe?' + q;
++    const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
++
++    due.push({
++      keyName: key.name,
++      schedule,
++      message: {
++        to: schedule.email,
++        subject: emailToSend.subject,
++        text: emailToSend.text + '\n\nUnsubscribe any time: ' + unsubPage,
++        tags: [{ name: 'type', value: 'drip' }],
++        // Per-recipient, per-drip-step key so a cron retry cannot double-send.
++        idempotencyKey: 'drip-' + schedule.email + '-' + schedule.emailsSent,
++        headers: {
++          'List-Unsubscribe': '<' + unsubApi + '>',
++          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
++        },
++      },
++    });
++  }
++
++  // Send in groups of 100 (Resend's batch limit). Fail soft per group: a bad
++  // group does not stop the others, and only sent recipients advance in KV.
++  const GROUP = 100;
++  for (let i = 0; i < due.length; i += GROUP) {
++    const group = due.slice(i, i + GROUP);
++    const result = await sendBatch(env, group.map((d) => d.message));
++    const ok = result.chunks.length > 0 && result.chunks.every((c) => c.ok);
++    if (ok) {
++      for (const d of group) {
++        d.schedule.emailsSent += 1;
++        d.schedule.nextEmailDate = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
++        d.schedule.lastSent = now.toISOString();
++        await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
+         sent++;
+-      } else { errors++; }
+-    } catch (e) { errors++; }
++      }
++    } else {
++      errors += group.length;
++    }
+   }
++
+   return new Response(JSON.stringify({ sent, skipped, errors, total: list.keys.length }), {
+     headers: { 'Content-Type': 'application/json' },
+   });
+diff --git a/functions/api/stripe-webhook.js b/functions/api/stripe-webhook.js
+index bf6eb7f..5c97f87 100644
+--- a/functions/api/stripe-webhook.js
++++ b/functions/api/stripe-webhook.js
+@@ -1,3 +1,5 @@
++import { sendEmail } from './_lib/email.js';
++
+ async function verifyStripeSignature(body, signature, secret) {
+   const parts = signature.split(',');
+   const timestamp = parts.find(p => p.startsWith('t=')).split('=')[1];
+@@ -54,18 +56,13 @@ export async function onRequestPost({ request, env }) {
+         await env.GROW_DATA.put('email:' + email.toLowerCase().trim(), token, {
+           expirationTtl: 60 * 60 * 24 * 365 * 2,
+         });
+-        if (env.SENDER_API_KEY) {
++        {
+           const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
+-          await fetch('https://api.sender.net/v2/transactional/send', {
+-            method: 'POST',
+-            headers: {
+-              Authorization: 'Bearer ' + env.SENDER_API_KEY,
+-              'Content-Type': 'application/json',
+-            },
+-            body: JSON.stringify({
+-              to: email,
+-              subject: 'You\'re in. Both of You',
+-              html: `
++          await sendEmail(env, {
++            to: email,
++            subject: 'You\'re in. Both of You',
++            tags: [{ name: 'type', value: 'purchase' }],
++            html: `
+                 <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:540px;margin:0 auto;padding:40px 24px;background:#F7F5F0">
+ 
+                   <!-- Logo mark -->
+@@ -123,7 +120,6 @@ export async function onRequestPost({ request, env }) {
+                 </div>
+               `,
+               text: `You're in.\n\nBoth of You is ready when you are.\n\nOpen it here:\n${accessUrl}\n\nThis link works on any device. Bookmark this email, it's how you get back in. No password needed.\n\nLost the link? Go to adhdreflect.com/grow and use "Recover access."\n\n---\n\nWhere to start: Module 1 is the beginning. If you've taken the pattern quiz, your first modules are waiting based on your result. Each module is 10-18 minutes on a phone.\n\nBetween modules: adhdreflect.com has a free search tool for hard moments, describe what's happening and it matches you to a card.\n\nNeed to talk to someone? online-therapy.com offers CBT-based therapy from $40/week. Use code THERAPY20 for 20% off your first month. (We earn a small commission if you sign up.)\n\n---\n\nADHD Reflect · adhdreflect.com\nThis is not medical advice.`,
+-            }),
+           });
+         }
+       }
+diff --git a/functions/api/subscribe.js b/functions/api/subscribe.js
+index 07f01cc..31ab6aa 100644
+--- a/functions/api/subscribe.js
++++ b/functions/api/subscribe.js
+@@ -1,4 +1,6 @@
+ // ADHD Reflect — Subscribe endpoint
++import { sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
++
+ export async function onRequestPost({ request, env }) {
+   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+   try {
+@@ -7,22 +9,15 @@ export async function onRequestPost({ request, env }) {
+     if (!email || !pattern) {
+       return new Response(JSON.stringify({ error: 'Email and pattern required' }), { status: 400, headers });
+     }
+-    const apiKey = env.SENDER_API_KEY;
+-    if (!apiKey) {
+-      return new Response(JSON.stringify({ error: 'Email service not configured' }), { status: 500, headers });
++
++    // Honour unsubscribes. Someone who opted out re-subscribes only via the
++    // resubscribe link, not by signing up again.
++    if (env.SEARCH_LOGS && await env.SEARCH_LOGS.get('unsub:' + normalizeEmail(email))) {
++      return new Response(JSON.stringify({ success: true, pattern }), { status: 200, headers });
+     }
+-    const senderHeaders = { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json', 'Accept': 'application/json' };
+-    const groupsRes = await fetch('https://api.sender.net/v2/groups', { headers: senderHeaders });
+-    const groupsData = await groupsRes.json();
+-    const groups = groupsData.data || [];
+-    const patternGroup = groups.find(g => g.title.toLowerCase() === pattern.toLowerCase());
+-    if (!patternGroup) {
+-      return new Response(JSON.stringify({ error: 'Pattern group not found: ' + pattern }), { status: 404, headers });
+-    }
+-    await fetch('https://api.sender.net/v2/subscribers', {
+-      method: 'POST', headers: senderHeaders,
+-      body: JSON.stringify({ email, groups: [patternGroup.id] }),
+-    });
++
++    // Record the drip schedule. send-scheduled.js reads this and sends the
++    // pattern practices over the following weeks.
+     if (env.SEARCH_LOGS) {
+       const scheduleKey = 'email:' + email.toLowerCase().trim();
+       await env.SEARCH_LOGS.put(scheduleKey, JSON.stringify({
+@@ -32,6 +27,41 @@ export async function onRequestPost({ request, env }) {
+         nextEmailDate: new Date(Date.now() + 24*60*60*1000).toISOString(),
+       }), { expirationTtl: 60*60*24*60 });
+     }
++
++    // Welcome email. Marketing send, so it carries a signed unsubscribe path.
++    const token = await signUnsub(env, email);
++    const q = 'e=' + encodeURIComponent(email) + '&t=' + token;
++    const unsubUrl = 'https://adhdreflect.com/unsubscribe?' + q;
++    const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
++    await sendEmail(env, {
++      to: email,
++      subject: 'You\'re in. Your first practice lands tomorrow.',
++      tags: [{ name: 'type', value: 'welcome' }],
++      headers: {
++        'List-Unsubscribe': '<' + unsubApi + '>',
++        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
++      },
++      html: `
++        <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;color:#1F2A37">
++          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Thanks for signing up.</p>
++          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">You came out as a <strong>${pattern}</strong>. Over the next few weeks I'll send you four short practices built for that pattern. The first one lands tomorrow. No apps, no streaks, just one small thing to try each time.</p>
++          <p style="font-size:16px;line-height:1.6;margin:0 0 24px">In between, <a href="https://adhdreflect.com" style="color:#4A6FA5;text-decoration:none">adhdreflect.com</a> has a free search tool for the hard moment you're in right now. Describe what's happening and it matches you to a card.</p>
++          <p style="font-size:14px;color:#56606E;line-height:1.6;margin:0">ADHD Reflect<br><a href="https://adhdreflect.com" style="color:#9B8BB4;text-decoration:none">adhdreflect.com</a></p>
++          <p style="font-size:12px;color:#9B8BB4;line-height:1.6;margin:24px 0 0">Too many emails? <a href="${unsubUrl}" style="color:#9B8BB4">Unsubscribe any time</a>.</p>
++        </div>
++      `,
++      text: `Thanks for signing up.
++
++You came out as a ${pattern}. Over the next few weeks I'll send you four short practices built for that pattern. The first one lands tomorrow. No apps, no streaks, just one small thing to try each time.
++
++In between, adhdreflect.com has a free search tool for the hard moment you're in right now. Describe what's happening and it matches you to a card.
++
++ADHD Reflect
++adhdreflect.com
++
++Unsubscribe any time: ${unsubUrl}`,
++    });
++
+     return new Response(JSON.stringify({ success: true, pattern }), { status: 200, headers });
+   } catch (e) {
+     return new Response(JSON.stringify({ error: e.message }), { status: 500, headers });
+diff --git a/functions/api/unsubscribe.js b/functions/api/unsubscribe.js
+new file mode 100644
+index 0000000..bd63f58
+--- /dev/null
++++ b/functions/api/unsubscribe.js
+@@ -0,0 +1,70 @@
++// ADHD Reflect — unsubscribe endpoint.
++// KV is the source of truth (unsub:<email>); the Resend suppression list is a
++// backstop. Unsubscribing never touches Grow access, tokens or purchase
++// records, so transactional email (purchase, recovery, free access) keeps
++// working.
++import {
++  verifyUnsub,
++  addSuppression,
++  removeSuppression,
++  normalizeEmail,
++} from './_lib/email.js';
++
++// Keep the opt-out on file for years, well beyond the drip schedule TTL.
++const UNSUB_TTL = 60 * 60 * 24 * 365 * 5;
++
++async function doUnsubscribe(env, email) {
++  const key = 'unsub:' + email;
++  const existing = env.SEARCH_LOGS ? await env.SEARCH_LOGS.get(key) : null;
++  if (existing) return 'already';
++  if (env.SEARCH_LOGS) {
++    await env.SEARCH_LOGS.put(
++      key,
++      JSON.stringify({ email, unsubscribedAt: new Date().toISOString() }),
++      { expirationTtl: UNSUB_TTL },
++    );
++  }
++  await addSuppression(env, email); // best-effort backstop
++  return 'done';
++}
++
++async function doResubscribe(env, email) {
++  if (env.SEARCH_LOGS) await env.SEARCH_LOGS.delete('unsub:' + email);
++  await removeSuppression(env, email); // best-effort backstop
++  return 'resubscribed';
++}
++
++// POST: mailbox-provider one-click (List-Unsubscribe-Post). Verify, unsubscribe,
++// return 200 with an empty body. Providers will not follow a redirect or read
++// HTML, so we send neither.
++export async function onRequestPost({ request, env }) {
++  const url = new URL(request.url);
++  const email = normalizeEmail(url.searchParams.get('e'));
++  const token = url.searchParams.get('t');
++  if (!email || !(await verifyUnsub(env, email, token))) {
++    return new Response(null, { status: 400 });
++  }
++  await doUnsubscribe(env, email);
++  return new Response(null, { status: 200 });
++}
++
++// GET: called by the unsubscribe page via fetch. Returns a JSON status.
++// action=resubscribe reverses it. Invalid or missing token: 400, with no hint
++// about whether the address exists.
++export async function onRequestGet({ request, env }) {
++  const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
++  const url = new URL(request.url);
++  const email = normalizeEmail(url.searchParams.get('e'));
++  const token = url.searchParams.get('t');
++  const action = url.searchParams.get('action') === 'resubscribe' ? 'resubscribe' : 'unsubscribe';
++
++  if (!email || !(await verifyUnsub(env, email, token))) {
++    return new Response(JSON.stringify({ status: 'invalid' }), { status: 400, headers });
++  }
++
++  const status = action === 'resubscribe'
++    ? await doResubscribe(env, email)
++    : await doUnsubscribe(env, email);
++
++  return new Response(JSON.stringify({ status }), { status: 200, headers });
++}
+diff --git a/src/pages/legal/privacy.md b/src/pages/legal/privacy.md
+index 7cd79fd..e1979c5 100644
+--- a/src/pages/legal/privacy.md
++++ b/src/pages/legal/privacy.md
+@@ -113,13 +113,13 @@ We use a small number of carefully chosen services to run ADHD Reflect. These ar
+ | Service | What it does | What we share with it |
+ |---|---|---|
+ | **Anthropic (Claude API)** | Matches your assistant input to the right card or guide. | The text you type into the assistant. Not used for model training. |
+-| **Sender.net** | Sends the newsletter and weekly practice emails. | Your email address and which pattern you scored on. |
++| **Resend** | Sends the welcome email and weekly practice emails. | Your email address and which pattern you scored on. |
+ | **Stripe** | Processes payments for paid features. | Name, email, country and payment details (handled by Stripe directly). |
+ | **Supabase** (or equivalent hosted database) | Stores account, quiz pattern and saved cards. | Email, hashed password, pattern result, saved cards. |
+ | **Replit / Cloudflare / Vercel** | Hosts the site. | Standard technical logs. |
+ | **Plausible** (or similar) | Counts visits without cookies. | Anonymous, aggregated page views. |
+ 
+-We do not share what you type into the assistant with any of these services other than Anthropic. We do not share your quiz result with anyone other than Sender.net (so we can match your weekly practice to your pattern).
++We do not share what you type into the assistant with any of these services other than Anthropic. We do not share your quiz result with anyone other than Resend (so we can send you the weekly practice that matches your pattern).
+ 
+ If we ever change a service in this list, we will update this page.
+ 
+diff --git a/src/pages/unsubscribe.astro b/src/pages/unsubscribe.astro
+new file mode 100644
+index 0000000..e4c8496
+--- /dev/null
++++ b/src/pages/unsubscribe.astro
+@@ -0,0 +1,149 @@
++---
++import Base from '../layouts/Base.astro';
++---
++<Base title="Unsubscribe" description="Manage your ADHD Reflect emails.">
++  <div class="unsub-wrap">
++    <div class="unsub-inner">
++      <div class="unsub-label">ADHD Reflect</div>
++
++      <div id="unsub-loading" class="unsub-state">
++        <h1 class="unsub-title">One moment</h1>
++        <p class="unsub-sub">Updating your email preferences.</p>
++      </div>
++
++      <div id="unsub-done" class="unsub-state" hidden>
++        <h1 class="unsub-title">You're unsubscribed</h1>
++        <p class="unsub-sub">You won't get any more practice emails or newsletters. This takes effect straight away.</p>
++        <p class="unsub-note">Account emails still reach you as normal: your purchase receipt, your access link, and recovery links are not affected.</p>
++        <p class="unsub-resub">Changed your mind? <a id="resub-link" href="#">Resubscribe</a></p>
++      </div>
++
++      <div id="unsub-already" class="unsub-state" hidden>
++        <h1 class="unsub-title">You're already unsubscribed</h1>
++        <p class="unsub-sub">There's nothing more to do. You're off the practice emails and the newsletter.</p>
++        <p class="unsub-note">Account emails (receipts, access and recovery links) still reach you as normal.</p>
++        <p class="unsub-resub">Changed your mind? <a id="resub-link-2" href="#">Resubscribe</a></p>
++      </div>
++
++      <div id="unsub-resubscribed" class="unsub-state" hidden>
++        <h1 class="unsub-title">You're back on the list</h1>
++        <p class="unsub-sub">Your practice emails will pick up again. Welcome back.</p>
++      </div>
++
++      <div id="unsub-invalid" class="unsub-state" hidden>
++        <h1 class="unsub-title">This link didn't work</h1>
++        <p class="unsub-sub">The link looks broken or out of date. Use the unsubscribe link at the bottom of a recent email, or email <a href="mailto:hello@adhdreflect.com">hello@adhdreflect.com</a> and we'll sort it out.</p>
++      </div>
++
++      <div class="unsub-footer">
++        <a href="/">Back to adhdreflect.com</a>
++      </div>
++    </div>
++  </div>
++</Base>
++
++<style>
++.unsub-wrap {
++  min-height: 70vh;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  padding: var(--space-3xl) var(--page-pad);
++}
++.unsub-inner {
++  max-width: 440px;
++  width: 100%;
++  text-align: center;
++}
++.unsub-label {
++  font-family: var(--mono);
++  font-size: 10px;
++  letter-spacing: 0.2em;
++  text-transform: uppercase;
++  color: var(--blue);
++  margin-bottom: var(--space-md);
++}
++.unsub-title {
++  font-family: var(--serif);
++  font-size: clamp(28px, 7vw, 40px);
++  font-weight: 300;
++  color: var(--slate);
++  font-variation-settings: 'opsz' 40;
++  line-height: 1.15;
++  margin-bottom: var(--space-md);
++}
++.unsub-sub {
++  font-family: var(--sans);
++  font-size: 16px;
++  color: var(--pewter);
++  line-height: 1.6;
++  margin-bottom: var(--space-lg);
++}
++.unsub-note {
++  font-family: var(--sans);
++  font-size: 14px;
++  color: var(--pewter);
++  line-height: 1.6;
++  background: rgba(31,42,55,0.04);
++  border-radius: var(--radius-md);
++  padding: 14px 18px;
++  margin-bottom: var(--space-lg);
++}
++.unsub-resub {
++  font-family: var(--sans);
++  font-size: 14px;
++  color: var(--pewter);
++}
++.unsub-sub a, .unsub-resub a { color: var(--blue); text-decoration: none; }
++.unsub-sub a:hover, .unsub-resub a:hover { text-decoration: underline; }
++.unsub-footer {
++  margin-top: var(--space-2xl);
++  padding-top: var(--space-xl);
++  border-top: 1px solid var(--mist-border);
++}
++.unsub-footer a {
++  font-family: var(--sans);
++  font-size: 13px;
++  color: var(--pewter);
++  text-decoration: none;
++}
++.unsub-footer a:hover { text-decoration: underline; }
++</style>
++
++<script>
++  const params = new URLSearchParams(window.location.search);
++  const e = params.get('e');
++  const t = params.get('t');
++  const action = params.get('action') === 'resubscribe' ? 'resubscribe' : 'unsubscribe';
++
++  function show(id) {
++    document.querySelectorAll('.unsub-state').forEach((el) => { el.hidden = true; });
++    const el = document.getElementById(id);
++    if (el) el.hidden = false;
++  }
++
++  async function run() {
++    if (!e || !t) { show('unsub-invalid'); return; }
++
++    const qs = 'e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=' + action;
++    const resubUrl = '/unsubscribe?e=' + encodeURIComponent(e) + '&t=' + encodeURIComponent(t) + '&action=resubscribe';
++    const l1 = document.getElementById('resub-link');
++    const l2 = document.getElementById('resub-link-2');
++    if (l1) l1.setAttribute('href', resubUrl);
++    if (l2) l2.setAttribute('href', resubUrl);
++
++    try {
++      const res = await fetch('/api/unsubscribe?' + qs);
++      if (!res.ok) { show('unsub-invalid'); return; }
++      const data = await res.json();
++      if (data.status === 'done') show('unsub-done');
++      else if (data.status === 'already') show('unsub-already');
++      else if (data.status === 'resubscribed') show('unsub-resubscribed');
++      else show('unsub-invalid');
++    } catch (err) {
++      show('unsub-invalid');
++    }
++  }
++
++  run();
++</script>
