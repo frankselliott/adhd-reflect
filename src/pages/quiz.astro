@@ -1,13 +1,62 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// Natural-question meta title/description in the same register as the cards,
+// so the quiz is findable by search and AI answer engines.
+const seoTitle = 'Which ADHD parenting pattern keeps catching you?';
+const description = 'A three-minute quiz for ADHD parents. Notice how you tend to come apart when parenting gets hard: Reactor, Juggler, Looper, Spiraller or Escaper. Not a diagnosis.';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does the ADHD parenting pattern quiz take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "About three minutes. Twelve questions, no right answers. You are noticing which loop tends to catch you when parenting gets hard, so you can see it coming next time." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the ADHD parenting pattern quiz a diagnosis?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It is a reflective tool, not a diagnosis or a validated psychological instrument. It points to a pattern worth noticing, not a clinical result, and it does not assess you or your child." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the five ADHD parenting patterns?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Reactor, Juggler, Looper, Spiraller and Escaper. Each is a different way an ADHD nervous system tends to come apart under pressure, from reacting before you can stop to shutting down and leaving the room while still in it." }
+    }
+  ]
+};
 ---
-<Base title="What's Your ADHD Parenting Pattern?" description="Find out how your ADHD shows up when parenting gets hard. Twelve questions, three minutes, no diagnosis.">
+<Base title={seoTitle} description={description} schema={faqSchema}>
+
+  <!-- SEO: server-rendered intro for crawlers (the quiz renders over this and
+       it is hidden on mount). Names and one line each only, so no result is
+       given away before someone answers. -->
+  <article id="seo-content" class="quiz-seo">
+    <h1>Which ADHD parenting pattern keeps catching you?</h1>
+    <p>This is for ADHD parents raising kids who set off every button ADHD already makes hard. It is about how you tend to come apart in the hard moments, not what is wrong with you.</p>
+    <p>Twelve questions, about three minutes. There are no right answers. You are noticing which loop keeps catching you, so you can see it coming next time.</p>
+    <p>Most parents land in one of five patterns:</p>
+    <ul>
+      <li><strong>Reactor.</strong> You go from calm to reacting with no runway in between.</li>
+      <li><strong>Juggler.</strong> The things that matter slip out of your working memory before you can act on them.</li>
+      <li><strong>Looper.</strong> You keep explaining and correcting a dysregulated child when part of you knows they cannot hear you yet.</li>
+      <li><strong>Spiraller.</strong> After a hard moment you replay it, and the guilt takes up more room than the repair.</li>
+      <li><strong>Escaper.</strong> When it gets too big you go quiet, drift to your phone, or leave the room while still in it.</li>
+    </ul>
+    <p>This is a reflective tool, not a diagnosis or a validated psychological instrument. It points to a pattern to notice, nothing more. What it is based on is set out in <a href="/what-this-is-based-on">what this is based on</a>.</p>
+  </article>
 
   <div id="quiz-root">
     <!-- React island loads here -->
   </div>
 
   <script>
+    // Hide SEO content once React loads
+    const seoEl = document.getElementById('seo-content');
+    if (seoEl) seoEl.style.display = 'none';
+
     import { createElement } from 'react';
     import { createRoot } from 'react-dom/client';
     import Quiz from '../components/Quiz.jsx';
@@ -22,4 +71,14 @@ import Base from '../layouts/Base.astro';
   #quiz-root {
     min-height: 80dvh;
   }
+  .quiz-seo {
+    max-width: 640px; margin: 0 auto; padding: 40px 24px;
+    font-family: var(--serif); color: #6B6358; line-height: 1.7;
+  }
+  .quiz-seo h1 { font-size: 28px; font-weight: 300; color: #191714; margin-bottom: 16px; }
+  .quiz-seo p { margin-bottom: 12px; }
+  .quiz-seo ul { margin: 0 0 12px; padding-left: 20px; }
+  .quiz-seo li { margin-bottom: 8px; }
+  .quiz-seo strong { color: #191714; }
+  .quiz-seo a { color: #4A6FA5; }
 </style>

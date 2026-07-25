@@ -10,6 +10,7 @@ const EXCLUDE = [
   '/admin',
   '/app',
   '/dev/',
+  '/guides/saved',
   '/grow/home',
   '/grow/module/',
   '/grow/summary',
