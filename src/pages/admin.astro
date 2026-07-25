@@ -30,6 +30,8 @@ import Base from '../layouts/Base.astro';
       <div style="display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid rgba(31,42,55,0.08);padding-bottom:0">
         <button class="tab-btn active" onclick="showTab('site')" id="tab-site">Site</button>
         <button class="tab-btn" onclick="showTab('course')" id="tab-course">Course</button>
+        <button class="tab-btn" onclick="showTab('email')" id="tab-email">Email</button>
+        <button class="tab-btn" onclick="showTab('revenue')" id="tab-revenue">Revenue</button>
         <button class="tab-btn" onclick="showTab('codes')" id="tab-codes">Codes</button>
         <button class="tab-btn" onclick="showTab('cards')" id="tab-cards">Missing cards</button>
       </div>
@@ -86,6 +88,65 @@ import Base from '../layouts/Base.astro';
           <p>Anonymised. No emails, no identifying information.</p>
         </div>
         <div id="purchaser-list"></div>
+      </div>
+
+      <!-- ── EMAIL TAB ── -->
+      <div id="pane-email" class="tab-pane" style="display:none">
+        <div id="email-loading" style="font-family:var(--sans);font-size:14px;color:var(--pewter);padding:8px 0">Loading...</div>
+        <div id="email-body" style="display:none">
+          <div id="email-summary" class="stat-grid"></div>
+
+          <div id="email-sync-flag" style="display:none;margin-bottom:24px"></div>
+
+          <div class="section-head">
+            <h2>Drip progress</h2>
+            <p>Where active subscribers sit in the welcome sequence. Step 0 have not had the first email yet.</p>
+          </div>
+          <div id="drip-funnel" style="margin-bottom:40px"></div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px">
+            <div class="card-panel">
+              <div class="panel-label">Subscribers by quiz pattern</div>
+              <div id="email-patterns"></div>
+            </div>
+            <div class="card-panel">
+              <div class="panel-label">Last drip run</div>
+              <div id="email-last-run"></div>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2>Recent sends</h2>
+            <p>Last 20 from Resend. Bounced and complained are highlighted.</p>
+          </div>
+          <div id="email-recent"></div>
+        </div>
+      </div>
+
+      <!-- ── REVENUE TAB ── -->
+      <div id="pane-revenue" class="tab-pane" style="display:none">
+        <div id="revenue-loading" style="font-family:var(--sans);font-size:14px;color:var(--pewter);padding:8px 0">Loading...</div>
+        <div id="revenue-body" style="display:none">
+          <div id="revenue-summary" class="stat-grid"></div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0">
+            <div class="card-panel">
+              <div class="panel-label">Purchases by country</div>
+              <div id="revenue-country"></div>
+            </div>
+            <div class="card-panel">
+              <div class="panel-label">Refunds and discounts</div>
+              <div id="revenue-refunds"></div>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2>Recent purchases</h2>
+            <p>Adaptive Pricing is on, so both the amount charged and the settlement amount are shown.</p>
+          </div>
+          <div id="revenue-recent"></div>
+        </div>
+        <div id="revenue-unconfigured" style="display:none;font-family:var(--sans);font-size:14px;color:var(--pewter);padding:8px 0">Stripe is not configured.</div>
       </div>
 
       <!-- ── CODES TAB ── -->
@@ -249,12 +310,17 @@ import Base from '../layouts/Base.astro';
   let adminKey = '';
   let allData = {};
   let unmatchedRaw = [];
+  // Email and Revenue are not in section=all — they hit Resend and Stripe, so
+  // they load only on first view of their tab and are cached from then on.
+  const lazyLoaded = { email: false, revenue: false };
 
-  function showTab(name) {
+  async function showTab(name) {
     document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('pane-' + name).style.display = 'block';
     document.getElementById('tab-' + name).classList.add('active');
+    if (name === 'email' && !lazyLoaded.email) { lazyLoaded.email = true; await loadEmail(); }
+    if (name === 'revenue' && !lazyLoaded.revenue) { lazyLoaded.revenue = true; await loadRevenue(); }
   }
 
   async function loadAll() {
@@ -494,6 +560,161 @@ import Base from '../layouts/Base.astro';
     const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
     const data = await res.json();
     renderCodes(data.discounts);
+  }
+
+  // ── EMAIL (lazy) ──
+  async function loadEmail() {
+    try {
+      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=email');
+      const data = await res.json();
+      if (data.error) { document.getElementById('email-loading').textContent = data.error; return; }
+      renderEmail(data.email);
+    } catch (e) {
+      document.getElementById('email-loading').textContent = 'Error: ' + e.message;
+    }
+  }
+
+  function renderEmail(email) {
+    if (!email) return;
+    document.getElementById('email-loading').style.display = 'none';
+    document.getElementById('email-body').style.display = 'block';
+
+    document.getElementById('email-summary').innerHTML = [
+      { label: 'Subscribers', value: email.subscriberCount, color: '#4A6FA5' },
+      { label: 'Unsubscribes', value: email.unsubCount, color: '#B85038' },
+      { label: 'Unsub rate', value: email.unsubRate + '%', color: '#C97B6A' },
+      { label: 'Resend contacts', value: email.resendContactCount == null ? '—' : email.resendContactCount, color: '#9B8BB4' },
+      { label: 'Suppression list', value: email.suppressionCount == null ? '—' : email.suppressionCount, color: '#56606E' },
+    ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+
+    // Sync divergence flag
+    const flag = document.getElementById('email-sync-flag');
+    if (email.syncDiverges) {
+      flag.style.display = 'block';
+      flag.innerHTML = `<div style="background:rgba(184,80,56,0.06);border:1px solid rgba(184,80,56,0.2);border-radius:10px;padding:14px 18px;font-family:var(--sans);font-size:14px;color:#B85038">
+        Resend holds ${email.resendContactCount} contacts but KV has ${email.subscriberCount} active subscribers. The KV to Resend mirror looks behind.</div>`;
+    } else {
+      flag.style.display = 'none';
+    }
+
+    // Drip funnel as a bar list
+    const funnel = email.dripFunnel || {};
+    const labels = { 0: 'Step 0', 1: 'Step 1', 2: 'Step 2', 3: 'Step 3', 4: 'Step 4+' };
+    const maxF = Math.max(...[0,1,2,3,4].map(i => funnel[i] || 0), 1);
+    document.getElementById('drip-funnel').innerHTML = [0,1,2,3,4].map(i => {
+      const count = funnel[i] || 0;
+      const pct = Math.round(count / maxF * 100);
+      return `<div class="module-bar-wrap">
+        <span class="module-bar-label" style="width:52px">${labels[i]}</span>
+        <div class="module-bar-track"><div class="module-bar-fill" style="width:${pct}%"></div></div>
+        <span class="module-bar-count">${count}</span>
+      </div>`;
+    }).join('');
+
+    // Patterns
+    document.getElementById('email-patterns').innerHTML = Object.entries(email.patternBreakdown || {})
+      .sort((a, b) => b[1] - a[1])
+      .map(([p, count]) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+          <span style="font-family:var(--sans);font-size:13px;color:var(--slate);text-transform:capitalize">${p}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${count}</span>
+        </div>
+      `).join('') || '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No subscribers yet.</p>';
+
+    // Last drip run
+    const run = email.lastDripRun;
+    document.getElementById('email-last-run').innerHTML = run
+      ? `<div style="font-family:var(--sans);font-size:14px;color:var(--slate);line-height:1.9">
+          <div>Sent <strong>${run.sent}</strong>, skipped ${run.skipped}, errors ${run.errors}${run.capped ? ' (capped)' : ''}</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--pewter);margin-top:6px">${run.timestamp ? new Date(run.timestamp).toLocaleString() : ''}</div>
+        </div>`
+      : '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No drip run recorded yet.</p>';
+
+    // Recent sends
+    const bad = s => s === 'bounced' || s === 'complained';
+    document.getElementById('email-recent').innerHTML = (email.recentSends || []).length === 0
+      ? '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No sends recorded yet.</p>'
+      : email.recentSends.map(s => `
+        <div class="row-item">
+          <span class="badge ${bad(s.status) ? 'badge-miss' : 'badge-off'}">${(s.status || 'sent').toUpperCase()}</span>
+          <div style="flex:1;min-width:0">
+            <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.subject || '(no subject)'}</div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--pewter);margin-top:2px">${s.to || ''}${s.created_at ? ' · ' + new Date(s.created_at).toLocaleString() : ''}</div>
+          </div>
+        </div>
+      `).join('');
+  }
+
+  // ── REVENUE (lazy) ──
+  async function loadRevenue() {
+    try {
+      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=revenue');
+      const data = await res.json();
+      if (data.error) { document.getElementById('revenue-loading').textContent = data.error; return; }
+      renderRevenue(data.revenue);
+    } catch (e) {
+      document.getElementById('revenue-loading').textContent = 'Error: ' + e.message;
+    }
+  }
+
+  function money(cents, currency) {
+    if (cents == null) return '—';
+    const amount = (cents / 100).toFixed(2);
+    return (currency ? currency.toUpperCase() + ' ' : '') + amount;
+  }
+
+  function renderRevenue(rev) {
+    document.getElementById('revenue-loading').style.display = 'none';
+    if (!rev || !rev.configured) {
+      document.getElementById('revenue-unconfigured').style.display = 'block';
+      return;
+    }
+    document.getElementById('revenue-body').style.display = 'block';
+    const cur = rev.settlementCurrency;
+
+    document.getElementById('revenue-summary').innerHTML = [
+      { label: 'Revenue all time', value: money(rev.allTime.revenue, cur), color: '#4B6B4E' },
+      { label: 'Purchases all time', value: rev.allTime.count, color: '#4A6FA5' },
+      { label: 'Revenue 30 days', value: money(rev.last30.revenue, cur), color: '#4B6B4E' },
+      { label: 'Purchases 30 days', value: rev.last30.count, color: '#4A6FA5' },
+    ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value" style="font-size:22px">${c.value}</div></div>`).join('');
+
+    // By country
+    document.getElementById('revenue-country').innerHTML = Object.entries(rev.byCountry || {})
+      .sort((a, b) => b[1] - a[1])
+      .map(([c, count]) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+          <span style="font-family:var(--sans);font-size:13px;color:var(--slate)">${c}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${count}</span>
+        </div>
+      `).join('') || '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No data yet.</p>';
+
+    // Refunds and discounts
+    document.getElementById('revenue-refunds').innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(31,42,55,0.04)">
+        <span style="font-family:var(--sans);font-size:13px;color:var(--slate)">Refunds</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${rev.refunds.count} · ${money(rev.refunds.amount, cur)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
+        <span style="font-family:var(--sans);font-size:13px;color:var(--slate)">Discount impact</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--blue)">${money(rev.discountImpact, cur)}</span>
+      </div>`;
+
+    // Recent purchases — local charged and settlement side by side
+    document.getElementById('revenue-recent').innerHTML = (rev.recent || []).length === 0
+      ? '<p style="font-family:var(--sans);font-size:13px;color:var(--pewter)">No purchases yet.</p>'
+      : rev.recent.map(p => {
+        const settle = p.settleAmount != null ? money(p.settleAmount, p.settleCurrency) : null;
+        const local = money(p.localAmount, p.localCurrency);
+        const showSettle = settle && settle !== local;
+        return `
+        <div class="row-item">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--pewter);width:80px;flex-shrink:0">${p.date ? new Date(p.date * 1000).toLocaleDateString() : '—'}</span>
+          <span style="font-family:var(--mono);font-size:12px;color:var(--slate);width:130px;flex-shrink:0">${local}${showSettle ? '<span style="color:var(--pewter)"> → ' + settle + '</span>' : ''}</span>
+          <span style="font-family:var(--sans);font-size:12px;color:var(--pewter);width:40px;flex-shrink:0">${p.country || ''}</span>
+          <span style="font-family:var(--sans);font-size:12px;color:var(--slate);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.email || ''}</span>
+        </div>`;
+      }).join('');
   }
 
   // ── CARD GAPS ──

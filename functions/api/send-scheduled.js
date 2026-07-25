@@ -446,7 +446,12 @@ export async function onRequestGet({ request, env }) {
     }
   }
 
-  return new Response(JSON.stringify({ sent, skipped, errors, total, capped }), {
+  // Record the run so the admin dashboard can show when the drip last fired,
+  // instead of that only being visible in this response body.
+  const runStats = { sent, skipped, errors, total, capped, timestamp: new Date().toISOString() };
+  try { await env.SEARCH_LOGS.put('stats:last-drip-run', JSON.stringify(runStats)); } catch (e) { /* best-effort */ }
+
+  return new Response(JSON.stringify(runStats), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
