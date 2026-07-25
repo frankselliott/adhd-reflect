@@ -50,7 +50,7 @@ export async function onRequestPost({ request, env }) {
     const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
     await sendEmail(env, {
       to: email,
-      subject: 'You\'re in. Your first practice lands tomorrow.',
+      subject: 'You\'re in. First one lands tomorrow.',
       tags: [{ name: 'type', value: 'welcome' }],
       headers: {
         'List-Unsubscribe': '<' + unsubApi + '>',
@@ -58,18 +58,24 @@ export async function onRequestPost({ request, env }) {
       },
       html: `
         <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;color:#1F2A37">
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Thanks for signing up.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">You came out as <strong>${patternName}</strong>. Over the next few weeks I'll send you four short practices built for that pattern. The first one lands tomorrow. No apps, no streaks, just one small thing to try each time.</p>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 24px">In between, <a href="https://adhdreflect.com" style="color:#4A6FA5;text-decoration:none">adhdreflect.com</a> has a free search tool for the hard moment you're in right now. Describe what's happening and it matches you to a card.</p>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Your pattern: <strong>${patternName}</strong>.</p>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.</p>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">That's the whole thing. Four emails.</p>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 16px">In between, <a href="https://adhdreflect.com" style="color:#4A6FA5;text-decoration:none">adhdreflect.com</a> has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.</p>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 24px">Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.</p>
           <p style="font-size:14px;color:#56606E;line-height:1.6;margin:0">ADHD Reflect<br><a href="https://adhdreflect.com" style="color:#9B8BB4;text-decoration:none">adhdreflect.com</a></p>
           <p style="font-size:12px;color:#9B8BB4;line-height:1.6;margin:24px 0 0">Too many emails? <a href="${unsubUrl}" style="color:#9B8BB4">Unsubscribe any time</a>.</p>
         </div>
       `,
-      text: `Thanks for signing up.
+      text: `Your pattern: ${patternName}.
 
-You came out as ${patternName}. Over the next few weeks I'll send you four short practices built for that pattern. The first one lands tomorrow. No apps, no streaks, just one small thing to try each time.
+Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.
 
-In between, adhdreflect.com has a free search tool for the hard moment you're in right now. Describe what's happening and it matches you to a card.
+That's the whole thing. Four emails.
+
+In between, adhdreflect.com has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.
+
+Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.
 
 ADHD Reflect
 adhdreflect.com
