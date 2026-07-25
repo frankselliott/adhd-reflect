@@ -18,6 +18,35 @@ function isValidEmail(email) {
   return true;
 }
 
+// Rate limiting. Counters in SEARCH_LOGS with a one-hour TTL: 5 signups per IP
+// per hour, and the same address no more than 3 times per hour regardless of
+// IP. This stops anyone mail-bombing an address from our verified domain or
+// flooding the list.
+const RL_TTL = 60 * 60;
+const RL_IP_MAX = 5;
+const RL_ADDR_MAX = 3;
+
+async function bump(env, key) {
+  const cur = parseInt((await env.SEARCH_LOGS.get(key)) || '0', 10) || 0;
+  const next = cur + 1;
+  await env.SEARCH_LOGS.put(key, String(next), { expirationTtl: RL_TTL });
+  return next;
+}
+
+// True if this signup should be blocked. Fails open on any KV error, so a KV
+// hiccup never blocks real signups.
+async function isRateLimited(env, ip, norm) {
+  if (!env.SEARCH_LOGS) return false;
+  try {
+    const ipCount = await bump(env, 'rl:subscribe:' + ip);
+    const addrCount = await bump(env, 'rl:subscribe:addr:' + norm);
+    return ipCount > RL_IP_MAX || addrCount > RL_ADDR_MAX;
+  } catch (e) {
+    console.error('rate limit check failed, allowing signup', e && e.message);
+    return false;
+  }
+}
+
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
   try {
@@ -38,6 +67,13 @@ export async function onRequestPost({ request, env }) {
     // Validate the address before touching KV, Resend or the welcome send.
     if (!isValidEmail(norm)) {
       return new Response(JSON.stringify({ success: false, reason: 'invalid_email' }), { status: 400, headers });
+    }
+
+    // Rate limit before doing any work, so a blocked caller never triggers a
+    // send or a contact write.
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (await isRateLimited(env, ip, norm)) {
+      return new Response(JSON.stringify({ success: false, reason: 'rate_limited' }), { status: 429, headers });
     }
 
     // Honour unsubscribes. Someone who opted out re-subscribes only via the

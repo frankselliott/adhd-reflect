@@ -349,12 +349,20 @@ export async function onRequestGet({ request, env }) {
     return new Response('Not configured', { status: 500 });
   }
 
-  const list = await env.SEARCH_LOGS.list({ prefix: 'email:', limit: 500 });
   const now = new Date();
-  let sent = 0, skipped = 0, errors = 0;
+  let sent = 0, skipped = 0, errors = 0, total = 0;
 
   // Collect everyone due this run, then send them via Resend's batch endpoint.
+  // Paginate with the cursor (same pattern as backfill-contacts.js) so the run
+  // does not silently stop at the first page. Cap at 20 pages so a runaway
+  // cannot blow the Workers time limit.
   const due = [];
+  const MAX_PAGES = 20;
+  let cursor, pages = 0, capped = false;
+  do {
+  const list = await env.SEARCH_LOGS.list({ prefix: 'email:', cursor });
+  pages++;
+  total += list.keys.length;
   for (const key of list.keys) {
     const raw = await env.SEARCH_LOGS.get(key.name);
     if (!raw) continue;
@@ -397,6 +405,10 @@ export async function onRequestGet({ request, env }) {
       },
     });
   }
+  cursor = list.list_complete ? undefined : list.cursor;
+  if (cursor && pages >= MAX_PAGES) { capped = true; break; }
+  } while (cursor);
+  if (capped) console.warn('send-scheduled: hit ' + MAX_PAGES + '-page ceiling; more subscribers remain unprocessed this run');
 
   // Advance one recipient in KV after a successful send.
   const advance = async (d) => {
@@ -427,7 +439,7 @@ export async function onRequestGet({ request, env }) {
     }
   }
 
-  return new Response(JSON.stringify({ sent, skipped, errors, total: list.keys.length }), {
+  return new Response(JSON.stringify({ sent, skipped, errors, total, capped }), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
