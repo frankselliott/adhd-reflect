@@ -117,7 +117,7 @@ If the check picks something up, the assistant **does not try to match a card**.
 - the main crisis support line;
 - a clear note that ADHD Reflect is not a crisis service.
 
-A crisis check is not perfect. It is meant as an extra safety net, not a substitute for getting help. If you are in danger, contact emergency services. Our [Important safety information](/important-safety-information) page has more options.
+A crisis check is not perfect. It is meant as an extra safety net, not a substitute for getting help. If you are in danger, contact emergency services. Our [Important safety information](/legal/safety) page has more options.
 
 ---
 

@@ -2,49 +2,34 @@
 layout: ../../layouts/Legal.astro
 title: Cookies and Analytics
 label: Legal
-description: How ADHD Reflect uses cookies and tracks usage.
-updated: 25 May 2026
+description: How ADHD Reflect uses cookies and whether it tracks you.
+updated: 25 July 2026
 ---
-
-# Cookies and analytics
-
-**Last updated: 25 May 2026**
 
 ## The short version
 
-ADHD Reflect tries to use as few cookies and as little tracking as possible. We use a privacy-friendly analytics tool that counts page views without identifying you. We do not use tracking cookies for advertising. We do not let other companies track you on our site.
+ADHD Reflect uses almost nothing. There is no analytics tool, no page-view counting and no visitor profiling. There are no advertising cookies. We do not let other companies track you on our site. What little we store in your browser is there to keep paid access working and to remember a preference you set.
 
 ---
 
-## Cookies we do use
+## What we store in your browser
 
-A cookie is a small file your browser saves so that a website can remember things.
+We do not use tracking cookies. We use your browser's local storage for two practical things:
 
-We use:
+- **Paid access.** When you buy Both of You, your access token is saved in your browser so you stay signed in on that device without logging in every time. There are no accounts and no passwords, so this backup is how the device remembers you.
+- **Country preference.** If you have picked a country for support resources, we remember your choice so you do not have to set it again.
 
-- **A session cookie**, only when you are logged in, so the site knows it is you between page loads. This is deleted when you log out or close your browser.
-- **A "you have accepted this cookie banner" cookie**, if we ever show one, so we do not annoy you with it again.
-- **A "remember country" cookie**, so if you have manually picked a country for support resources, we remember your choice next time.
-
-These cookies are essential or based on your direct action. They do not track you across other websites.
+Neither of these follows you to other websites. Clearing your browser storage removes them. If you clear the access token, you can get back in using the link in your original purchase email.
 
 ---
 
 ## Analytics
 
-We use **Plausible** (or an equivalent privacy-friendly tool such as Fathom or Simple Analytics).
+There is no analytics tool on this site.
 
-This tool:
+We do not count how many people visit, we do not record which pages you look at, and we do not build any profile of you. We removed analytics rather than reach for a "privacy-friendly" version of it, because for what this site is, we would rather collect nothing.
 
-- counts how many people visit each page;
-- tells us roughly which countries people are coming from;
-- tells us which pages, cards or guides are being used the most;
-- does not use cookies;
-- does not store IP addresses;
-- does not build a profile of you;
-- does not follow you to other websites.
-
-We use this information to decide what to write next and to fix things that are broken.
+If we ever add anything here, we will update this page and the [Privacy policy](/legal/privacy) first.
 
 ---
 
@@ -52,29 +37,21 @@ We use this information to decide what to write next and to fix things that are 
 
 We do not use:
 
-- Google Analytics or any other analytics tool that creates a profile of you;
+- Google Analytics or any other analytics tool;
+- Plausible, Fathom, Simple Analytics or any other page-view counter;
 - Facebook Pixel, TikTok Pixel, LinkedIn Insight Tag or similar advertising trackers;
 - ad networks;
 - session-replay tools that record what you type or click;
 - cross-site tracking cookies;
 - any tool that captures the text you type into forms, including the assistant.
 
-If we ever add a new tool, we will update this page and the [Privacy policy](/privacy-policy).
-
 ---
 
 ## Email tracking
 
-Our newsletter and weekly practice emails are sent through **ConvertKit** (or a similar tool).
+Our welcome email and weekly practice emails are sent through **Resend**.
 
-By default, these emails track:
-
-- whether the email was opened;
-- whether a link in the email was clicked.
-
-We use this in aggregate to see whether emails are useful. It is not used to single you out, and it is not shared.
-
-If you would prefer not to be tracked at all, most modern email clients have an option to turn this off, and you can also reply asking us to switch tracking off for your address. We will.
+Open tracking and click tracking are both **switched off**. That means we do not record whether you opened an email or clicked a link inside it. We send the email and that is the end of it.
 
 ---
 
@@ -82,10 +59,11 @@ If you would prefer not to be tracked at all, most modern email clients have an 
 
 You can:
 
-- block all cookies in your browser (the site will still work, but you will need to log in each time);
-- block third-party cookies (this is on by default in most modern browsers, which is good);
+- clear your browser storage at any time (the site still works; you may need the link from your purchase email to get back into Both of You);
 - use a private or incognito window for any visit you do not want remembered;
-- ask us to delete any data we have about you (see the [Privacy policy](/privacy-policy)).
+- ask us to delete any data we hold about you (see the [Privacy policy](/legal/privacy)).
+
+There is no cookie banner, because there is nothing to consent to.
 
 ---
 
