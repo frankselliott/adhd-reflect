@@ -15,8 +15,18 @@ const cardsMap = Object.fromEntries(CARDS.map(c => [c.id, c]));
 const relatedCardTitles = (guide.relatedCards || [])
   .filter(id => cardsMap[id])
   .map(id => ({ id, title: cardsMap[id].title }));
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": guide.title,
+  "description": guide.recognize,
+  "author": { "@type": "Organization", "name": "ADHD Reflect" },
+  "publisher": { "@type": "Organization", "name": "ADHD Reflect", "url": "https://adhdreflect.com" },
+  "mainEntityOfPage": `https://adhdreflect.com/guides/${guide.id}`
+};
 ---
-<Base title={`${guide.title} · Guide`} description={guide.recognize}>
+<Base title={`${guide.title} · Guide`} description={guide.recognize} schema={articleSchema}>
 
   <div id="guide-root"></div>
 

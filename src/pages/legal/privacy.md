@@ -1,6 +1,10 @@
-# Privacy Policy
-
-**Last updated: 25 May 2026**
+---
+layout: ../../layouts/Legal.astro
+title: Privacy Policy
+label: Legal
+description: How ADHD Reflect handles your information.
+updated: 25 July 2026
+---
 
 ## The short version
 
@@ -9,15 +13,16 @@ ADHD Reflect is built for people in difficult parenting moments. That means the 
 Here is the honest summary:
 
 - We collect the minimum we can.
+- There are no accounts and no passwords. Paid access is a token in an emailed link, plus a backup saved in your browser.
 - We do not sell your data.
-- We do not use your data to target advertising.
-- We do not share what you type into the assistant with referral partners, advertisers or anyone marketing to you.
-- We use a small number of trusted services (listed below) to run the site, send emails and match your input to the right card or guide.
+- We do not use your data to target advertising. We do not run any analytics tool.
+- We do not share what you type into the assistant with advertisers, referral partners or anyone marketing to you.
+- We use four services to run the site: Cloudflare, Anthropic, Resend and Stripe. Nothing else.
 - You can ask us to delete your data at any time.
 
 The rest of this page explains how that works in detail.
 
-If anything here is unclear, email **adhdreflect@gmail.com** and we will answer in plain English.
+If anything here is unclear, email **hello@adhdreflect.com** and we will answer in plain English.
 
 ---
 
@@ -25,9 +30,17 @@ If anything here is unclear, email **adhdreflect@gmail.com** and we will answer 
 
 ADHD Reflect is operated by **ABN 44 606 081 086**, based in Brisbane, Australia.
 
-In this policy, "we", "us" and "our" mean ADHD Reflect. "You" means anyone using the site, the assistant, the quiz, the newsletter or any of our paid features.
+In this policy, "we", "us" and "our" mean ADHD Reflect. "You" means anyone using the site, the assistant, the quiz, the newsletter or Both of You.
 
-We are based in Australia and bound by the **Privacy Act 1988 (Cth)** and the **Australian Privacy Principles (APPs)**. If you are in the United Kingdom, European Union, California or another jurisdiction with its own privacy laws, you also have rights under those laws. We have tried to apply the strictest reasonable standard across the board rather than running different versions for different regions.
+We treat ourselves as bound by the Privacy Act 1988 (Cth) and the Australian Privacy Principles. Some small businesses are exempt from that Act. We have not relied on that exemption, because a lot of what you type here is personal and some of it is about your health or your child's, and it should be handled properly regardless of our size.
+
+---
+
+## No accounts, no passwords
+
+There is nothing to log into. You do not create an account and you never set a password.
+
+When you buy Both of You, we email you a link with a private access token in it. That link is how you get back in, on any device. Your browser also keeps a backup copy so you stay signed in on the device you bought it on. That is the whole system. There is no username, no password, and no account for someone to break into.
 
 ---
 
@@ -35,29 +48,27 @@ We are based in Australia and bound by the **Privacy Act 1988 (Cth)** and the **
 
 We collect different things depending on what you do on the site.
 
-### 1. Things you give us directly
+### Things you give us directly
 
-**Email address.** If you sign up for the newsletter, create an account or get your quiz result, we collect your email address.
+**Email address.** If you sign up for the newsletter or your quiz result, or you buy Both of You, we collect your email address.
 
-**Quiz answers.** If you take the parenting pattern quiz, we collect your answers and the pattern result. If you create an account, we store this so we can match weekly practices to your pattern. If you do not create an account, we use it once to give you a result and do not store it long-term.
+**Quiz answers.** If you take the parenting pattern quiz, we use your answers to work out your pattern. We store the pattern (not the individual answers) so we can send you the weekly practices that match it.
 
-**Account details.** If you create an account, we store the email you used to sign in and a hashed version of your password. We do not store your password in readable form.
+**Anything you choose to type or speak.** If you use the in-the-moment assistant to describe what just happened in your home, we receive that text. If you use voice input, your browser converts speech to text on your device, and we receive only the text. See "What we do with what you type" below, because this is the most sensitive part.
 
-**Anything you choose to type or speak.** If you use the in-the-moment assistant to describe what just happened in your home, we receive that text. If you use voice input, your browser converts speech to text on your device, and we receive only the text. See the section "What we do with what you type" below, because this is the most sensitive part.
-
-**Payment details.** If you ever upgrade to a paid tier, payment is processed by **Stripe**. We do not see or store your card number. We receive a record that you paid, your subscription status, and the country your card was issued in.
+**Payment details.** If you buy Both of You, payment is processed by **Stripe**. It is a single, one-off payment. There is no subscription and no recurring billing. We do not see or store your card number. We receive a record that you paid and the country your card was issued in.
 
 **Anything you send us by email.** If you email us, we keep your message and reply.
 
-### 2. Things we collect automatically
+### Things we collect automatically
 
 **Country-level location.** We use your IP address to work out your country, so we can show you the right crisis lines and support resources. We do not store precise location, suburb or postcode unless you give it to us deliberately.
 
-**Basic technical information.** Standard web logs, including IP address, device type, browser, the pages you visited and the time. We use these for security, debugging and to understand how many people use the site.
+**Basic technical information.** Standard web server logs from our host, Cloudflare, used for security and debugging.
 
-**Analytics.** We use **Plausible** (or a similar privacy-friendly analytics tool), which counts page views without cookies and without identifying individual users. See our [Cookies and analytics page](/cookies-and-analytics) for details.
+We do not run any analytics tool. We do not count page views, build visitor profiles, or track you from page to page.
 
-### 3. Things we do not collect
+### Things we do not collect
 
 We do not collect or ask for:
 
@@ -78,16 +89,23 @@ This is the most sensitive part of the site, so we want to be specific.
 
 When you type or speak something into the in-the-moment assistant ("I just yelled at my kid", "the homework meltdown again", and so on), here is what happens:
 
-1. Your text is sent to **Anthropic's Claude API** in the United States. Anthropic uses it only to return a match to one of our pre-written cards or guides. Per Anthropic's published terms, API inputs are **not used to train their models** unless we explicitly opt in, which we do not.
-2. The assistant returns a short list of likely card or guide matches.
-3. We log only the **matched card or guide ID** and a general **category tag**.
-4. We **do not log your raw query by default**.
+1. Your text is sent to **Anthropic's Claude API**, processed in the United States. Anthropic uses it only to help match your words to one of our pre-written cards or guides. The AI does not generate advice. Per Anthropic's terms, API inputs are **not used to train their models**.
+2. The assistant matches you to a card or guide.
+3. We log what you typed in our own records for **90 days**, so we can see what people are struggling with and decide what to write next. After 90 days it is deleted automatically.
 
-There is one exception. If the assistant cannot match your query to a card or guide, we may log the text so we can use it to decide what to write next. We will only do this if you tick the consent box that appears when this happens. You can use the assistant without ticking the box; you just will not see "your query helped us write a new guide" as a result later.
+We never sell this text, and we never use it for advertising. We do not link it to your email, your payment or your access token.
 
 We also run a crisis-language check on what you type. If you describe something that looks like a safety risk to you, your child or someone else, we will not try to match a card. We will show you crisis support options for your country instead.
 
-We do not link what you type to your email, your account or your payment details.
+---
+
+## Information about other people
+
+The hardest part of a tool like this is that you often type about your children. Your child has not agreed to any of this, and a young child cannot.
+
+Here is exactly what happens to that text. It is sent to Anthropic in the United States to match your words to a card, and it is logged in our own records under our search data for 90 days so we can learn what to write next. It is never sold and never used for advertising. After 90 days it is deleted.
+
+We ask you not to include anything that identifies your child, such as their name, school or photo. The assistant works fine with general descriptions. If you want anything you have typed removed sooner, email **privacy@adhdreflect.com** and we will delete it.
 
 ---
 
@@ -100,7 +118,6 @@ ADHD Reflect is not a health service. We do not provide diagnosis, therapy, trea
 We treat all of this as sensitive by default. That means:
 
 - we only collect it with your knowledge and where it is needed to give you what you came for;
-- we apply tighter access controls inside our systems;
 - we do not share it with advertisers, marketers or referral partners;
 - we do not use it to build a profile that follows you around the internet.
 
@@ -108,18 +125,16 @@ We treat all of this as sensitive by default. That means:
 
 ## Who we share data with
 
-We use a small number of carefully chosen services to run ADHD Reflect. These are listed below, with the reason we use them and what we share.
+We use four services to run ADHD Reflect. That is the whole list.
 
 | Service | What it does | What we share with it |
 |---|---|---|
-| **Anthropic (Claude API)** | Matches your assistant input to the right card or guide. | The text you type into the assistant. Not used for model training. |
-| **Resend** | Sends the welcome email and weekly practice emails. | Your email address and which pattern you scored on. |
-| **Stripe** | Processes payments for paid features. | Name, email, country and payment details (handled by Stripe directly). |
-| **Supabase** (or equivalent hosted database) | Stores account, quiz pattern and saved cards. | Email, hashed password, pattern result, saved cards. |
-| **Replit / Cloudflare / Vercel** | Hosts the site. | Standard technical logs. |
-| **Plausible** (or similar) | Counts visits without cookies. | Anonymous, aggregated page views. |
+| **Cloudflare** | Hosts the site and stores its data in Cloudflare KV. | Your email, quiz pattern, drip schedule, access token, and what you type into the assistant. |
+| **Anthropic (Claude API)** | Matches your assistant input to the right card or guide. Processed in the United States. | The text you type into the assistant. Not used to train their models. |
+| **Resend** | Sends the welcome email and weekly practice emails. Your subscriber data sits on Resend's servers in Japan. | Your email address and which pattern you scored on. |
+| **Stripe** | Processes the one-off payment for Both of You. | Name, email, country and payment details, handled by Stripe directly. |
 
-We do not share what you type into the assistant with any of these services other than Anthropic. We do not share your quiz result with anyone other than Resend (so we can send you the weekly practice that matches your pattern).
+We do not share what you type into the assistant with anyone other than Anthropic. We do not share your quiz result with anyone other than Resend, so we can send you the weekly practice that matches your pattern.
 
 If we ever change a service in this list, we will update this page.
 
@@ -134,29 +149,26 @@ We will only share your data outside this list if:
 
 ## Where your data is stored
 
-Most of the services above are based in the **United States**. Some store data in other regions. By using ADHD Reflect, you understand that your data may be processed in countries other than your own.
+Your data lives in Cloudflare KV. Two of our services also process it overseas: **Anthropic** in the **United States** when the assistant matches your text, and **Resend** in **Japan** when we send you email.
 
-Where data leaves Australia, we rely on the relevant service's contractual commitments to handle it consistently with the Australian Privacy Principles, UK and EU GDPR, and other applicable laws.
-
-If you would prefer your data to stay in a particular country, email us and we will tell you what we can offer.
+Where data leaves Australia, we rely on the contractual protections those providers have in place to handle it consistently with the Australian Privacy Principles and other applicable laws.
 
 ---
 
 ## How long we keep it
 
-| Data | How long we keep it |
-|---|---|
-| Newsletter email address | Until you unsubscribe, plus 30 days |
-| Account data | Until you delete the account, plus 30 days |
-| Quiz answers (no account) | A few hours, then discarded |
-| Quiz pattern (with account) | Until you delete the account |
-| Assistant matches (card IDs only) | Up to 12 months in aggregate form |
-| Unmatched query text (with consent) | Up to 6 months, then deleted or fully anonymised |
-| Payment records | 7 years, to meet Australian tax law |
-| Support emails | Up to 3 years |
-| Web logs | Up to 90 days |
+Almost everything lives in Cloudflare KV and deletes itself on a timer. These are the real numbers, read from the code:
 
-When we delete data, we do so from active systems within 30 days. Backups may take longer to cycle out, up to 90 days.
+| What it is | How long we keep it |
+|---|---|
+| A short-lived cache of which card your text matched | 30 days |
+| What you type into the assistant | 90 days |
+| Your drip schedule and quiz pattern | 60 days |
+| Your unsubscribe record | 5 years |
+| Your purchase access token | 2 years |
+| Your contact record held in Resend | Until you ask us to delete it, or we remove it |
+
+Your contact record in Resend does not expire on its own, so it stays there until it is deleted. Everything else expires automatically on the timer above.
 
 ---
 
@@ -171,15 +183,21 @@ You have the following rights, no matter where you live:
 - **Opt out** of marketing emails at any time, using the link at the bottom of every email.
 - **Complain** to us first, and to a regulator if we cannot fix it.
 
-To use any of these rights, email **adhdreflect@gmail.com** with a short description of what you want. We will respond within **30 days**, usually faster. If we need more information to verify it is really you, we will ask.
+To use any of these rights, email **privacy@adhdreflect.com** with a short description of what you want. We will respond within **one month**. If we need more information to check it is really you, we will ask.
 
 If you are in **Australia** and you are not happy with how we have responded, you can complain to the **Office of the Australian Information Commissioner** at [oaic.gov.au](https://www.oaic.gov.au).
 
-If you are in the **United Kingdom**, you can complain to the **Information Commissioner's Office** at [ico.org.uk](https://ico.org.uk).
+### If you are in the UK or the EU
 
-If you are in the **European Union**, you can complain to your local data protection authority.
+If you are in the UK or the EU, you also have rights under the UK GDPR and GDPR.
 
-If you are in **California**, you have additional rights under the CCPA and CPRA, including the right to opt out of the sale or sharing of personal information. We do not sell or share personal information as those terms are defined under California law.
+Our lawful basis for sending you email is your consent, which you gave when you signed up and can withdraw at any time using the unsubscribe link in any email. Our lawful basis for the assistant is our legitimate interest in matching what you type to the right piece of writing, which is the entire point of the tool.
+
+You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to delete it, by emailing privacy@adhdreflect.com. We will respond within one month.
+
+Your data is processed outside the UK and EU: in the United States by Anthropic when the assistant matches your text, and in Japan by Resend when we send you email. We rely on the standard contractual clauses those providers have in place.
+
+If you are in **California**, you have rights under the CCPA and CPRA, including the right to opt out of the sale or sharing of personal information. We do not sell or share personal information as those terms are defined under California law.
 
 ---
 
@@ -187,7 +205,7 @@ If you are in **California**, you have additional rights under the CCPA and CPRA
 
 ADHD Reflect is built for adults, especially parents. It is not designed for, marketed to or intended for children or teenagers.
 
-We do not knowingly collect personal information from anyone under 18. If you are a parent or carer and you believe your child has used the site and given us information, email **adhdreflect@gmail.com** and we will delete it.
+We do not knowingly collect personal information from anyone under 18. If you are a parent or carer and you believe your child has used the site and given us information, email **privacy@adhdreflect.com** and we will delete it.
 
 We also ask that you do not type information about your child that would identify them (name, school, photo, exact age, exact suburb) into the assistant or any form on the site. The site works with general descriptions of moments. It does not need identifying details about your child, and we do not want them.
 
@@ -195,7 +213,7 @@ We also ask that you do not type information about your child that would identif
 
 ## Security
 
-We use industry-standard protections, including encryption in transit, hashed passwords, role-based access inside our team and regular updates to our hosting and services.
+We use industry-standard protections, including encryption in transit and tight access controls. Because there are no accounts and no passwords, there is no login for an attacker to guess or steal.
 
 No system is perfectly secure. If we ever have a data breach that is likely to cause you serious harm, we will tell you and the relevant regulator, as required under the Notifiable Data Breaches scheme in Australia.
 
@@ -205,13 +223,11 @@ No system is perfectly secure. If we ever have a data breach that is likely to c
 
 If we change anything important on this page, we will update the date at the top and tell newsletter subscribers by email. Small clarifications or typo fixes may happen without a separate notice.
 
-The current version of this policy always lives at this URL.
-
 ---
 
 ## Contact us
 
-**Privacy questions or requests:** adhdreflect@gmail.com
-**General contact:** adhdreflect@gmail.com
+**Privacy questions and deletion requests:** privacy@adhdreflect.com
+**General contact:** hello@adhdreflect.com
 
-We aim to reply within five business days, and always within thirty.
+Both addresses reach the same inbox. We aim to reply within five business days, and always within one month.

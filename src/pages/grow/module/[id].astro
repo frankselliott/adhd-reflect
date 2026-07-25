@@ -7,6 +7,6 @@ export function getStaticPaths() {
   return ids.map(id => ({ params: { id } }));
 }
 ---
-<Base title="Module" description="Both of You" current="grow">
+<Base title="Module" description="Both of You" current="grow" noindex={true}>
   <GrowModule moduleId={id} client:load />
 </Base>

@@ -507,13 +507,17 @@ function ResultScreen({ results }) {
               <span style={{ fontFamily: 'var(--serif)', fontSize: 14, color: '#6B6358' }}>Making it stick</span>
             </div>
           </div>
-          {/* Replace with ConvertKit or email provider embed */}
-          <input style={styles.emailInput} type="email" placeholder="your@email.com" id="quiz-email" />
-          <button style={styles.emailBtn} data-signup-btn onClick={async () => {
+          <form onSubmit={async (e) => {
+            e.preventDefault();
             const emailEl = document.getElementById('quiz-email');
-            const email = emailEl?.value;
-            if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+            const errEl = document.getElementById('quiz-email-error');
             const btn = document.querySelector('[data-signup-btn]');
+            const note = document.querySelector('[data-signup-note]');
+            const showError = (msg) => { if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; } };
+            // Local part, @, domain, a dot, and a TLD of 2+. Not full RFC 5322.
+            const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            const email = (emailEl?.value || '').trim().toLowerCase();
+            if (!EMAIL_RE.test(email)) { showError('Please enter a valid email address.'); return; }
             if (btn) { btn.textContent = 'Signing up...'; btn.disabled = true; }
             try {
               const res = await fetch('/api/subscribe', {
@@ -527,20 +531,36 @@ function ResultScreen({ results }) {
                 if (emailEl) emailEl.style.display = 'none';
                 try { localStorage.setItem('adhd-reflect-email-signup', JSON.stringify({ email, pattern: primary, timestamp: Date.now() })); } catch(e) {}
                 if (data.welcomeSent === false && data.reason !== 'already_subscribed') {
-                  const note = document.querySelector('[data-signup-note]');
                   if (note) note.textContent = "You're on the list. The welcome email did not go through just now, but your plan still starts tomorrow. If nothing arrives, email hello@adhdreflect.com.";
                 }
+              } else if (data.reason === 'invalid_email') {
+                showError('Please enter a valid email address.');
+                if (btn) { btn.textContent = 'Send me my practice plan'; btn.disabled = false; }
+              } else if (data.reason === 'rate_limited') {
+                showError('Too many attempts. Try again shortly.');
+                if (btn) { btn.textContent = 'Send me my practice plan'; btn.disabled = false; }
               } else if (data.reason === 'unsubscribed') {
                 if (btn) { btn.textContent = 'You have unsubscribed'; btn.disabled = true; }
-                const note = document.querySelector('[data-signup-note]');
                 if (note) note.textContent = "You've unsubscribed before. Use the resubscribe link in any old email, or email hello@adhdreflect.com.";
               } else {
                 if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
               }
-            } catch(e) {
+            } catch(err) {
               if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
             }
-          }}>Send me my practice plan</button>
+          }}>
+            <input
+              style={styles.emailInput}
+              type="email"
+              placeholder="your@email.com"
+              id="quiz-email"
+              required
+              autoComplete="email"
+              onInput={() => { const errEl = document.getElementById('quiz-email-error'); if (errEl) errEl.style.display = 'none'; }}
+            />
+            <p id="quiz-email-error" style={{ display: 'none', color: 'var(--clay)', fontFamily: 'var(--sans)', fontSize: 14, margin: '0 0 10px' }}></p>
+            <button style={styles.emailBtn} type="submit" data-signup-btn>Send me my practice plan</button>
+          </form>
           <p style={styles.emailNote} data-signup-note>Free. Four emails over four weeks. Then one per week if you want it. Unsubscribe anytime.</p>
         </div>
 

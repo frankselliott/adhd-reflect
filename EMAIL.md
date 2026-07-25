@@ -4,6 +4,10 @@ All transactional and marketing email goes through [Resend](https://resend.com).
 Sending domain: **adhdreflect.com** (verified in Resend). Everything routes
 through a single helper: `functions/api/_lib/email.js`.
 
+> **UK/EU Article 27 representative:** deliberately deferred while subscriber
+> numbers are negligible. Revisit and appoint one when UK and Irish subscribers
+> reach the hundreds.
+
 - `sendEmail(env, { to, subject, html, text, tags, idempotencyKey, headers })`
   posts to `https://api.resend.com/emails`. Never throws; returns
   `{ ok, id, error }` and logs the Resend error body on failure. Retries once

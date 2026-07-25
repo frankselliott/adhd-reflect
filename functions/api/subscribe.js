@@ -3,6 +3,50 @@ import { sendEmail, signUnsub, normalizeEmail, upsertContact } from './_lib/emai
 import { PATTERN_NAMES, VALID_PATTERNS } from './_lib/patterns.js';
 import { welcomeEmailHtml } from './_lib/emails.js';
 
+// Local part, @, domain, a dot, and a TLD of 2+. Not full RFC 5322. Kept in
+// sync with the client check in src/components/Quiz.jsx; client validation is
+// only decoration on a public, CORS-* endpoint, so this is the real gate.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const JUNK_DOMAINS = new Set(['localhost', 'example.com', 'test.com']);
+
+function isValidEmail(email) {
+  if (!email || email.length > 254) return false;
+  if (!EMAIL_RE.test(email)) return false;
+  const domain = email.slice(email.lastIndexOf('@') + 1);
+  if (!domain.includes('.')) return false;
+  if (JUNK_DOMAINS.has(domain)) return false;
+  return true;
+}
+
+// Rate limiting. Counters in SEARCH_LOGS with a one-hour TTL: 5 signups per IP
+// per hour, and the same address no more than 3 times per hour regardless of
+// IP. This stops anyone mail-bombing an address from our verified domain or
+// flooding the list.
+const RL_TTL = 60 * 60;
+const RL_IP_MAX = 5;
+const RL_ADDR_MAX = 3;
+
+async function bump(env, key) {
+  const cur = parseInt((await env.SEARCH_LOGS.get(key)) || '0', 10) || 0;
+  const next = cur + 1;
+  await env.SEARCH_LOGS.put(key, String(next), { expirationTtl: RL_TTL });
+  return next;
+}
+
+// True if this signup should be blocked. Fails open on any KV error, so a KV
+// hiccup never blocks real signups.
+async function isRateLimited(env, ip, norm) {
+  if (!env.SEARCH_LOGS) return false;
+  try {
+    const ipCount = await bump(env, 'rl:subscribe:' + ip);
+    const addrCount = await bump(env, 'rl:subscribe:addr:' + norm);
+    return ipCount > RL_IP_MAX || addrCount > RL_ADDR_MAX;
+  } catch (e) {
+    console.error('rate limit check failed, allowing signup', e && e.message);
+    return false;
+  }
+}
+
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
   try {
@@ -19,6 +63,18 @@ export async function onRequestPost({ request, env }) {
     }
     const patternName = PATTERN_NAMES[pattern];
     const norm = normalizeEmail(email);
+
+    // Validate the address before touching KV, Resend or the welcome send.
+    if (!isValidEmail(norm)) {
+      return new Response(JSON.stringify({ success: false, reason: 'invalid_email' }), { status: 400, headers });
+    }
+
+    // Rate limit before doing any work, so a blocked caller never triggers a
+    // send or a contact write.
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (await isRateLimited(env, ip, norm)) {
+      return new Response(JSON.stringify({ success: false, reason: 'rate_limited' }), { status: 429, headers });
+    }
 
     // Honour unsubscribes. Someone who opted out re-subscribes only via the
     // resubscribe link, not by signing up again.
@@ -38,7 +94,7 @@ export async function onRequestPost({ request, env }) {
     // pattern practices over the following weeks.
     if (env.SEARCH_LOGS) {
       await env.SEARCH_LOGS.put(scheduleKey, JSON.stringify({
-        email, pattern,
+        email: norm, pattern,
         signupDate: new Date().toISOString(),
         emailsSent: 0,
         nextEmailDate: new Date(Date.now() + 24*60*60*1000).toISOString(),
@@ -46,12 +102,12 @@ export async function onRequestPost({ request, env }) {
     }
 
     // Welcome email. Marketing send, so it carries a signed unsubscribe path.
-    const token = await signUnsub(env, email);
-    const q = 'e=' + encodeURIComponent(email) + '&t=' + token;
+    const token = await signUnsub(env, norm);
+    const q = 'e=' + encodeURIComponent(norm) + '&t=' + token;
     const unsubUrl = 'https://adhdreflect.com/unsubscribe?' + q;
     const unsubApi = 'https://adhdreflect.com/api/unsubscribe?' + q;
     const result = await sendEmail(env, {
-      to: email,
+      to: norm,
       subject: 'You\'re in. First one lands tomorrow.',
       tags: [{ name: 'type', value: 'welcome' }],
       headers: {
@@ -86,7 +142,7 @@ Unsubscribe any time: ${unsubUrl}`,
 
     // Mirror into Resend contacts (durable list). KV still drives the drip;
     // this is for retention, not routing, and must never fail the signup.
-    const contact = await upsertContact(env, { email, pattern, unsubscribed: false });
+    const contact = await upsertContact(env, { email: norm, pattern, unsubscribed: false });
 
     return new Response(JSON.stringify({ success: true, pattern, welcomeSent, reason, contactSynced: contact.ok }), { status: 200, headers });
   } catch (e) {

@@ -8,6 +8,8 @@ interface Props {
   description?: string;
   current?: string;
   ogImage?: string;
+  noindex?: boolean;
+  schema?: any;
 }
 
 const {
@@ -15,6 +17,8 @@ const {
   description = 'For ADHD parents raising ADHD kids. Not therapy. Not advice. Just what helps.',
   current = '',
   ogImage,
+  noindex = false,
+  schema,
 } = Astro.props;
 
 const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`;
@@ -59,7 +63,9 @@ const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
 
   <!-- Prevent indexing until ready to launch -->
   <link rel="canonical" href={`https://adhdreflect.com${Astro.url.pathname}`} />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  {noindex
+    ? <meta name="robots" content="noindex, nofollow" />
+    : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -82,10 +88,10 @@ const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
     "@type": "Organization",
     "name": "ADHD Reflect",
     "url": "https://adhdreflect.com",
-    "description": "Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in.",
-    "sameAs": []
+    "description": "Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in."
   }
   </script>
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 </head>
 <body>
   <Nav current={current} />
