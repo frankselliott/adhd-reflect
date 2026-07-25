@@ -7,15 +7,20 @@ interface Props {
   title?: string;
   description?: string;
   current?: string;
+  ogImage?: string;
 }
 
 const {
   title = 'ADHD Reflect',
   description = 'For ADHD parents raising ADHD kids. Not therapy. Not advice. Just what helps.',
   current = '',
+  ogImage,
 } = Astro.props;
 
 const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`;
+// Open Graph needs a raster image: SVG is ignored by every major platform.
+// Pages may pass ogImage to override the default (e.g. a per-pattern card).
+const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -43,10 +48,12 @@ const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
-  <meta property="og:image" content="https://adhdreflect.com/og-image.svg" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="twitter:image" content="https://adhdreflect.com/og-image.svg" />
+  <meta property="og:image:alt" content={fullTitle} />
+  <meta name="twitter:image" content={ogImageUrl} />
   <meta property="og:url" content={`https://adhdreflect.com${Astro.url.pathname}`} />
   <meta property="og:site_name" content="ADHD Reflect" />
 
