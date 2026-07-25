@@ -1,5 +1,6 @@
 import { sendEmail } from '../_lib/email.js';
 import { recoveryEmailHtml } from '../_lib/emails.js';
+import { recovery as recoveryCopy } from '../_lib/emailCopy.js';
 
 export async function onRequestPost({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
@@ -30,10 +31,10 @@ export async function onRequestPost({ request, env }) {
       const accessUrl = 'https://adhdreflect.com/grow/access?token=' + token;
       await sendEmail(env, {
         to: normalised,
-        subject: 'Your Both of You access link',
+        subject: recoveryCopy.subject,
         tags: [{ name: 'type', value: 'recovery' }],
         html: recoveryEmailHtml({ accessUrl }),
-        text: 'Your Both of You access link: ' + accessUrl + '\n\nBookmark this link — it works on any device. No password needed.',
+        text: recoveryCopy.text({ accessUrl }),
       });
     }
 

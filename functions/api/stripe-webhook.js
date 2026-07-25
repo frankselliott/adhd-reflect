@@ -1,5 +1,6 @@
 import { sendEmail } from './_lib/email.js';
 import { purchaseEmailHtml } from './_lib/emails.js';
+import { purchase as purchaseCopy } from './_lib/emailCopy.js';
 
 async function verifyStripeSignature(body, signature, secret) {
   const parts = signature.split(',');
@@ -66,13 +67,13 @@ export async function onRequestPost({ request, env }) {
           await env.GROW_DATA.put('session:' + session.id, accessUrl, { expirationTtl: 60 * 60 * 24 });
           const emailResult = await sendEmail(env, {
             to: email,
-            subject: 'You\'re in. Both of You',
+            subject: purchaseCopy.subject,
             tags: [{ name: 'type', value: 'purchase' }],
             // Stripe retries the same event on a 5xx; keying on the session ID
             // means a retry cannot send a second receipt.
             idempotencyKey: 'purchase-' + session.id,
             html: purchaseEmailHtml({ accessUrl }),
-            text: `You're in.\n\nBoth of You is ready when you are.\n\nOpen it here:\n${accessUrl}\n\nThis link works on any device. Bookmark this email, it's how you get back in. No password needed.\n\nLost the link? Go to adhdreflect.com/grow and use "Recover access."\n\n---\n\nWhere to start: Module 1 is the beginning. If you've taken the pattern quiz, your first modules are waiting based on your result. Each module is 10-18 minutes on a phone.\n\nBetween modules: adhdreflect.com has a free search tool for hard moments, describe what's happening and it matches you to a card.\n\nNeed to talk to someone? online-therapy.com offers CBT-based therapy from $40/week. Use code THERAPY20 for 20% off your first month. (We earn a small commission if you sign up.)\n\n---\n\nADHD Reflect · adhdreflect.com\nThis is not medical advice.`,
+            text: purchaseCopy.text({ accessUrl }),
           });
           // Email must not fail silently. Return non-2xx so Stripe retries.
           // The idempotency key above is the Stripe session ID, so a retry
