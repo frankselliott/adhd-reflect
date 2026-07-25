@@ -1,10 +1,10 @@
 // Per-pattern Open Graph for shared quiz results.
 // The site is static, so a query param cannot vary the baked-in OG tags. This
-// Pages Function runs at the edge for /quiz: it serves the exact same static
-// page (via next()) and, ONLY when ?p=<valid pattern> is present, swaps the
-// og:image / twitter:image / og:image:alt so a shared link previews with the
-// pattern card. The quiz itself is never altered by ?p= — only meta tags are.
-// Any miss or error returns the page unchanged.
+// Pages Function fetches the exact same static page from the asset store and,
+// ONLY when ?p=<valid pattern> is present, swaps the og:image / twitter:image /
+// og:image:alt so a shared link previews with the pattern card. The quiz itself
+// is never altered by ?p= — only meta tags are. Any miss or error returns the
+// page unchanged.
 const NAMES = {
   reactor: 'The Overloaded Reactor',
   juggler: 'The Chaos Juggler',
@@ -14,9 +14,18 @@ const NAMES = {
 };
 
 export async function onRequestGet(context) {
-  const res = await context.next();
+  const { request, env } = context;
+
+  // Serve the static page. Prefer the ASSETS binding; fall back to next().
+  let res;
   try {
-    const p = new URL(context.request.url).searchParams.get('p');
+    res = env && env.ASSETS ? await env.ASSETS.fetch(request) : await context.next();
+  } catch (e) {
+    return context.next();
+  }
+
+  try {
+    const p = new URL(request.url).searchParams.get('p');
     if (!p || !Object.prototype.hasOwnProperty.call(NAMES, p)) return res;
 
     const ct = res.headers.get('content-type') || '';
