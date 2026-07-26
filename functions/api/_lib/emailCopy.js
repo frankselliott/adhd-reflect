@@ -45,24 +45,24 @@ export const footerTransactionalNote = 'You are getting this because you bought 
 // subscribes. HTML via welcomeEmailHtml(); carries a signed unsubscribe path.
 export const welcome = {
   key: 'welcome',
-  subject: `You're in. First one lands tomorrow.`,
-  preheader: `You're in. First one lands tomorrow.`,
+  subject: `Your first email lands tomorrow`,
+  preheader: `Four short emails about your pattern.`,
   html: {
     title: ({ patternName }) => `Your pattern: ${patternName}`,
-    p1: `Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.`,
-    p2: `That's the whole thing. Four emails.`,
-    p3: ({ link }) => `In between, ${link(SITE, SITE_DISPLAY)} has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.`,
-    note: `Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.`,
+    p1: `Tomorrow I'll send the first of four short emails about how this pattern can show up at home, especially when everyone is tired and your last good nerve has already gone. The other three will arrive weekly after that.`,
+    p2: `There's nothing to keep up with. Read them when you can and ignore anything that doesn't fit.`,
+    p3: ({ link }) => `If today is already a lot, ${link(SITE, SITE_DISPLAY)} has a free tool for the moment you're in. Tell it what's happening and it'll find something you could try.`,
+    note: `A lot of parenting advice starts with “stay calm”. Fair enough. It gets trickier when the parent has ADHD too. ADHD Reflect starts there.`,
   },
-  text: ({ patternName, unsubUrl }) => `Your pattern: ${patternName}.
+  text: ({ patternName, unsubUrl }) => `Your pattern is ${patternName}.
 
-Tomorrow you'll get the first of four short emails on what that actually looks like in a real house on a bad night. Then one a week for three more weeks. No apps, no streaks, no homework.
+Tomorrow I'll send the first of four short emails about how this pattern can show up at home, especially when everyone is tired and your last good nerve has already gone. The other three will arrive weekly after that.
 
-That's the whole thing. Four emails.
+There's nothing to keep up with. Read them when you can and ignore anything that doesn't fit.
 
-In between, ${SITE_DISPLAY} has a free tool for the moment you're in right now. Describe what's happening and it matches you to a card written for it.
+If today is already a lot, ${SITE_DISPLAY} has a free tool for the moment you're in. Tell it what's happening and it'll find something you could try.
 
-Worth saying once: most parenting advice assumes you're the calm one in the room. That falls apart when you've both got ADHD and you're both gone at the same time. That's the gap this is for.
+A lot of parenting advice starts with “stay calm”. Fair enough. It gets trickier when the parent has ADHD too. ADHD Reflect starts there.
 
 ${SENDER}
 ${SITE_DISPLAY}
@@ -75,22 +75,46 @@ ${unsubscribeLine(unsubUrl)}`,
 export const purchase = {
   key: 'purchase',
   subject: `You're in. Both of You`,
-  preheader: `Both of You is ready when you are. No rush. No schedule.`,
+  preheader: `Both of You is ready whenever you are.`,
   html: {
     title: `You're in.`,
-    p1: `Both of You is ready when you are. No rush. No schedule.`,
+    p1: `Both of You is ready whenever you are. There's no schedule to fall behind on.`,
     button: `Open Both of You`,
     accessLabel: `Your access link`,
-    p2: `This email is your key. <strong>Bookmark it</strong>, it's how you get back in on any device. No password. No account.`,
+    p2: `This email is your key. <strong>Bookmark it</strong> and you can get back in on any device. No password or account to remember.`,
     p3: ({ link }) => `Lost it later? Go to ${link(SITE + '/grow', SITE_DISPLAY + '/grow')} and use "Recover access."`,
     startLabel: `Where to start`,
-    p4: `The course begins in Module 1, but if you've already taken the pattern quiz, your first modules are waiting for you based on your result.`,
-    p5: `Each module takes 10–18 minutes. You don't need to sit down. You don't need to be in a good headspace. You just need a few minutes and a phone.`,
-    p6: ({ link }) => `Between modules, ${link(SITE, SITE_DISPLAY)} has a search tool for the hard moment you're in right now, describe what's happening and it matches you to a card. Free, no login.`,
-    p7: ({ link }) => `If you're at the point where you want to talk to someone, ${link('https://go.online-therapy.com/aff_c?offer_id=2&amp;aff_id=6176', 'online-therapy.com')} offers CBT-based therapy from $40/week with a 20% first-month discount using code <strong>THERAPY20</strong>. We use this link because we think it's genuinely useful, we also earn a small commission if you sign up.`,
-    note: `Both of You is structured practical content, not a clinical intervention.`,
+    p4: `Module 1 is the proper beginning, but you don't have to be proper about it. If you've taken the pattern quiz, you'll also see a few suggested modules. Start with the one that sounds most like your house this week.`,
+    p5: `Most modules take 10–18 minutes, and you can read them in bits. Five interrupted minutes on your phone is completely fine.`,
+    p6: ({ link }) => `For the hard moments between modules, ${link(SITE, SITE_DISPLAY)} has a free search tool. Tell it what's happening and it'll find a card for that moment.`,
+    p7: ({ link }) => `Some things are easier to untangle with another person. If you want that, ${link('https://go.online-therapy.com/aff_c?offer_id=2&amp;aff_id=6176', 'online-therapy.com')} offers CBT-based online therapy from $40 a week. Code <strong>THERAPY20</strong> takes 20% off the first month. This is an affiliate link, which means I may earn a small commission if you join. It costs you no extra.`,
+    note: `Both of You is practical education and reflection, not therapy or medical advice.`,
   },
-  text: ({ accessUrl }) => `You're in.\n\nBoth of You is ready when you are.\n\nOpen it here:\n${accessUrl}\n\nThis link works on any device. Bookmark this email, it's how you get back in. No password needed.\n\nLost the link? Go to ${SITE_DISPLAY}/grow and use "Recover access."\n\n---\n\nWhere to start: Module 1 is the beginning. If you've taken the pattern quiz, your first modules are waiting based on your result. Each module is 10-18 minutes on a phone.\n\nBetween modules: ${SITE_DISPLAY} has a free search tool for hard moments, describe what's happening and it matches you to a card.\n\nNeed to talk to someone? online-therapy.com offers CBT-based therapy from $40/week. Use code THERAPY20 for 20% off your first month. (We earn a small commission if you sign up.)\n\n---\n\n${SENDER} · ${SITE_DISPLAY}\n${NOT_MEDICAL}`,
+  text: ({ accessUrl }) => `You're in.
+
+Both of You is ready whenever you are. There's no schedule to fall behind on.
+
+Open it here:
+${accessUrl}
+
+This email is your key. Bookmark it and you can get back in on any device. No password or account to remember.
+
+Lost it later? Go to ${SITE_DISPLAY}/grow and use "Recover access."
+
+---
+
+Module 1 is the proper beginning, but you don't have to be proper about it. If you've taken the pattern quiz, you'll also see a few suggested modules. Start with the one that sounds most like your house this week.
+
+Most modules take 10–18 minutes, and you can read them in bits. Five interrupted minutes on your phone is completely fine.
+
+For the hard moments between modules, ${SITE_DISPLAY} has a free search tool. Tell it what's happening and it'll find a card for that moment.
+
+Some things are easier to untangle with another person. If you want that, online-therapy.com offers CBT-based online therapy from $40 a week. Code THERAPY20 takes 20% off the first month. This is an affiliate link, which means I may earn a small commission if you join. It costs you no extra.
+
+---
+
+${SENDER} · ${SITE_DISPLAY}
+Both of You is practical education and reflection, not therapy or medical advice.`,
 };
 
 // RECOVERY. Transactional. Sends when a buyer asks for their access link again
@@ -102,10 +126,10 @@ export const recovery = {
   html: {
     p1: `Here's your access link for Both of You.`,
     button: `Open Both of You`,
-    p2: `This link works on any device. Bookmark it or save this email — it's how you get in.`,
+    p2: `This link works on any device. Bookmark it or save this email, it's how you get in.`,
     p3: `No password needed. Just the link.`,
   },
-  text: ({ accessUrl }) => `Your Both of You access link: ${accessUrl}\n\nBookmark this link — it works on any device. No password needed.`,
+  text: ({ accessUrl }) => `Your Both of You access link: ${accessUrl}\n\nBookmark this link, it works on any device. No password needed.`,
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -122,14 +146,16 @@ export const DRIP = {
     // Reactor, email 1, sends 1 day after signup, to Reactor subscribers
     {
       key: 'reactor-1',
-      subject: `You yelled. Now what.`,
-      text: `If you are reading this, you probably yelled today. Or yesterday. Or you are saving this email for when you inevitably do.
+      subject: `You yelled. What now?`,
+      text: `Maybe you yelled today. Maybe everything stayed technically calm, but only just.
 
-The reactor pattern means your emotional response arrives before your thinking brain gets a vote. Heat, volume, speed. Then the shame. You know this sequence.
+With the Reactor pattern, the reaction can be well underway before you've had time to choose it. Your body speeds up, your voice follows, and afterwards you wonder how it got that big.
 
-This week, do not try to fix it. Just notice the body signal that arrives before the yelling starts. Tight chest. Clenched jaw. Shoulders at your ears. That signal is your three-second warning system. You do not need to use it yet. Just learn what it feels like.
+This week, see if you can spot what your body does first. Maybe your chest tightens, your jaw locks or your shoulders head towards your ears. That may be the earliest warning you get.
 
-If you want to understand what is actually happening in your nervous system during those moments:
+You don't need to stop the reaction on command. For now, noticing the first sign is enough.
+
+More on what's happening in those moments:
 https://adhdreflect.com/guides/g01
 
 ADHD Reflect`,
@@ -137,16 +163,16 @@ ADHD Reflect`,
     // Reactor, email 2, sends 8 days after signup, to Reactor subscribers
     {
       key: 'reactor-2',
-      subject: `One exhale. That is the whole trick.`,
-      text: `You noticed the signal. The heat, the clench, the surge. Good.
+      subject: `Try one breath out`,
+      text: `Last week was about spotting the signal: the heat, the clench, the sudden surge.
 
-Now add one thing before you speak: breathe out. Not a meditation. Not a breathing exercise. One exhale through your mouth. That is it.
+This week, try one slow breath out before you speak. It doesn't need to become a routine or make you feel wonderfully calm.
 
-One exhale activates your parasympathetic nervous system. It buys you about two seconds. Two seconds is not enough to become calm. It is enough to choose a slightly different volume.
+In the middle of bedtime, wonderfully calm is a fairly ambitious target. The breath may simply buy you a second, or help your first sentence come out half a notch quieter.
 
-If you exhale and still yell, congratulations, you are a human being with ADHD. The practice is the exhale. The perfection is not required.
+If you remember after you've already reacted, that still tells you where the gap might be next time.
 
-More on what happens when two nervous systems collide in the same room:
+More on what happens when two overloaded nervous systems meet:
 https://adhdreflect.com/guides/g04
 
 ADHD Reflect`,
@@ -154,19 +180,21 @@ ADHD Reflect`,
     // Reactor, email 3, sends 15 days after signup, to Reactor subscribers
     {
       key: 'reactor-3',
-      subject: `The twenty-second repair`,
-      text: `You reacted. It was too big. The guilt is doing laps.
+      subject: `A repair can be this short`,
+      text: `You reacted more strongly than you wanted to. Now the guilt has taken over the building.
 
-Here is the whole repair: walk to them within thirty minutes and say, "I was too loud. That was more than you deserved. I am sorry."
+Try keeping the repair very small:
 
-That is it. No speech. No self-flagellation. No promise you will never do it again, because you probably will and they know it.
+"I was too loud. I'm sorry. You didn't deserve that."
 
-The return to normal is the repair. Your child does not need a perfect parent. They need a parent who comes back.
+Then leave some room for whatever they say. You don't need a long explanation or a promise that it will never happen again.
 
-If repair after rupture is something you want to go deeper on:
+The repair is in going back. The hard moment doesn't get to be the only part of the story.
+
+More on repairing after things go sideways:
 https://adhdreflect.com/guides/g11
 
-We also have a full module on repair, what it actually is, why ADHD parents skip it, and what a two-sentence repair sounds like in a real household. It is part of Both of You, our self-guided program for ADHD parents raising ADHD kids. Worth a look if the repair piece keeps eluding you:
+Both of You also has a full module on repair, including what to say when your mind goes blank. If this is the bit you keep getting stuck on, it's here:
 https://adhdreflect.com/grow
 
 ADHD Reflect`,
@@ -174,20 +202,18 @@ ADHD Reflect`,
     // Reactor, email 4, sends 22 days after signup, to Reactor subscribers
     {
       key: 'reactor-4',
-      subject: `You will still yell. You will get faster.`,
-      text: `Four weeks in. Here is the honest version: the reactor pattern is not going away. Your nervous system is wired this way.
+      subject: `The change might be small`,
+      text: `A month in, you probably haven't become the serene parent from the stock photo. That wasn't the assignment.
 
-What changes is speed. The gap between the reaction and the repair gets shorter. The number of times you catch yourself before the peak goes up. Progress looks like yelling three sentences instead of ten. Repairing in ten minutes instead of three hours.
+Maybe you notice the surge a little earlier. You stop after three sharp sentences instead of ten. You go back in ten minutes instead of spending the evening feeling terrible in another room.
 
-That is real progress. It just does not look like the calm-parent-influencer version of progress.
+That is real movement, even if the house still gets loud sometimes.
 
-If these four emails have been useful and you want to go further, not a subscription, not a course with twenty hours of video, just twenty short text modules you can read on your phone, Both of You is built specifically for Reactor parents and the four other patterns that come with ADHD. One payment, no time pressure, no streaks:
+Both of You carries this approach across twenty short modules for ADHD parents raising ADHD-influenced kids. You can work through it on your phone, in whatever order and at whatever pace suits you:
 https://adhdreflect.com/grow
 
-And if you want to talk to someone who actually gets ADHD families:
+And if this feels bigger than something a course can hold, there are options for professional support here:
 https://adhdreflect.com/resources
-
-Keep going. You are doing harder work than most people will ever understand.
 
 ADHD Reflect`,
     },
@@ -198,14 +224,16 @@ ADHD Reflect`,
     // Juggler, email 1, sends 1 day after signup, to Juggler subscribers
     {
       key: 'juggler-1',
-      subject: `You forgot something today. It is fine.`,
-      text: `You forgot something. Or you are about to. The permission slip, the appointment, the lunch, the thing you swore you would not forget this time.
+      subject: `Of course you forgot something`,
+      text: `The permission slip. The appointment. The lunchbox sitting beautifully packed on the kitchen bench.
 
-The juggler pattern means you are carrying more than your working memory can hold, and the balls drop at the worst possible moments. Not because you do not care. Because your brain's holding capacity has a hard limit and your life exceeds it daily.
+The Juggler pattern tends to show up when life asks your working memory to hold far more than it comfortably can. Something falls out. Usually the thing you were especially determined not to forget.
 
-This week, try this: at the end of today, write down everything you tracked, managed, or worried about. The list will be longer than you think. That is your invisible load. Nobody else sees it.
+Tonight, write down everything you remembered, organised, chased or quietly worried about today. This isn't the start of a new daily habit. It's a one-off stocktake.
 
-If you want to understand why your working memory keeps betraying you:
+The list may explain why the lunchbox didn't make it to school.
+
+More on ADHD and working memory:
 https://adhdreflect.com/guides/g02
 
 ADHD Reflect`,
@@ -213,16 +241,16 @@ ADHD Reflect`,
     // Juggler, email 2, sends 8 days after signup, to Juggler subscribers
     {
       key: 'juggler-2',
-      subject: `One thing before the chaos`,
-      text: `Every morning, fourteen things compete for your attention. Your ADHD brain treats them all as equally urgent, which means none of them win.
+      subject: `Pick one thing before everyone wakes up`,
+      text: `Mornings have a habit of presenting fourteen equally urgent problems before you've finished making coffee.
 
-Try this: before the day starts, pick one thing. Not the most urgent. The most important. Write it on your hand if you need to. Do it first.
+Tonight, pick the one thing tomorrow really needs. Put it somewhere you'll collide with it: on the kettle, your lock screen or your hand.
 
-If you do the one thing and everything else falls apart, that is still a better day than doing fourteen things badly and the important one not at all.
+It doesn't have to be the biggest job. It might just be "bring the form" or "leave by 8:10".
 
-The urgent things will scream regardless. The important things just quietly disappear when you are not looking.
+The rest of the morning may still be chaos. At least the important thing has a fighting chance.
 
-Why time feels different for ADHD brains and what to do about it:
+More on why time can be so slippery with ADHD:
 https://adhdreflect.com/guides/g06
 
 ADHD Reflect`,
@@ -230,16 +258,14 @@ ADHD Reflect`,
     // Juggler, email 3, sends 15 days after signup, to Juggler subscribers
     {
       key: 'juggler-3',
-      subject: `Drop something on purpose`,
-      text: `The juggler's secret: the skill is not carrying more. It is choosing what to put down.
+      subject: `What can you stop carrying?`,
+      text: `The answer may not be getting better at juggling. It may be putting one ball down on purpose.
 
-This week, deliberately drop one thing. The packed lunch that could be canteen twice a week. The activity nobody enjoys. The household standard only you hold.
+Canteen once a week. Leaving the washing unfolded. Retiring an activity nobody actually likes. Lowering a household standard that somehow became law.
 
-Drop it. Watch what happens. Usually nothing. The thing you were gripping was not load-bearing. It just felt like it was.
+Pick one thing that can be easier. Try the easier version and see whether anything terrible happens.
 
-Your family needs you functional more than they need you thorough. Those two things are in competition and functional wins.
-
-If the invisible load is something you want to work through more systematically, we have two modules on it in Both of You, one on why the morning keeps collapsing, one on what a routine actually looks like when it is built for an ADHD brain rather than against it:
+Both of You has two modules on the invisible load and building routines that can survive an actual ADHD household. If that sounds useful, they're here:
 https://adhdreflect.com/grow
 
 ADHD Reflect`,
@@ -247,22 +273,18 @@ ADHD Reflect`,
     // Juggler, email 4, sends 22 days after signup, to Juggler subscribers
     {
       key: 'juggler-4',
-      subject: `Systems, not willpower`,
-      text: `The juggler pattern does not improve with effort. It improves with infrastructure.
+      subject: `Your brain doesn't need another job`,
+      text: `Anything a system remembers is one less thing you have to.
 
-Every task you move from your memory to a system is one less thing your working memory has to hold. A shared calendar. A default Monday dinner. An alarm for the medication. A checklist on the back of the door.
+A shared calendar. The same easy dinner every Monday. Medication beside the coffee. A school checklist stuck to the door at eye level.
 
-These are not crutches. They are plumbing. Nobody carries water when pipes exist.
+Choose one recurring annoyance and give it a home outside your head. Keep the system almost embarrassingly simple. Elaborate systems are lovely for the three days they exist.
 
-Build one system this week. The smallest one. Keep it simple. Complicated systems do not survive ADHD. Simple ones do.
-
-If these four emails have landed and you want a structured way through the rest of it, morning routines, partner dynamics, the school calls, what to do when your child melts down and you have nothing left, Both of You covers all of it. Twenty short modules, no video, works on a phone:
+Both of You has more on mornings, overload, partner dynamics and the days when your child needs more than you have left. It's twenty short modules designed to be read in bits:
 https://adhdreflect.com/grow
 
-For specific professional support:
+If carrying everything has tipped into not coping, these professional support options may be worth a look:
 https://adhdreflect.com/resources
-
-You are managing more than most people can see. That is not nothing.
 
 ADHD Reflect`,
     },
@@ -274,13 +296,17 @@ ADHD Reflect`,
     {
       key: 'looper-1',
       subject: `Same fight, different Tuesday`,
-      text: `You had the argument again. The same one. About the screen time, or the homework, or the shoes by the door. You both said the same things you said last time. It ended the same way.
+      text: `The argument happened again. Screens, homework, shoes, bedtime. You both knew the script and somehow still had to perform the whole thing.
 
-The looper pattern means you get stuck in cycles. Same trigger, same reaction, same exhausted reset. Then repeat.
+The Looper pattern is that familiar cycle: same trigger, same reactions, same wrung-out ending.
 
-This week, just map one loop. Write it down: "It started with X. I did Y. We ended up at Z." You do not need to fix it. Just see it. You cannot exit a loop you have not noticed.
+This week, map one round after it's over:
 
-If the argument loop is one of your regulars:
+"It started with ___. I did ___. Then we ended up ___."
+
+No need to solve it yet. You're just getting a look at the route while nobody is driving it.
+
+If arguments are one of your regular loops:
 https://adhdreflect.com/guides/g20
 
 ADHD Reflect`,
@@ -288,16 +314,16 @@ ADHD Reflect`,
     // Looper, email 2, sends 8 days after signup, to Looper subscribers
     {
       key: 'looper-2',
-      subject: `Change your half`,
-      text: `You have been trying to break the loop by fixing the trigger. If they would just stop doing the thing, you would not have to do your thing.
+      subject: `Make the loop wobble`,
+      text: `Most loops come with a tempting solution: if they would stop doing their bit, you wouldn't do yours.
 
-Problem: you do not control the trigger. You control your response.
+Fair. Also difficult to arrange.
 
-This week, when the loop starts, change one thing about your half. If you usually raise your voice, lower it. If you usually lecture, stop at one sentence. If you usually follow them, stay where you are.
+So try changing one small part you control. If you usually give the full lecture, stop after one sentence. If you follow them down the hall, stay put. If your voice goes up, see if you can bring it down one notch.
 
-The loop needs both parts. When yours changes, the loop cannot complete the same way. It might not break. But it will wobble. That wobble is progress.
+It may not end the argument. It does make the old script harder to follow exactly.
 
-Understanding the two-nervous-system dynamic underneath the loop:
+More on what happens when two nervous systems set each other off:
 https://adhdreflect.com/guides/g04
 
 ADHD Reflect`,
@@ -305,17 +331,19 @@ ADHD Reflect`,
     // Looper, email 3, sends 15 days after signup, to Looper subscribers
     {
       key: 'looper-3',
-      subject: `What the fight is actually about`,
-      text: `The loop ran again. But this time you saw it. That counts, even if it does not feel like it.
+      subject: `Maybe it isn't really about the shoes`,
+      text: `Sometimes the thing you're arguing about is the thing. Sometimes it's just where all the other stress happened to land.
 
-After the loop finishes, not during, after, try: "I noticed we keep landing in the same place. What is actually going on underneath this?"
+Once everyone is properly calm, not the suspicious silence five minutes later, you could try:
 
-The argument about screen time is usually about control. The argument about homework is usually about adequacy. The argument about bedtime is usually about depletion. The surface issue runs the loop. The fuel is underneath.
+"We keep ending up in the same fight. What makes this one so hard?"
 
-We have a module specifically for loopers on how to stop without feeling like you lost, including what to do with the discomfort of leaving something unresolved on purpose. It is in Both of You if you want to go further with this:
+They might tell you something you hadn't realised. They might shrug. You're opening a conversation, not performing a parenting technique correctly.
+
+Both of You has a module for Loopers on stopping a circular argument without needing to feel that someone won. It's here if you want it:
 https://adhdreflect.com/grow
 
-If your partner is part of the loop, this might also be useful:
+If the loop is with your partner:
 https://adhdreflect.com/guides/g12
 
 ADHD Reflect`,
@@ -323,17 +351,17 @@ ADHD Reflect`,
     // Looper, email 4, sends 22 days after signup, to Looper subscribers
     {
       key: 'looper-4',
-      subject: `The loop is the teacher`,
-      text: `Four weeks. Some loops will not stop. Some exist because ADHD creates the same conditions every day.
+      subject: `Catching it on round two`,
+      text: `Some family loops keep coming back because the same tired people keep meeting the same hard parts of the day.
 
-But you are catching the loop earlier. Exiting sooner. Recovering faster. That is the progress. Not the absence of the loop. The speed of the recognition.
+Often the change is timing. You notice the loop on round two instead of round five, or stop before saying the really sharp thing. Recovery takes twenty minutes instead of swallowing the whole night.
 
-You noticed on round two instead of round five. You stopped before the damage point. You named it before it became an action. That is harder than it sounds and you are doing it.
+The loop still happened. It also took less from everyone.
 
-If you want to keep going with this work, the repair after the loop, the partner dynamic, the school version of the same conversation, Both of You has twenty modules that go deeper on all of it. No video, no live sessions, reads like a conversation rather than a textbook:
+Both of You goes further into repair, partner dynamics and the same old battles around school and home. It's twenty short modules, all text, and there's no timetable:
 https://adhdreflect.com/grow
 
-If you and your partner are stuck in a loop together and need a professional in the room:
+If you and your partner keep getting stuck in the same place, professional support is here too:
 https://adhdreflect.com/resources
 
 ADHD Reflect`,
@@ -345,14 +373,18 @@ ADHD Reflect`,
     // Spiraller, email 1, sends 1 day after signup, to Spiraller subscribers
     {
       key: 'spiraller-1',
-      subject: `It started with a forgotten lunchbox`,
-      text: `A forgotten lunchbox became "I am failing them." A bad morning became "they will never cope." A meltdown became "what if this is who they are forever."
+      subject: `It started with a lunchbox`,
+      text: `A forgotten lunchbox became "I'm failing them." A bad morning became "they'll never cope." One meltdown somehow ended with you mentally visiting their difficult adulthood.
 
-The spiraller pattern means one thought leads to the next, each darker than the last, until you are somewhere far worse than where the evidence supports.
+The Spiraller pattern can carry you a very long way from the thing that actually happened.
 
-This week, just notice the distance. When you catch yourself spiralling, write down where it started and where it took you. "Started: forgotten lunch. Ended: they will never hold a job." That gap is the spiral. Seeing it is the first step to shortening it.
+If you catch one this week, note the start and the destination:
 
-Understanding the shame spiral and why your brain does this:
+"Started: forgotten lunch. Ended: they'll never manage on their own."
+
+Seeing the distance can make the next thought feel a little less like a fact.
+
+More on ADHD shame spirals:
 https://adhdreflect.com/guides/g03
 
 ADHD Reflect`,
@@ -360,16 +392,17 @@ ADHD Reflect`,
     // Spiraller, email 2, sends 8 days after signup, to Spiraller subscribers
     {
       key: 'spiraller-2',
-      subject: `Fact or fear?`,
-      text: `The spiral feels like logic. Each step follows the last. But the spiral is not reasoning. It is anxiety in a logic costume.
+      subject: `Fact, fear or tired prediction?`,
+      text: `A spiral can sound convincing because each thought seems to prove the next one.
 
-Next time you notice the spiral, ask one question: "Is this a fact or a fear?"
+When you notice it, try sorting the thoughts:
 
-"They had a bad morning." Fact. "They will never manage independently." Fear wearing a prediction suit.
+"They had a bad morning." Something that happened.
+"They'll never manage independently." A frightened prediction.
 
-You do not need to argue with the fear. Just label it. "That is the spiral talking." The label does not make it disappear. It makes you the observer instead of the passenger.
+You don't have to argue yourself into optimism. "I'm doing the future thing again" may be enough to put a little space around the prediction.
 
-Why rejection sensitivity makes the spiral spin faster:
+More on rejection sensitivity and why one moment can suddenly feel enormous:
 https://adhdreflect.com/guides/g05
 
 ADHD Reflect`,
@@ -377,14 +410,18 @@ ADHD Reflect`,
     // Spiraller, email 3, sends 15 days after signup, to Spiraller subscribers
     {
       key: 'spiraller-3',
-      subject: `Your brain has a selective memory`,
-      text: `The spiral remembers every failure and forgets every success. It is working with a biased evidence file.
+      subject: `Keep the boring evidence too`,
+      text: `Spirals are excellent record-keepers for everything that went wrong. The ordinary okay bits rarely make the file.
 
-This week, build a counter-file. Three things that went okay today. Not great. Okay. "Got to school on time." "Nobody cried at dinner." "They read for ten minutes."
+Try collecting three of those today:
 
-The spiral will tell you these do not count. They count. Write them somewhere visible. When the spiral starts, read the list. Not to feel better. To see the whole picture instead of just the dark corner.
+"We got to school."
+"Dinner was mostly edible."
+"They told me something funny in the car."
 
-The hardest part of the spiraller pattern is that the shame consumes the energy that should go into repair. We have a module specifically on getting from the spiral to the actual repair, what it looks like, why simpler is better, and why the repair is for them not for your guilt. It is in Both of You:
+This isn't forced gratitude, and you don't need to feel better after writing them. You're just keeping a less selective record.
+
+Both of You has a module on getting out of the shame replay and into a simple repair. If that gap is hard for you, it's here:
 https://adhdreflect.com/grow
 
 ADHD Reflect`,
@@ -392,20 +429,18 @@ ADHD Reflect`,
     // Spiraller, email 4, sends 22 days after signup, to Spiraller subscribers
     {
       key: 'spiraller-4',
-      subject: `You are not your worst thought`,
-      text: `The spirals will keep coming. ADHD rejection sensitivity means your brain reaches the worst case faster than other brains. That is wiring, not weakness.
+      subject: `When your brain races ahead`,
+      text: `Your brain may keep racing from one hard moment to the worst possible ending.
 
-But you are catching the spiral earlier. It reaches less depth before you notice. Recovery is faster. You spiralled to "this is hard" instead of "this is hopeless." That is progress.
+Over time, you may notice the jump sooner. "This is hard" doesn't always make it all the way to "everything is hopeless." Sometimes it does, but you find your way back sooner.
 
-Your brain will keep offering you the catastrophic version. You are learning to read it as a draft, not a final document.
+The first thought can feel completely true and still be a frightened prediction.
 
-If these four emails have helped and you want a more structured way through it, the spiral, the repair, what to do after the hard moment, Both of You goes deeper on all of it. Twenty short modules written specifically for parents where both the adult and the child have ADHD:
+Both of You goes deeper into spirals, repair and what to do after a hard moment. It's twenty short modules for ADHD parents raising ADHD-influenced kids, built to be picked up and put down:
 https://adhdreflect.com/grow
 
-For professional support from people who understand ADHD brains that spiral:
+If the thoughts are getting hard to carry on your own, professional support is here:
 https://adhdreflect.com/resources
-
-You are doing this. Imperfectly. Which is the only way it gets done.
 
 ADHD Reflect`,
     },
@@ -416,16 +451,16 @@ ADHD Reflect`,
     // Escaper, email 1, sends 1 day after signup, to Escaper subscribers
     {
       key: 'escaper-1',
-      subject: `You are reading this from the bathroom, aren't you`,
-      text: `You are hiding. Maybe in the bathroom. Maybe behind your phone. Maybe you are physically present but mentally three suburbs away.
+      subject: `Reading this in the bathroom?`,
+      text: `Maybe you're hiding in the bathroom. Maybe it's behind your phone. Maybe you're in the room, but mentally somewhere near Toowoomba.
 
-The escaper pattern means when demand exceeds capacity, your brain's first move is to leave. Not always physically. Sometimes you go quiet, check out, scroll, or suddenly become very interested in something that is not the hard thing.
+The Escaper pattern often shows up when the demands have outrun your capacity. You go quiet, scroll, shut down or develop a sudden need to reorganise something in another room.
 
-This is not laziness. It is your nervous system choosing the lowest-demand option. Your brain is protecting you. Unfortunately, it is also leaving your family without you in the room.
+It doesn't mean you don't care. It may mean you've run out of room.
 
-This week, just notice the escape. Do not stop it. Notice it. "That is the escape." That is the whole practice.
+This week, see if you notice yourself leaving. You don't have to stop it on command. A quiet "oh, I'm escaping" gives you somewhere to begin.
 
-Understanding what your nervous system is doing when it checks out:
+More on what can happen when an overloaded brain checks out:
 https://adhdreflect.com/guides/g01
 
 ADHD Reflect`,
@@ -433,18 +468,16 @@ ADHD Reflect`,
     // Escaper, email 2, sends 8 days after signup, to Escaper subscribers
     {
       key: 'escaper-2',
-      subject: `Five minutes, then come back`,
-      text: `You escaped. You noticed. Good.
+      subject: `Take five. Then come back.`,
+      text: `Trying never to escape is a big job. Practising the return is smaller.
 
-Now try the return. Not preventing the escape. The coming back part.
+When you notice yourself disappearing into the phone, the bathroom or the shutdown, try saying: "I need five minutes. I'll come back."
 
-When you catch yourself in the escape, the scroll, the shutdown, the bathroom, give yourself five minutes. Deliberately. "I am taking five minutes." Then come back. Put the phone down. Walk into the room. Say: "I am back."
+Then take the five minutes. Properly. When they're up, put the phone down, walk back in and say, "I'm back."
 
-Five minutes of deliberate absence is different from an hour of unconscious checkout. Same behaviour. Different awareness. Different impact.
+You may need longer than five. Say that too. The useful bit is making the break visible and making the return real.
 
-The practice is not the escape. It is the return.
-
-If burnout is driving the escapes:
+If depletion is behind a lot of your escapes:
 https://adhdreflect.com/guides/g15
 
 ADHD Reflect`,
@@ -452,17 +485,21 @@ ADHD Reflect`,
     // Escaper, email 3, sends 15 days after signup, to Escaper subscribers
     {
       key: 'escaper-3',
-      subject: `Name what you are running from`,
-      text: `The escape is always from something. A conversation you do not want. A feeling you cannot face. A task too big to start. A conflict you do not want to enter.
+      subject: `What are you getting away from?`,
+      text: `The scroll is often getting you away from something: a conversation, a feeling, a task with no obvious first step, the possibility of another fight.
 
-This week, before you escape, name it. "I am avoiding the bedtime conversation." "I am avoiding the guilt." "I am avoiding the fight about homework."
+If you can, name the thing:
 
-Naming the thing does not stop the escape. It makes the escape a choice instead of a reflex. "I am choosing to avoid this" is different from "I am scrolling." Same phone in your hand. Different level of honesty.
+"I don't want to start bedtime."
+"I don't want to feel guilty."
+"I can't face the homework argument."
 
-We have two modules for escaper parents in Both of You, one on why you leave even when you stay, one on what the small return actually looks like when you have nothing left to give. Worth reading if the coming-back part is where you keep getting stuck:
+Naming it won't make you keen. It may make the next choice clearer: take a break, ask for help, shrink the task or decide when you'll return to it.
+
+Both of You has two modules for Escapers: one on leaving while you're still physically there, and one on making a small return when you have almost nothing left. They're here:
 https://adhdreflect.com/grow
 
-If you are escaping because you are completely depleted:
+If you're running on empty:
 https://adhdreflect.com/guides/g15
 
 ADHD Reflect`,
@@ -470,22 +507,18 @@ ADHD Reflect`,
     // Escaper, email 4, sends 22 days after signup, to Escaper subscribers
     {
       key: 'escaper-4',
-      subject: `Present is a practice, not a personality`,
-      text: `The escape impulse will not go away. When capacity is low, your brain will always prefer the door. That is wiring, not character.
+      subject: `Coming back is a skill`,
+      text: `You may always want the exit when your capacity is low. The useful change isn't never leaving. It's making the exits shorter, clearer and less lonely for everyone else.
 
-But the returns are getting faster. The escapes are getting shorter. You are naming what you avoid instead of pretending you are not avoiding it.
+You reached for the phone, but put it down sooner. You checked out, then said you needed a break. You avoided the conversation, but came back to it that evening.
 
-You still reached for the phone, but five minutes instead of thirty. You still checked out, but you came back before the damage was done. You still avoided the conversation, but you had it the same day.
+The return is the part worth practising.
 
-The escape is not the failure. The failure to return is. And you are returning.
-
-If these four emails have been useful and you want more structure, the partner dynamic, what your child experiences when you check out, how to build the return as a habit, Both of You covers all of it in twenty short modules. No video, no live sessions, works on a phone in fragments:
+Both of You covers the partner dynamic, what checking out can feel like for your child, and ways to make returning easier. It's twenty short modules, all text, made to work in fragments:
 https://adhdreflect.com/grow
 
-For real support from people who understand ADHD avoidance without judging it:
+If checking out has become the main way you're getting through, you can find professional support here:
 https://adhdreflect.com/resources
-
-You are here. You are reading this. You came back. That is the practice.
 
 ADHD Reflect`,
     },
