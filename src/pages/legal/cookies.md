@@ -3,12 +3,12 @@ layout: ../../layouts/Legal.astro
 title: Cookies and Analytics
 label: Legal
 description: How ADHD Reflect uses cookies and whether it tracks you.
-updated: 25 July 2026
+updated: 27 July 2026
 ---
 
 ## The short version
 
-ADHD Reflect uses almost nothing. There is no analytics tool, no page-view counting and no visitor profiling. There are no advertising cookies. We do not let other companies track you on our site. What little we store in your browser is there to keep paid access working and to remember a preference you set.
+ADHD Reflect uses almost nothing. We use no third-party analytics and no visitor profiling, and there are no advertising cookies. We do keep our own first-party count of how many times each page is viewed per day, stored on our own infrastructure with no cookies and nothing that identifies you. We do not let other companies track you on our site. What little we store in your browser is there to keep paid access working and to remember a preference you set.
 
 ---
 
@@ -25,11 +25,13 @@ Neither of these follows you to other websites. Clearing your browser storage re
 
 ## Analytics
 
-There is no analytics tool on this site.
+We use no third-party analytics tool. Instead we keep a small first-party count of our own.
 
-We do not count how many people visit, we do not record which pages you look at, and we do not build any profile of you. We removed analytics rather than reach for a "privacy-friendly" version of it, because for what this site is, we would rather collect nothing.
+That count is simple: how many times each page was viewed, per day. It lives on our own infrastructure (Cloudflare KV). It uses no cookies, and it stores no IP addresses, no user agents and nothing that identifies you or links one visit to another. Because of that it cannot tell how many unique people visited, only how many times a page was loaded. The counts are deleted automatically after 90 days.
 
-If we ever add anything here, we will update this page and the [Privacy policy](/legal/privacy) first.
+We keep this so we can see which pages are useful and which are not. We do not build any profile of you, and we do not track you from page to page.
+
+If we ever change this, we will update this page and the [Privacy policy](/legal/privacy) first.
 
 ---
 
@@ -37,8 +39,8 @@ If we ever add anything here, we will update this page and the [Privacy policy](
 
 We do not use:
 
-- Google Analytics or any other analytics tool;
-- Plausible, Fathom, Simple Analytics or any other page-view counter;
+- Google Analytics or any other third-party analytics tool;
+- Plausible, Fathom, Simple Analytics or any other hosted analytics service;
 - Facebook Pixel, TikTok Pixel, LinkedIn Insight Tag or similar advertising trackers;
 - ad networks;
 - session-replay tools that record what you type or click;

@@ -13,6 +13,32 @@ async function listAllKeys(kv, prefix, maxPages = 50) {
   return keys;
 }
 
+// Read many KV values with bounded concurrency instead of one at a time. A
+// single admin request used to await up to ~2,500 gets in series before
+// anything rendered; batching in chunks turns that into a few dozen parallel
+// waits. Returns values in the same order as `names`.
+async function getMany(kv, names, chunk = 50) {
+  const out = [];
+  for (let i = 0; i < names.length; i += chunk) {
+    const slice = names.slice(i, i + chunk);
+    const vals = await Promise.all(slice.map((n) => kv.get(n)));
+    out.push(...vals);
+  }
+  return out;
+}
+
+// Read + parse every value under a KV prefix, batched.
+async function readAll(kv, prefix) {
+  const keys = await listAllKeys(kv, prefix);
+  const vals = await getMany(kv, keys.map((k) => k.name));
+  const out = [];
+  for (const v of vals) {
+    if (!v) continue;
+    try { out.push(JSON.parse(v)); } catch (e) { /* skip malformed */ }
+  }
+  return out;
+}
+
 // Both of You price, so the shared Stripe account's other businesses do not
 // pollute the numbers. Filtering to this is essential.
 const PRICE_ID = 'price_1Tfz2LCVv6feGeb2rYx6q2WQ';
@@ -51,16 +77,46 @@ async function stripeGet(env, path) {
   return res.json();
 }
 
+// Is a Resend send from our own domain? The account is shared with
+// centrely.com.au and ccschecker.com.au, so this keeps their sends, and their
+// customers' email addresses, out of this dashboard. Handles both the
+// "Name <addr>" form and a bare address.
+function fromOurDomain(from) {
+  const m = String(from || '').match(/<([^>]+)>/);
+  const addr = (m ? m[1] : String(from || '')).trim().toLowerCase();
+  return addr.endsWith('@adhdreflect.com');
+}
+
+// Count contacts in our Resend segment, paginated. The shared account holds
+// the other businesses' contacts too, so we scope to RESEND_SEGMENT_ID rather
+// than reading the whole /contacts list, which is not segment-scoped. Contacts
+// are subscriber addresses (gmail and the like), so a from-domain filter cannot
+// apply to them; the segment is the correct scope.
+async function countSegmentContacts(env) {
+  if (!env.RESEND_SEGMENT_ID) return null;
+  let count = 0, after = null, pages = 0;
+  do {
+    let path = `/segments/${env.RESEND_SEGMENT_ID}/contacts?limit=100`;
+    if (after) path += '&after=' + encodeURIComponent(after);
+    const page = await resendGet(env, path);
+    const data = (page && page.data) || [];
+    count += data.length;
+    after = (page && page.has_more && data.length) ? data[data.length - 1].id : null;
+    pages++;
+  } while (after && pages < 20);
+  return count;
+}
+
 // ── Email section: KV (reliable) + Resend (best-effort, cached) ──
 async function buildEmailSection(env) {
   const out = { subscriberCount: 0, patternBreakdown: {}, dripFunnel: {0:0,1:0,2:0,3:0,4:0},
     unsubCount: 0, unsubRate: 0, lastDripRun: null,
-    resendContactCount: null, recentSends: [], suppressionCount: null, syncDiverges: false };
+    resendContactCount: null, recentSends: [], bouncedCount: 0, complainedCount: 0, syncDiverges: false };
 
   if (env.SEARCH_LOGS) {
     const emailKeys = await listAllKeys(env.SEARCH_LOGS, 'email:');
-    for (const k of emailKeys) {
-      const raw = await env.SEARCH_LOGS.get(k.name);
+    const vals = await getMany(env.SEARCH_LOGS, emailKeys.map((k) => k.name));
+    for (const raw of vals) {
       if (!raw) continue;
       let s; try { s = JSON.parse(raw); } catch (e) { continue; }
       const p = s.pattern || 'unknown';
@@ -76,30 +132,35 @@ async function buildEmailSection(env) {
   }
 
   const resend = await cached(env, 'resend-email', async () => {
-    const r = { contactCount: null, recentSends: [], suppressionCount: null };
+    const r = { contactCount: null, recentSends: [], bouncedCount: 0, complainedCount: 0 };
     if (!env.RESEND_API_KEY) return r;
+    // Recent sends. GET /emails is account-wide with no from-domain filter
+    // server-side, so fetch a larger page and keep only our own sends before
+    // display. This stops the other businesses' customer addresses ever
+    // reaching this dashboard, and scopes the bounce/complaint counts to us.
     try {
-      const emails = await resendGet(env, '/emails?limit=20');
-      r.recentSends = (emails.data || []).map(e => ({
+      const emails = await resendGet(env, '/emails?limit=100');
+      const ours = (emails.data || []).filter((e) => fromOurDomain(e.from));
+      r.recentSends = ours.slice(0, 20).map((e) => ({
         to: Array.isArray(e.to) ? e.to.join(', ') : (e.to || ''),
         subject: e.subject || '',
         status: e.last_event || 'sent',
         created_at: e.created_at || null,
       }));
+      // Resend's account-wide /suppressions list is keyed by recipient address
+      // with no sender to filter on, so it cannot be scoped to adhdreflect. The
+      // meaningful, scoped signal is delivery problems in our own sends.
+      r.bouncedCount = ours.filter((e) => e.last_event === 'bounced').length;
+      r.complainedCount = ours.filter((e) => e.last_event === 'complained').length;
     } catch (e) { /* leave empty */ }
-    try {
-      const sup = await resendGet(env, '/suppressions');
-      r.suppressionCount = (sup.data || []).length;
-    } catch (e) {}
-    try {
-      const contacts = await resendGet(env, '/contacts');
-      r.contactCount = (contacts.data || []).length;
-    } catch (e) {}
+    // Contacts scoped to our segment (see countSegmentContacts).
+    try { r.contactCount = await countSegmentContacts(env); } catch (e) {}
     return r;
   });
   out.resendContactCount = resend.contactCount;
   out.recentSends = resend.recentSends;
-  out.suppressionCount = resend.suppressionCount;
+  out.bouncedCount = resend.bouncedCount;
+  out.complainedCount = resend.complainedCount;
   // Sync is behind if Resend holds fewer contacts than KV has active
   // subscribers (contacts should persist beyond the 60-day KV window, so
   // Resend < KV means the KV -> Resend mirror is not keeping up).
@@ -176,6 +237,99 @@ async function buildRevenueSection(env) {
   });
 }
 
+// ── Search analytics helpers (SEARCH_LOGS 'search:' prefix) ──
+function searchSummary(logs) {
+  const total = logs.length;
+  const matched = logs.filter((l) => l.matched).length;
+  const unmatched = logs.filter((l) => !l.matched && !l.crisis).length;
+  const crisis = logs.filter((l) => l.crisis).length;
+  const uniqueQueries = [...new Set(logs.map((l) => (l.query || '').toLowerCase().trim()))].length;
+  return { total, matched, unmatched, crisis, uniqueQueries };
+}
+function searchDetail(logs) {
+  const sorted = [...logs].sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+  const cardCounts = {};
+  sorted.forEach((l) => {
+    if (l.topMatch) {
+      cardCounts[l.topMatch] = cardCounts[l.topMatch] || { id: l.topMatch, title: l.topMatchTitle, count: 0 };
+      cardCounts[l.topMatch].count++;
+    }
+  });
+  const dailyCounts = {};
+  sorted.forEach((l) => {
+    if (l.timestamp) {
+      const day = l.timestamp.substring(0, 10);
+      dailyCounts[day] = (dailyCounts[day] || 0) + 1;
+    }
+  });
+  return {
+    summary: searchSummary(sorted),
+    topCards: Object.values(cardCounts).sort((a, b) => b.count - a.count).slice(0, 20),
+    unmatchedQueries: sorted.filter((l) => !l.matched && !l.crisis).map((l) => ({ query: l.query, timestamp: l.timestamp })),
+    recentSearches: sorted.slice(0, 50),
+    dailyCounts,
+  };
+}
+
+// ── Course analytics helpers (GROW_DATA 'token:' prefix) ──
+function courseSummary(users) {
+  const totalPurchasers = users.length;
+  const done = (u) => Object.keys(u.progress || {}).length;
+  return {
+    totalPurchasers,
+    completedCourse: users.filter((u) => done(u) >= 20).length,
+    reachedHalfway: users.filter((u) => done(u) >= 10).length,
+    startedOnly: users.filter((u) => done(u) < 3).length,
+    avgCompletion: totalPurchasers > 0 ? Math.round(users.reduce((s, u) => s + done(u), 0) / totalPurchasers) : 0,
+  };
+}
+function courseDetail(users) {
+  // Anonymised: pattern, date, count and source only. No email, no token.
+  const view = users.map((u) => ({
+    pattern: u.pattern || 'unknown',
+    purchasedAt: u.purchasedAt,
+    completedCount: Object.keys(u.progress || {}).length,
+    source: u.source || 'direct',
+  }));
+  view.sort((a, b) => (b.purchasedAt || '').localeCompare(a.purchasedAt || ''));
+  const patternDistribution = {}, sourceDistribution = {}, moduleCompletionCounts = {};
+  view.forEach((u) => { patternDistribution[u.pattern] = (patternDistribution[u.pattern] || 0) + 1; });
+  view.forEach((u) => { sourceDistribution[u.source] = (sourceDistribution[u.source] || 0) + 1; });
+  users.forEach((u) => {
+    Object.keys(u.progress || {}).forEach((mid) => { moduleCompletionCounts[mid] = (moduleCompletionCounts[mid] || 0) + 1; });
+  });
+  return {
+    summary: courseSummary(users),
+    patternDistribution,
+    sourceDistribution,
+    moduleCompletionCounts,
+    recentPurchasers: view.slice(0, 20),
+  };
+}
+
+// ── Page-view stats: pv:<YYYY-MM-DD>:<path> counters from _middleware.js ──
+async function buildStatsSection(env) {
+  const out = { daily: {}, topPages: [], totalCounted: 0 };
+  if (!env.SEARCH_LOGS) return out;
+  const keys = await listAllKeys(env.SEARCH_LOGS, 'pv:');
+  const vals = await getMany(env.SEARCH_LOGS, keys.map((k) => k.name));
+  const pageTotals = {};
+  keys.forEach((k, i) => {
+    const n = parseInt(vals[i] || '0', 10) || 0;
+    // Key is pv:<10-char day>:<path>. The path can contain colons, so slice by
+    // fixed offsets rather than splitting on ':'.
+    const rest = k.name.slice(3);   // after 'pv:'
+    const day = rest.slice(0, 10);
+    const path = rest.slice(11);    // after 'YYYY-MM-DD:'
+    if (!day || !path) return;
+    out.daily[day] = (out.daily[day] || 0) + n;
+    pageTotals[path] = (pageTotals[path] || 0) + n;
+    out.totalCounted += n;
+  });
+  out.topPages = Object.entries(pageTotals).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([path, count]) => ({ path, count }));
+  return out;
+}
+
 export async function onRequestGet({ env, request }) {
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
@@ -190,151 +344,41 @@ export async function onRequestGet({ env, request }) {
   try {
     const result = {};
 
-    // ── Search analytics (from SEARCH_LOGS KV) ──
-    if (section === 'all' || section === 'search') {
-      if (env.SEARCH_LOGS) {
-        const searchKeys = await listAllKeys(env.SEARCH_LOGS, 'search:');
-        const logs = [];
-        for (const k of searchKeys) {
-          const value = await env.SEARCH_LOGS.get(k.name);
-          if (value) { try { logs.push(JSON.parse(value)); } catch(e) {} }
-        }
-        logs.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
-        const total = logs.length;
-        const matched = logs.filter(l => l.matched).length;
-        const unmatched = logs.filter(l => !l.matched && !l.crisis).length;
-        const crisis = logs.filter(l => l.crisis).length;
-        const uniqueQueries = [...new Set(logs.map(l => l.query?.toLowerCase().trim()))].length;
-        const cardCounts = {};
-        logs.forEach(l => {
-          if (l.topMatch) {
-            cardCounts[l.topMatch] = cardCounts[l.topMatch] || { id: l.topMatch, title: l.topMatchTitle, count: 0 };
-            cardCounts[l.topMatch].count++;
-          }
-        });
-        // Daily search counts (last 30 days)
-        const dailyCounts = {};
-        logs.forEach(l => {
-          if (l.timestamp) {
-            const day = l.timestamp.substring(0, 10);
-            dailyCounts[day] = (dailyCounts[day] || 0) + 1;
-          }
-        });
-        result.search = {
-          summary: { total, matched, unmatched, crisis, uniqueQueries },
-          topCards: Object.values(cardCounts).sort((a, b) => b.count - a.count).slice(0, 20),
-          unmatchedQueries: logs.filter(l => !l.matched && !l.crisis).map(l => ({ query: l.query, timestamp: l.timestamp })),
-          recentSearches: logs.slice(0, 50),
-          dailyCounts,
-        };
-      }
+    // Login (section=all) returns only the headline counts each tab's summary
+    // needs, read in parallel and batched. Every tab loads its own detail on
+    // first view, so login never waits on the full data set or on Resend/Stripe.
+    if (section === 'all') {
+      const [searchLogs, courseUsers] = await Promise.all([
+        env.SEARCH_LOGS ? readAll(env.SEARCH_LOGS, 'search:') : Promise.resolve(null),
+        env.GROW_DATA ? readAll(env.GROW_DATA, 'token:') : Promise.resolve(null),
+      ]);
+      if (searchLogs) result.search = { summary: searchSummary(searchLogs) };
+      if (courseUsers) result.course = { summary: courseSummary(courseUsers) };
     }
 
-    // ── Course analytics (from GROW_DATA KV) ──
-    if (section === 'all' || section === 'course') {
-      if (env.GROW_DATA) {
-        const tokenKeys = await listAllKeys(env.GROW_DATA, 'token:');
-        const users = [];
-        for (const k of tokenKeys) {
-          const value = await env.GROW_DATA.get(k.name);
-          if (value) {
-            try {
-              const u = JSON.parse(value);
-              users.push({
-                pattern: u.pattern || 'unknown',
-                purchasedAt: u.purchasedAt,
-                completedCount: Object.keys(u.progress || {}).length,
-                hasCheckin: !!u.midCourseCheckin,
-                completedAll: Object.keys(u.progress || {}).length >= 20,
-                // Anonymise — no email, no token
-                source: u.source || 'direct',
-              });
-            } catch(e) {}
-          }
-        }
-        users.sort((a, b) => (b.purchasedAt || '').localeCompare(a.purchasedAt || ''));
-
-        const totalPurchasers = users.length;
-        const completedCourse = users.filter(u => u.completedAll).length;
-        const reachedHalfway = users.filter(u => u.completedCount >= 10).length;
-        const startedOnly = users.filter(u => u.completedCount < 3).length;
-
-        // Pattern distribution
-        const patternCounts = {};
-        users.forEach(u => {
-          patternCounts[u.pattern] = (patternCounts[u.pattern] || 0) + 1;
-        });
-
-        // Source distribution
-        const sourceCounts = {};
-        users.forEach(u => {
-          sourceCounts[u.source] = (sourceCounts[u.source] || 0) + 1;
-        });
-
-        // Module completion rates
-        const moduleCounts = {};
-        for (const k of tokenKeys) {
-          const value = await env.GROW_DATA.get(k.name);
-          if (value) {
-            try {
-              const u = JSON.parse(value);
-              Object.keys(u.progress || {}).forEach(mid => {
-                moduleCounts[mid] = (moduleCounts[mid] || 0) + 1;
-              });
-            } catch(e) {}
-          }
-        }
-
-        // Daily purchase counts
-        const purchaseDailyCounts = {};
-        users.forEach(u => {
-          if (u.purchasedAt) {
-            const day = u.purchasedAt.substring(0, 10);
-            purchaseDailyCounts[day] = (purchaseDailyCounts[day] || 0) + 1;
-          }
-        });
-
-        // Average completion
-        const avgCompletion = users.length > 0
-          ? Math.round(users.reduce((sum, u) => sum + u.completedCount, 0) / users.length)
-          : 0;
-
-        result.course = {
-          summary: { totalPurchasers, completedCourse, reachedHalfway, startedOnly, avgCompletion },
-          patternDistribution: patternCounts,
-          sourceDistribution: sourceCounts,
-          moduleCompletionCounts: moduleCounts,
-          purchaseDailyCounts,
-          recentPurchasers: users.slice(0, 20),
-        };
-      }
+    // ── Site detail (search analytics) ──
+    if (section === 'search') {
+      if (env.SEARCH_LOGS) result.search = searchDetail(await readAll(env.SEARCH_LOGS, 'search:'));
     }
 
-    // ── Discount codes (from GROW_DATA KV, prefix discount:) ──
-    if (section === 'all' || section === 'discounts') {
-      if (env.GROW_DATA) {
-        const discountKeys = await listAllKeys(env.GROW_DATA, 'discount:');
-        const codes = [];
-        for (const k of discountKeys) {
-          const value = await env.GROW_DATA.get(k.name);
-          if (value) {
-            try { codes.push(JSON.parse(value)); } catch(e) {}
-          }
-        }
-        result.discounts = { codes };
-      }
+    // ── Course detail ──
+    if (section === 'course') {
+      if (env.GROW_DATA) result.course = courseDetail(await readAll(env.GROW_DATA, 'token:'));
     }
 
-    // ── Email (KV + Resend). Lazy: only on its own tab, never in 'all', so
-    //    login stays fast and Resend is not called on every dashboard load. ──
-    if (section === 'email') {
-      result.email = await buildEmailSection(env);
+    // ── Discount codes ──
+    if (section === 'discounts') {
+      if (env.GROW_DATA) result.discounts = { codes: await readAll(env.GROW_DATA, 'discount:') };
     }
 
-    // ── Revenue (Stripe). Lazy for the same reason, plus 5-minute KV cache. ──
-    if (section === 'revenue') {
-      result.revenue = await buildRevenueSection(env);
-    }
+    // ── Email (KV + Resend), lazy per tab so login stays fast. ──
+    if (section === 'email') result.email = await buildEmailSection(env);
+
+    // ── Revenue (Stripe), lazy per tab, 5-minute KV cache. ──
+    if (section === 'revenue') result.revenue = await buildRevenueSection(env);
+
+    // ── Page-view stats (first-party counters written by _middleware.js). ──
+    if (section === 'stats') result.stats = await buildStatsSection(env);
 
     return new Response(JSON.stringify(result), {
       headers: { 'Content-Type': 'application/json' },
