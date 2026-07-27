@@ -27,18 +27,21 @@ import Base from '../layouts/Base.astro';
     <div id="dashboard" style="display:none">
 
       <!-- Tab nav -->
-      <div style="display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid rgba(31,42,55,0.08);padding-bottom:0">
+      <div style="display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid rgba(31,42,55,0.08);padding-bottom:0;align-items:center;flex-wrap:wrap">
         <button class="tab-btn active" onclick="showTab('site')" id="tab-site">Site</button>
         <button class="tab-btn" onclick="showTab('course')" id="tab-course">Course</button>
         <button class="tab-btn" onclick="showTab('email')" id="tab-email">Email</button>
         <button class="tab-btn" onclick="showTab('revenue')" id="tab-revenue">Revenue</button>
+        <button class="tab-btn" onclick="showTab('stats')" id="tab-stats">Stats</button>
         <button class="tab-btn" onclick="showTab('codes')" id="tab-codes">Codes</button>
         <button class="tab-btn" onclick="showTab('cards')" id="tab-cards">Missing cards</button>
+        <button onclick="logout()" id="logout-btn" style="margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;border-radius:6px;border:1px solid rgba(31,42,55,0.12);background:white;cursor:pointer;color:var(--pewter)">Log out</button>
       </div>
 
       <!-- ── SITE TAB ── -->
       <div id="pane-site" class="tab-pane">
         <div id="search-summary" class="stat-grid"></div>
+        <div id="site-loading" class="tab-loading">Loading...</div>
 
         <div class="section-head">
           <h2>Search trend — daily</h2>
@@ -65,6 +68,7 @@ import Base from '../layouts/Base.astro';
       <!-- ── COURSE TAB ── -->
       <div id="pane-course" class="tab-pane" style="display:none">
         <div id="course-summary" class="stat-grid"></div>
+        <div id="course-loading" class="tab-loading">Loading...</div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0">
           <div class="card-panel">
@@ -117,7 +121,7 @@ import Base from '../layouts/Base.astro';
 
           <div class="section-head">
             <h2>Recent sends</h2>
-            <p>Last 20 from Resend. Bounced and complained are highlighted.</p>
+            <p>Last 20 of our own sends, filtered to adhdreflect.com so the shared Resend account's other businesses never show here. Bounced and complained are highlighted.</p>
           </div>
           <div id="email-recent"></div>
         </div>
@@ -184,6 +188,7 @@ import Base from '../layouts/Base.astro';
         <div class="section-head">
           <h2>Active codes</h2>
         </div>
+        <div id="codes-loading" class="tab-loading">Loading...</div>
         <div id="codes-list"></div>
       </div>
 
@@ -197,7 +202,27 @@ import Base from '../layouts/Base.astro';
           <input id="card-filter" placeholder="Filter..." oninput="filterCards()" style="font-family:var(--sans);font-size:14px;padding:10px 14px;border:1.5px solid rgba(31,42,55,0.1);border-radius:8px;background:white;outline:none;flex:1"/>
           <button onclick="exportCards()" style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;padding:10px 16px;border-radius:8px;border:1px solid rgba(31,42,55,0.1);background:white;cursor:pointer;color:var(--pewter)">Export CSV</button>
         </div>
+        <div id="cards-loading" class="tab-loading">Loading...</div>
         <div id="cards-gap-list"></div>
+      </div>
+
+      <!-- ── STATS TAB ── -->
+      <div id="pane-stats" class="tab-pane" style="display:none">
+        <div id="stats-loading" class="tab-loading">Loading...</div>
+        <div id="stats-body" style="display:none">
+          <div id="stats-summary" class="stat-grid"></div>
+
+          <div class="section-head">
+            <h2>Visits, last 30 days</h2>
+            <p>First-party page counts. These are page views, not unique visitors, since we store no identifiers.</p>
+          </div>
+          <div id="stats-daily" style="margin-bottom:40px"></div>
+
+          <div class="section-head">
+            <h2>Top 20 pages</h2>
+          </div>
+          <div id="stats-top"></div>
+        </div>
       </div>
 
     </div>
@@ -304,45 +329,122 @@ import Base from '../layouts/Base.astro';
   .module-bar-track { flex: 1; height: 6px; background: var(--mist); border-radius: 3px; overflow: hidden; }
   .module-bar-fill { height: 100%; background: var(--blue); border-radius: 3px; }
   .module-bar-count { font-family: var(--mono); font-size: 10px; color: var(--pewter); width: 28px; text-align: right; flex-shrink: 0; }
+  .tab-loading { font-family: var(--sans); font-size: 14px; color: var(--pewter); padding: 8px 0; }
 </style>
 
 <script is:inline>
+  const SS_KEY = 'adhd-admin-key';
   let adminKey = '';
-  let allData = {};
   let unmatchedRaw = [];
-  // Email and Revenue are not in section=all — they hit Resend and Stripe, so
-  // they load only on first view of their tab and are cached from then on.
-  const lazyLoaded = { email: false, revenue: false };
+  let searchDetailData = null; // shared by the Site and Missing cards tabs
+  // Each tab loads its own detail on first view. Login (section=all) only
+  // brings back the summary counts, so it never waits on the full data set,
+  // Resend or Stripe.
+  const loaded = { site:false, course:false, codes:false, cards:false, email:false, revenue:false, stats:false };
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Fetch a section with the admin key. A 401 means the stored key is stale:
+  // clear it and drop back to the login form.
+  async function adminFetch(section) {
+    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=' + section);
+    if (res.status === 401) { logout(); throw new Error('unauthorized'); }
+    return res.json();
+  }
+
+  function logout() {
+    try { sessionStorage.removeItem(SS_KEY); } catch (e) {}
+    adminKey = '';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('auth-form').style.display = 'block';
+    const input = document.getElementById('admin-key');
+    if (input) input.value = '';
+  }
+
+  function hideLoading(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 
   async function showTab(name) {
     document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('pane-' + name).style.display = 'block';
     document.getElementById('tab-' + name).classList.add('active');
-    if (name === 'email' && !lazyLoaded.email) { lazyLoaded.email = true; await loadEmail(); }
-    if (name === 'revenue' && !lazyLoaded.revenue) { lazyLoaded.revenue = true; await loadRevenue(); }
+    if (!loaded[name]) { loaded[name] = true; await loadSection(name); }
   }
 
-  async function loadAll() {
-    adminKey = document.getElementById('admin-key').value;
-    if (!adminKey) return;
+  // Load one tab's detail. Loading states live in each pane and are hidden as
+  // the detail arrives.
+  async function loadSection(name) {
     try {
-      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=all');
-      const data = await res.json();
-      if (data.error) { alert(data.error); return; }
-      allData = data;
-      document.getElementById('auth-form').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      renderSite(data.search);
-      renderCourse(data.course);
-      renderCodes(data.discounts);
-      renderCardGaps(data.search);
-    } catch(e) { alert('Error: ' + e.message); }
+      if (name === 'site') {
+        const d = await adminFetch('search');
+        searchDetailData = d.search || null;
+        hideLoading('site-loading');
+        renderSiteDetail(searchDetailData);
+      } else if (name === 'course') {
+        const d = await adminFetch('course');
+        hideLoading('course-loading');
+        renderCourseDetail(d.course);
+      } else if (name === 'codes') {
+        const d = await adminFetch('discounts');
+        hideLoading('codes-loading');
+        renderCodes(d.discounts);
+      } else if (name === 'cards') {
+        // Reuse the Site tab's search detail if it is already loaded.
+        const search = searchDetailData || ((await adminFetch('search')).search || null);
+        searchDetailData = search;
+        hideLoading('cards-loading');
+        renderCardGaps(search);
+      } else if (name === 'stats') {
+        const d = await adminFetch('stats');
+        renderStats(d.stats);
+      } else if (name === 'email') {
+        await loadEmail();
+      } else if (name === 'revenue') {
+        await loadRevenue();
+      }
+    } catch (e) {
+      if (e.message === 'unauthorized') return; // already dropped to login
+      const el = document.getElementById(name + '-loading');
+      if (el) { el.style.display = 'block'; el.textContent = 'Error: ' + e.message; }
+    }
+  }
+
+  // Sign in (or restore a stored key). section=all returns only summary counts.
+  async function loadAll(existingKey) {
+    adminKey = existingKey || document.getElementById('admin-key').value;
+    if (!adminKey) return;
+    let data;
+    try {
+      data = await adminFetch('all');
+    } catch (e) {
+      if (e.message !== 'unauthorized') alert('Error: ' + e.message);
+      return;
+    }
+    if (data.error) { alert(data.error); return; }
+    try { sessionStorage.setItem(SS_KEY, adminKey); } catch (e) {}
+    document.getElementById('auth-form').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    Object.keys(loaded).forEach(k => loaded[k] = false);
+    searchDetailData = null;
+    renderSiteSummary(data.search && data.search.summary);
+    renderCourseSummary(data.course && data.course.summary);
+    showTab('site');
   }
 
   document.getElementById('admin-key')?.addEventListener('keydown', e => {
     if (e.key === 'Enter') loadAll();
   });
+
+  // Restore a stored key (sessionStorage, so it clears when the browser closes)
+  // and skip straight to the dashboard.
+  (function () {
+    let stored = '';
+    try { stored = sessionStorage.getItem(SS_KEY) || ''; } catch (e) {}
+    if (stored) loadAll(stored);
+  })();
 
   // ── Toggle value field for percent codes ──
   document.getElementById('code-type')?.addEventListener('change', function() {
@@ -353,9 +455,9 @@ import Base from '../layouts/Base.astro';
   document.getElementById('code-type')?.dispatchEvent(new Event('change'));
 
   // ── SITE ──
-  function renderSite(search) {
-    if (!search) return;
-    const s = search.summary;
+  // Summary strip renders instantly from the section=all login payload.
+  function renderSiteSummary(s) {
+    if (!s) return;
     document.getElementById('search-summary').innerHTML = [
       { label: 'Total searches', value: s.total, color: '#4A6FA5' },
       { label: 'Matched', value: s.matched, color: '#4B6B4E' },
@@ -364,6 +466,11 @@ import Base from '../layouts/Base.astro';
       { label: 'Unique queries', value: s.uniqueQueries, color: '#9B8BB4' },
       { label: 'Match rate', value: s.total > 0 ? Math.round(s.matched / s.total * 100) + '%' : '—', color: '#4B6B4E' },
     ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+  }
+
+  // Detail (chart, lists) loads on first view of the Site tab.
+  function renderSiteDetail(search) {
+    if (!search) return;
 
     // Mini chart
     const days = Object.entries(search.dailyCounts || {}).sort((a, b) => a[0].localeCompare(b[0])).slice(-30);
@@ -409,9 +516,8 @@ import Base from '../layouts/Base.astro';
   }
 
   // ── COURSE ──
-  function renderCourse(course) {
-    if (!course) return;
-    const s = course.summary;
+  function renderCourseSummary(s) {
+    if (!s) return;
     document.getElementById('course-summary').innerHTML = [
       { label: 'Total buyers', value: s.totalPurchasers, color: '#4A6FA5' },
       { label: 'Completed all 20', value: s.completedCourse, color: '#4B6B4E' },
@@ -419,6 +525,10 @@ import Base from '../layouts/Base.astro';
       { label: 'Started only', value: s.startedOnly, color: '#C97B6A' },
       { label: 'Avg modules done', value: s.avgCompletion, color: '#56606E' },
     ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+  }
+
+  function renderCourseDetail(course) {
+    if (!course) return;
 
     // Pattern distribution
     document.getElementById('pattern-dist').innerHTML = Object.entries(course.patternDistribution || {})
@@ -506,6 +616,17 @@ import Base from '../layouts/Base.astro';
       `;
   }
 
+  // POST an action with the admin key. A 401 drops back to login, like adminFetch.
+  async function adminPost(body) {
+    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (res.status === 401) { logout(); throw new Error('unauthorized'); }
+    return res.json();
+  }
+
   async function createCode() {
     const code = document.getElementById('code-input').value.trim();
     const type = document.getElementById('code-type').value;
@@ -519,58 +640,41 @@ import Base from '../layouts/Base.astro';
     if (!code) { fb.textContent = 'Code required.'; return; }
     fb.textContent = 'Creating...';
     try {
-      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'create_discount', code, type, value, maxUses, expiresAt, notes, accessDays }),
-      });
-      const data = await res.json();
+      const data = await adminPost({ action: 'create_discount', code, type, value, maxUses, expiresAt, notes, accessDays });
       if (data.success) {
         fb.textContent = 'Created: ' + data.code.code;
         document.getElementById('code-input').value = '';
         document.getElementById('code-notes').value = '';
-        // Reload discounts
-        const res2 = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
-        const d2 = await res2.json();
-        renderCodes(d2.discounts);
+        renderCodes((await adminFetch('discounts')).discounts);
       } else {
         fb.textContent = data.error || 'Error';
       }
-    } catch(e) { fb.textContent = e.message; }
+    } catch(e) { if (e.message !== 'unauthorized') fb.textContent = e.message; }
   }
 
   async function toggleCode(code) {
-    await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'toggle_discount', code }),
-    });
-    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
-    const data = await res.json();
-    renderCodes(data.discounts);
+    try {
+      await adminPost({ action: 'toggle_discount', code });
+      renderCodes((await adminFetch('discounts')).discounts);
+    } catch(e) { if (e.message !== 'unauthorized') alert('Error: ' + e.message); }
   }
 
   async function deleteCode(code) {
     if (!confirm('Delete code ' + code + '?')) return;
-    await fetch('/api/admin?key=' + encodeURIComponent(adminKey), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'delete_discount', code }),
-    });
-    const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=discounts');
-    const data = await res.json();
-    renderCodes(data.discounts);
+    try {
+      await adminPost({ action: 'delete_discount', code });
+      renderCodes((await adminFetch('discounts')).discounts);
+    } catch(e) { if (e.message !== 'unauthorized') alert('Error: ' + e.message); }
   }
 
   // ── EMAIL (lazy) ──
   async function loadEmail() {
     try {
-      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=email');
-      const data = await res.json();
+      const data = await adminFetch('email');
       if (data.error) { document.getElementById('email-loading').textContent = data.error; return; }
       renderEmail(data.email);
     } catch (e) {
-      document.getElementById('email-loading').textContent = 'Error: ' + e.message;
+      if (e.message !== 'unauthorized') document.getElementById('email-loading').textContent = 'Error: ' + e.message;
     }
   }
 
@@ -584,7 +688,8 @@ import Base from '../layouts/Base.astro';
       { label: 'Unsubscribes', value: email.unsubCount, color: '#B85038' },
       { label: 'Unsub rate', value: email.unsubRate + '%', color: '#C97B6A' },
       { label: 'Resend contacts', value: email.resendContactCount == null ? '—' : email.resendContactCount, color: '#9B8BB4' },
-      { label: 'Suppression list', value: email.suppressionCount == null ? '—' : email.suppressionCount, color: '#56606E' },
+      { label: 'Bounced', value: email.bouncedCount || 0, color: '#B85038' },
+      { label: 'Complained', value: email.complainedCount || 0, color: '#C97B6A' },
     ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
 
     // Sync divergence flag
@@ -648,12 +753,11 @@ import Base from '../layouts/Base.astro';
   // ── REVENUE (lazy) ──
   async function loadRevenue() {
     try {
-      const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=revenue');
-      const data = await res.json();
+      const data = await adminFetch('revenue');
       if (data.error) { document.getElementById('revenue-loading').textContent = data.error; return; }
       renderRevenue(data.revenue);
     } catch (e) {
-      document.getElementById('revenue-loading').textContent = 'Error: ' + e.message;
+      if (e.message !== 'unauthorized') document.getElementById('revenue-loading').textContent = 'Error: ' + e.message;
     }
   }
 
@@ -715,6 +819,45 @@ import Base from '../layouts/Base.astro';
           <span style="font-family:var(--sans);font-size:12px;color:var(--slate);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.email || ''}</span>
         </div>`;
       }).join('');
+  }
+
+  // ── STATS (lazy) ──
+  function renderStats(stats) {
+    hideLoading('stats-loading');
+    document.getElementById('stats-body').style.display = 'block';
+    if (!stats) return;
+    const daily = stats.daily || {};
+    const days = Object.keys(daily).sort().slice(-30);
+    const totalRecent = days.reduce((sum, d) => sum + daily[d], 0);
+
+    document.getElementById('stats-summary').innerHTML = [
+      { label: 'Views, last 30 days', value: totalRecent, color: '#4A6FA5' },
+      { label: 'Views counted (90d)', value: stats.totalCounted || 0, color: '#4B6B4E' },
+      { label: 'Days with visits', value: Object.keys(daily).length, color: '#9B8BB4' },
+    ].map(c => `<div class="stat-card"><div class="stat-label" style="color:${c.color}">${c.label}</div><div class="stat-value">${c.value}</div></div>`).join('');
+
+    // Visits over the last 30 days, as a simple bar list.
+    const max = Math.max(...days.map(d => daily[d]), 1);
+    document.getElementById('stats-daily').innerHTML = days.length === 0
+      ? '<p class="tab-loading">No visits counted yet.</p>'
+      : days.map(d => {
+          const count = daily[d];
+          const pct = Math.round(count / max * 100);
+          return `<div class="module-bar-wrap">
+            <span class="module-bar-label" style="width:64px">${d.slice(5)}</span>
+            <div class="module-bar-track"><div class="module-bar-fill" style="width:${pct}%"></div></div>
+            <span class="module-bar-count">${count}</span>
+          </div>`;
+        }).join('');
+
+    // Top 20 pages.
+    document.getElementById('stats-top').innerHTML = (stats.topPages || []).length === 0
+      ? '<p class="tab-loading">No pages counted yet.</p>'
+      : stats.topPages.map(p => `
+          <div class="row-item">
+            <span style="font-family:var(--mono);font-size:12px;color:var(--pewter);width:48px;flex-shrink:0">${p.count}</span>
+            <span style="font-family:var(--mono);font-size:13px;color:var(--slate);word-break:break-all">${esc(p.path)}</span>
+          </div>`).join('');
   }
 
   // ── CARD GAPS ──

@@ -3,7 +3,7 @@ layout: ../../layouts/Legal.astro
 title: Privacy Policy
 label: Legal
 description: How ADHD Reflect handles your information.
-updated: 25 July 2026
+updated: 27 July 2026
 ---
 
 ## The short version
@@ -15,7 +15,7 @@ Here is the honest summary:
 - We collect the minimum we can.
 - There are no accounts and no passwords. Paid access is a token in an emailed link, plus a backup saved in your browser.
 - We do not sell your data.
-- We do not use your data to target advertising. We do not run any analytics tool.
+- We do not use your data to target advertising, and we use no third-party analytics. The only counting we do is our own: how many times each page was viewed per day, with no cookies and nothing that identifies you.
 - We do not share what you type into the assistant with advertisers, referral partners or anyone marketing to you.
 - We use four services to run the site: Cloudflare, Anthropic, Resend and Stripe. Nothing else.
 - You can ask us to delete your data at any time.
@@ -66,7 +66,9 @@ We collect different things depending on what you do on the site.
 
 **Basic technical information.** Standard web server logs from our host, Cloudflare, used for security and debugging.
 
-We do not run any analytics tool. We do not count page views, build visitor profiles, or track you from page to page.
+**Aggregate page counts.** We keep a first-party count of how many times each page is viewed per day, stored on our own infrastructure (Cloudflare KV). It is counts only. We do not store IP addresses, user agents, cookies, device details or anything that identifies you or links one visit to another. Because of that we cannot tell how many unique people visited, only how many times a page was loaded. These counts are deleted automatically after 90 days.
+
+We use no third-party analytics such as Google Analytics, and we do not build visitor profiles or track you from page to page.
 
 ### Things we do not collect
 
@@ -162,6 +164,7 @@ Almost everything lives in Cloudflare KV and deletes itself on a timer. These ar
 | What it is | How long we keep it |
 |---|---|
 | A short-lived cache of which card your text matched | 30 days |
+| Aggregate page-view counts (per page, per day, no identifiers) | 90 days |
 | What you type into the assistant | 90 days |
 | Your drip schedule and quiz pattern | 60 days |
 | Your unsubscribe record | 5 years |
