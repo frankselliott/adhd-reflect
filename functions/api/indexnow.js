@@ -53,6 +53,31 @@ async function collectUrls() {
   return [...seen];
 }
 
+// Collect the site's URLs from the sitemap and submit them to IndexNow.
+// Returns a summary. Throws on a hard failure (no sitemap URLs); the caller
+// decides whether that matters. Reused by the daily drip cron in
+// send-scheduled.js so submission happens automatically on the same schedule.
+export async function submitToIndexNow() {
+  const urls = await collectUrls();
+  if (urls.length === 0) throw new Error('No URLs found in sitemap.');
+
+  const batches = [];
+  for (let i = 0; i < urls.length; i += BATCH) {
+    const urlList = urls.slice(i, i + BATCH);
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ host: HOST, key: INDEXNOW_KEY, keyLocation: KEY_LOCATION, urlList }),
+    });
+    // IndexNow returns 200 or 202 on success; anything else is worth logging.
+    if (res.status !== 200 && res.status !== 202) {
+      console.error('indexnow: submission returned', res.status, await res.text().catch(() => ''));
+    }
+    batches.push({ count: urlList.length, status: res.status });
+  }
+  return { submitted: urls.length, batches, keyLocation: KEY_LOCATION };
+}
+
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
@@ -60,35 +85,15 @@ export async function onRequestGet({ request, env }) {
   }
 
   try {
-    const urls = await collectUrls();
-    if (urls.length === 0) {
-      return new Response(JSON.stringify({ error: 'No URLs found in sitemap.' }), {
-        status: 502, headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    const batches = [];
-    for (let i = 0; i < urls.length; i += BATCH) {
-      const urlList = urls.slice(i, i + BATCH);
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ host: HOST, key: INDEXNOW_KEY, keyLocation: KEY_LOCATION, urlList }),
-      });
-      // IndexNow returns 200 or 202 on success; anything else is worth logging.
-      if (res.status !== 200 && res.status !== 202) {
-        console.error('indexnow: submission returned', res.status, await res.text().catch(() => ''));
-      }
-      batches.push({ count: urlList.length, status: res.status });
-    }
-
-    return new Response(JSON.stringify({ submitted: urls.length, batches, keyLocation: KEY_LOCATION }), {
+    const result = await submitToIndexNow();
+    return new Response(JSON.stringify(result), {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (e) {
     console.error('indexnow error', e && e.message);
-    return new Response(JSON.stringify({ error: 'Something went wrong.' }), {
-      status: 500, headers: { 'Content-Type': 'application/json' },
+    const noUrls = /No URLs/.test(e && e.message);
+    return new Response(JSON.stringify({ error: noUrls ? e.message : 'Something went wrong.' }), {
+      status: noUrls ? 502 : 500, headers: { 'Content-Type': 'application/json' },
     });
   }
 }

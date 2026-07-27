@@ -4,6 +4,7 @@
 import { sendBatch, sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
 import { dripEmailHtml } from './_lib/emails.js';
 import { DRIP, unsubscribeLine } from './_lib/emailCopy.js';
+import { submitToIndexNow } from './indexnow.js';
 
 // Simple sanity check. One invalid address must not stall the whole drip,
 // because Resend's batch endpoint is atomic (all-or-nothing per call).
@@ -126,7 +127,20 @@ export async function onRequestGet({ request, env }) {
   const runStats = { sent, skipped, errors, total, capped, timestamp: new Date().toISOString() };
   try { await env.SEARCH_LOGS.put('stats:last-drip-run', JSON.stringify(runStats)); } catch (e) { /* best-effort */ }
 
-  return new Response(JSON.stringify(runStats), {
+  // Reuse this daily cron to refresh IndexNow (Bing, Yandex and the other
+  // engines that share the feed), so newly deployed or changed pages get
+  // picked up without a separate schedule. Strictly best-effort: a failure
+  // here must never affect the drip, so it is caught and only logged. It is
+  // kept out of the KV drip stats and reported in the response only.
+  let indexnow = null;
+  try {
+    indexnow = await submitToIndexNow();
+  } catch (e) {
+    console.error('indexnow submission from cron failed', e && e.message);
+    indexnow = { error: e && e.message };
+  }
+
+  return new Response(JSON.stringify({ ...runStats, indexnow }), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
