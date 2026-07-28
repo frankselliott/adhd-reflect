@@ -7,25 +7,19 @@ import Base from '../../layouts/Base.astro';
   </div>
 </Base>
 <script>
-  (async () => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-    const pattern = params.get('pattern') || '';
-    const el = document.getElementById('status');
-    try {
-      const res = await fetch('/api/grow/free-access', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, pattern }),
-      });
-      const data = await res.json();
-      if (data.accessUrl) {
-        window.location.href = data.accessUrl;
-      } else {
-        el.textContent = 'Something went wrong. Email hello@adhdreflect.com with your code.';
-      }
-    } catch(e) {
-      el.textContent = 'Something went wrong. Email hello@adhdreflect.com with your code.';
+  // This page used to redeem the code straight from the URL, which meant a code
+  // entered at checkout never got the chance to capture an email and so had no
+  // recovery path. It now forwards to /grow/redeem, the single redemption UI,
+  // with the code prefilled. Nothing is spent here.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var code = params.get('code') || '';
+    var pattern = params.get('pattern') || '';
+    if (pattern) {
+      try { localStorage.setItem('adhd_pattern', pattern); } catch (e) { /* private mode */ }
     }
+    var target = '/grow/redeem';
+    if (code) target += '?code=' + encodeURIComponent(code);
+    window.location.replace(target);
   })();
 </script>

@@ -20,14 +20,12 @@ export async function onRequestPost({ request, env }) {
           const expired = codeData.expiresAt && new Date(codeData.expiresAt) < new Date();
           const maxed = codeData.maxUses !== null && codeData.usedCount >= codeData.maxUses;
           if (!expired && !maxed) {
-            // Increment usage.
-            // KNOWN LIMITATION: not atomic (KV has no atomic increment), so
-            // concurrent redemptions of a limited code can overshoot maxUses.
-            // Accepted; a hard cap would need Durable Objects. See free-access.js.
-            codeData.usedCount++;
-            await env.GROW_DATA.put(codeKey, JSON.stringify(codeData));
-            // Return free access URL — webhook will be skipped, so we create access directly
-            // Free codes redirect to a special handler
+            // Validate only. Do NOT increment here.
+            // This used to spend the code, and then /api/grow/free-access spent
+            // it a second time on the very next request, which meant any code
+            // with maxUses: 1 was already exhausted by the time the user
+            // arrived and they were told it had hit its limit. free-access.js
+            // is now the only place usedCount moves.
             return new Response(JSON.stringify({
               url: 'https://adhdreflect.com/grow/free-access?code=' + encodeURIComponent(discountCode.toUpperCase().trim()) + '&pattern=' + encodeURIComponent(pattern),
             }), { status: 200, headers });
