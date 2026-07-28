@@ -19,6 +19,16 @@ import Base from '../../layouts/Base.astro';
           spellcheck="false"
           class="redeem-input"
         />
+        <input
+          id="email-input"
+          type="email"
+          placeholder="Your email (optional)"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          class="redeem-input redeem-input-email"
+        />
+        <p class="redeem-hint">We'll email your access link so you can get back in later. Skip it if you'd rather, but then the link you get next is the only one you'll have.</p>
         <div id="redeem-error" class="redeem-error" style="display:none"></div>
         <button id="redeem-btn" class="redeem-btn">Get access</button>
         <p class="redeem-note">No payment needed. Your access link will open immediately.</p>
@@ -107,6 +117,19 @@ import Base from '../../layouts/Base.astro';
 .redeem-input:focus {
   border-color: var(--blue);
 }
+.redeem-input-email {
+  letter-spacing: normal;
+  text-transform: none;
+  font-size: 16px;
+}
+.redeem-hint {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--pewter);
+  line-height: 1.5;
+  text-align: center;
+  margin: -4px 0 0;
+}
 .redeem-input.error {
   border-color: var(--clay);
 }
@@ -190,6 +213,7 @@ import Base from '../../layouts/Base.astro';
 
 <script>
   const input = document.getElementById('code-input');
+  const emailInput = document.getElementById('email-input');
   const btn = document.getElementById('redeem-btn');
   const errorEl = document.getElementById('redeem-error');
   const form = document.getElementById('redeem-form');
@@ -207,8 +231,23 @@ import Base from '../../layouts/Base.astro';
     input.classList.remove('error');
   }
 
+  // Arriving from /grow/free-access?code=... (the checkout path): prefill the
+  // code and put the cursor in the email field, which is the only thing left
+  // for them to decide.
+  {
+    const prefill = new URLSearchParams(window.location.search).get('code');
+    if (prefill) {
+      input.value = prefill.trim().toUpperCase();
+      setTimeout(() => emailInput.focus(), 0);
+    }
+  }
+
   input.addEventListener('input', clearError);
   input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') redeem();
+  });
+  emailInput.addEventListener('input', clearError);
+  emailInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') redeem();
   });
 
@@ -216,8 +255,13 @@ import Base from '../../layouts/Base.astro';
 
   async function redeem() {
     const code = input.value.trim().toUpperCase();
+    const email = emailInput.value.trim();
     if (!code) {
       showError('Please enter your code.');
+      return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      showError('That email address doesn\'t look right. Check it, or leave it blank.');
       return;
     }
     clearError();
@@ -229,7 +273,7 @@ import Base from '../../layouts/Base.astro';
       const res = await fetch('/api/grow/free-access', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, pattern }),
+        body: JSON.stringify({ code, pattern, email }),
       });
       const data = await res.json();
 
