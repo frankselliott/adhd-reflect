@@ -38,7 +38,18 @@ a generated plain-text fallback; we never send html alone).
 | `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
 | `ADMIN_KEY` | Required | cron auth for `send-scheduled`, `email-health`, `email-clear` |
 | `RESEND_SEGMENT_ID` | **Required** for contact sync | segment every mirrored contact is added to |
+| `DRIP_MAX_PER_RUN` | Optional (default 150) | cap on drip sends per `send-scheduled` run, so a backlog drains gently within the sending-domain warm-up |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
+
+> **The drip cron must be authenticated.** `send-scheduled` runs only when the
+> `?key=` query param matches `ADMIN_KEY` on **this** deployment. Because Pages
+> secrets are per-environment, an `ADMIN_KEY` set only in Preview means every
+> Production cron call fails and the drip silently never fires — while welcome
+> and purchase emails (which need only `RESEND_API_KEY`) keep working. The
+> endpoint now makes this loud: a missing server key returns `500
+> not_configured (ADMIN_KEY)` and a wrong/missing caller key returns `401
+> unauthorized`, both with explicit JSON bodies, so cron-job.org logs a failure
+> instead of a green run. Confirm the Production binding with `email-health`.
 
 > Cloudflare Pages secrets are **per-environment**. A value set only for
 > **Preview** is not present in **Production**. If `email-health` shows
@@ -106,6 +117,17 @@ success, so a silent no-send is visible. Response shape:
 
 The quiz surfaces a quiet line to the user when `welcomeSent` is false (except
 `already_subscribed`).
+
+`send-scheduled` returns a machine-readable JSON summary on **every** run —
+`{ ok, dryRun, scanned, due, sent, failed, skipped, skippedBreakdown, ... }` —
+and records it to `stats:last-drip-run` for the dashboard, so a run that sends
+nothing is never mistaken for success. `skippedBreakdown` explains why each row
+was passed over (`notDue`, `completed`, `invalidEmail`, `unsubscribed`,
+`noCopy`, `perRunCap`). Add **`?dry=1`** to run the full selection logic and get
+the same summary without sending anything or advancing any schedule — use it to
+verify the drip picks up the right people before a live run. A live run sends at
+most one step per subscriber, and at most `DRIP_MAX_PER_RUN` in total, so a
+backlog drains one email per person per day rather than in a burst.
 
 Admin tools (both `GET`, `ADMIN_KEY` via `?key=`):
 - `/api/email-health?key=…` — booleans for which env vars and KV bindings are
