@@ -107,8 +107,13 @@ export async function onRequestGet({ request, env }) {
     const raw = await env.SEARCH_LOGS.get(key.name);
     if (!raw) continue;
     const schedule = JSON.parse(raw);
-    if (new Date(schedule.nextEmailDate) > now) { skipped.notDue++; continue; }
+    // Completed before not-due: someone who has had all four emails is finished
+    // for good, whatever their next date says. Checking the date first filed
+    // every finished subscriber under notDue, which made "completed" read as 0
+    // forever and hid how much of the list had reached the end of the sequence.
+    // Both branches skip, so this only changes which counter is credited.
     if (schedule.emailsSent >= 4) { skipped.completed++; continue; }
+    if (new Date(schedule.nextEmailDate) > now) { skipped.notDue++; continue; }
     // Skip malformed addresses so a bad KV row cannot poison the batch.
     if (!EMAIL_RE.test(String(schedule.email || '').trim())) {
       console.warn('send-scheduled: skipping invalid address', key.name);
@@ -163,17 +168,28 @@ export async function onRequestGet({ request, env }) {
 
   let sent = 0, failed = 0;
 
-  // Advance one recipient in KV after a successful send. Anchor the next date
-  // to the PREVIOUS scheduled date plus 7 days, not to now, so a late cron run
-  // does not push the whole schedule forward permanently. If the cron has
-  // missed several days the new date may still be in the past, which just makes
-  // this person due again next run: one email per person per run (the loop
-  // sends a single step each time), and the schedule re-converges over the
-  // following days rather than firing a burst.
+  // Advance one recipient in KV after a successful send. Normally the next date
+  // is the PREVIOUS scheduled date plus 7 days, not now-plus-7, so a cron run
+  // that lands a few hours late does not walk the whole schedule forward.
+  //
+  // That anchoring breaks down when a schedule is badly behind. If the drip has
+  // been dead for weeks, prev + 7d is STILL in the past, so this person is due
+  // again on the very next run, and the run after that: someone promised "one a
+  // week for four weeks" receives the remaining three on consecutive days. That
+  // reads as a malfunction, and it is the opposite of what the welcome email
+  // says.
+  //
+  // So: keep the drift-free anchor while it is still in the future, and re-base
+  // to a week from now once it has fallen into the past. A late subscriber gets
+  // this email today and the next in seven days, which is the cadence they were
+  // actually promised.
+  const WEEK = 7*24*60*60*1000;
   const advance = async (d) => {
     const prev = new Date(d.schedule.nextEmailDate).getTime();
+    const drift = prev + WEEK;
+    const next = drift > now.getTime() ? drift : now.getTime() + WEEK;
     d.schedule.emailsSent += 1;
-    d.schedule.nextEmailDate = new Date(prev + 7*24*60*60*1000).toISOString();
+    d.schedule.nextEmailDate = new Date(next).toISOString();
     d.schedule.lastSent = now.toISOString();
     await env.SEARCH_LOGS.put(d.keyName, JSON.stringify(d.schedule), { expirationTtl: 60*60*24*60 });
     sent++;
