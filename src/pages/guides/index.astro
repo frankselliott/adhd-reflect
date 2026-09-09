@@ -1,8 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { TOPIC_GUIDES } from '../../data/topicGuides.js';
+import { breadcrumbs } from '../../data/seo.js';
+
+const crumbs = breadcrumbs([{ name: 'Guides', path: '/guides' }]);
 ---
-<Base title="Guides" description="Research-backed guides for understanding ADHD parenting patterns." current="guides">
+<Base title="Guides" description="Research-backed guides for understanding ADHD parenting patterns." current="guides" schema={crumbs}>
 
   <section class="guides-hero">
     <div class="guides-hero-inner">

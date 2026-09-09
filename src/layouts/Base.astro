@@ -10,6 +10,7 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   schema?: any;
+  ogType?: string;
 }
 
 const {
@@ -19,12 +20,61 @@ const {
   ogImage,
   noindex = false,
   schema,
+  // 'article' on cards, guides and other written pages so social and search
+  // treat them as content rather than as another copy of the site front page.
+  ogType = 'website',
 } = Astro.props;
 
 const fullTitle = title === 'ADHD Reflect' ? title : `${title} — ADHD Reflect`;
 // Open Graph needs a raster image: SVG is ignored by every major platform.
 // Pages may pass ogImage to override the default (e.g. a per-pattern card).
 const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
+
+// Site-wide structured data as ONE linked graph rather than two free-floating
+// objects. The stable @ids let every page's Article/FAQ schema point back at
+// the same publisher entity instead of describing a new nameless organisation
+// each time, which is what lets search engines consolidate the site into a
+// single known publisher. SITE_ORG_ID is exported-by-convention: page schemas
+// reference the same string.
+const ORG_ID = 'https://adhdreflect.com/#organization';
+const SITE_ID = 'https://adhdreflect.com/#website';
+
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'ADHD Reflect',
+      url: 'https://adhdreflect.com',
+      description: 'Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in.',
+      // A real, square, raster asset. Google needs a fetchable logo here for
+      // the publisher to be eligible for logo treatment in results.
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://adhdreflect.com/icon-512.png',
+        width: 512,
+        height: 512,
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': SITE_ID,
+      name: 'ADHD Reflect',
+      url: 'https://adhdreflect.com',
+      description: 'For ADHD parents raising ADHD kids. Describe what just happened and find what helps.',
+      inLanguage: 'en',
+      publisher: { '@id': ORG_ID },
+      // The homepage really does read ?q= (AIRouter.jsx), so this action is
+      // honest: it resolves to a working search.
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://adhdreflect.com/?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  ],
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +98,8 @@ const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:locale" content="en" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
@@ -68,29 +119,7 @@ const ogImageUrl = `https://adhdreflect.com${ogImage || '/og-default.png'}`;
     : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
 
   <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "ADHD Reflect",
-    "url": "https://adhdreflect.com",
-    "description": "For ADHD parents raising ADHD kids. Describe what just happened and find what helps.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://adhdreflect.com/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ADHD Reflect",
-    "url": "https://adhdreflect.com",
-    "description": "Practical support for ADHD parents raising ADHD kids. Cards, guides, and tools for the moment you are in."
-  }
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
   {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 </head>
 <body>

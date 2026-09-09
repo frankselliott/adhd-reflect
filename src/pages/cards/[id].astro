@@ -6,6 +6,7 @@ import { BRAIN_PROCESS, DEFAULT_BRAIN } from '../../data/brainProcess.js';
 import { CARD_ACTIVITIES, PATTERN_NAMES } from '../../data/activities.js';
 import { KID_BRAIN } from '../../data/kidBrain.js';
 import { CARD_TO_TOPIC_GUIDES } from '../../data/cardToTopicGuides.js';
+import { article, faq, breadcrumbs } from '../../data/seo.js';
 
 export function getStaticPaths() {
   return CARDS.map(card => ({
@@ -52,36 +53,30 @@ function clampWords(s, max) {
 }
 const metaDescription = clampWords(stripMarkdown(rightNowText), 155);
 const typeLabel = { moment: 'ADHD parenting moment', parent: 'ADHD parent behaviour', kid: 'ADHD child behaviour' }[card.type];
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": card.title,
-  "description": metaDescription,
-  "author": { "@type": "Organization", "name": "ADHD Reflect" },
-  "publisher": { "@type": "Organization", "name": "ADHD Reflect", "url": "https://adhdreflect.com" },
-  "mainEntityOfPage": `https://adhdreflect.com/cards/${card.id}`,
-  "datePublished": "2026-05-31",
-  "dateModified": "2026-05-31",
-  "about": [
-    { "@type": "Thing", "name": "ADHD" },
-    { "@type": "Thing", "name": "Parenting" },
-    { "@type": "Thing", "name": typeLabel }
-  ]
-};
+const cardPath = `/cards/${card.id}`;
+const articleSchema = article({
+  headline: card.title,
+  description: metaDescription,
+  path: cardPath,
+  // Card library publication date. Unchanged from the previous inline schema.
+  datePublished: '2026-05-31',
+  dateModified: '2026-05-31',
+  about: [
+    { '@type': 'Thing', name: 'ADHD' },
+    { '@type': 'Thing', name: 'Parenting' },
+    { '@type': 'Thing', name: typeLabel },
+  ],
+});
 // FAQPage pairing the question form with the quotable answer, so answer
 // engines have a clean question/answer pair to extract and cite.
-const faqSchema = answerBlock ? {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": seoTitle,
-    "acceptedAnswer": { "@type": "Answer", "text": answerBlock }
-  }]
-} : null;
-const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+const faqSchema = answerBlock ? faq(seoTitle, answerBlock, cardPath) : null;
+const crumbs = breadcrumbs([
+  { name: 'Cards', path: '/cards' },
+  { name: card.title, path: cardPath },
+]);
+const pageSchema = [articleSchema, crumbs, ...(faqSchema ? [faqSchema] : [])];
 ---
-<Base title={seoTitle} description={metaDescription} schema={pageSchema}>
+<Base title={seoTitle} description={metaDescription} schema={pageSchema} ogType="article">
 
   <!-- SEO: server-rendered content for crawlers (React renders over this) -->
   <article id="seo-content" class="seo-article">

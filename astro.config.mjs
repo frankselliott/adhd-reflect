@@ -11,6 +11,12 @@ const EXCLUDE = [
   '/app',
   '/dev/',
   '/guides/saved',
+  // Legal.astro hard-codes noindex on every /legal/ page. Submitting a
+  // noindex URL in the sitemap is a contradiction: Search Console reports it
+  // as "Submitted URL marked noindex" and it burns crawl budget on pages we
+  // have already told Google to ignore. Keep the sitemap and the robots meta
+  // saying the same thing.
+  '/legal/',
   '/grow/home',
   '/grow/module/',
   '/grow/summary',
