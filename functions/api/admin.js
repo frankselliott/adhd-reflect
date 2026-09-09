@@ -1,6 +1,8 @@
 // Paginate a KV prefix fully. A single list() caps at ~1000 keys, so without a
 // cursor the dashboard silently under-counts. Bounded at maxPages so a huge
 // namespace cannot run away in one admin request.
+import { adminKeyMatches } from './_lib/auth.js';
+
 async function listAllKeys(kv, prefix, maxPages = 50) {
   const keys = [];
   let cursor, pages = 0;
@@ -335,7 +337,7 @@ export async function onRequestGet({ env, request }) {
   const key = url.searchParams.get('key');
   const section = url.searchParams.get('section') || 'all';
 
-  if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, key)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401, headers: { 'Content-Type': 'application/json' },
     });
@@ -395,7 +397,7 @@ export async function onRequestGet({ env, request }) {
 export async function onRequestPost({ env, request }) {
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
-  if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, key)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401, headers: { 'Content-Type': 'application/json' },
     });

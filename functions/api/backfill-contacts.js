@@ -3,13 +3,14 @@
 // Mirrors every KV subscriber (email:<addr>) into Resend contacts so the list
 // survives the 60-day KV TTL. Fully idempotent; safe to run repeatedly.
 import { upsertContact, normalizeEmail } from './_lib/email.js';
+import { adminKeyMatches } from './_lib/auth.js';
 
 export async function onRequestGet({ request, env }) {
   const jsonHeaders = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
 
-  if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, key)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: jsonHeaders });
   }
   if (!env.RESEND_API_KEY || !env.SEARCH_LOGS) {

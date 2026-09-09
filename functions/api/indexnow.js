@@ -12,6 +12,8 @@
 // by hand or from a cron after a deploy:
 //   /api/indexnow?key=ADMIN_KEY
 
+import { adminKeyMatches } from './_lib/auth.js';
+
 const INDEXNOW_KEY = '28394371fd554902b704dc94713b9f4c';
 const HOST = 'adhdreflect.com';
 const SITE = 'https://adhdreflect.com';
@@ -80,7 +82,7 @@ export async function submitToIndexNow() {
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
-  if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, url.searchParams.get('key'))) {
     return new Response('Unauthorized', { status: 401 });
   }
 

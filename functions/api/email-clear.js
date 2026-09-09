@@ -4,13 +4,14 @@
 // fires for that address and it can be retested. Does NOT touch unsub:<addr>,
 // Grow access, tokens or purchase records.
 import { normalizeEmail } from './_lib/email.js';
+import { adminKeyMatches } from './_lib/auth.js';
 
 export async function onRequestGet({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
 
-  if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, key)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers });
   }
 

@@ -11,6 +11,7 @@
 // non-2xx body so they show up as failures in the cron-job.org execution log
 // instead of looking like a healthy run.
 
+import { adminKeyConfigured, adminKeyMatches, keyMismatchInfo } from './_lib/auth.js';
 import { sendBatch, sendEmail, signUnsub, normalizeEmail } from './_lib/email.js';
 import { dripEmailHtml } from './_lib/emails.js';
 import { DRIP, unsubscribeLine } from './_lib/emailCopy.js';
@@ -50,7 +51,7 @@ export async function onRequestGet({ request, env }) {
   //  - the caller sent a wrong or missing key.
   // Either way the body is explicit and the status is non-2xx, so cron-job.org
   // records a failure rather than a green run.
-  if (!env.ADMIN_KEY) {
+  if (!adminKeyConfigured(env)) {
     return json({
       ok: false,
       error: 'not_configured',
@@ -58,12 +59,13 @@ export async function onRequestGet({ request, env }) {
       detail: 'ADMIN_KEY is not set on this deployment. Cloudflare Pages secrets are per-environment: set it in the Production scope and redeploy.',
     }, 500);
   }
-  if (!cronKey || cronKey !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, cronKey)) {
     return json({
       ok: false,
       error: 'unauthorized',
       reason: cronKey ? 'invalid_key' : 'missing_key',
       detail: 'Provide the cron key as ?key=… . This request did not match ADMIN_KEY, so no drip was sent.',
+      ...keyMismatchInfo(env, cronKey),
     }, 401);
   }
 

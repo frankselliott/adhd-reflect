@@ -2,12 +2,14 @@
 // GET only, ADMIN_KEY auth: /api/email-health?key=ADMIN_KEY
 // Reports which env vars and bindings are PRESENT on this deployment, never
 // their values, so a production binding can be confirmed in one request.
+import { adminKeyMatches } from './_lib/auth.js';
+
 export async function onRequestGet({ request, env }) {
   const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
 
-  if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) {
+  if (!adminKeyMatches(env, key)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers });
   }
 

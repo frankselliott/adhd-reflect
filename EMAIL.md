@@ -50,6 +50,13 @@ a generated plain-text fallback; we never send html alone).
 > not_configured (ADMIN_KEY)` and a wrong/missing caller key returns `401
 > unauthorized`, both with explicit JSON bodies, so cron-job.org logs a failure
 > instead of a green run. Confirm the Production binding with `email-health`.
+>
+> **Whitespace is tolerated.** A secret pasted into the Cloudflare dashboard
+> very often picks up a trailing newline or space that cannot be seen there, and
+> a strict `===` then rejects a key identical to the one you typed. Every
+> `ADMIN_KEY` check goes through `adminKeyMatches()` in `_lib/auth.js`, which
+> trims both sides and compares in constant time. Inner whitespace and case are
+> still significant; a whitespace-only `ADMIN_KEY` counts as unset.
 
 > Cloudflare Pages secrets are **per-environment**. A value set only for
 > **Preview** is not present in **Production**. If `email-health` shows
