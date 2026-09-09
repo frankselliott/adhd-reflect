@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { TOPIC_GUIDES } from '../../data/topicGuides.js';
 import { CARDS } from '../../data/cards.js';
+import { article, faq, breadcrumbs } from '../../data/seo.js';
 
 export function getStaticPaths() {
   return TOPIC_GUIDES.map(guide => ({
@@ -48,27 +49,29 @@ function inlineText(s) {
 const seoTitle = guide.seoTitle || `${guide.title} · Guide`;
 const answerBlock = guide.answerBlock || '';
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": guide.title,
-  "description": guide.recognize,
-  "author": { "@type": "Organization", "name": "ADHD Reflect" },
-  "publisher": { "@type": "Organization", "name": "ADHD Reflect", "url": "https://adhdreflect.com" },
-  "mainEntityOfPage": `https://adhdreflect.com/guides/${guide.id}`
-};
-const faqSchema = answerBlock ? {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": guide.seoTitle || guide.title,
-    "acceptedAnswer": { "@type": "Answer", "text": answerBlock }
-  }]
-} : null;
-const pageSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+const guidePath = `/guides/${guide.id}`;
+const articleSchema = article({
+  headline: guide.title,
+  description: guide.recognize,
+  path: guidePath,
+  about: [
+    { '@type': 'Thing', name: 'ADHD' },
+    { '@type': 'Thing', name: 'Parenting' },
+    ...(guide.topic ? [{ '@type': 'Thing', name: guide.topic }] : []),
+  ],
+});
+const faqSchema = answerBlock
+  ? faq(guide.seoTitle || guide.title, answerBlock, guidePath)
+  : null;
+// Breadcrumbs let Google show "adhdreflect.com › Guides › <title>" instead of
+// a bare URL, and make the guide's place in the site explicit.
+const crumbs = breadcrumbs([
+  { name: 'Guides', path: '/guides' },
+  { name: guide.title, path: guidePath },
+]);
+const pageSchema = [articleSchema, crumbs, ...(faqSchema ? [faqSchema] : [])];
 ---
-<Base title={seoTitle} description={guide.recognize} schema={pageSchema}>
+<Base title={seoTitle} description={guide.recognize} schema={pageSchema} ogType="article">
 
   {answerBlock && (
     <div class="guide-lead guide-prose">

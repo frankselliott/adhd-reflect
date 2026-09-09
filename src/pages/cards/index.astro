@@ -1,12 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { CARDS } from '../../data/cards.js';
+import { breadcrumbs } from '../../data/seo.js';
 
 const momentCards = CARDS.filter(c => c.type === 'moment');
 const parentCards = CARDS.filter(c => c.type === 'parent');
 const kidCards = CARDS.filter(c => c.type === 'kid');
+const crumbs = breadcrumbs([{ name: 'Cards', path: '/cards' }]);
 ---
-<Base title="All Cards: ADHD Parenting Moments" description="Every ADHD parenting moment, behaviour, and pattern we cover. For the moment you are in, when ADHD and parenting collide.">
+<Base title="All Cards: ADHD Parenting Moments" description="Every ADHD parenting moment, behaviour, and pattern we cover. For the moment you are in, when ADHD and parenting collide." schema={crumbs}>
 
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
