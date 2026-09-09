@@ -257,7 +257,7 @@ export async function onRequestGet({ request, env }) {
   let indexnow = null;
   if (!dryRun) {
     try {
-      indexnow = await submitToIndexNow();
+      indexnow = await submitToIndexNow(env);
     } catch (e) {
       console.error('indexnow submission from cron failed', e && e.message);
       indexnow = { error: e && e.message };
