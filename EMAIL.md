@@ -36,7 +36,7 @@ a generated plain-text fallback; we never send html alone).
 |---|---|---|
 | `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
 | `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
-| `ADMIN_KEY` | Required | cron auth for `send-scheduled`, `email-health`, `email-clear` |
+| `ADMIN_KEY` | Required | the admin dashboard password (`/admin`, via `/api/admin`), and cron auth for `send-scheduled`, `email-health`, `email-clear` |
 | `RESEND_SEGMENT_ID` | **Required** for contact sync | segment every mirrored contact is added to |
 | `DRIP_MAX_PER_RUN` | Optional (default 150) | cap on drip sends per `send-scheduled` run, so a backlog drains gently within the sending-domain warm-up |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
@@ -50,6 +50,12 @@ a generated plain-text fallback; we never send html alone).
 > not_configured (ADMIN_KEY)` and a wrong/missing caller key returns `401
 > unauthorized`, both with explicit JSON bodies, so cron-job.org logs a failure
 > instead of a green run. Confirm the Production binding with `email-health`.
+> `/api/admin` returns the same two bodies, and the `/admin` sign-in form shows
+> them in words: "no ADMIN_KEY on this deployment" versus "password not
+> accepted", with whether what you typed is even the same length as the key.
+> A same-length mismatch after you have just changed the key in the dashboard
+> almost always means the change has not been deployed yet: Pages only picks up
+> a new variable value on the next deployment, so retry the latest deployment.
 >
 > **Whitespace is tolerated.** A secret pasted into the Cloudflare dashboard
 > very often picks up a trailing newline or space that cannot be seen there, and
