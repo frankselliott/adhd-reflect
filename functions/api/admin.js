@@ -1,8 +1,41 @@
+import { adminKeyConfigured, adminKeyMatches, keyMismatchInfo } from './_lib/auth.js';
+
+const json = (body, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status, headers: { 'Content-Type': 'application/json' },
+  });
+
+// Auth for both verbs. Returns a Response to send when the caller is not
+// allowed in, or null when they are. Mirrors send-scheduled.js: the two failure
+// modes are split so the login form can say which one it is, because a bare
+// 401 "Unauthorized" is indistinguishable between "wrong password", "a pasted
+// key with stray whitespace" and "this deployment has no ADMIN_KEY at all"
+// (Pages secrets are per-environment, and a value changed in the dashboard
+// only reaches the function on the next deploy). suppliedLength and
+// lengthMatches are the only diagnostics: the caller already knows what it
+// sent, and one bit of length comparison never discloses the key.
+function authFailure(env, key) {
+  if (!adminKeyConfigured(env)) {
+    return json({
+      error: 'not_configured',
+      missing: 'ADMIN_KEY',
+      detail: 'ADMIN_KEY is not set on this deployment. Cloudflare Pages secrets are per-environment: set it in the Production scope and redeploy.',
+    }, 500);
+  }
+  if (!adminKeyMatches(env, key)) {
+    return json({
+      error: 'unauthorized',
+      reason: key ? 'invalid_key' : 'missing_key',
+      detail: 'The key did not match ADMIN_KEY on this deployment.',
+      ...keyMismatchInfo(env, key),
+    }, 401);
+  }
+  return null;
+}
+
 // Paginate a KV prefix fully. A single list() caps at ~1000 keys, so without a
 // cursor the dashboard silently under-counts. Bounded at maxPages so a huge
 // namespace cannot run away in one admin request.
-import { adminKeyMatches } from './_lib/auth.js';
-
 async function listAllKeys(kv, prefix, maxPages = 50) {
   const keys = [];
   let cursor, pages = 0;
@@ -337,11 +370,8 @@ export async function onRequestGet({ env, request }) {
   const key = url.searchParams.get('key');
   const section = url.searchParams.get('section') || 'all';
 
-  if (!adminKeyMatches(env, key)) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
-      status: 401, headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  const denied = authFailure(env, key);
+  if (denied) return denied;
 
   try {
     const result = {};
@@ -397,11 +427,8 @@ export async function onRequestGet({ env, request }) {
 export async function onRequestPost({ env, request }) {
   const url = new URL(request.url);
   const key = url.searchParams.get('key');
-  if (!adminKeyMatches(env, key)) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
-      status: 401, headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  const denied = authFailure(env, key);
+  if (denied) return denied;
 
   const body = await request.json();
   const { action } = body;

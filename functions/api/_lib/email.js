@@ -204,7 +204,10 @@ export async function sendEmail(env, opts) {
 // deterministic Idempotency-Key for that batch request (Resend's key is
 // request-scoped, not per-message), so a retried chunk cannot double-send.
 //
-// Returns { sent, failed, chunks: [{ ok, count, error }] }.
+// Returns { sent, failed, chunks: [{ ok, count, error, status?, thrown? }] }.
+// A chunk Resend answered with an error status carries `status`; a chunk whose
+// request threw (network error, timeout) carries `thrown: true`. Callers must
+// treat the latter as outcome unknown, because the batch may have landed.
 export async function sendBatch(env, messages) {
   if (!env.RESEND_API_KEY) {
     console.error('sendBatch: RESEND_API_KEY not configured');
@@ -241,12 +244,12 @@ export async function sendBatch(env, messages) {
         try { data = await res.json(); } catch (_) { /* non-JSON body */ }
         console.error('Resend batch failed', res.status, JSON.stringify(data));
         failed += chunk.length;
-        results.push({ ok: false, count: chunk.length, error: (data && data.message) || `HTTP ${res.status}` });
+        results.push({ ok: false, count: chunk.length, error: (data && data.message) || `HTTP ${res.status}`, status: res.status });
       }
     } catch (e) {
       console.error('Resend batch threw', e && e.message);
       failed += chunk.length;
-      results.push({ ok: false, count: chunk.length, error: (e && e.message) || 'batch failed' });
+      results.push({ ok: false, count: chunk.length, error: (e && e.message) || 'batch failed', thrown: true });
     }
   }
 

@@ -21,6 +21,11 @@ import Base from '../layouts/Base.astro';
           background:var(--blue);color:white;cursor:pointer;
         ">Sign in</button>
       </div>
+      <!-- Why a sign-in was refused. Empty and hidden until there is something
+           to say; a silent bounce back to this form is indistinguishable from
+           the page being broken. -->
+      <div id="auth-msg" role="alert" style="display:none;margin-top:14px;max-width:560px;
+        font-family:var(--sans);font-size:14px;line-height:1.5;color:#9b2c2c"></div>
     </div>
 
     <!-- Dashboard -->
@@ -347,21 +352,67 @@ import Base from '../layouts/Base.astro';
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Fetch a section with the admin key. A 401 means the stored key is stale:
-  // clear it and drop back to the login form.
+  // Turn a refused sign-in into one plain sentence for the form. The server
+  // sends only non-sensitive diagnostics (see authFailure in admin.js): whether
+  // ADMIN_KEY exists on the deployment at all, and whether what was typed is
+  // even the same length as the key. That one bit separates "wrong password"
+  // from "right password, but the deployment is still running an old key".
+  function explainRefusal(status, body) {
+    body = body || {};
+    if (status === 500 && body.error === 'not_configured') {
+      return 'This deployment has no ADMIN_KEY set, so nobody can sign in. ' +
+        'Add it under Cloudflare Pages, Settings, Variables and Secrets in the Production scope, then redeploy.';
+    }
+    if (body.reason === 'missing_key') return 'Enter the admin password.';
+    if (body.lengthMatches === true) {
+      return 'Password not accepted. It is the same length as the key on this deployment but not the same value: ' +
+        'check for a typo, or a key that was changed in Cloudflare without a redeploy.';
+    }
+    if (body.lengthMatches === false) {
+      return 'Password not accepted. It is a different length from the key on this deployment, so it is not the same password ' +
+        '(' + body.suppliedLength + ' characters sent).';
+    }
+    return 'Password not accepted.';
+  }
+
+  function showAuthMessage(text) {
+    const el = document.getElementById('auth-msg');
+    if (!el) return;
+    el.textContent = text || '';
+    el.style.display = text ? 'block' : 'none';
+  }
+
+  // Read the JSON body, or null if there is none (a 5xx from the edge, say).
+  async function readJson(res) {
+    try { return await res.json(); } catch (e) { return null; }
+  }
+
+  // Fetch a section with the admin key. A 401 means the key is wrong or stale,
+  // and a not_configured 500 means the deployment cannot accept any key: in
+  // both cases clear it and drop back to the login form, saying why.
   async function adminFetch(section) {
     const res = await fetch('/api/admin?key=' + encodeURIComponent(adminKey) + '&section=' + section);
-    if (res.status === 401) { logout(); throw new Error('unauthorized'); }
+    if (res.status === 401 || res.status === 500) {
+      const body = await readJson(res);
+      if (res.status === 401 || (body && body.error === 'not_configured')) {
+        logout(explainRefusal(res.status, body));
+        throw new Error('unauthorized');
+      }
+      throw new Error((body && body.error) || ('HTTP ' + res.status));
+    }
     return res.json();
   }
 
-  function logout() {
+  // Back to the login form. `reason`, when given, is shown under it; a bare
+  // logout (the button) shows nothing.
+  function logout(reason) {
     try { sessionStorage.removeItem(SS_KEY); } catch (e) {}
     adminKey = '';
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('auth-form').style.display = 'block';
     const input = document.getElementById('admin-key');
     if (input) input.value = '';
+    showAuthMessage(reason || '');
   }
 
   function hideLoading(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
@@ -415,15 +466,26 @@ import Base from '../layouts/Base.astro';
   // Sign in (or restore a stored key). section=all returns only summary counts.
   async function loadAll(existingKey) {
     adminKey = existingKey || document.getElementById('admin-key').value;
-    if (!adminKey) return;
+    if (!adminKey) { showAuthMessage('Enter the admin password.'); return; }
+    showAuthMessage('');
     let data;
     try {
       data = await adminFetch('all');
     } catch (e) {
-      if (e.message !== 'unauthorized') alert('Error: ' + e.message);
+      if (e.message === 'unauthorized') {
+        // adminFetch has already shown why. A key restored from the last visit
+        // that no longer works deserves a different first line, because the
+        // user did not type anything to be wrong about.
+        if (existingKey) {
+          const el = document.getElementById('auth-msg');
+          if (el) el.textContent = 'Your saved sign-in was no longer accepted. ' + el.textContent;
+        }
+      } else {
+        showAuthMessage('Could not reach the admin API: ' + e.message);
+      }
       return;
     }
-    if (data.error) { alert(data.error); return; }
+    if (data.error) { showAuthMessage(data.error); return; }
     try { sessionStorage.setItem(SS_KEY, adminKey); } catch (e) {}
     document.getElementById('auth-form').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
@@ -623,7 +685,7 @@ import Base from '../layouts/Base.astro';
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    if (res.status === 401) { logout(); throw new Error('unauthorized'); }
+    if (res.status === 401) { logout(explainRefusal(401, await readJson(res))); throw new Error('unauthorized'); }
     return res.json();
   }
 

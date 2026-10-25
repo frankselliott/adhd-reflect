@@ -36,7 +36,7 @@ a generated plain-text fallback; we never send html alone).
 |---|---|---|
 | `RESEND_API_KEY` | **Required** | every email send + Resend suppression list |
 | `UNSUB_SECRET` | **Required** | HMAC signing of unsubscribe links |
-| `ADMIN_KEY` | Required | cron auth for `send-scheduled`, `email-health`, `email-clear` |
+| `ADMIN_KEY` | Required | the admin dashboard password (`/admin`, via `/api/admin`), and cron auth for `send-scheduled`, `email-health`, `email-clear` |
 | `RESEND_SEGMENT_ID` | **Required** for contact sync | segment every mirrored contact is added to |
 | `DRIP_MAX_PER_RUN` | Optional (default 150) | cap on drip sends per `send-scheduled` run, so a backlog drains gently within the sending-domain warm-up |
 | `SENDER_API_KEY` | **Dead** — remove it | nothing (was Sender.net) |
@@ -50,6 +50,12 @@ a generated plain-text fallback; we never send html alone).
 > not_configured (ADMIN_KEY)` and a wrong/missing caller key returns `401
 > unauthorized`, both with explicit JSON bodies, so cron-job.org logs a failure
 > instead of a green run. Confirm the Production binding with `email-health`.
+> `/api/admin` returns the same two bodies, and the `/admin` sign-in form shows
+> them in words: "no ADMIN_KEY on this deployment" versus "password not
+> accepted", with whether what you typed is even the same length as the key.
+> A same-length mismatch after you have just changed the key in the dashboard
+> almost always means the change has not been deployed yet: Pages only picks up
+> a new variable value on the next deployment, so retry the latest deployment.
 >
 > **Whitespace is tolerated.** A secret pasted into the Cloudflare dashboard
 > very often picks up a trailing newline or space that cannot be seen there, and
@@ -70,7 +76,7 @@ a generated plain-text fallback; we never send html alone).
 | `functions/api/stripe-webhook.js` | Stripe `checkout.session.completed` | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `purchase` | yes (`purchase-{session.id}`) |
 | `functions/api/grow/recover.js` | POST from the recover form | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `recovery` | no |
 | `functions/api/subscribe.js` | POST from the pattern signup | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `welcome` | no |
-| `functions/api/send-scheduled.js` | Daily cron (cron-job.org) | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `drip` | yes (`drip-{email}-{step}`) |
+| `functions/api/send-scheduled.js` | Daily cron (cron-job.org) | ADHD Reflect &lt;hello@adhdreflect.com&gt; | `drip` | yes (`drip:{email}:{step}`) |
 
 `functions/api/grow/free-access.js` sends **no** email: it returns the
 `accessUrl` and `src/pages/grow/redeem.astro` redirects the browser to it.
@@ -130,11 +136,34 @@ The quiz surfaces a quiet line to the user when `welcomeSent` is false (except
 and records it to `stats:last-drip-run` for the dashboard, so a run that sends
 nothing is never mistaken for success. `skippedBreakdown` explains why each row
 was passed over (`notDue`, `completed`, `invalidEmail`, `unsubscribed`,
-`noCopy`, `perRunCap`). Add **`?dry=1`** to run the full selection logic and get
-the same summary without sending anything or advancing any schedule — use it to
-verify the drip picks up the right people before a live run. A live run sends at
-most one step per subscriber, and at most `DRIP_MAX_PER_RUN` in total, so a
-backlog drains one email per person per day rather than in a burst.
+`noCopy`, `malformed`, `perRunCap`). Add **`?dry=1`** (or `?dryRun=1`) to run
+the full selection logic and get the same summary without sending anything or
+advancing any schedule, plus a `contacts` list with one entry per subscriber:
+`eligibleStep` (what their signup date entitles them to by now: step 0 on day
+1, then one more a week), `lastSentStep`, `nextStep` (what a live run sends:
+always the next step they have not had), `nextEmailDate`, and `action` (`send`
+with the `subject`, `skip` with the `reason`, or `defer` under the per-run cap).
+The list is dry-run only, so subscriber addresses never land in the cron log.
+
+A live run sends at most one step per subscriber, and at most `DRIP_MAX_PER_RUN`
+in total. The next step is gated by `nextEmailDate`, not by the exact day, so a
+missed cron run never loses an email: the step is simply sent on the next run,
+and the schedule is then re-anchored a week out so a backlog drains one email
+per person per week, the cadence the welcome email promised. Each step is sent
+under `Idempotency-Key: drip:{email}:{step}`, and the schedule row (`emailsSent`)
+in KV is the durable record of which steps a subscriber has had. The batch call
+is atomic: an error status from Resend means nothing went out and the group is
+retried as single sends under those keys, but a batch request that *threw* is
+treated as outcome unknown and is never resent that run (it stays due for the
+next run, which is deduped by the deterministic batch key).
+
+**If `stats:last-drip-run` stops advancing, check the cron first.** The run
+record is written only by a live run that reached the end, so a stale timestamp
+with every row overdue means the cron is not getting through: most often a
+`?key=` in the cron-job.org URL that no longer matches `ADMIN_KEY` (every key
+change needs the cron URL updated too), which the 401 body reports as
+`invalid_key` with `lengthMatches`. The selection logic itself is checked in
+one request with `?dry=1`.
 
 Admin tools (both `GET`, `ADMIN_KEY` via `?key=`):
 - `/api/email-health?key=…` — booleans for which env vars and KV bindings are
